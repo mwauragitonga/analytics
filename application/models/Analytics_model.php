@@ -156,4 +156,30 @@ class Analytics_model extends CI_Model
 	}
 
 	/*Filter users by date joined*/
+
+	/* */
+	/*filter multimedia content by views/reads */
+
+	public function getVideosViews(){
+		$this->db->select('*');
+		$this->db->from('multimedia_content');
+		$this->db->where('file_type', 'video');
+		$this->db->order_by('Views', 'DESC');
+		$this->db->limit(10);
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+	public function getEbooksViews(){
+		$this->db->select('*');
+		$this->db->from('multimedia_content');
+		$this->db->where('file_type', 'slides');
+		$this->db->order_by('Views', 'DESC');
+		$this->db->limit(10);
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+
+	
 }
