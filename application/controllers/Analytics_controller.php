@@ -22,6 +22,17 @@ class Analytics_controller extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('index.php');
+		$studentCount= $this->Analytics_model->getStudentsCount();
+		$maleStudents= $this->Analytics_model->getMaleStudents();
+		$femaleStudents= $this->Analytics_model->getFemaleStudents();
+		$signupsToday= $this->Analytics_model->getDailySignups();
+		$data=array(
+			'studentCount'=>$studentCount,
+			'maleCount'=> $maleStudents,
+			'femaleCount'=>$femaleStudents,
+			'signupsToday'=>$signupsToday
+		);
+	//	var_dump($studentCount);
+		$this->load->view('index.php', $data);
 	}
 }
