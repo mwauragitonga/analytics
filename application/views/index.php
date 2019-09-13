@@ -479,7 +479,11 @@
 							<br>
 							<br>
 							<br>
-							<div class="chart" id="gender" style="height: 350px;"></div>
+							<div class="chart" id="topVideos" style="height: 350px;"></div>
+							<br>
+							<br>
+							<br>
+							<div class="chart" id="topBooks" style="height: 350px;"></div>
 						</ul>
 						<div class="tab-content no-padding">
 				<div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
@@ -497,33 +501,13 @@
 					<!-- Calendar -->
 					<div class="box box-solid bg-green-gradient">
 						<div class="box-header">
-							<i class="fa fa-calendar"></i>
+							<i class="fa fa-line-chart"></i>
 
-							<h3 class="box-title">Calendar</h3>
-							<!-- tools box -->
-							<div class="pull-right box-tools">
-								<!-- button with a dropdown -->
-								<div class="btn-group">
-									<button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-										<i class="fa fa-bars"></i></button>
-<!--									<ul class="dropdown-menu pull-right" role="menu">-->
-<!--										<li><a href="#">Add new event</a></li>-->
-<!--										<li><a href="#">Clear events</a></li>-->
-<!--										<li class="divider"></li>-->
-<!--										<li><a href="#">View calendar</a></li>-->
-<!--									</ul>-->
-								</div>
-								<button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-								</button>
-							</div>
-							<!-- /. tools -->
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body no-padding">
-							<!--The calendar -->
-							<div id="calendar" style="width: 100%"></div>
+							<!--Student Classification -->
+							<div class="chart" id="gender" style="height: 350px;"></div>
 
 						</div>
 						<br>
@@ -536,7 +520,7 @@
 							<br>
 							<br>
 							<br>
-							<div class="chart" id="subscription_types" style="height: 350px;"></div>
+							<div class="chart" id="subscription_types" style="height: 450px;"></div>
 						</div>
 					</div>
 					<!-- /.box -->
@@ -795,7 +779,7 @@
 
         series: [
             {
-                name: "Study Levels",
+                name: "Study-Levels",
                 colorByPoint: true,
                 data: [
                     {
@@ -823,6 +807,158 @@
         ],
 
     });
+</script>
+<!--/*bar graph for top 5 viewed videos*/-->
+<script>
+    // Create the chart
+    Highcharts.chart('topVideos', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Most viewed Videos'
+        },
+        xAxis: {
+            type: '',
+            categories:[<?php
+				$count=0;
+				foreach($topVideos as $video){
+					$count +=1;
+					if($count== count($topVideos)){
+						echo '"'.$video->file_name.'"';
+					}else{
+						echo  '"'.$video->file_name .'", ';
+					}
+				}; ?>],
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize:'13px'
+                }
+            }
+
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Views'
+            }
+
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                     // format: '{point.y:.}'
+                }
+            }
+        },
+
+        tooltip: {
+           // headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span><br/>'
+        },
+
+        series: [
+            {
+                name: "Names",
+                colorByPoint: true,
+                data: [<?php
+					$count=0;
+                   foreach($topVideos as $video){
+                   	$count +=1;
+                   	if($count== count($topVideos)){
+                   		echo $video->Views;
+					}else{
+						echo  $video->Views .',';
+					}
+			}; ?>
+                ]
+            }
+        ],
+
+    });
+
+</script>
+<!--/*bar graph for top 5 read books*/-->
+<script>
+    // Create the chart
+    Highcharts.chart('topBooks', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Most Read Books'
+        },
+        xAxis: {
+            type: '',
+            categories:[<?php
+				$count=0;
+				foreach($topEbooks as $book){
+					$count +=1;
+					if($count== count($topEbooks)){
+						echo '"'.$book->file_name.'"';
+					}else{
+						echo  '"'.$book->file_name .'", ';
+					}
+				}; ?>],
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize:'13px'
+                }
+            }
+
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Reads'
+            }
+
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    // format: '{point.y:.}'
+                }
+            }
+        },
+
+        tooltip: {
+         //   headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span><br/>'
+        },
+
+        series: [
+            {
+                name: "Names",
+                colorByPoint: true,
+                data: [<?php
+					$count=0;
+					foreach($topEbooks as $book){
+						$count +=1;
+						if($count== count($topEbooks)){
+							echo $book->Views;
+						}else{
+							echo  $book->Views .',';
+						}
+					}; ?>
+                ]
+            }
+        ],
+
+    });
+
 </script>
 <!--pie chart for students by gender-->
 <script>
@@ -919,7 +1055,7 @@
             type: 'pie'
         },
         title: {
-            text: 'Classification of students by subscriptions'
+            text: 'Classification of students by subscription types'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -930,7 +1066,7 @@
                 cursor: 'pointer',
                 dataLabels: {
                     enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
                 },
                 showInLegend: true
             }
@@ -943,12 +1079,12 @@
                 y: <?php echo $monthlySubs ; ?>,
                 sliced: true,
                 selected: true
-            }, {
+            },  {
+                    name: 'Annual',
+                    y: <?php echo $annualSubs ; ?>
+                }, {
                 name: 'Termly',
                 y: <?php echo $termlySubs ; ?>
-            }, {
-                name: 'Annual',
-                y: <?php echo $annualSubs ; ?>
             }, {
                 name: 'None',
                 y: <?php echo $nonSubs ; ?>

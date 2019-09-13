@@ -165,9 +165,9 @@ class Analytics_model extends CI_Model
 		$this->db->from('multimedia_content');
 		$this->db->where('file_type', 'video');
 		$this->db->order_by('Views', 'DESC');
-		$this->db->limit(10);
+		$this->db->limit(5);
 		$query= $this->db->get();
-		return $query->num_rows();
+		return $query->result();
 
 	}
 	public function getEbooksViews(){
@@ -175,9 +175,9 @@ class Analytics_model extends CI_Model
 		$this->db->from('multimedia_content');
 		$this->db->where('file_type', 'slides');
 		$this->db->order_by('Views', 'DESC');
-		$this->db->limit(10);
+		$this->db->limit(5);
 		$query= $this->db->get();
-		return $query->num_rows();
+		return $query->result();
 
 	}
 
@@ -189,7 +189,6 @@ class Analytics_model extends CI_Model
 		$this->db->from('users');
 		$this->db->where('date_joined', $date);
 		$query= $this->db->get();
-
 		return $query->num_rows();
 	}
 	

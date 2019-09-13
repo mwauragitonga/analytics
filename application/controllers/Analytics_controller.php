@@ -36,6 +36,9 @@ class Analytics_controller extends CI_Controller
 		$termlySusbscriptions = $this->Analytics_model->getTermlySubscriptions();
 		$monthlySusbscriptions= $this->Analytics_model->getMonthlySubscriptions();
 		$nonSusbcribers= $this->Analytics_model->getNonSubscribers();
+		$topVideos= $this->Analytics_model->getVideosViews();
+		$topEbooks= $this->Analytics_model->getEbooksViews();
+
 		$data=array(
 			'studentCount'=>$studentCount,
 			'maleCount'=> $maleStudents,
@@ -50,7 +53,9 @@ class Analytics_controller extends CI_Controller
 			'annualSubs'=>$annualSubscriptions,
 			'termlySubs'=>$termlySusbscriptions,
 			'monthlySubs'=>$monthlySusbscriptions,
-			'nonSubs'=>$nonSusbcribers
+			'nonSubs'=>$nonSusbcribers,
+			'topVideos'=>$topVideos,
+			'topEbooks'=> $topEbooks
 		);
 		//var_dump($formFours);
 		$this->load->view('index.php', $data);
