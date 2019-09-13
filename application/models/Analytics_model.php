@@ -64,7 +64,7 @@ class Analytics_model extends CI_Model
 		$this->db->join('students', 'students.user_id = users.user_id', 'left');
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
 		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
-		$this->db->where('students.study_levels', 'level_001');
+		$this->db->where('students.study_level', 'level_001');
 		$query=$this->db->get();
 		return $query->num_rows();
 	}
@@ -74,7 +74,7 @@ class Analytics_model extends CI_Model
 		$this->db->join('students', 'students.user_id = users.user_id', 'left');
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
 		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
-		$this->db->where('students.study_levels', 'level_002');
+		$this->db->where('students.study_level', 'level_002');
 		$query=$this->db->get();
 		return $query->num_rows();
 	}
@@ -84,7 +84,7 @@ class Analytics_model extends CI_Model
 		$this->db->join('students', 'students.user_id = users.user_id', 'left');
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
 		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
-		$this->db->where('students.study_levels', 'level_003');
+		$this->db->where('students.study_level', 'level_003');
 		$query=$this->db->get();
 		return $query->num_rows();
 	}
@@ -94,7 +94,7 @@ class Analytics_model extends CI_Model
 		$this->db->join('students', 'students.user_id = users.user_id', 'left');
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
 		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
-		$this->db->where('students.study_levels', 'level_004');
+		$this->db->where('students.study_level', 'level_004');
 		$query=$this->db->get();
 		return $query->num_rows();
 	}

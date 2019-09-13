@@ -475,63 +475,20 @@
 					<div class="nav-tabs-custom">
 						<!-- Tabs within a box -->
 						<ul class="nav nav-tabs pull-right">
-							<li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-<!--							<li><a href="#sales-chart" data-toggle="tab">Donut</a></li>-->
-							<li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
+							<div class="chart" id="studyLevel" style="height: 350px;"></div>
+							<br>
+							<br>
+							<br>
+							<div class="chart" id="gender" style="height: 350px;"></div>
 						</ul>
 						<div class="tab-content no-padding">
-							<!-- Morris chart - Sales -->
-							<div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-							<div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+				<div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
 						</div>
 					</div>
 					<!-- /.nav-tabs-custom -->
 					<!-- solid sales graph -->
 					<div class="box box-solid bg-teal-gradient">
-						<div class="box-header">
-							<i class="fa fa-th"></i>
 
-							<h3 class="box-title">Sales Graph</h3>
-
-							<div class="box-tools pull-right">
-								<button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-								</button>
-							</div>
-						</div>
-						<div class="box-body border-radius-none">
-							<div class="chart" id="line-chart" style="height: 250px;"></div>
-						</div>
-						<!-- /.box-body -->
-						<div class="box-footer no-border">
-							<div class="row">
-								<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-									<input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-										   data-fgColor="#39CCCC">
-
-									<div class="knob-label">Mail-Orders</div>
-								</div>
-								<!-- ./col -->
-								<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-									<input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-										   data-fgColor="#39CCCC">
-
-									<div class="knob-label">Online</div>
-								</div>
-								<!-- ./col -->
-								<div class="col-xs-4 text-center">
-									<input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-										   data-fgColor="#39CCCC">
-
-									<div class="knob-label">In-Store</div>
-								</div>
-								<!-- ./col -->
-							</div>
-							<!-- /.row -->
-						</div>
-						<!-- /.box-footer -->
-					</div>
 				</section>
 				<!-- /.Left col -->
 				<!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -567,49 +524,19 @@
 						<div class="box-body no-padding">
 							<!--The calendar -->
 							<div id="calendar" style="width: 100%"></div>
+
 						</div>
+						<br>
+						<br>
+						<br>
+						<div class="chart" id="subscriptions" style="height: 350px;"></div>
+
 						<!-- /.box-body -->
 						<div class="box-footer text-black">
-<!--							<div class="row">-->
-<!--								<div class="col-sm-6">-->
-<!--									-- Progress bars -->
-<!--									<div class="clearfix">-->
-<!--										<span class="pull-left">Task #1</span>-->
-<!--										<small class="pull-right">90%</small>-->
-<!--									</div>-->
-<!--									<div class="progress xs">-->
-<!--										<div class="progress-bar progress-bar-green" style="width: 90%;"></div>-->
-<!--									</div>-->
-<!---->
-<!--									<div class="clearfix">-->
-<!--										<span class="pull-left">Task #2</span>-->
-<!--										<small class="pull-right">70%</small>-->
-<!--									</div>-->
-<!--									<div class="progress xs">-->
-<!--										<div class="progress-bar progress-bar-green" style="width: 70%;"></div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--
-<!								<div class="col-sm-6">-->
-<!--									<div class="clearfix">-->
-<!--										<span class="pull-left">Task #3</span>-->
-<!--										<small class="pull-right">60%</small>-->
-<!--									</div>-->
-<!--									<div class="progress xs">-->
-<!--										<div class="progress-bar progress-bar-green" style="width: 60%;"></div>-->
-<!--									</div>-->
-<!---->
-<!--									<div class="clearfix">-->
-<!--										<span class="pull-left">Task #4</span>-->
-<!--										<small class="pull-right">40%</small>-->
-<!--									</div>-->
-<!--									<div class="progress xs">-->
-<!--										<div class="progress-bar progress-bar-green" style="width: 40%;"></div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--
-<!							</div>-->
-							<!-- /.row -->
+							<br>
+							<br>
+							<br>
+							<div class="chart" id="subscription_types" style="height: 350px;"></div>
 						</div>
 					</div>
 					<!-- /.box -->
@@ -820,5 +747,214 @@
 	<div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<!--/*bar graph for students by study level*/-->
+<script>
+    // Create the chart
+    Highcharts.chart('studyLevel', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Classification of Students by study level'
+        },
+        xAxis: {
+            type: '',
+            categories:['Form One ', 'Form Two', 'Form Three', 'Form Four'],
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize:'13px'
+                }
+            }
+
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Students'
+            }
+
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    //  format: '{point.y:.}'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span><br/>'
+        },
+
+        series: [
+            {
+                name: "Study Levels",
+                colorByPoint: true,
+                data: [
+                    {
+                        name: "Form One",
+                        y: <?php  echo $formOnes ; ?>,
+
+                    },
+                    {
+                        name: "Form Two",
+                        y: <?php  echo $formTwos ; ?>
+
+                    },
+                    {
+                        name: "Form Three",
+                        y:<?php  echo $formThrees ; ?>,
+
+                    },
+                    {
+                        name: "Form Four",
+                        y:<?php  echo $formFours ; ?>
+                    },
+
+                ]
+            }
+        ],
+
+    });
+</script>
+<!--pie chart for students by gender-->
+<script>
+    // Build the chart
+    Highcharts.chart('gender', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Classification of students by gender'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: '',
+            colorByPoint: true,
+            data: [{
+                name: 'Male',
+                y: <?php echo count($femaleCount) ; ?>,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Female',
+                y: <?php echo count($maleCount) ; ?>
+            }]
+        }]
+    });
+</script>
+<!--pie chart for active vs inactive subscriptions-->
+<script>
+    // Build the chart
+    Highcharts.chart('subscriptions', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Classification of students by subscriptions'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: '',
+            colorByPoint: true,
+            data: [{
+                name: 'Active',
+                y: <?php echo $activeSubs ; ?>,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Inactive',
+                y: <?php echo $inactiveSubs ; ?>
+            }, ]
+        }]
+    });
+</script>
+<!--pie chart for subscription types-->
+<script>
+    // Build the chart
+    Highcharts.chart('subscription_types', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Classification of students by subscriptions'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: '',
+            colorByPoint: true,
+            data: [{
+                name: 'Monthly',
+                y: <?php echo $monthlySubs ; ?>,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Termly',
+                y: <?php echo $termlySubs ; ?>
+            }, {
+                name: 'Annual',
+                y: <?php echo $annualSubs ; ?>
+            }, {
+                name: 'None',
+                y: <?php echo $nonSubs ; ?>
+            }]
+        }]
+    });
+</script>
 
 <?php $this->load->view('template/footer'); ?>
