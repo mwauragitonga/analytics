@@ -17,7 +17,7 @@ class Analytics_model extends CI_Model
 	/*get all students*/
 	public function getStudents()
 	{
-		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, students.admission_number, schools.school_name, study_levels.level_name');
+		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, students.admission_number, schools.name, study_levels.level_name');
 		$this->db->from('users');
 		$this->db->join('students', 'students.user_id = users.user_id', 'left');
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
@@ -30,7 +30,7 @@ class Analytics_model extends CI_Model
 	/*get student details */
 	public function getStudentDetails($userID)
 	{
-		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me, schools.school_name, study_levels.level_name');
+		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me, schools.name, study_levels.level_name');
 		$this->db->from('users');
 		$this->db->join('students', 'students.user_id = users.user_id', 'left');
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
@@ -43,14 +43,14 @@ class Analytics_model extends CI_Model
 
 	/*get students by gender*/
 	public function getMaleStudents(){
-		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me, schools.school_name, study_levels.level_name');
+		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me');
 		$this->db->from('users');
 		$this->db->where('gender','Male' );
 		$query= $this->db->get();
 		return $query->result();
 	}
 	public function getFemaleStudents(){
-		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me, schools.school_name, study_levels.level_name');
+		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me');
 		$this->db->from('users');
 		$this->db->where('gender','Female' );
 		$query= $this->db->get();
@@ -59,42 +59,42 @@ class Analytics_model extends CI_Model
 
 	/*Filter students by study level*/
 	public function getFormOne(){
-		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me, schools.school_name, study_levels.level_name');
+		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me');
 		$this->db->from('users');
 		$this->db->join('students', 'students.user_id = users.user_id', 'left');
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
 		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
-		$this->db->where('students.study_levels', 'level_001');
+		$this->db->where('students.study_level', 'level_001');
 		$query=$this->db->get();
 		return $query->num_rows();
 	}
 	public function getFormTwo(){
-		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me, schools.school_name, study_levels.level_name');
+		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me');
 		$this->db->from('users');
 		$this->db->join('students', 'students.user_id = users.user_id', 'left');
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
 		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
-		$this->db->where('students.study_levels', 'level_002');
+		$this->db->where('students.study_level', 'level_002');
 		$query=$this->db->get();
 		return $query->num_rows();
 	}
 	public function getFormThree(){
-		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me, schools.school_name, study_levels.level_name');
+		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me, schools.name, study_levels.level_name');
 		$this->db->from('users');
 		$this->db->join('students', 'students.user_id = users.user_id', 'left');
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
 		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
-		$this->db->where('students.study_levels', 'level_003');
+		$this->db->where('students.study_level', 'level_003');
 		$query=$this->db->get();
 		return $query->num_rows();
 	}
 	public function getFormFour(){
-		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me, schools.school_name, study_levels.level_name');
+		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me, schools.name, study_levels.level_name');
 		$this->db->from('users');
 		$this->db->join('students', 'students.user_id = users.user_id', 'left');
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
 		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
-		$this->db->where('students.study_levels', 'level_004');
+		$this->db->where('students.study_level', 'level_004');
 		$query=$this->db->get();
 		return $query->num_rows();
 	}
@@ -156,4 +156,40 @@ class Analytics_model extends CI_Model
 	}
 
 	/*Filter users by date joined*/
+
+	/* */
+	/*filter multimedia content by views/reads */
+
+	public function getVideosViews(){
+		$this->db->select('*');
+		$this->db->from('multimedia_content');
+		$this->db->where('file_type', 'video');
+		$this->db->order_by('Views', 'DESC');
+		$this->db->limit(5);
+		$query= $this->db->get();
+		return $query->result();
+
+	}
+	public function getEbooksViews(){
+		$this->db->select('*');
+		$this->db->from('multimedia_content');
+		$this->db->where('file_type', 'slides');
+		$this->db->order_by('Views', 'DESC');
+		$this->db->limit(5);
+		$query= $this->db->get();
+		return $query->result();
+
+	}
+
+	/*get daily sign-ups */
+	public function getDailySignups(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = date('Y-m-d H:i:s');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('date_joined', $date);
+		$query= $this->db->get();
+		return $query->num_rows();
+	}
+	
 }

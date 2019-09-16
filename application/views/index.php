@@ -302,8 +302,6 @@
             </span>
 					</a>
 					<ul class="treeview-menu">
-						<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-						<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
 					</ul>
 				</li>
 				<li class="treeview">
@@ -311,15 +309,8 @@
 						<i class="fa fa-files-o"></i>
 						<span>Layout Options</span>
 						<span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
             </span>
 					</a>
-					<ul class="treeview-menu">
-						<li><a href="<?php echo base_url(); ?>assets/pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-					</ul>
 				</li>
 				<li>
 					<a href="<?php echo base_url(); ?>assets/pages/widgets.html">
@@ -386,78 +377,7 @@
 						<li><a href="<?php echo base_url(); ?>assets/pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
 					</ul>
 				</li>
-				<li>
-					<a href="pages/calendar.html">
-						<i class="fa fa-calendar"></i> <span>Calendar</span>
-						<span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-					</a>
-				</li>
-				<li>
-					<a href="<?php echo base_url(); ?>assets/pages/mailbox/mailbox.html">
-						<i class="fa fa-envelope"></i> <span>Mailbox</span>
-						<span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
-            </span>
-					</a>
-				</li>
-				<li class="treeview">
-					<a href="#">
-						<i class="fa fa-folder"></i> <span>Examples</span>
-						<span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-					</a>
-					<ul class="treeview-menu">
-						<li><a href="<?php echo base_url(); ?>assets/pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-						<li><a href="<?php echo base_url(); ?>assets/pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
-					</ul>
-				</li>
-				<li class="treeview">
-					<a href="#">
-						<i class="fa fa-share"></i> <span>Multilevel</span>
-						<span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-					</a>
-					<ul class="treeview-menu">
-						<li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-						<li class="treeview">
-							<a href="#"><i class="fa fa-circle-o"></i> Level One
-								<span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-							</a>
-							<ul class="treeview-menu">
-								<li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-								<li class="treeview">
-									<a href="#"><i class="fa fa-circle-o"></i> Level Two
-										<span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-									</a>
-									<ul class="treeview-menu">
-										<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-										<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-					</ul>
-				</li>
-				<li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+
 				<li class="header">LABELS</li>
 				<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
 				<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
@@ -489,9 +409,9 @@
 					<!-- small box -->
 					<div class="small-box bg-aqua">
 						<div class="inner">
-							<h3>150</h3>
+							<h3><?php echo $studentCount ; ?></h3>
 
-							<p>New Orders</p>
+							<p>Students</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-bag"></i>
@@ -504,9 +424,9 @@
 					<!-- small box -->
 					<div class="small-box bg-green">
 						<div class="inner">
-							<h3>53<sup style="font-size: 20px">%</sup></h3>
+							<h3><?php echo count($maleCount)  ; ?><sup style="font-size: 20px"></sup></h3>
 
-							<p>Bounce Rate</p>
+							<p>Male Students</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-stats-bars"></i>
@@ -519,12 +439,12 @@
 					<!-- small box -->
 					<div class="small-box bg-yellow">
 						<div class="inner">
-							<h3>44</h3>
+							<h3><?php echo count($femaleCount) ; ?></h3>
 
-							<p>User Registrations</p>
+							<p>Female Students</p>
 						</div>
 						<div class="icon">
-							<i class="ion ion-person-add"></i>
+							<i class="ion ion-pie-graph "></i>
 						</div>
 						<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
@@ -534,12 +454,12 @@
 					<!-- small box -->
 					<div class="small-box bg-red">
 						<div class="inner">
-							<h3>65</h3>
+							<h3><?php echo ($signupsToday) ; ?></h3>
 
-							<p>Unique Visitors</p>
+							<p>Sign Ups Today</p>
 						</div>
 						<div class="icon">
-							<i class="ion ion-pie-graph"></i>
+							<i class="ion ion-person-add"></i>
 						</div>
 						<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
@@ -555,425 +475,52 @@
 					<div class="nav-tabs-custom">
 						<!-- Tabs within a box -->
 						<ul class="nav nav-tabs pull-right">
-							<li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-							<li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-							<li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
+							<div class="chart" id="studyLevel" style="height: 350px;"></div>
+							<br>
+							<br>
+							<br>
+							<div class="chart" id="topVideos" style="height: 350px;"></div>
+							<br>
+							<br>
+							<br>
+							<div class="chart" id="topBooks" style="height: 350px;"></div>
 						</ul>
 						<div class="tab-content no-padding">
-							<!-- Morris chart - Sales -->
-							<div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-							<div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+				<div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
 						</div>
 					</div>
 					<!-- /.nav-tabs-custom -->
-
-					<!-- Chat box -->
-					<div class="box box-success">
-						<div class="box-header">
-							<i class="fa fa-comments-o"></i>
-
-							<h3 class="box-title">Chat</h3>
-
-							<div class="box-tools pull-right" data-toggle="tooltip" title="Status">
-								<div class="btn-group" data-toggle="btn-toggle">
-									<button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i>
-									</button>
-									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
-								</div>
-							</div>
-						</div>
-						<div class="box-body chat" id="chat-box">
-							<!-- chat item -->
-							<div class="item">
-								<img src="<?php echo base_url(); ?>assets/dist/img/user4-128x128.jpg" alt="user image" class="online">
-
-								<p class="message">
-									<a href="#" class="name">
-										<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
-										Mike Doe
-									</a>
-									I would like to meet you to discuss the latest news about
-									the arrival of the new theme. They say it is going to be one the
-									best themes on the market
-								</p>
-								<div class="attachment">
-									<h4>Attachments:</h4>
-
-									<p class="filename">
-										Theme-thumbnail-image.jpg
-									</p>
-
-									<div class="pull-right">
-										<button type="button" class="btn btn-primary btn-sm btn-flat">Open</button>
-									</div>
-								</div>
-								<!-- /.attachment -->
-							</div>
-							<!-- /.item -->
-							<!-- chat item -->
-							<div class="item">
-								<img src="<?php echo base_url(); ?>assets/dist/img/user3-128x128.jpg" alt="user image" class="offline">
-
-								<p class="message">
-									<a href="#" class="name">
-										<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
-										Alexander Pierce
-									</a>
-									I would like to meet you to discuss the latest news about
-									the arrival of the new theme. They say it is going to be one the
-									best themes on the market
-								</p>
-							</div>
-							<!-- /.item -->
-							<!-- chat item -->
-							<div class="item">
-								<img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" alt="user image" class="offline">
-
-								<p class="message">
-									<a href="#" class="name">
-										<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
-										Susan Doe
-									</a>
-									I would like to meet you to discuss the latest news about
-									the arrival of the new theme. They say it is going to be one the
-									best themes on the market
-								</p>
-							</div>
-							<!-- /.item -->
-						</div>
-						<!-- /.chat -->
-						<div class="box-footer">
-							<div class="input-group">
-								<input class="form-control" placeholder="Type message...">
-
-								<div class="input-group-btn">
-									<button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /.box (chat box) -->
-
-					<!-- TO DO List -->
-					<div class="box box-primary">
-						<div class="box-header">
-							<i class="ion ion-clipboard"></i>
-
-							<h3 class="box-title">To Do List</h3>
-
-							<div class="box-tools pull-right">
-								<ul class="pagination pagination-sm inline">
-									<li><a href="#">&laquo;</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">&raquo;</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
-							<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-							<ul class="todo-list">
-								<li>
-									<!-- drag handle -->
-									<span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-									<!-- checkbox -->
-									<input type="checkbox" value="">
-									<!-- todo text -->
-									<span class="text">Design a nice theme</span>
-									<!-- Emphasis label -->
-									<small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-									<!-- General tools such as edit or delete-->
-									<div class="tools">
-										<i class="fa fa-edit"></i>
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</li>
-								<li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-									<input type="checkbox" value="">
-									<span class="text">Make the theme responsive</span>
-									<small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-									<div class="tools">
-										<i class="fa fa-edit"></i>
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</li>
-								<li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-									<input type="checkbox" value="">
-									<span class="text">Let theme shine like a star</span>
-									<small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-									<div class="tools">
-										<i class="fa fa-edit"></i>
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</li>
-								<li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-									<input type="checkbox" value="">
-									<span class="text">Let theme shine like a star</span>
-									<small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-									<div class="tools">
-										<i class="fa fa-edit"></i>
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</li>
-								<li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-									<input type="checkbox" value="">
-									<span class="text">Check your messages and notifications</span>
-									<small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-									<div class="tools">
-										<i class="fa fa-edit"></i>
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</li>
-								<li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-									<input type="checkbox" value="">
-									<span class="text">Let theme shine like a star</span>
-									<small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-									<div class="tools">
-										<i class="fa fa-edit"></i>
-										<i class="fa fa-trash-o"></i>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<!-- /.box-body -->
-						<div class="box-footer clearfix no-border">
-							<button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
-						</div>
-					</div>
-					<!-- /.box -->
-
-					<!-- quick email widget -->
-					<div class="box box-info">
-						<div class="box-header">
-							<i class="fa fa-envelope"></i>
-
-							<h3 class="box-title">Quick Email</h3>
-							<!-- tools box -->
-							<div class="pull-right box-tools">
-								<button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-										title="Remove">
-									<i class="fa fa-times"></i></button>
-							</div>
-							<!-- /. tools -->
-						</div>
-						<div class="box-body">
-							<form action="#" method="post">
-								<div class="form-group">
-									<input type="email" class="form-control" name="emailto" placeholder="Email to:">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" name="subject" placeholder="Subject">
-								</div>
-								<div>
-                  <textarea class="textarea" placeholder="Message"
-							style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-								</div>
-							</form>
-						</div>
-						<div class="box-footer clearfix">
-							<button type="button" class="pull-right btn btn-default" id="sendEmail">Send
-								<i class="fa fa-arrow-circle-right"></i></button>
-						</div>
-					</div>
+					<!-- solid sales graph -->
+					<div class="box box-solid bg-teal-gradient">
 
 				</section>
 				<!-- /.Left col -->
 				<!-- right col (We are only adding the ID to make the widgets sortable)-->
 				<section class="col-lg-5 connectedSortable">
 
-					<!-- Map box -->
-					<div class="box box-solid bg-light-blue-gradient">
-						<div class="box-header">
-							<!-- tools box -->
-							<div class="pull-right box-tools">
-								<button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"
-										title="Date range">
-									<i class="fa fa-calendar"></i></button>
-								<button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse"
-										data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
-									<i class="fa fa-minus"></i></button>
-							</div>
-							<!-- /. tools -->
-
-							<i class="fa fa-map-marker"></i>
-
-							<h3 class="box-title">
-								Visitors
-							</h3>
-						</div>
-						<div class="box-body">
-							<div id="world-map" style="height: 250px; width: 100%;"></div>
-						</div>
-						<!-- /.box-body-->
-						<div class="box-footer no-border">
-							<div class="row">
-								<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-									<div id="sparkline-1"></div>
-									<div class="knob-label">Visitors</div>
-								</div>
-								<!-- ./col -->
-								<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-									<div id="sparkline-2"></div>
-									<div class="knob-label">Online</div>
-								</div>
-								<!-- ./col -->
-								<div class="col-xs-4 text-center">
-									<div id="sparkline-3"></div>
-									<div class="knob-label">Exists</div>
-								</div>
-								<!-- ./col -->
-							</div>
-							<!-- /.row -->
-						</div>
-					</div>
-					<!-- /.box -->
-
-					<!-- solid sales graph -->
-					<div class="box box-solid bg-teal-gradient">
-						<div class="box-header">
-							<i class="fa fa-th"></i>
-
-							<h3 class="box-title">Sales Graph</h3>
-
-							<div class="box-tools pull-right">
-								<button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-								</button>
-							</div>
-						</div>
-						<div class="box-body border-radius-none">
-							<div class="chart" id="line-chart" style="height: 250px;"></div>
-						</div>
-						<!-- /.box-body -->
-						<div class="box-footer no-border">
-							<div class="row">
-								<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-									<input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-										   data-fgColor="#39CCCC">
-
-									<div class="knob-label">Mail-Orders</div>
-								</div>
-								<!-- ./col -->
-								<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-									<input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-										   data-fgColor="#39CCCC">
-
-									<div class="knob-label">Online</div>
-								</div>
-								<!-- ./col -->
-								<div class="col-xs-4 text-center">
-									<input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-										   data-fgColor="#39CCCC">
-
-									<div class="knob-label">In-Store</div>
-								</div>
-								<!-- ./col -->
-							</div>
-							<!-- /.row -->
-						</div>
-						<!-- /.box-footer -->
-					</div>
-					<!-- /.box -->
-
 					<!-- Calendar -->
 					<div class="box box-solid bg-green-gradient">
 						<div class="box-header">
-							<i class="fa fa-calendar"></i>
+							<i class="fa fa-line-chart"></i>
 
-							<h3 class="box-title">Calendar</h3>
-							<!-- tools box -->
-							<div class="pull-right box-tools">
-								<!-- button with a dropdown -->
-								<div class="btn-group">
-									<button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-										<i class="fa fa-bars"></i></button>
-									<ul class="dropdown-menu pull-right" role="menu">
-										<li><a href="#">Add new event</a></li>
-										<li><a href="#">Clear events</a></li>
-										<li class="divider"></li>
-										<li><a href="#">View calendar</a></li>
-									</ul>
-								</div>
-								<button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-								</button>
-							</div>
-							<!-- /. tools -->
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body no-padding">
-							<!--The calendar -->
-							<div id="calendar" style="width: 100%"></div>
+							<!--Student Classification -->
+							<div class="chart" id="gender" style="height: 350px;"></div>
+
 						</div>
+						<br>
+						<br>
+						<br>
+						<div class="chart" id="subscriptions" style="height: 350px;"></div>
+
 						<!-- /.box-body -->
 						<div class="box-footer text-black">
-							<div class="row">
-								<div class="col-sm-6">
-									<!-- Progress bars -->
-									<div class="clearfix">
-										<span class="pull-left">Task #1</span>
-										<small class="pull-right">90%</small>
-									</div>
-									<div class="progress xs">
-										<div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-									</div>
-
-									<div class="clearfix">
-										<span class="pull-left">Task #2</span>
-										<small class="pull-right">70%</small>
-									</div>
-									<div class="progress xs">
-										<div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-									</div>
-								</div>
-								<!-- /.col -->
-								<div class="col-sm-6">
-									<div class="clearfix">
-										<span class="pull-left">Task #3</span>
-										<small class="pull-right">60%</small>
-									</div>
-									<div class="progress xs">
-										<div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-									</div>
-
-									<div class="clearfix">
-										<span class="pull-left">Task #4</span>
-										<small class="pull-right">40%</small>
-									</div>
-									<div class="progress xs">
-										<div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-									</div>
-								</div>
-								<!-- /.col -->
-							</div>
-							<!-- /.row -->
+							<br>
+							<br>
+							<br>
+							<div class="chart" id="subscription_types" style="height: 450px;"></div>
 						</div>
 					</div>
 					<!-- /.box -->
@@ -1184,5 +731,366 @@
 	<div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<!--/*bar graph for students by study level*/-->
+<script>
+    // Create the chart
+    Highcharts.chart('studyLevel', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Classification of Students by study level'
+        },
+        xAxis: {
+            type: '',
+            categories:['Form One ', 'Form Two', 'Form Three', 'Form Four'],
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize:'13px'
+                }
+            }
+
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Students'
+            }
+
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    //  format: '{point.y:.}'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span><br/>'
+        },
+
+        series: [
+            {
+                name: "Study-Levels",
+                colorByPoint: true,
+                data: [
+                    {
+                        name: "Form One",
+                        y: <?php  echo $formOnes ; ?>,
+
+                    },
+                    {
+                        name: "Form Two",
+                        y: <?php  echo $formTwos ; ?>
+
+                    },
+                    {
+                        name: "Form Three",
+                        y:<?php  echo $formThrees ; ?>,
+
+                    },
+                    {
+                        name: "Form Four",
+                        y:<?php  echo $formFours ; ?>
+                    },
+
+                ]
+            }
+        ],
+
+    });
+</script>
+<!--/*bar graph for top 5 viewed videos*/-->
+<script>
+    // Create the chart
+    Highcharts.chart('topVideos', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Most viewed Videos'
+        },
+        xAxis: {
+            type: '',
+            categories:[<?php
+				$count=0;
+				foreach($topVideos as $video){
+					$count +=1;
+					if($count== count($topVideos)){
+						echo '"'.$video->file_name.'"';
+					}else{
+						echo  '"'.$video->file_name .'", ';
+					}
+				}; ?>],
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize:'13px'
+                }
+            }
+
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Views'
+            }
+
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                     // format: '{point.y:.}'
+                }
+            }
+        },
+
+        tooltip: {
+           // headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span><br/>'
+        },
+
+        series: [
+            {
+                name: "Names",
+                colorByPoint: true,
+                data: [<?php
+					$count=0;
+                   foreach($topVideos as $video){
+                   	$count +=1;
+                   	if($count== count($topVideos)){
+                   		echo $video->Views;
+					}else{
+						echo  $video->Views .',';
+					}
+			}; ?>
+                ]
+            }
+        ],
+
+    });
+
+</script>
+<!--/*bar graph for top 5 read books*/-->
+<script>
+    // Create the chart
+    Highcharts.chart('topBooks', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Most Read Books'
+        },
+        xAxis: {
+            type: '',
+            categories:[<?php
+				$count=0;
+				foreach($topEbooks as $book){
+					$count +=1;
+					if($count== count($topEbooks)){
+						echo '"'.$book->file_name.'"';
+					}else{
+						echo  '"'.$book->file_name .'", ';
+					}
+				}; ?>],
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize:'13px'
+                }
+            }
+
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Reads'
+            }
+
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    // format: '{point.y:.}'
+                }
+            }
+        },
+
+        tooltip: {
+         //   headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span><br/>'
+        },
+
+        series: [
+            {
+                name: "Names",
+                colorByPoint: true,
+                data: [<?php
+					$count=0;
+					foreach($topEbooks as $book){
+						$count +=1;
+						if($count== count($topEbooks)){
+							echo $book->Views;
+						}else{
+							echo  $book->Views .',';
+						}
+					}; ?>
+                ]
+            }
+        ],
+
+    });
+
+</script>
+<!--pie chart for students by gender-->
+<script>
+    // Build the chart
+    Highcharts.chart('gender', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Classification of students by gender'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: '',
+            colorByPoint: true,
+            data: [{
+                name: 'Male',
+                y: <?php echo count($femaleCount) ; ?>,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Female',
+                y: <?php echo count($maleCount) ; ?>
+            }]
+        }]
+    });
+</script>
+<!--pie chart for active vs inactive subscriptions-->
+<script>
+    // Build the chart
+    Highcharts.chart('subscriptions', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Classification of students by subscriptions'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: '',
+            colorByPoint: true,
+            data: [{
+                name: 'Active',
+                y: <?php echo $activeSubs ; ?>,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Inactive',
+                y: <?php echo $inactiveSubs ; ?>
+            }, ]
+        }]
+    });
+</script>
+<!--pie chart for subscription types-->
+<script>
+    // Build the chart
+    Highcharts.chart('subscription_types', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Classification of students by subscription types'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: '',
+            colorByPoint: true,
+            data: [{
+                name: 'Monthly',
+                y: <?php echo $monthlySubs ; ?>,
+                sliced: true,
+                selected: true
+            },  {
+                    name: 'Annual',
+                    y: <?php echo $annualSubs ; ?>
+                }, {
+                name: 'Termly',
+                y: <?php echo $termlySubs ; ?>
+            }, {
+                name: 'None',
+                y: <?php echo $nonSubs ; ?>
+            }]
+        }]
+    });
+</script>
 
 <?php $this->load->view('template/footer'); ?>

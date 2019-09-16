@@ -22,6 +22,42 @@ class Analytics_controller extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('index.php');
+		$studentCount= $this->Analytics_model->getStudentsCount();
+		$maleStudents= $this->Analytics_model->getMaleStudents();
+		$femaleStudents= $this->Analytics_model->getFemaleStudents();
+		$signupsToday= $this->Analytics_model->getDailySignups();
+		$formOnes= $this->Analytics_model->getFormOne();
+		$formTwos= $this->Analytics_model->getFormTwo();
+		$formThrees= $this->Analytics_model->getFormThree();
+		$formFours= $this->Analytics_model->getFormFour();
+		$activeSubscriptions = $this->Analytics_model->getActiveSubscriptions();
+		$inactiveSubscriptions= $this->Analytics_model->getInactiveSubscriptions();
+		$annualSubscriptions= $this->Analytics_model->getAnnualSubscriptions();
+		$termlySusbscriptions = $this->Analytics_model->getTermlySubscriptions();
+		$monthlySusbscriptions= $this->Analytics_model->getMonthlySubscriptions();
+		$nonSusbcribers= $this->Analytics_model->getNonSubscribers();
+		$topVideos= $this->Analytics_model->getVideosViews();
+		$topEbooks= $this->Analytics_model->getEbooksViews();
+
+		$data=array(
+			'studentCount'=>$studentCount,
+			'maleCount'=> $maleStudents,
+			'femaleCount'=>$femaleStudents,
+			'signupsToday'=>$signupsToday,
+			'formOnes'=>$formOnes,
+			'formTwos'=>$formTwos,
+			'formThrees'=>$formThrees,
+			'formFours'=>$formFours,
+			'activeSubs'=>$activeSubscriptions,
+			'inactiveSubs'=>$inactiveSubscriptions,
+			'annualSubs'=>$annualSubscriptions,
+			'termlySubs'=>$termlySusbscriptions,
+			'monthlySubs'=>$monthlySusbscriptions,
+			'nonSubs'=>$nonSusbcribers,
+			'topVideos'=>$topVideos,
+			'topEbooks'=> $topEbooks
+		);
+		//var_dump($formFours);
+		$this->load->view('index.php', $data);
 	}
 }
