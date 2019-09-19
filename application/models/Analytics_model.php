@@ -191,5 +191,34 @@ class Analytics_model extends CI_Model
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
-	
+	/*login validation */
+
+	public function login_validation($email, $password){
+		$this->db->select('user_id, fname, lname, online_status, mobile, email, hash, username, password, gender, user_type, user_status');
+		$this->db->from('users');
+		$this->db->where('email',$email);
+		$result =$this->db->get()->row();
+		if(empty($result)){
+			//this is to prevent errors  when the username is not found
+			'Wamlambez';
+		}else{
+			$hashed=$result->password;
+		}
+		if(!empty($result)){
+			if ($this->bcrypt->compare($password, $hashed)){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+	public function getUserDetails($email){
+		$this->db->select('user_id, fname, lname, online_status, mobile, email, hash, username, password, gender, user_type, user_status');
+		$this->db->from('users');
+		$this->db->where('email',$email);
+		$result =$this->db->get()->row();
+		return$result;
+	}
 }
