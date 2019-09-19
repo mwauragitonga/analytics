@@ -61,7 +61,6 @@ class Analytics_controller extends CI_Controller
 				'title' => "General Analytics",
 				'view' => "general/general.php"
 			);
-			//var_dump($formFours);
 			$this->load->view('index.php', $data);
 		}else{
 			$this->load->view('login/login.php');
