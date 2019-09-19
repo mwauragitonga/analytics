@@ -55,9 +55,59 @@ class Analytics_controller extends CI_Controller
 			'monthlySubs'=>$monthlySusbscriptions,
 			'nonSubs'=>$nonSusbcribers,
 			'topVideos'=>$topVideos,
-			'topEbooks'=> $topEbooks
+			'topEbooks'=> $topEbooks,
+            'title' => "General Analytics",
+            'view' => "general/general.php"
 		);
 		//var_dump($formFours);
 		$this->load->view('index.php', $data);
 	}
+
+    /**
+     *
+     */
+    public function webAnalytics(){
+
+        $data=array(
+
+            'title' => "Web Analytics",
+            'view' => "web_analytics/web.php"
+        );
+        //var_dump($formFours);
+        $this->load->view('index.php', $data);
+
+    }
+
+    /**
+     *
+     */
+    public function appAnalytics(){
+        $data=array(
+
+            'title' => "App analytics",
+            'view' => "app_analytics/app.php"
+        );
+        //var_dump($formFours);
+        $this->load->view('index.php', $data);
+    }
+
+    /**
+     *
+     */
+    public function payments(){
+        $data=array(
+
+            'title' => "Payments",
+            'view' => "payments/payments.php"
+        );
+        //var_dump($formFours);
+        $this->load->view('index.php', $data);
+    }
+
+    /**
+     *
+     */
+    public function authentication(){
+
+    }
 }
