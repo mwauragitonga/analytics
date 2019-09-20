@@ -1,5 +1,4 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Analytics_controller extends CI_Controller
@@ -102,7 +101,7 @@ class Analytics_controller extends CI_Controller
     public function payments(){
         $data=array(
 
-            'title' => "Payments",
+            'title' => "Payments And Subscriptions",
             'view' => "payments/payments.php"
         );
         //var_dump($formFours);
