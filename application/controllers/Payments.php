@@ -31,12 +31,12 @@ class Payments extends REST_Controller
             $start_date = "";
             $end_date = "";
             $tiles_data = $this->tilesData($start_date, $end_date);
-            $graph_data = $this->graphsData();
+           // $graph_data = $this->graphsData();
 
             $response = array(
                 "status" => true,
                 "tiles_data" => $tiles_data,
-                "graph_data" => $graph_data
+              //  "graph_data" => $graph_data
             );
             $this->response($response, REST_Controller::HTTP_OK);
         } catch (Exception $e) {
