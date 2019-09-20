@@ -39,54 +39,54 @@
 	<!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<body class="hold-transition login-page">
+<div class="login-box">
+	<div class="login-logo">
+		<a href="#"><b>ANALYTICS </b>PORTAL</a>
+	</div>
+	<!-- /.login-logo -->
+	<div class="login-box-body">
+		<p class="login-box-msg">Sign in to Analytics Portal</p>
 
-    <header class="main-header">
-        <!-- Logo -->
-        <a href="index2.html" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini">Dawati</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Dawati</b> E-Learning</span>
-        </a>
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
+		<form action="<?php echo base_url(); ?>authentication" method="post">
+			<div class="form-group has-feedback">
+				<input type="email" class="form-control" name="email" placeholder="Email or Phone">
+				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="password" class="form-control" name="password" placeholder="Password">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
+			<div class="row">
+				<!-- /.col -->
+				<div class="col-xs-12">
+					<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+				</div>
+				<!-- /.col -->
+			</div>
+		</form>
 
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <!-- User Account: style can be found in dropdown.less -->
-                    <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-							<span class="hidden-xs"><?php echo $this->session->userdata('fname').' '. $this->session->userdata('lname') ;?></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li class="user-header">
-                                <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"><br>
+		<a href="#">I forgot my password</a><br>
 
-								<?php echo $this->session->userdata('fname').''. $this->session->userdata('lname') ;?>
-							</li>
+	</div>
 
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-<!--                                    <a href="#" class="btn btn-default btn-flat">Profile</a>-->
-                                </div>
-                                <div class="pull-right">
-                                    <a href="<?php echo base_url(); ?>logout" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+</div>
+<!-- jQuery 3 -->
+<script src="<?php echo base_url(); ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="<?php echo base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
 
-                </ul>
-            </div>
-        </nav>
-    </header>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+    });
+</script>
+</body>
 
+<?php

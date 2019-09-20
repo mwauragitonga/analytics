@@ -76,7 +76,7 @@
 						<div class="icon">
 							<i class="ion ion-person-add"></i>
 						</div>
-						<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="<?php echo base_url();?>login" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 				<!-- ./col -->
@@ -419,12 +419,12 @@
             colorByPoint: true,
             data: [{
                 name: 'Male',
-                y: <?php echo count($femaleCount) ; ?>,
+                y: <?php echo count($maleCount) ; ?>,
                 sliced: true,
                 selected: true
             }, {
                 name: 'Female',
-                y: <?php echo count($maleCount) ; ?>
+                y: <?php echo count($femaleCount) ; ?>
             }]
         }]
     });
