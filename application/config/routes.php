@@ -54,5 +54,6 @@ $route['general'] = 'Analytics_controller/index';
 $route['payments'] = 'Analytics_controller/payments';
 $route['web'] ='Analytics_controller/webAnalytics';
 $route['app'] = 'Analytics_controller/appAnalytics';
+$route['payments_index'] = 'Payments/initialize';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
