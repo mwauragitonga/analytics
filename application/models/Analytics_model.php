@@ -191,6 +191,10 @@ class Analytics_model extends CI_Model
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
+	public function filterSignUps(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = date('Y-m-d H:i:s');
+	}
 	/*login validation */
 
 	public function login_validation($email, $password){
@@ -200,7 +204,7 @@ class Analytics_model extends CI_Model
 		$this->db->where('user_type', '1');
 		$result =$this->db->get()->row();
 		if(empty($result)){
-			//this is to prevent errors  when the username is not found
+			//this is to prevent errors  when the email is not found
 			'Wamlambez';
 		}else{
 			$hashed=$result->password;
