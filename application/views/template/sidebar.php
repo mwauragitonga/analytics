@@ -16,7 +16,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="active">
                 <a href="<?php echo base_url(); ?>general">
                     <i class="fa fa-dashboard"></i> <span>General</span>
 
@@ -30,14 +30,14 @@
 
                 </a>
             </li>
-            <li class="treeview">
+            <li class="">
                 <a href="<?php echo base_url(); ?>app">
                     <i class="fa fa-pie-chart"></i>
                     <span>Android App Analysis</span>
                 </a>
 
             </li>
-            <li class="treeview">
+            <li class="">
                 <a href="<?php echo base_url(); ?>payments">
                     <i class="fa fa-laptop"></i>
                     <span>Payments</span>
