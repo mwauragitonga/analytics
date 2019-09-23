@@ -187,7 +187,7 @@ class Analytics_model extends CI_Model
 		$date = date('Y-m-d');
 		$this->db->select('*');
 		$this->db->from('users');
-		$this->db->where('date_joined', $date);
+		$this->db->like('date_joined', $date);
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
