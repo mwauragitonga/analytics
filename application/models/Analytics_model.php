@@ -184,7 +184,7 @@ class Analytics_model extends CI_Model
 	/*get daily sign-ups */
 	public function getDailySignups(){
 		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d H:i:s');
+		$date = date('Y-m-d');
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->where('date_joined', $date);
