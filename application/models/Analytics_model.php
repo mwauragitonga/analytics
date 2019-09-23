@@ -184,24 +184,21 @@ class Analytics_model extends CI_Model
 	/*get daily sign-ups */
 	public function getDailySignups(){
 		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d H:i:s');
+		$date = date('Y-m-d');
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->where('date_joined', $date);
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
-	public function filterSignUps(){
-		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d H:i:s');
-	}
+
 	/*login validation */
 
 	public function login_validation($email, $password){
 		$this->db->select('user_id, fname, lname, online_status, mobile, email, hash, username, password, gender, user_type, user_status');
 		$this->db->from('users');
 		$this->db->where('email',$email);
-		$this->db->where('user_type', '1');
+		$this->db->where('user_type', '5');
 		$result =$this->db->get()->row();
 		if(empty($result)){
 			//this is to prevent errors  when the email is not found
@@ -225,5 +222,55 @@ class Analytics_model extends CI_Model
 		$this->db->where('email',$email);
 		$result =$this->db->get()->row();
 		return$result;
+	}
+
+	/* accounts management functions */
+	public function getWebRegistrations(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('registration_source','source_001');
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+	public function getAppRegistrations(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('registration_source','source_002');
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+	public function getUnclassifiedRegistrations(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('registration_source',NULL);
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+	public function averageSignups(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = new DateTime();
+		$date->modify('-1 month');
+		$month= $date->format('Y-m-d');
+
+		$today= date('Y-m-d ');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('date_joined >=',  $month);
+		$this->db->where('date_joined <=', $today );
+		$query= $this->db->get();
+		return $query->num_rows();
+		//var_dump($today);
+
+	}
+	public function filterSignUps(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = date('Y-m-d ');
 	}
 }

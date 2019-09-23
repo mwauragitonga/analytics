@@ -44,6 +44,13 @@
                 </a>
 
             </li>
+			<li>
+				<a href="<?php echo base_url(); ?>accounts">
+					<i class="fa fa-user"></i>
+					<span>Accounts</span>
+				</a>
+
+			</li>
         </ul>
     </section>
     <!-- /.sidebar -->

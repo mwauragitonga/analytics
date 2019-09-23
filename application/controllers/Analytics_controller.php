@@ -107,7 +107,39 @@ class Analytics_controller extends CI_Controller
         //var_dump($formFours);
         $this->load->view('index.php', $data);
     }
+	/**
+	 *
+	 */
+	public function accounts(){
+		$signupsToday= $this->Analytics_model->getDailySignups();
+		$webRegistrations= $this->Analytics_model->getWebRegistrations();
+		$appRegistrations= $this->Analytics_model->getAppRegistrations();
+		$unclassifiedRegistrations = $this->Analytics_model->getUnclassifiedRegistrations();
+		$activeSubscriptions = $this->Analytics_model->getActiveSubscriptions();
+		$inactiveSubscriptions= $this->Analytics_model->getInactiveSubscriptions();
+		$nonSusbcribers= $this->Analytics_model->getNonSubscribers();
+		$monthlySignups= $this->Analytics_model->averageSignups();
+		$inactiveUsers= $inactiveSubscriptions + $nonSusbcribers;
 
+		//var_dump($monthlySignups);
+		$data=array(
+			'signupsToday'=>$signupsToday,
+			'webRegistrations'=>$webRegistrations,
+			'appRegistrations'=> $appRegistrations,
+			'unclassified'=>$unclassifiedRegistrations,
+			'active'=>$activeSubscriptions,
+			'inactive'=>$inactiveUsers,
+			'title' => "Accounts Management",
+			'view' => "accounts/accounts.php"
+		);
+		//var_dump($formFours);
+		$this->load->view('index.php', $data);
+	}
+	public function filterSignups(){
+		$startDate='';
+		$endDate= '';
+		echo 'wamlambez';
+	}
     /**
      *
      */
@@ -132,7 +164,7 @@ class Analytics_controller extends CI_Controller
 			$data = array(
 				'message' =>$message
 			);
-
+		#var_dump($email);
 			$this->load->view('login/login',$data);
 		}
     }

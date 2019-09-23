@@ -90,22 +90,6 @@
                 <div class="nav-tabs-custom">
                     <!-- Tabs within a box -->
                     <ul class="nav nav-tabs pull-right">
-						<div class="form-group">
-							<label>Minimal</label>
-							<select class="form-control select2" name="select_period" id="select_period" onselect="selectPeriod()" style="width: 50%;">
-								<option disabled="disabled" selected="selected">Select period</option>
-								<option value="today">Today</option>
-								<option value="yesterday">Yesterday</option>
-								<option value="this_week">This Week</option>
-								<option value="last_week">Last Week</option>
-								<option value="month">This Month</option>
-								<option value="custom">Custom</option>
-							</select>
-							<div  style="display: none" id="date_picker">
-							<input type="date"  class="form-control" id="start_date" name="startDate" style="width: 50%;" >
-							<input type="date"  class="form-control" id="end_date" name="endDate" style="width: 50%;" >
-							</div>
-						</div>
                         <div class="chart" id="studyLevel" style="height: 350px;"></div>
                         <br>
                         <br>
@@ -176,57 +160,3 @@
 <!-- ./wrapper -->
 <!--/*bar graph for students by study level*/-->
 
-<script type="text/javascript">
-    function selectPeriod() {
-        var period = document.getElementById('select_period').value
-        var start_Date;
-        var end_Date;
-
-        if (period == 'today') {
-            document.getElementById('date_picker').style.display = "none";
-
-            var date = currentDate.getDate();
-            var month = currentDate.getMonth(); //Be careful! January is 0 not 1
-            var year = currentDate.getFullYear();
-
-            var dateString = year + "-0" + (month + 1) + "-" + date;
-            start_Date = dateString;
-            end_Date = dateString;
-            initialize(start_Date, end_Date);
-        } else if (period == 'yesterday') {
-            document.getElementById('date_picker').style.display = "none";
-            var date = currentDate.getDate();
-            var month = currentDate.getMonth(); //Be careful! January is 0 not 1
-            var year = currentDate.getFullYear();
-
-            var dateString = year + "-0" + (month + 1) + "-" + (date - 1);
-            start_Date = dateString;
-            end_Date = dateString;
-            initialize(start_Date, end_Date);
-        } else if (period == 'lastweek') {
-            document.getElementById('date_picker').style.display = "none";
-            var date = currentDate.getDate();
-            var month = currentDate.getMonth(); //Be careful! January is 0 not 1
-            var year = currentDate.getFullYear();
-
-
-            start_Date = year + "-0" + (month + 1) + "-" + (date - 6);
-            end_Date = year + "-0" + (month + 1) + "-" + date;;
-            initialize(start_Date, end_Date);
-        } else if (period == 'custom') {
-            document.getElementById('date_picker').style.display = "block";
-
-        }
-    }
-    function selectPeriod_datePicker() {
-        var start_Date = document.getElementById("start_date").value;
-        var end_Date = document.getElementById("end_date").value;
-
-        initialize(start_Date, end_Date);
-    }
-</script>
-<script>
-	function test() {
-
-    }
-</script>
