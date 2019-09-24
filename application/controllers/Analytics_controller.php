@@ -111,6 +111,7 @@ class Analytics_controller extends CI_Controller
 	 *
 	 */
 	public function accounts(){
+		if($this->is_logged_in()==true){
 		$signupsToday= $this->Analytics_model->getDailySignups();
 		$webRegistrations= $this->Analytics_model->getWebRegistrations();
 		$appRegistrations= $this->Analytics_model->getAppRegistrations();
@@ -119,11 +120,27 @@ class Analytics_controller extends CI_Controller
 		$inactiveSubscriptions= $this->Analytics_model->getInactiveSubscriptions();
 		$nonSusbcribers= $this->Analytics_model->getNonSubscribers();
 		$weeklySignups= $this->Analytics_model->averageSignups();
-		$inactiveUsers= $inactiveSubscriptions + $nonSusbcribers;
-		$montlyActiveUsers= $this->Analytics_model->monthlyActiveUsers();
+		$monthlyActiveUsers= $this->Analytics_model->monthlyActiveUsers();
 		$weeklyActiveUsers = $this->Analytics_model->weeklyActiveUsers();
+		$loggedInUsers= $this->Analytics_model->loggedInUsers();
+		$loggedOutUsers = $this->Analytics_model->loggedOutUsers();
+		$neverLogged = $this->Analytics_model->neverLoggedIn();
 
-		//var_dump($weeklySignups);
+		$loggedOut = $loggedOutUsers + $neverLogged;
+		$inactiveUsers= $inactiveSubscriptions + $nonSusbcribers;
+
+		$dat = date('Y-m-d');
+		$date = new DateTime($dat);
+		$users = array();
+		$period = $date->modify("-11 months");
+		for ($i = 0; $i < 12; $i++) {
+			$users[$i] = $this->Analytics_model->users_By_Months($period->format('Y-m'));
+			$period = $date->modify("+1 months");
+			//var_dump($users);
+		}
+		//return $users;
+		$today= date('Y-m-d ');
+		//var_dump($loggedInUsers);
 		$data=array(
 			'signupsToday'=>$signupsToday,
 			'webRegistrations'=>$webRegistrations,
@@ -132,13 +149,19 @@ class Analytics_controller extends CI_Controller
 			'active'=>$activeSubscriptions,
 			'inactive'=>$inactiveUsers,
 			'average'=>$weeklySignups,
-			'monthlyUsers'=>$montlyActiveUsers,
+			'monthlyUsers'=>$monthlyActiveUsers,
 			'weeklyUsers'=>$weeklyActiveUsers,
+			'annualUsers'=>$users,
+			'loggedIn'=>$loggedInUsers,
+			'loggedOut'=>$loggedOut,
 			'title' => "Accounts Management",
 			'view' => "accounts/accounts.php"
 		);
 		//var_dump($formFours);
 		$this->load->view('index.php', $data);
+		}else{
+			$this->load->view('login/login.php');
+		}
 	}
 	public function filterSignups(){
 		$startDate='';

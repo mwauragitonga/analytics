@@ -302,6 +302,47 @@ class Analytics_model extends CI_Model
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
+//	get active users over the last 12 months
+	public function users_By_Months($instance_month){
+
+		$this->db->select("COUNT(user_id) as users");
+		$this->db->from("users");
+		$this->db->where("user_type","1");
+		$this->db->like('last_seen',$instance_month);
+		$query = $this->db->get()->row();
+		//var_dump($query->users);
+		return $query->users;
+
+	}
+	//get logged in accounts
+	public function loggedInUsers()
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('online_status', '1');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+		//get logged out accounts
+	public function loggedOutUsers(){
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('user_type', '1');
+			$this->db->where('online_status','2');
+		//	$this->db->where('online_status','0');
+			$query= $this->db->get();
+			return $query->num_rows();
+		}
+		public function neverLoggedIn(){
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('user_type', '1');
+			$this->db->where('online_status','0');
+			$query= $this->db->get();
+			return $query->num_rows();
+		}
+
 	public function filterSignUps(){
 		date_default_timezone_set("Africa/Nairobi");
 		$date = date('Y-m-d ');

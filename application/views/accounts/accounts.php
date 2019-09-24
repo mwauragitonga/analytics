@@ -31,7 +31,7 @@
 					<div class="icon">
 						<i class="ion ion-bag"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
 				</div>
 			</div>
 			<!-- ./col -->
@@ -46,7 +46,7 @@
 					<div class="icon">
 						<i class="ion ion-stats-bars"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+<!--					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
 			<!-- ./col -->
@@ -61,7 +61,7 @@
 					<div class="icon">
 						<i class="ion ion-pie-graph "></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+<!--					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
 			<!-- ./col -->
@@ -76,7 +76,7 @@
 					<div class="icon">
 						<i class="ion ion-person-add"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+<!--					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
 			<!-- ./col -->
@@ -90,25 +90,25 @@
 				<div class="nav-tabs-custom">
 					<!-- Tabs within a box -->
 					<ul class="nav nav-tabs pull-right">
-						<div class="form-group">
-							<label>Filter SignUps</label>
-							<select class="form-control select2" name="select_period" id="select_period" onchange="selectPeriod()" style="width: 50%;">
-								<option disabled="disabled" selected="selected">Select period</option>
-								<option value="today">Today</option>
-								<option value="yesterday">Yesterday</option>
-								<option value="last_week">Last 7 Days</option>
-								<option value="custom">Custom</option>
-							</select>
-							<div  style="display: none" id="date_picker">
-								<input type="date"  class="form-control" id="start_date" name="startDate" style="width: 50%;" >
-								<input type="date"  class="form-control" id="end_date" name="endDate" style="width: 50%;" >
-							</div>
-						</div>
+<!--						<div class="form-group">-->
+<!--							<label>Filter SignUps</label>-->
+<!--							<select class="form-control select2" name="select_period" id="select_period" onchange="selectPeriod()" style="width: 50%;">-->
+<!--								<option disabled="disabled" selected="selected">Select period</option>-->
+<!--								<option value="today">Today</option>-->
+<!--								<option value="yesterday">Yesterday</option>-->
+<!--								<option value="last_week">Last 7 Days</option>-->
+<!--								<option value="custom">Custom</option>-->
+<!--							</select>-->
+<!--							<div  style="display: none" id="date_picker">-->
+<!--								<input type="date"  class="form-control" id="start_date" name="startDate" style="width: 50%;" >-->
+<!--								<input type="date"  class="form-control" id="end_date" name="endDate" style="width: 50%;" >-->
+<!--							</div>-->
+<!--						</div>-->
 						<div class="chart" id="signups" style="height: 350px;"></div>
 						<br>
 						<br>
 						<br>
-						<div class="chart" id="activee" style="height: 350px;"></div>
+						<div class="chart" id="active_users" style="height: 450px;"></div>
 						<br>
 						<br>
 						<br>
@@ -142,7 +142,7 @@
 					<br>
 					<br>
 					<br>
-					<div class="chart" id="subscriptions" style="height: 350px;"></div>
+					<div class="chart" id="logged_in" style="height: 350px;"></div>
 
 					<!-- /.box-body -->
 					<div class="box-footer text-black">
@@ -371,4 +371,124 @@
             }]
         }]
     });
+</script>
+<!--pie chart for logged in vs logged out accounts-->
+
+<script>
+    // Build the chart
+    Highcharts.chart('logged_in', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Classification of Logged in vs Logged out Accounts'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: '',
+            colorByPoint: true,
+            data: [{
+                name: 'Logged In',
+                y: <?php echo  $loggedIn; ?>,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Logged Out',
+                y: <?php echo $loggedOut ; ?>
+            }]
+        }]
+    });
+</script>
+<!--graph for active users over last 12 months-->
+<script>
+    function getMonthsString() {
+        var today = new Date;
+        var current = today.getMonth();
+
+        var monthString = new Array();
+        var month = new Array();
+        for (var i = 11; i > -1; i--) {
+            var d = new Date;
+            d.setMonth(today.getMonth() - i);
+            month[0] = "Jan";
+            month[1] = "Feb";
+            month[2] = "Mar";
+            month[3] = "Apr";
+            month[4] = "May";
+            month[5] = "June";
+            month[6] = "July";
+            month[7] = "Aug";
+            month[8] = "Sept";
+            month[9] = "Oct";
+            month[10] = "Nov";
+            month[11] = "Dec";
+            //month[d.getMonth()];
+            monthString.push(month[d.getMonth()]);
+
+        }
+        //  var kji =monthString.join('\,');
+        //  console.log(kji);
+        return monthString;
+    }
+    Highcharts.chart('active_users', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Active users for the last 12 months'
+        },
+        xAxis: {
+            categories: getMonthsString()
+        },
+        yAxis: {
+            title: {
+                text: "Users"
+            }
+        },
+        plotOptions: {
+            column: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Active Users',
+            data: [<?php
+					$count=0;
+					foreach($annualUsers as $users){
+					$count +=1;
+				if($count== count($annualUsers)){
+					echo $users;
+				}else{
+					echo  $users .',';
+				}
+			} ; ?>]
+        }]
+    });
+
+
+</script>
+<script>
+
 </script>
