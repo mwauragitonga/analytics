@@ -118,10 +118,12 @@ class Analytics_controller extends CI_Controller
 		$activeSubscriptions = $this->Analytics_model->getActiveSubscriptions();
 		$inactiveSubscriptions= $this->Analytics_model->getInactiveSubscriptions();
 		$nonSusbcribers= $this->Analytics_model->getNonSubscribers();
-		$monthlySignups= $this->Analytics_model->averageSignups();
+		$weeklySignups= $this->Analytics_model->averageSignups();
 		$inactiveUsers= $inactiveSubscriptions + $nonSusbcribers;
+		$montlyActiveUsers= $this->Analytics_model->monthlyActiveUsers();
+		$weeklyActiveUsers = $this->Analytics_model->weeklyActiveUsers();
 
-		//var_dump($monthlySignups);
+		//var_dump($weeklySignups);
 		$data=array(
 			'signupsToday'=>$signupsToday,
 			'webRegistrations'=>$webRegistrations,
@@ -129,6 +131,9 @@ class Analytics_controller extends CI_Controller
 			'unclassified'=>$unclassifiedRegistrations,
 			'active'=>$activeSubscriptions,
 			'inactive'=>$inactiveUsers,
+			'average'=>$weeklySignups,
+			'monthlyUsers'=>$montlyActiveUsers,
+			'weeklyUsers'=>$weeklyActiveUsers,
 			'title' => "Accounts Management",
 			'view' => "accounts/accounts.php"
 		);

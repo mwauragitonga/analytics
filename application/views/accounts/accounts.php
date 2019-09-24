@@ -54,9 +54,9 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<!--                        <h3><?php /*echo count($femaleCount) ; */?></h3>
--->
-						<p>Average Weekly Signups</p>
+				    <h3><?php echo $monthlyUsers ; ?></h3>
+
+						<p>Active Users in the Last Month</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-pie-graph "></i>
@@ -69,9 +69,9 @@
 				<!-- small box -->
 				<div class="small-box bg-red">
 					<div class="inner">
-						<h3><?php echo ($signupsToday) ; ?></h3>
+						<h3><?php echo ($weeklyUsers) ; ?></h3>
 
-						<p>Sign Ups Today</p>
+						<p>Active Users in the Last Week</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-person-add"></i>

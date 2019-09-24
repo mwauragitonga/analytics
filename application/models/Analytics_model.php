@@ -187,7 +187,7 @@ class Analytics_model extends CI_Model
 		$date = date('Y-m-d');
 		$this->db->select('*');
 		$this->db->from('users');
-		$this->db->where('date_joined', $date);
+		$this->db->like('date_joined', $date);
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
@@ -255,19 +255,52 @@ class Analytics_model extends CI_Model
 	public function averageSignups(){
 		date_default_timezone_set("Africa/Nairobi");
 		$date = new DateTime();
-		$date->modify('-1 month');
-		$month= $date->format('Y-m-d');
-
+		$date->modify('-1 week');
+		$week= $date->format('Y-m-d');
+		//var_dump($week);
 		$today= date('Y-m-d ');
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->where('user_type', '1');
-		$this->db->where('date_joined >=',  $month);
+		$this->db->where('date_joined >=',  $week);
 		$this->db->where('date_joined <=', $today );
 		$query= $this->db->get();
-		return $query->num_rows();
-		//var_dump($today);
+		return ($query->num_rows())/7;
 
+
+	}
+//	get users active in the last month
+	public function monthlyActiveUsers(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = new DateTime();
+		$date->modify('-1 month');
+		$month= $date->format('Y-m-d');
+		//var_dump($week);
+		$today= date('Y-m-d ');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('last_seen >=',  $month);
+		//$this->db->where('last_seen <=', $today );
+		$query= $this->db->get();
+		return $query->num_rows();
+	}
+	//	get users active in the last week
+
+	public function weeklyActiveUsers(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = new DateTime();
+		$date->modify('-1 week');
+		$week= $date->format('Y-m-d');
+		//var_dump($week);
+		$today= date('Y-m-d ');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('last_seen >=',  $week);
+		//$this->db->where('last_seen <=', $today );
+		$query= $this->db->get();
+		return $query->num_rows();
 	}
 	public function filterSignUps(){
 		date_default_timezone_set("Africa/Nairobi");
