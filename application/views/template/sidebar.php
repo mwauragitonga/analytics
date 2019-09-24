@@ -30,14 +30,16 @@
 
                 </a>
             </li>
-            <li class="">
+
+            <li>
                 <a href="<?php echo base_url(); ?>app">
                     <i class="fa fa-pie-chart"></i>
                     <span>Android App Analysis</span>
                 </a>
 
             </li>
-            <li class="">
+
+            <li>
                 <a href="<?php echo base_url(); ?>payments">
                     <i class="fa fa-laptop"></i>
                     <span>Payments</span>

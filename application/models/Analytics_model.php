@@ -191,16 +191,20 @@ class Analytics_model extends CI_Model
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
+	public function filterSignUps(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = date('Y-m-d H:i:s');
+	}
 	/*login validation */
 
 	public function login_validation($email, $password){
 		$this->db->select('user_id, fname, lname, online_status, mobile, email, hash, username, password, gender, user_type, user_status');
 		$this->db->from('users');
 		$this->db->where('email',$email);
-		$this->db->where('user_type', '5');
+		$this->db->where('user_type', '1');
 		$result =$this->db->get()->row();
 		if(empty($result)){
-			//this is to prevent errors  when the username is not found
+			//this is to prevent errors  when the email is not found
 			'Wamlambez';
 		}else{
 			$hashed=$result->password;
