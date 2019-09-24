@@ -8,8 +8,8 @@
             </small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li><a href="<?php echo base_url()?>general"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Payments</li>
         </ol>
     </section>
 
@@ -26,15 +26,14 @@
                         <p>Total Revenue (Ksh)</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="fa fa-money"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-green">
+                <div class="small-box bg-green-gradient">
                     <div class="inner">
                         <h3 id="aYS"><sup style="font-size: 20px"></sup></h3>
 
@@ -43,13 +42,12 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-yellow">
+                <div class="small-box bg-primary">
                     <div class="inner">
                         <h3 id="aTS"></h3>
 
@@ -58,13 +56,12 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph "></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-red">
+                <div class="small-box bg-yellow">
                     <div class="inner">
                         <h3 id="aMS"></h3>
 
@@ -73,34 +70,31 @@
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-yellow">
+                <div class="small-box bg-red">
                     <div class="inner">
                         <h3 id="nS"></h3>
                         <p>Non Subscribers</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph "></i>
+                        <i class="fa fa-times "></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-yellow">
+                <div class="small-box bg-green">
                     <div class="inner">
                         <h3 id="successRate"></h3>
 
                         <p>Payment Success Rate</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph "></i>
+                        <i class="fa fa-check"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -211,7 +205,9 @@
             request.send(data);
 
             request.onreadystatechange = () => {
+
                 response = JSON.parse(request.responseText);
+               // console.log(response)
                 var revenue_By_Months = response.graph_data.revenue_By_Months.map(Number);
                 var subscription_Comparisons = response.graph_data.subscriptions_Comparisons;
                 var monthly = (subscription_Comparisons.monthly_subscriptions).map(Number);
@@ -270,6 +266,14 @@
                     yAxis: {
                         title: {
                             text: "Revenue (Ksh)"
+                        }
+                    },
+                    plotOptions: {
+                        column: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
                         }
                     },
                     credits: {

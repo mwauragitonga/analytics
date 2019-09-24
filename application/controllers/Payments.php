@@ -63,56 +63,32 @@ class Payments extends REST_Controller
     public function revenue_By_Months()
     {
 
-        $months[1] = "Jan";
-        $months[2] = "Feb";
-        $months[3] = "Mar";
-        $months[4] = "Apr";
-        $months[5] = "May";
-        $months[6] = "June";
-        $months[7] = "July";
-        $months[8] = "Aug";
-        $months[9] = "Sept";
-        $months[10] = "Oct";
-        $months[11] = "Nov";
-        $months[0] = "Dec";
-        $month = date('m');
-        $year = date('Y');
+        $dat = date('Y-m-d');
+        $date = new DateTime($dat);
         $revenue = array();
-
+        $period = $date->modify("-11 months");
         for ($i = 0; $i < 12; $i++) {
-            $instance_month = $month - $i < 0 ? ($year-1).$month - $i + 12 : $year.$month;
-            print_r($instance_month);
-            $revenue[$i] = $this->Payments_model->revenue_By_Months($instance_month);
-            $month --;
+            $revenue[$i] = $this->Payments_model->revenue_By_Months($period->format('Ym'));
+            $period = $date->modify("+1 months");
         }
         return $revenue;
 
     }
     public function subscriptions_Comparisons(){
-        $months[1] = "Jan";
-        $months[2] = "Feb";
-        $months[3] = "Mar";
-        $months[4] = "Apr";
-        $months[5] = "May";
-        $months[6] = "June";
-        $months[7] = "July";
-        $months[8] = "Aug";
-        $months[9] = "Sept";
-        $months[10] = "Oct";
-        $months[11] = "Nov";
-        $months[0] = "Dec";
-        $month = date('m');
+
+        $dat = date('Y-m-d');
+        $date = new DateTime($dat);
         $subscriptions['monthly_subscriptions'] = array();
         $subscriptions['yearly_subscriptions'] = array();
         $subscriptions['termly_subscriptions'] = array();
-
+        $period = $date->modify("-11 months");
         for ($i = 0; $i < 12; $i++) {
-            $instance_month = $month - $i < 0 ? $month - $i + 12 : $month;
-           // $subscriptions[$i] = $this->Payments_model->subscriptions_Comparisons($instance_month);
-            array_push($subscriptions['monthly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($instance_month,"monthly"));
-            array_push($subscriptions['termly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($instance_month,"termly"));
-            array_push($subscriptions['yearly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($instance_month,"yearly"));
-            $month--;
+          //  print_r($period); echo "<br>";
+            array_push($subscriptions['monthly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Y-m"),"monthly"));
+            array_push($subscriptions['termly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Y-m"),"termly"));
+            array_push($subscriptions['yearly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Y-m"),"yearly"));
+            $period = $date->modify("+1 months");
+
         }
         return $subscriptions;
     }

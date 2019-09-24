@@ -70,6 +70,7 @@ class Payments_model extends CI_Model
         $this->db->from("student_subscriptions");
         $this->db->where("subscription_type",$subscription_type);
     //    $this->db->where(date('m',strtotime("timestamp")),$instance_month);
+        $this->db->like("start_date" , $instance_month );
         $query = $this->db->get()->row();
         return $query->count;
     }
