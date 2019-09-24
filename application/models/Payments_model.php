@@ -52,7 +52,7 @@ class Payments_model extends CI_Model
     public function successfulPaymentAttempts($start_date,$end_date){
         $this->db->select("COUNT(index_ID) as count");
         $this->db->from("mpesa_callbacks");
-        $this->db->where("transaction_ID !=","NULL");
+        $this->db->where("(transaction_ID !=NULL)OR transaction_ID != ''");
         $query = $this->db->get()->row();
         return $query->count;
     }
