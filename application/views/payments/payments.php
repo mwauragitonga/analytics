@@ -8,8 +8,8 @@
             </small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li><a href="<?php echo base_url()?>general"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Payments</li>
         </ol>
     </section>
 
@@ -26,15 +26,14 @@
                         <p>Total Revenue (Ksh)</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="fa fa-money"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-green">
+                <div class="small-box bg-green-gradient">
                     <div class="inner">
                         <h3 id="aYS"><sup style="font-size: 20px"></sup></h3>
 
@@ -43,13 +42,12 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-yellow">
+                <div class="small-box bg-primary">
                     <div class="inner">
                         <h3 id="aTS"></h3>
 
@@ -58,13 +56,12 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph "></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-red">
+                <div class="small-box bg-yellow">
                     <div class="inner">
                         <h3 id="aMS"></h3>
 
@@ -73,34 +70,31 @@
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-yellow">
+                <div class="small-box bg-red">
                     <div class="inner">
                         <h3 id="nS"></h3>
                         <p>Non Subscribers</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph "></i>
+                        <i class="fa fa-times "></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-yellow">
+                <div class="small-box bg-green">
                     <div class="inner">
                         <h3 id="successRate"></h3>
 
                         <p>Payment Success Rate</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph "></i>
+                        <i class="fa fa-check"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -167,7 +161,7 @@
         var startDate;
         var endDate;
         var request = new XMLHttpRequest();
-        request.open("POST", "<?php echo base_url() . 'payments_index'?>");
+        request.open("POST", "<?php echo base_url() . 'tiles'?>");
         request.setRequestHeader('Content-Type', 'application/json');
         let data = JSON.stringify({
             /* "start_date": startDate,
@@ -195,6 +189,107 @@
 
         };
     }
+
+    //var refresh = setInterval(xHR, 2000);
+    window.addEventListener("load", function () {
+            var response;
+            var startDate;
+            var endDate;
+            var request = new XMLHttpRequest();
+            request.open("POST", "<?php echo base_url() . 'graphs'?>");
+            request.setRequestHeader('Content-Type', 'application/json');
+            let data = JSON.stringify({
+                /* "start_date": startDate,
+                 "end_date": endDate*/
+            });
+            request.send(data);
+
+            request.onreadystatechange = () => {
+
+                response = JSON.parse(request.responseText);
+               // console.log(response)
+                var revenue_By_Months = response.graph_data.revenue_By_Months.map(Number);
+                var subscription_Comparisons = response.graph_data.subscriptions_Comparisons;
+                var monthly = (subscription_Comparisons.monthly_subscriptions).map(Number);
+                var yearly = subscription_Comparisons.yearly_subscriptions.map(Number);
+                var termly = subscription_Comparisons.termly_subscriptions.map(Number);
+
+                Highcharts.chart('subscriptions', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Comparison of new subscriptions for the last 12 months'
+                    },
+                    subtitle: {
+                        text: 'Source: Dawati Web and App'
+                    },
+                    xAxis: {
+                        categories: getMonthsString()
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'New Subscriptions'
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Monthly',
+                            data: monthly
+                        }, {
+                            name: 'Termly',
+                            data: termly
+                        },
+                        {
+                            name: 'Yearly',
+                            data: yearly
+                        }]
+                });
+                Highcharts.chart('revenue_by_month', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Revenue for the last 12 months'
+                    },
+                    xAxis: {
+                        categories: getMonthsString()
+                    },
+                    yAxis: {
+                        title: {
+                            text: "Revenue (Ksh)"
+                        }
+                    },
+                    plotOptions: {
+                        column: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'Revenue',
+                        data: revenue_By_Months
+                    }]
+                });
+
+            }
+
+        }
+    )
+    ;
 
     function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
         try {
@@ -243,68 +338,7 @@
         return monthString;
     }
 
-    Highcharts.chart('subscriptions', {
-        chart: {
-            type: 'line'
-        },
-        title: {
-            text: 'Comparison of new subscriptions for the last 12 months'
-        },
-        subtitle: {
-            text: 'Source: Dawati Web and App'
-        },
-        xAxis: {
-            categories: getMonthsString()
-        },
-        yAxis: {
-            title: {
-                text: 'New Subscriptions'
-            }
-        },
-        plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
-                },
-                enableMouseTracking: false
-            }
-        },
-        series: [
-        {
-            name: 'Monthly',
-            data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'Termly',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        },
-        {
-            name: 'Yearly',
-            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        }]
-    });
 
-    Highcharts.chart('revenue_by_month', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Revenue for the last 12 months'
-        },
-        xAxis: {
-            categories: getMonthsString()
-        },
-        yAxis : {
-            title : {
-                text : "Revenue (Ksh)"
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Revenue',
-            data: [3, 4, 4, 2, 5, 2, 4, 6, 3, 5, 5, 2]
-        }]
-    });
+
 </script>
 

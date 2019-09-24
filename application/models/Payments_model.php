@@ -56,15 +56,23 @@ class Payments_model extends CI_Model
         $query = $this->db->get()->row();
         return $query->count;
     }
-    public function  revenue_By_Months(){
-        $this->db->select("SUM(amaount) as revenue");
+    public function  revenue_By_Months($instance_month){
+        $this->db->select("SUM(amount) as revenue");
         $this->db->from("mpesa_callbacks");
         $this->db->where("transaction_ID !=","NULL");
+      //  $this->db->where('time_of_payment',date('m',strtotime("time_of_payment")),$instance_month);
+        $this->db->like('time_of_payment',$instance_month);
+        $query = $this->db->get()->row();
+        return $query->revenue;
+    }
+    public function subscriptions_Comparisons($instance_month,$subscription_type){
+        $this->db->select( "COUNT(index_ID) as count");
+        $this->db->from("student_subscriptions");
+        $this->db->where("subscription_type",$subscription_type);
+    //    $this->db->where(date('m',strtotime("timestamp")),$instance_month);
+        $this->db->like("start_date" , $instance_month );
         $query = $this->db->get()->row();
         return $query->count;
-    }
-    public function subscriptions_Comparisons(){
-
     }
 
 }

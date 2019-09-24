@@ -21,33 +21,13 @@ class Payments extends REST_Controller
 
     }
 
-    public function initialize_post()
+    public function tiles_post()
     {
         $post_data = file_get_contents("php://input");
         $decoded_post_data = json_decode($post_data);
-        try {
-            /*$start_date = $decoded_post_data->startDate;
-            $end_date = $decoded_post_data->endDate;*/
-            $start_date = "";
-            $end_date = "";
-            $tiles_data = $this->tilesData($start_date, $end_date);
-           // $graph_data = $this->graphsData();
 
-            $response = array(
-                "status" => true,
-                "tiles_data" => $tiles_data,
-              //  "graph_data" => $graph_data
-            );
-            $this->response($response, REST_Controller::HTTP_OK);
-        } catch (Exception $e) {
-            $response = "Fail";
-            $this->response($response, REST_Controller::HTTP_NO_CONTENT);
-
-        }
-    }
-
-    public function tilesData($start_date, $end_date)
-    {
+        $start_date = " ";
+        $end_date = " ";
         $data = array();
         $data["total_Revenue"] = $this->Payments_model->totalRevenue($start_date, $end_date);
         $data["active_Yearly_Subscribers"] = $this->Payments_model->active_Yearly_Subscribers($start_date, $end_date);
@@ -57,40 +37,58 @@ class Payments extends REST_Controller
         $data["payment_Attempts"] = $this->Payments_model->paymentAttempts($start_date, $end_date);
         $data["successful_Payment_Attempts"] = $this->Payments_model->successfulPaymentAttempts($start_date, $end_date);
 
-        return $data;
+        $response = array(
+            "status" => true,
+            "tiles_data" => $data,
+        );
+        $this->response($response, REST_Controller::HTTP_OK);
     }
 
-    public function graphsData()
+    public function graphs_post()
     {
+        $post_data = file_get_contents("php://input");
+        $decoded_post_data = json_decode($post_data);
+        $start_date = " ";
+        $end_date = " ";
         $data = array();
         $data["revenue_By_Months"] = $this->revenue_By_Months();
-        $data["subscriptions_Comparisons"] = $this->Payments_model->subscriptions_Comparisons();
+        $data["subscriptions_Comparisons"] = $this->subscriptions_Comparisons();
+        $response = array(
+            "status" => true,
+            "graph_data" => $data
+        );
+        $this->response($response, REST_Controller::HTTP_OK);
     }
 
     public function revenue_By_Months()
     {
 
-        $time = strtotime('20190405130955');
-        // print_r($time);
-        $month = date('m', $time);
-        //  print_r($month);
-        $month = date('m');
+        $dat = date('Y-m-d');
+        $date = new DateTime($dat);
         $revenue = array();
-
+        $period = $date->modify("-11 months");
         for ($i = 0; $i < 12; $i++) {
-            $instance_month = $month - $i < 0 ? $month - $i + 12 : $month - $i;
-            $revenue[$i] = $this->Payments_model->revenue_By_Months($instance_month);
+            $revenue[$i] = $this->Payments_model->revenue_By_Months($period->format('Ym'));
+            $period = $date->modify("+1 months");
         }
         return $revenue;
 
     }
-    public function subscriptions_Comparison(){
-        $month = date('m');
-        $subscriptions = array();
+    public function subscriptions_Comparisons(){
 
+        $dat = date('Y-m-d');
+        $date = new DateTime($dat);
+        $subscriptions['monthly_subscriptions'] = array();
+        $subscriptions['yearly_subscriptions'] = array();
+        $subscriptions['termly_subscriptions'] = array();
+        $period = $date->modify("-11 months");
         for ($i = 0; $i < 12; $i++) {
-            $instance_month = $month - $i < 0 ? $month - $i + 12 : $month - $i;
-            $subscriptions[$i] = $this->Payments_model->subscriptions_Comparisons($instance_month);
+          //  print_r($period); echo "<br>";
+            array_push($subscriptions['monthly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Y-m"),"monthly"));
+            array_push($subscriptions['termly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Y-m"),"termly"));
+            array_push($subscriptions['yearly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Y-m"),"yearly"));
+            $period = $date->modify("+1 months");
+
         }
         return $subscriptions;
     }
