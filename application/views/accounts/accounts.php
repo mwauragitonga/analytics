@@ -11,7 +11,7 @@
 			</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="<?php echo base_url(); ?>general"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li class="active">Accounts</li>
 		</ol>
 	</section>
