@@ -191,10 +191,7 @@ class Analytics_model extends CI_Model
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
-	public function filterSignUps(){
-		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d H:i:s');
-	}
+
 	/*login validation */
 
 	public function login_validation($email, $password){
@@ -225,5 +222,129 @@ class Analytics_model extends CI_Model
 		$this->db->where('email',$email);
 		$result =$this->db->get()->row();
 		return$result;
+	}
+
+	/* accounts management functions */
+	public function getWebRegistrations(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('registration_source','source_001');
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+	public function getAppRegistrations(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('registration_source','source_002');
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+	public function getUnclassifiedRegistrations(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('registration_source',NULL);
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+	public function averageSignups(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = new DateTime();
+		$date->modify('-1 week');
+		$week= $date->format('Y-m-d');
+		//var_dump($week);
+		$today= date('Y-m-d ');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('date_joined >=',  $week);
+		$this->db->where('date_joined <=', $today );
+		$query= $this->db->get();
+		return ($query->num_rows())/7;
+
+
+	}
+//	get users active in the last month
+	public function monthlyActiveUsers(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = new DateTime();
+		$date->modify('-1 month');
+		$month= $date->format('Y-m-d');
+		//var_dump($week);
+		$today= date('Y-m-d ');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('last_seen >=',  $month);
+		//$this->db->where('last_seen <=', $today );
+		$query= $this->db->get();
+		return $query->num_rows();
+	}
+	//	get users active in the last week
+
+	public function weeklyActiveUsers(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = new DateTime();
+		$date->modify('-1 week');
+		$week= $date->format('Y-m-d');
+		//var_dump($week);
+		$today= date('Y-m-d ');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('last_seen >=',  $week);
+		//$this->db->where('last_seen <=', $today );
+		$query= $this->db->get();
+		return $query->num_rows();
+	}
+//	get active users over the last 12 months
+	public function users_By_Months($instance_month){
+
+		$this->db->select("COUNT(user_id) as users");
+		$this->db->from("users");
+		$this->db->where("user_type","1");
+		$this->db->like('last_seen',$instance_month);
+		$query = $this->db->get()->row();
+		//var_dump($query->users);
+		return $query->users;
+
+	}
+	//get logged in accounts
+	public function loggedInUsers()
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('online_status', '1');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+		//get logged out accounts
+	public function loggedOutUsers(){
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('user_type', '1');
+			$this->db->where('online_status','2');
+		//	$this->db->where('online_status','0');
+			$query= $this->db->get();
+			return $query->num_rows();
+		}
+		public function neverLoggedIn(){
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('user_type', '1');
+			$this->db->where('online_status','0');
+			$query= $this->db->get();
+			return $query->num_rows();
+		}
+
+	public function filterSignUps(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = date('Y-m-d ');
 	}
 }
