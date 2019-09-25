@@ -38,7 +38,8 @@ class Payments_model extends CI_Model
     public function  none_subscribers($start_date,$end_date){
         $this->db->select( "COUNT(index_ID) as count");
         $this->db->from("student_subscriptions");
-        $this->db->where("subscription_type","none");
+        $this->db->where("(subscription_type = 'none' OR subscription_type = '')");
+
         $query = $this->db->get()->row();
         return $query->count;
     }
