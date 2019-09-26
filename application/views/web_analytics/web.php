@@ -24,9 +24,9 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <!--                        <h3><?php /*echo $studentCount ; */?></h3>
--->
-                        <p>Students</p>
+						<h3><?php echo $signUps ; ?></h3>
+
+                        <p>Sign Ups </p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -39,9 +39,10 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <!--                        <h3><?php /*echo count($maleCount)  ; */?><sup style="font-size: 20px"></sup></h3>
--->
-                        <p>Male Students</p>
+                     <h3><?php /*echo count($maleCount)  ; */?>
+						 <sup style="font-size: 20px"></sup></h3>
+
+                        <p>Log Ins</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -56,7 +57,7 @@
                     <div class="inner">
                         <!--                        <h3><?php /*echo count($femaleCount) ; */?></h3>
 -->
-                        <p>Female Students</p>
+                        <p>Video Views Today</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph "></i>
@@ -71,7 +72,7 @@
                     <div class="inner">
                         <!--                        <h3><?php /*echo ($signupsToday) ; */?></h3>
 -->
-                        <p>Sign Ups Today</p>
+                        <p>Books Read Today</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>

@@ -13,7 +13,7 @@ class Analytics_controller extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->data ['title'] = "Dawati E-Learning";
+		$this->data ['title'] = "Dawati Analytics | General";
 		$this->data ['description'] = "";
 
 		$this->load->model('Analytics_model');
@@ -67,20 +67,7 @@ class Analytics_controller extends CI_Controller
 
 	}
 
-    /**
-     *
-     */
-    public function webAnalytics(){
 
-        $data=array(
-
-            'title' => "Web Analytics",
-            'view' => "web_analytics/web.php"
-        );
-        //var_dump($formFours);
-        $this->load->view('index.php', $data);
-
-    }
 
     /**
      *
@@ -93,6 +80,7 @@ class Analytics_controller extends CI_Controller
         );
         //var_dump($formFours);
         $this->load->view('index.php', $data);
+
     }
 
     /**
@@ -163,10 +151,15 @@ class Analytics_controller extends CI_Controller
 			$this->load->view('login/login.php');
 		}
 	}
-	public function filterSignups(){
-		$startDate='';
-		$endDate= '';
-		echo 'wamlambez';
+
+	public function accountsByDay(){
+		$data=array(
+
+			'title' => "Sign Ups ",
+			'view' => "accounts/signups.php"
+		);
+		//var_dump($formFours);
+		$this->load->view('index.php', $data);
 	}
     /**
      *
