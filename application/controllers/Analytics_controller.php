@@ -196,6 +196,18 @@ class Analytics_controller extends CI_Controller
 			$this->load->view('login/login',$data);
 		}
     }
+    public function signUps_by_Day()
+    {
+       // if ($this->is_logged_in()) {
+            $post_data = file_get_contents("php://input");
+            $decoded_post_data = json_decode($post_data);
+            $date = $decoded_post_data->date;
+
+            $users = $this->Analytics_model->signUps_By_Day($date);
+
+            echo json_encode($users);
+      //  }
+    }
 	public function is_logged_in()
 	{
 		if ( $this->session->userdata('status') == true ) {

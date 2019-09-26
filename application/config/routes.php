@@ -61,6 +61,7 @@ $route['login'] = 'Analytics_controller/login';
 $route['logout'] = 'Analytics_controller/logout';
 $route['accounts'] = 'Analytics_controller/accounts';
 $route['filter'] = 'Analytics_controller/filterSignups';
+$route['accountsByDay'] = "Analytics_controller/signUps_by_Day";
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
