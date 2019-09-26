@@ -16,7 +16,7 @@
 	<section>
 		<div class="row" style="width: 55%;float: right">
 			<label>Choose Date</label>
-			<input type="date"  class="form-control" id="date" name="date" style="width: 25%;" onchange="dateChanged()" >
+			<input type="date" min="2019-09-23"  class="form-control" id="date" name="date" style="width: 25%;" onchange="dateChanged()" >
 
 		</div>
 		<div class="box-body">
@@ -64,7 +64,7 @@
         });
         request.send(data);
 
-        request.onreadystatechange = () => {
+        request.onload = () => {
             var response = JSON.parse(request.responseText);
             for(var i =0; i<response.length; i++){
                 var fname = response[i].fname;
