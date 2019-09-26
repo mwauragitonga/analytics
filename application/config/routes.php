@@ -59,5 +59,8 @@ $route['graphs'] ='Payments/graphs';
 $route['authentication'] = 'Analytics_controller/authentication';
 $route['login'] = 'Analytics_controller/login';
 $route['logout'] = 'Analytics_controller/logout';
+$route['accounts'] = 'Analytics_controller/accounts';
+$route['filter'] = 'Analytics_controller/filterSignups';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
