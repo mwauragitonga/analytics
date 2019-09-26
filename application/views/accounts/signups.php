@@ -30,6 +30,7 @@
 					<th>Phone Number</th>
 					<th>School</th>
 					<th>Study Level</th>
+                    <th>Subscription Status</th>
 				</tr>
 				</thead>
 			<tbody id="signUps">
@@ -72,10 +73,11 @@
                 var level_name = response[i].level_name;
                 var mobile = response[i].mobile;
                 var school_name = response[i].school_name;
+                var subscription_Status= response[i].status;
 
               //  console.log(school_name);
 
-                 tr += "<tr><td>"+(i+1)+"</td><td>"+fname+"</td><td>"+gender+"</td><td>"+mobile+"</td><td>"+school_name+"</td><td>"+level_name+"</td></tr>";
+                 tr += "<tr><td>"+(i+1)+"</td><td>"+fname+"</td><td>"+gender+"</td><td>"+mobile+"</td><td>"+school_name+"</td><td>"+level_name+"</td><td>"+subscription_Status+"</td></tr>";
                // console.log(tr)
 
             }

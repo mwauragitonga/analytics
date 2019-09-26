@@ -62,7 +62,7 @@ $route['logout'] = 'Analytics_controller/logout';
 $route['accounts'] = 'Analytics_controller/accounts';
 $route['accountsByDay'] = 'Analytics_controller/accountsByDay';
 $route['filter'] = 'Analytics_controller/filterSignups';
-$route['accountsview'] = "Analytics_controller/accountsByDay";//ajax
+$route['accountsview'] = "Analytics_controller/accountsByDay";
 $route['accountsByDay'] = "Analytics_controller/signUps_by_Day";//ajax
 
 $route['404_override'] = '';

@@ -318,11 +318,12 @@ class Analytics_model extends CI_Model
 
 	}
 	public function signUps_By_Day($date){
-	    $this->db->select("fname , mobile, gender ,study_levels.level_name,schools.name as school_name");
+	    $this->db->select("fname , mobile, gender ,study_levels.level_name,schools.name as school_name, student_subscriptions.status");
 	    $this->db->from("users");
 	    $this->db->join("students","users.user_id = students.user_id");
         $this->db->join("schools","students.school_code = schools.school_code");
         $this->db->join("study_levels","students.study_level = study_levels.level_code");
+        $this->db->join("student_subscriptions","users.user_id = student_subscriptions.user_id");
         $this->db->like("date_joined",$date);
 	    $query = $this->db->get()->result();
 
