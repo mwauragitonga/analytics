@@ -16,7 +16,7 @@
 	<section>
 		<div class="row" style="width: 55%;float: right">
 			<label>Choose Date</label>
-			<input type="date"  class="form-control" id="date" name="date" style="width: 25%;" >
+			<input type="date"  class="form-control" id="date" name="date" style="width: 25%;" onchange="dateChanged()" >
 
 		</div>
 		<div class="box-body">
@@ -32,10 +32,54 @@
 					<th>Study Level</th>
 				</tr>
 				</thead>
-			<tbody>
+			<tbody id="signUps">
 
 			</tbody>
 			</table>
 		</div>
 	</section>
 </div>
+<script>
+    var currentDate = new Date();
+    var date_initial = currentDate.getDate();
+    var month_initial = currentDate.getMonth(); //Be careful! January is 0 not 1
+    var year_initial = currentDate.getFullYear();
+
+    var dateString_initial = year_initial + "-0" + (month_initial + 1) + "-" + date_initial;
+    window.onLoad = loadSignUps(dateString_initial);
+    //from date picker
+    function dateChanged(){
+        var date = document.getElementById("date").value;
+        loadSignUps(date)
+    }
+    function loadSignUps(date) {
+        console.log(dateString_initial)
+        var request = new XMLHttpRequest();
+        request.open("POST", "<?php echo base_url() . 'accountsByDay'?>");
+        request.setRequestHeader('Content-Type', 'application/json');
+        var tbody = document.getElementById("signUps");
+        var tr ='';
+        let data = JSON.stringify({
+            "date": date
+        });
+        request.send(data);
+
+        request.onreadystatechange = () => {
+            var response = JSON.parse(request.responseText);
+            for(var i =0; i<response.length; i++){
+                var fname = response[i].fname;
+                var gender = response[i].gender;
+                var level_name = response[i].level_name;
+                var mobile = response[i].mobile;
+                var school_name = response[i].school_name;
+
+              //  console.log(school_name);
+
+                 tr += "<tr><td>"+(i+1)+"</td><td>"+fname+"</td><td>"+gender+"</td><td>"+mobile+"</td><td>"+school_name+"</td><td>"+level_name+"</td></tr>";
+               // console.log(tr)
+
+            }
+            tbody.innerHTML = tr;
+        }
+    }
+</script>
