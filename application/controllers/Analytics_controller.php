@@ -72,20 +72,6 @@ class Analytics_controller extends CI_Controller
     /**
      *
      */
-    public function appAnalytics(){
-        $data=array(
-
-            'title' => "App analytics",
-            'view' => "app_analytics/app.php"
-        );
-        //var_dump($formFours);
-        $this->load->view('index.php', $data);
-
-    }
-
-    /**
-     *
-     */
     public function payments(){
         $data=array(
 
