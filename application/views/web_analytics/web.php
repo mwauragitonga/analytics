@@ -181,11 +181,11 @@
 		//console.log(today);
         var dayString = new Array();
         var day = new Array();
-        var d = new Date;
 
-        for (var i =6; i > -1; i--) {
 
-/**/
+        for (var i =7; i > 0; i--) {
+            var d = new Date;
+/**/		d.setDate(today.getDay() - i);
             day[0] = "Sunday";
             day[1] = "Monday";
             day[2] = "Tuesday";
@@ -195,18 +195,20 @@
             day[6] = "Saturday";
 
             dayString.push(day[d.getDay()]);
-
-            d.setDate(d.getDay());
-
-           // console.log(today.getDay());
+            //d.setDate(d.getDay());
+			//console.log(today.getDay());
         }
-        var inversDayString = new Array();
-        var k = 6;
-		for(var j=0;j<7;j++){
-	    inversDayString[j] = dayString[k];
-	    k--;
-	}
-		return inversDayString;
+    //
+    //     var inverseDayString = new Array();
+    //     var k = 6;
+	// 	for(var j=0;j<7;j++){
+	//     inverseDayString[j] = dayString[k];
+	//     k--;
+    //
+	//
+	// }
+       // console.log( dayString);
+		return dayString;
     }
     Highcharts.chart('active_users', {
         chart: {
@@ -260,9 +262,10 @@
         var day = new Array();
         var d = new Date;
 
-        for (var i =6; i > -1; i--) {
-
+        for (var i =7; i > 0; i--) {
+            var d = new Date;
             /**/
+			d.setDate(today.getDay() - i);
             day[0] = "Sunday";
             day[1] = "Monday";
             day[2] = "Tuesday";
@@ -272,18 +275,12 @@
             day[6] = "Saturday";
 
             dayString.push(day[d.getDay()]);
-
-            d.setDate(d.getDay());
-
-            // console.log(today.getDay());
+            //d.setDate(d.getDay());
+            console.log(today.getDay());
         }
-        var inversDayString = new Array();
-        var k = 6;
-        for(var j=0;j<7;j++){
-            inversDayString[j] = dayString[k];
-            k--;
-        }
-        return inversDayString;
+
+       // console.log( dayString);
+        return dayString;
     }
     Highcharts.chart('signups', {
         chart: {
