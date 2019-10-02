@@ -118,12 +118,12 @@ class AppModel extends CI_Model
 
 			sscanf($time->time_elapsed, "%d:%d:%d", $hours, $minutes, $seconds);
 			$timee = $hours * 3600 + $minutes * 60 + $seconds;
-			/*if ($timee <= 0) { //checks and skips elements with no end time
+			if ($timee <= 0) { //checks and skips elements with no end time
 				continue;
-			} else {*/
+			} else {
 				$time_seconds[$count] =$timee;
 					$count++;
-		//	}
+			}
 		}
 
 		$totalTime = array_sum($time_seconds); // in seconds
