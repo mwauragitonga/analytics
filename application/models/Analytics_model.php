@@ -19,10 +19,10 @@ class Analytics_model extends CI_Model
 	{
 		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, students.admission_number, schools.name, study_levels.level_name');
 		$this->db->from('users');
-		$this->db->join('students', 'students.user_id = users.user_id', 'left');
-		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
-		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
-		$this->db->where('user_type', 1);
+//		$this->db->join('students', 'students.user_id = users.user_id', 'left');
+//		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
+//		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
+		$this->db->where('user_type', '1');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -46,6 +46,7 @@ class Analytics_model extends CI_Model
 		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me');
 		$this->db->from('users');
 		$this->db->where('gender','Male' );
+		$this->db->where('user_type', '1');
 		$query= $this->db->get();
 		return $query->result();
 	}
@@ -53,6 +54,7 @@ class Analytics_model extends CI_Model
 		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me');
 		$this->db->from('users');
 		$this->db->where('gender','Female' );
+		$this->db->where('user_type', '1');
 		$query= $this->db->get();
 		return $query->result();
 	}
@@ -132,7 +134,6 @@ class Analytics_model extends CI_Model
 		$this->db->from('users');
 		$this->db->join('student_subscriptions', 'student_subscriptions.user_id=users.user_id');
 		$this->db->where('subscription_type', 'none');
-		$this->db->where('status', 'inactive');
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
@@ -143,6 +144,7 @@ class Analytics_model extends CI_Model
 		$this->db->from('users');
 		$this->db->join('student_subscriptions', 'student_subscriptions.user_id=users.user_id');
 		$this->db->where('status', 'active');
+		$this->db->where('user_type', '1');
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
@@ -151,6 +153,7 @@ class Analytics_model extends CI_Model
 		$this->db->from('users');
 		$this->db->join('student_subscriptions', 'student_subscriptions.user_id=users.user_id');
 		$this->db->where('status', 'inactive');
+		$this->db->where('user_type', '1');
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
@@ -184,12 +187,180 @@ class Analytics_model extends CI_Model
 	/*get daily sign-ups */
 	public function getDailySignups(){
 		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d H:i:s');
+		$date = date('Y-m-d');
 		$this->db->select('*');
 		$this->db->from('users');
-		$this->db->where('date_joined', $date);
+		$this->db->like('date_joined', $date);
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
-	
+
+	/*login validation */
+
+	public function login_validation($email, $password){
+		$this->db->select('user_id, fname, lname, online_status, mobile, email, hash, username, password, gender, user_type, user_status');
+		$this->db->from('users');
+		$this->db->where('email',$email);
+		$this->db->where('user_type', '5');
+		$result =$this->db->get()->row();
+		if(empty($result)){
+			//this is to prevent errors  when the email is not found
+			'Wamlambez';
+		}else{
+			$hashed=$result->password;
+		}
+		if(!empty($result)){
+			if ($this->bcrypt->compare($password, $hashed)){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+	public function getUserDetails($email){
+		$this->db->select('user_id, fname, lname, online_status, mobile, email, hash, username, password, gender, user_type, user_status');
+		$this->db->from('users');
+		$this->db->where('email',$email);
+		$result =$this->db->get()->row();
+		return$result;
+	}
+
+	/* accounts management functions */
+	public function getWebRegistrations(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('registration_source','source_001');
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+	public function getAppRegistrations(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('registration_source','source_002');
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+	public function getUnclassifiedRegistrations(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('registration_source',NULL);
+		$query= $this->db->get();
+		return $query->num_rows();
+
+	}
+	public function averageSignups(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = new DateTime();
+		$date->modify('-1 week');
+		$week= $date->format('Y-m-d');
+		//var_dump($week);
+		$today= date('Y-m-d ');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('date_joined >=',  $week);
+		$this->db->where('date_joined <=', $today );
+		$query= $this->db->get();
+		return ($query->num_rows())/7;
+
+
+	}
+//	get users active in the last month
+	public function monthlyActiveUsers(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = new DateTime();
+		$date->modify('-1 month');
+		$month= $date->format('Y-m-d');
+		//var_dump($week);
+		$today= date('Y-m-d ');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('last_seen >=',  $month);
+		//$this->db->where('last_seen <=', $today );
+		$query= $this->db->get();
+		return $query->num_rows();
+	}
+	//	get users active in the last week
+
+	public function weeklyActiveUsers(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = new DateTime();
+		$date->modify('-1 week');
+		$week= $date->format('Y-m-d');
+		//var_dump($week);
+		$today= date('Y-m-d ');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('last_seen >=',  $week);
+		//$this->db->where('last_seen <=', $today );
+		$query= $this->db->get();
+		return $query->num_rows();
+	}
+//	get active users over the last 12 months
+	public function users_By_Months($instance_month){
+
+		$this->db->select("COUNT(user_id) as users");
+		$this->db->from("users");
+		$this->db->where("user_type","1");
+		$this->db->like('last_seen',$instance_month);
+		$query = $this->db->get()->row();
+		//var_dump($query->users);
+		return $query->users;
+
+	}
+	public function signUps_By_Day($date){
+	    $this->db->select("fname , mobile, gender ,study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus");
+	    $this->db->from("users");
+	    $this->db->join("students","users.user_id = students.user_id");
+        $this->db->join("schools","students.school_code = schools.school_code");
+        $this->db->join("study_levels","students.study_level = study_levels.level_code");
+        $this->db->join("student_subscriptions","users.user_id = student_subscriptions.user_id");
+        $this->db->like("date_joined",$date);
+	    $query = $this->db->get()->result();
+
+	   return $query;
+
+    }
+	//get logged in accounts
+	public function loggedInUsers()
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('user_type', '1');
+		$this->db->where('online_status', '1');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+		//get logged out accounts
+	public function loggedOutUsers(){
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('user_type', '1');
+			$this->db->where('online_status','2');
+		//	$this->db->where('online_status','0');
+			$query= $this->db->get();
+			return $query->num_rows();
+		}
+		public function neverLoggedIn(){
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('user_type', '1');
+			$this->db->where('online_status','0');
+			$query= $this->db->get();
+			return $query->num_rows();
+		}
+
+	public function filterSignUps(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = date('Y-m-d ');
+	}
 }

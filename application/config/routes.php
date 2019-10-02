@@ -50,5 +50,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'Analytics_controller';
+$route['general'] = 'Analytics_controller/index';
+$route['payments'] = 'Analytics_controller/payments';
+$route['web'] ='Web_controller/webAnalytics';
+$route['app'] = 'AppAnalytics/index';
+$route['tiles'] = 'Payments/tiles';
+$route['graphs'] ='Payments/graphs';
+$route['authentication'] = 'Analytics_controller/authentication';
+$route['login'] = 'Analytics_controller/login';
+$route['logout'] = 'Analytics_controller/logout';
+$route['accounts'] = 'Analytics_controller/accounts';
+$route['accountsByDay'] = 'Analytics_controller/accountsByDay';
+$route['filter'] = 'Analytics_controller/filterSignups';
+$route['accountsview'] = "Analytics_controller/accountsByDay";
+$route['accountsByDay'] = "Analytics_controller/signUps_by_Day";//ajax
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
