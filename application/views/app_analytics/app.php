@@ -22,7 +22,7 @@
         <div class="row">
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
-				<div class="small-box bg-aqua">
+				<div class="small-box bg-blue">
 					<div class="inner">
 						                        <h3><?php echo $app_Usage_Minutes ; ?></h3>
 
@@ -31,8 +31,8 @@
 					<div class="icon">
 						<i class="ion ion-bag"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-				</div>
+<!--					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+-->				</div>
 			</div>
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
@@ -45,8 +45,8 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+-->                </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
@@ -60,8 +60,8 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+-->                </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
@@ -70,13 +70,13 @@
                     <div class="inner">
                                                 <h3><?php echo $total_Watchers ; ?></h3>
 
-                        <p>Total Watchers</p>
+                        <p>Total Viewers(Unique)</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph "></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+-->                </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
@@ -85,17 +85,17 @@
                     <div class="inner">
                                                 <h3><?php echo $total_Readers ; ?></h3>
 
-                        <p>Total Readers</p>
+                        <p>Total Readers (Unique)</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+-->                </div>
             </div>
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
-				<div class="small-box bg-red">
+				<div class="small-box bg-aqua">
 					<div class="inner">
 						<h3><?php echo $signins ; ?></h3>
 
@@ -104,8 +104,8 @@
 					<div class="icon">
 						<i class="ion ion-person-add"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-				</div>
+<!--					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+-->				</div>
 			</div>
             <!-- ./col -->
         </div>
@@ -134,13 +134,18 @@
 				   foreach ($students as $student){
 				   	?>
 				  <tr>
+					  <?php
+					  sscanf($student->appMinutes, "%d:%d:%d", $hours, $minutes, $seconds);
+					  $appMinutes = $hours * 3600 + $minutes * 60 + $seconds;
+					  ?>
+
 					  <td><?php echo $count+1?></td>
 					  <td><?php echo $student->fname?></td>
 					  <td><?php echo $student->mobile?></td>
 					  <td><?php echo $student->name?></td>
 					  <td><?php echo $student->level_name?></td>
-<!--					  <td><?php /*echo $student->appMinutes*/?></td>
--->
+					  <td><?php echo round($appMinutes / 60,2)?></td>
+
 					  <td></td>
 
 				  </tr>
@@ -218,12 +223,12 @@
             colorByPoint: true,
             data: [{
                 name: 'WI-FI',
-                y: 61.41,
+                y: <?php echo $internet_type['wifi'] ?>,
                 sliced: true,
                 selected: true
             }, {
                 name: 'Mobile Data',
-                y: 11.84
+                y: <?php echo $internet_type["mobile"] ?>
             },]
         }]
     });

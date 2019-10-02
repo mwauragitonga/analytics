@@ -75,7 +75,7 @@
                 var mobile = response[i].mobile;
                 var school_name = response[i].school_name;
                 var subscription_Status= response[i].status;
-
+				var userstatus = response[i].userstatus
               //  console.log(school_name);
 
                  tr += "<tr><td>"+(i+1)+"</td><td>"+fname+"</td><td>"+gender+"</td><td>"+mobile+"</td><td>"+school_name+"</td><td>"+level_name+"</td><td>"+subscription_Status+"</td><td>"+userstatus+"</td></tr>";

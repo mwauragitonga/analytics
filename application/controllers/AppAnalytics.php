@@ -24,7 +24,7 @@ class AppAnalytics extends CI_Controller
 		"total_Readers" => $this->AppModel->total_Readers(),
 		"signins"=>$this->AppModel->signIns(),
 		"students" =>$this->AppModel->students(),
-		//"internet_type" => $this->AppModel->internetType(),
+		"internet_type" => $this->AppModel->internetType(),
 		'title' => "App analytics",
 		'view' => "app_analytics/app.php"
 		);

@@ -74,22 +74,39 @@ class AppModel extends CI_Model
 		return $query->num_rows();
 	}
 	public function students(){
-		$this->db->select('users.fname, users.mobile,schools.name, study_levels.level_name');
+		$this->db->select('users.fname, users.mobile,schools.name, study_levels.level_name,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as appMinutes');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('users','mobile_analysis_data.user_ID = users.user_ID');
 		$this->db->join("students", "users.user_ID = students.user_ID");
 		$this->db->join("schools","students.school_code = schools.school_code");
 		$this->db->join("study_levels", "students.study_level = study_levels.level_code	");
 		$this->db->group_by('mobile_analysis_data.user_ID');
+		$this->db->where('content_type','App Usage');
+		$this->db->limit(10);
+		$this->db->order_by('appMinutes','DESC');
 		$query = $this->db->get()->result();
 		return $query;
 	}
 	public function internetType(){
 		$this->db->select('internet_type');
 		$this->db->from('mobile_analysis_data');
-		$this->db->group_by('internet_type');
+		//$this->db->group_by('internet_type');
+		$this->db->where('internet_type','Wi-FI');
 		$query = $this->db->get();
-		$internetType =$query->result();
+	$wifi =$query->num_rows();
+
+		$this->db->select('internet_type');
+		$this->db->from('mobile_analysis_data');
+	//	$this->db->group_by('internet_type');
+		$this->db->where('internet_type',"mobile");
+		$query2 = $this->db->get();
+		$mobile =$query2->num_rows();
+
+		$data = array(
+			'wifi' => $wifi,
+			'mobile' =>$mobile
+		);
+		return $data;
 
 	}
 
@@ -101,12 +118,12 @@ class AppModel extends CI_Model
 
 			sscanf($time->time_elapsed, "%d:%d:%d", $hours, $minutes, $seconds);
 			$timee = $hours * 3600 + $minutes * 60 + $seconds;
-			if ($timee <= 0) { //checks and skips elements with no end time
+			/*if ($timee <= 0) { //checks and skips elements with no end time
 				continue;
-			} else {
+			} else {*/
 				$time_seconds[$count] =$timee;
 					$count++;
-			}
+		//	}
 		}
 
 		$totalTime = array_sum($time_seconds); // in seconds
