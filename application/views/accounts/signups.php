@@ -31,6 +31,7 @@
 					<th>School</th>
 					<th>Study Level</th>
                     <th>Subscription Status</th>
+					<th>SMS confirmation</th>
 				</tr>
 				</thead>
 			<tbody id="signUps">
@@ -77,7 +78,7 @@
 
               //  console.log(school_name);
 
-                 tr += "<tr><td>"+(i+1)+"</td><td>"+fname+"</td><td>"+gender+"</td><td>"+mobile+"</td><td>"+school_name+"</td><td>"+level_name+"</td><td>"+subscription_Status+"</td></tr>";
+                 tr += "<tr><td>"+(i+1)+"</td><td>"+fname+"</td><td>"+gender+"</td><td>"+mobile+"</td><td>"+school_name+"</td><td>"+level_name+"</td><td>"+subscription_Status+"</td><td>"+userstatus+"</td></tr>";
                // console.log(tr)
 
             }
