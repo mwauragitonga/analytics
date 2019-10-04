@@ -151,9 +151,10 @@
 				  </tr>
 
 
-					   $count++
 
-					  <?php }
+
+					  <?php  $count++
+				   }
 				   ?>
 
 				   </tbody>
