@@ -153,7 +153,7 @@
 
 
 
-					  <?php  $count++
+					  <?php  $count++;
 				   }
 				   ?>
 
