@@ -21,10 +21,17 @@ class Evaluations_controller extends CI_Controller
 		$this->load->library("bcrypt");
 	}
 	public function evaluations(){
+		$availableExams = $this->Evaluations_model->getExams();
+		$attemptsToday = $this->Evaluations_model->getExamAttemptsToday();
+		$averageScore = $this->Evaluations_model->getExamAverage();
+		$totalAttempts = $this->Evaluations_model->getExamAttempts();
 
 
 		$data=array(
-
+			'available' => $availableExams,
+			'attemptsToday' => $attemptsToday,
+			'average' => $averageScore,
+			'totalAttempts' =>$totalAttempts,
 			'title' => "Evaluations Analytics",
 			'view' => "evaluations/evaluations.php"
 		);

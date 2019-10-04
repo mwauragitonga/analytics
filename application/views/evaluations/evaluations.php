@@ -11,8 +11,8 @@
 			</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Dashboard</li>
+			<li><a href="<?php echo base_url(); ?>general"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li class="active">Evaluations</li>
 		</ol>
 	</section>
 
@@ -24,55 +24,39 @@
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-<!--						<h3>--><?php //echo $signUps ; ?><!--</h3>-->
+				<h3><?php echo $available ; ?></h3>
 
-						<p>Sign Ups </p>
+						<p>Exams Available </p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-bag"></i>
+						<i class="fa fa-ravelry"></i>
 					</div>
 					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
 			<!-- ./col -->
-			<div class="col-lg-2 col-xs-6">
+			<div class="col-lg-3 col-xs-6">
 				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
-<!--						<h3>--><?php //echo $logins  ; ?>
+						<h3><?php echo $attemptsToday  ; ?>
 							<sup style="font-size: 20px"></sup></h3>
 
-						<p>Log Ins Today</p>
+						<p>Exams Attempted Today</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-stats-bars"></i>
+						<i class="fa fa-asterisk"></i>
 					</div>
 					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
-			<!-- ./col -->
-			<div class="col-lg-2 col-xs-6">
-				<!-- small box -->
-				<div class="small-box bg-yellow">
-					<div class="inner">
-<!--						<h3>--><?php //echo $views ;?><!--</h3>-->
-
-						<p>Video Views Today</p>
-					</div>
-					<div class="icon">
-						<i class="ion ion-pie-graph "></i>
-					</div>
-					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
-				</div>
-			</div>
-			<!-- ./col -->
-			<div class="col-lg-2 col-xs-6">
+			<div class="col-lg-3 col-xs-6">
 				<!-- small box -->
 				<div class="small-box bg-red">
 					<div class="inner">
-<!--						<h3>--><?php //echo  $reads ; ?><!--</h3>-->
-<!---->
-						<p>Books Read Today</p>
+							<h3><?php echo  $totalAttempts; ?></h3>
+
+						<p>Total Exam Attempts</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-person-add"></i>
@@ -80,20 +64,24 @@
 					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
+
+			<!-- ./col -->
 			<div class="col-lg-3 col-xs-6">
 				<!-- small box -->
-				<div class="small-box bg-teal">
+				<div class="small-box bg-yellow">
 					<div class="inner">
-<!--						<h3>--><?php //echo $attempts ;?><!--</h3>-->
+						<h3><?php echo round($average, 2)*100 .'%'; ?></h3>
 
-						<p>Attempted Payments Today</p>
+						<p>Average Exam Score</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-pie-graph "></i>
+						<i class="fa fa-sitemap "></i>
 					</div>
 					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
+			<!-- ./col -->
+
 			<!-- ./col -->
 		</div>
 		<!-- /.row -->
