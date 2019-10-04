@@ -106,14 +106,14 @@
                     <!-- Tabs within a box -->
                     <ul class="nav nav-tabs pull-right">
                         <div class="chart" id="active_users" style="height: 350px;"></div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="chart" id="topVideos" style="height: 350px;"></div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="chart" id="topBooks" style="height: 350px;"></div>
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <div class="chart" id="topVideos" style="height: 350px;"></div>-->
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <div class="chart" id="topBooks" style="height: 350px;"></div>-->
                     </ul>
                     <div class="tab-content no-padding">
                         <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
@@ -130,28 +130,25 @@
 
 
                 <div class="box box-solid ">
-                    <div class="box-header">
-                        <i class="fa fa-line-chart"></i>
 
-                    </div>
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
 						<!-- Sign Ups -->
                         <div class="chart" id="signups" style="height: 350px;"></div>
 
                     </div>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="chart" id="subscriptions" style="height: 350px;"></div>
-
-                    <!-- /.box-body -->
-                    <div class="box-footer text-black">
-                        <br>
-                        <br>
-                        <br>
-                        <div class="chart" id="subscription_types" style="height: 450px;"></div>
-                    </div>
+<!--                    <br>-->
+<!--                    <br>-->
+<!--                    <br>-->
+<!--                    <div class="chart" id="subscriptions" style="height: 350px;"></div>-->
+<!---->
+<!--                   /.box-body -->
+<!--                    <div class="box-footer text-black">-->
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <br>-->
+<!--                        <div class="chart" id="subscription_types" style="height: 450px;"></div>-->
+<!--                    </div>-->
                 </div>
                 <!-- /.box -->
 
@@ -276,7 +273,6 @@
 
             dayString.push(day[d.getDay()]);
             //d.setDate(d.getDay());
-            console.log(today.getDay());
         }
 
        // console.log( dayString);

@@ -54,6 +54,7 @@ $route['general'] = 'Analytics_controller/index';
 $route['payments'] = 'Analytics_controller/payments';
 $route['web'] ='Web_controller/webAnalytics';
 $route['app'] = 'AppAnalytics/index';
+$route['evaluations'] = 'Evaluations_controller/evaluations';
 $route['tiles'] = 'Payments/tiles';
 $route['graphs'] ='Payments/graphs';
 $route['authentication'] = 'Analytics_controller/authentication';
