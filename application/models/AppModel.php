@@ -69,7 +69,7 @@ class AppModel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('mobile_analysis_data');
 		$this->db->where('content_type', 'Signin');
-		$this->db->group_by('user_id');
+	//	$this->db->group_by('user_id');
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
