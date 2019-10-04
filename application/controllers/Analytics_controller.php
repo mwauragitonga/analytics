@@ -192,8 +192,13 @@ class Analytics_controller extends CI_Controller
 		$dates = explode('-', $date);
 		$startDate = date("Y-m-d", strtotime($dates[0]));
 		$end_Date = date("Y-m-d", strtotime($dates[1]));
-		$users = $this->Analytics_model->signUps_By_Day($startDate, $end_Date);
+		if ($startDate == $end_Date){
+			$users = $this->Analytics_model->signUps_By_Day($startDate);
 
+		}
+		else {
+			$users = $this->Analytics_model->signUps_By_Range($startDate, $end_Date);
+		}
 		echo json_encode($users);
 
 	}

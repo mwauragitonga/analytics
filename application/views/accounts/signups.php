@@ -61,6 +61,7 @@
     //from date picker
     function dateChanged() {
         var date = document.getElementById("date").value;
+        console.log(date);
         loadSignUps(date)
     }
 
