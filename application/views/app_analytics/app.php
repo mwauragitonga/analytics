@@ -124,6 +124,7 @@
 					   <th>Phone Number</th>
 					   <th>School</th>
 					   <th>Study Level</th>
+					   <th>Phone Model</th>
 					   <th>App minutes</th>
 
 				   </tr>
@@ -144,6 +145,7 @@
 					  <td><?php echo $student->mobile?></td>
 					  <td><?php echo $student->name?></td>
 					  <td><?php echo $student->level_name?></td>
+					  <td><?php echo $student->phone_type?></td>
 					  <td><?php echo round($appMinutes / 60,2)?></td>
 
 					  <td></td>
