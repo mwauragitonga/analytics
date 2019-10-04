@@ -51,6 +51,13 @@
 				</a>
 
 			</li>
+			<li>
+				<a href="<?php echo base_url(); ?>evaluations">
+					<i class="fa fa-tasks"></i>
+					<span>Evaluations</span>
+				</a>
+
+			</li>
         </ul>
     </section>
     <!-- /.sidebar -->

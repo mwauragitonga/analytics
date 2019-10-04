@@ -109,10 +109,7 @@
 						<br>
 						<br>
 						<div class="chart" id="active_users" style="height: 450px;"></div>
-						<br>
-						<br>
-						<br>
-						<div class="chart" id="topBooks" style="height: 350px;"></div>
+
 					</ul>
 					<div class="tab-content no-padding">
 						<div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
@@ -129,10 +126,6 @@
 
 				<!-- Calendar -->
 				<div class="box box-solid bg-green-gradient">
-					<div class="box-header">
-						<i class="fa fa-line-chart"></i>
-
-					</div>
 					<!-- /.box-header -->
 					<div class="box-body no-padding">
 						<!--Student Classification -->
@@ -144,13 +137,7 @@
 					<br>
 					<div class="chart" id="logged_in" style="height: 350px;"></div>
 
-					<!-- /.box-body -->
-					<div class="box-footer text-black">
-						<br>
-						<br>
-						<br>
-						<div class="chart" id="subscription_types" style="height: 450px;"></div>
-					</div>
+
 				</div>
 				<!-- /.box -->
 
