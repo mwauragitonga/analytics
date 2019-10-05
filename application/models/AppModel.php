@@ -36,7 +36,7 @@ class AppModel extends CI_Model
 	{
 		$this->db->select('TIMEDIFF(end_stamp,start_stamp) as time_elapsed');
 		$this->db->from('mobile_analysis_data');
-		$this->db->where('content_type', 'App Usage');
+		$this->db->where('(content_type ="App Usage" OR content_type ="App+Usage")');
 		$query = $this->db->get();
 		$appUsageTimes = $query->result();
 		$totalAppUsageTime = $this->calculateTime($appUsageTimes);
@@ -81,7 +81,7 @@ class AppModel extends CI_Model
 		$this->db->join("schools","students.school_code = schools.school_code");
 		$this->db->join("study_levels", "students.study_level = study_levels.level_code	");
 		$this->db->group_by('mobile_analysis_data.user_ID');
-		$this->db->where('content_type','App Usage');
+		$this->db->where('(content_type ="App Usage" OR content_type ="App+Usage")');
 		$this->db->limit(10);
 		$this->db->order_by('appMinutes','DESC');
 		$query = $this->db->get()->result();
