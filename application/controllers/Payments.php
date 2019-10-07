@@ -31,8 +31,8 @@ class Payments extends REST_Controller
         $data = array();
         $data["total_Revenue"] = $this->Payments_model->totalRevenue($start_date, $end_date);
         $data["active_Yearly_Subscribers"] = $this->Payments_model->active_Yearly_Subscribers($start_date, $end_date);
-        $data["active_Termly_Subscribers"] = $this->Payments_model->active_Monthly_Subscribers($start_date, $end_date);
-        $data["active_Monthly_Subscribers"] = $this->Payments_model->active_Termly_Subscribers($start_date, $end_date);
+        $data["active_Termly_Subscribers"] = $this->Payments_model->active_Termly_Subscribers($start_date, $end_date);
+        $data["active_Monthly_Subscribers"] = $this->Payments_model->active_Monthly_Subscribers($start_date, $end_date);
         $data["non_Subscribers"] = $this->Payments_model->none_subscribers($start_date, $end_date);
         $data["payment_Attempts"] = $this->Payments_model->paymentAttempts($start_date, $end_date);
         $data["successful_Payment_Attempts"] = $this->Payments_model->successfulPaymentAttempts($start_date, $end_date);

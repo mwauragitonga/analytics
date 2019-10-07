@@ -16,7 +16,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active">
+            <li >
                 <a href="<?php echo base_url(); ?>general">
                     <i class="fa fa-dashboard"></i> <span>General</span>
 
@@ -50,6 +50,13 @@
 				<a href="<?php echo base_url(); ?>accounts">
 					<i class="fa fa-user"></i>
 					<span>Accounts</span>
+				</a>
+
+			</li>
+			<li>
+				<a href="<?php echo base_url(); ?>evaluations">
+					<i class="fa fa-tasks"></i>
+					<span>Evaluations</span>
 				</a>
 
 			</li>

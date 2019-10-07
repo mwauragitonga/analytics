@@ -19,10 +19,10 @@ class Analytics_model extends CI_Model
 	{
 		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, students.admission_number, schools.name, study_levels.level_name');
 		$this->db->from('users');
-		$this->db->join('students', 'students.user_id = users.user_id', 'left');
-		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
-		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
-		$this->db->where('user_type', 1);
+//		$this->db->join('students', 'students.user_id = users.user_id', 'left');
+//		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
+//		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
+		$this->db->where('user_type', '1');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -46,6 +46,7 @@ class Analytics_model extends CI_Model
 		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me');
 		$this->db->from('users');
 		$this->db->where('gender','Male' );
+		$this->db->where('user_type', '1');
 		$query= $this->db->get();
 		return $query->result();
 	}
@@ -53,6 +54,7 @@ class Analytics_model extends CI_Model
 		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me');
 		$this->db->from('users');
 		$this->db->where('gender','Female' );
+		$this->db->where('user_type', '1');
 		$query= $this->db->get();
 		return $query->result();
 	}
@@ -132,7 +134,6 @@ class Analytics_model extends CI_Model
 		$this->db->from('users');
 		$this->db->join('student_subscriptions', 'student_subscriptions.user_id=users.user_id');
 		$this->db->where('subscription_type', 'none');
-		$this->db->where('status', 'inactive');
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
@@ -143,6 +144,7 @@ class Analytics_model extends CI_Model
 		$this->db->from('users');
 		$this->db->join('student_subscriptions', 'student_subscriptions.user_id=users.user_id');
 		$this->db->where('status', 'active');
+		$this->db->where('user_type', '1');
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
@@ -151,6 +153,7 @@ class Analytics_model extends CI_Model
 		$this->db->from('users');
 		$this->db->join('student_subscriptions', 'student_subscriptions.user_id=users.user_id');
 		$this->db->where('status', 'inactive');
+		$this->db->where('user_type', '1');
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
@@ -314,6 +317,30 @@ class Analytics_model extends CI_Model
 		return $query->users;
 
 	}
+	public function signUps_By_Day($date){
+		$this->db->select("fname , mobile, gender ,study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus");
+		$this->db->from("users");
+		$this->db->join("students","users.user_id = students.user_id");
+		$this->db->join("schools","students.school_code = schools.school_code");
+		$this->db->join("study_levels","students.study_level = study_levels.level_code");
+		$this->db->join("student_subscriptions","users.user_id = student_subscriptions.user_id");
+		$this->db->like("date_joined", $date);
+		$query = $this->db->get()->result();
+		return $query;
+	}
+	public function signUps_By_Range($start,$end){
+	    $this->db->select("fname , mobile, gender ,study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus");
+	    $this->db->from("users");
+	    $this->db->join("students","users.user_id = students.user_id");
+        $this->db->join("schools","students.school_code = schools.school_code");
+        $this->db->join("study_levels","students.study_level = study_levels.level_code");
+        $this->db->join("student_subscriptions","users.user_id = student_subscriptions.user_id");
+        $this->db->WHERE("date_joined BETWEEN '$start'  AND '$end'");
+	    $query = $this->db->get()->result();
+
+	   return $query;
+
+    }
 	//get logged in accounts
 	public function loggedInUsers()
 	{

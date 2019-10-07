@@ -52,15 +52,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Analytics_controller';
 $route['general'] = 'Analytics_controller/index';
 $route['payments'] = 'Analytics_controller/payments';
-$route['web'] ='Analytics_controller/webAnalytics';
-$route['app'] = 'Analytics_controller/appAnalytics';
+$route['web'] ='Web_controller/webAnalytics';
+$route['app'] = 'AppAnalytics/index';
+$route['evaluations'] = 'Evaluations_controller/evaluations';
 $route['tiles'] = 'Payments/tiles';
 $route['graphs'] ='Payments/graphs';
 $route['authentication'] = 'Analytics_controller/authentication';
 $route['login'] = 'Analytics_controller/login';
 $route['logout'] = 'Analytics_controller/logout';
 $route['accounts'] = 'Analytics_controller/accounts';
+$route['accountsByDay'] = 'Analytics_controller/accountsByDay';
 $route['filter'] = 'Analytics_controller/filterSignups';
+$route['accountsview'] = "Analytics_controller/accountsByDay";
+$route['accountsByDay'] = "Analytics_controller/signUps_by_Day";//ajax
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

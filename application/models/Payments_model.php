@@ -1,4 +1,5 @@
 <?php
+/*Designed and written by Cyrus Muchiri <cmuchiri8429@gmail.com>*/
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
