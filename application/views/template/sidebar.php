@@ -26,7 +26,7 @@
 
             <li>
                 <a href="<?php echo base_url(); ?>web">
-                    <i class="fa fa-th"></i> <span>WebApp analysis</span>
+                    <i class="fa fa-th"></i> <span>Web App Analysis</span>
 
                 </a>
             </li>

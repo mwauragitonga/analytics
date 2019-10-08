@@ -47,7 +47,7 @@ class Web_controller extends CI_Controller
 				'weeklyUsers' =>$users,
 				'weeklySignups'=> $signups,
 				'attempts' => $attemptedPayments,
-				'title' => "Web Analytics",
+				'title' => "Web Analysis",
 				'view' => "web_analytics/web.php"
 			);
 

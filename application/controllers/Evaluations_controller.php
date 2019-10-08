@@ -25,13 +25,15 @@ class Evaluations_controller extends CI_Controller
 		$attemptsToday = $this->Evaluations_model->getExamAttemptsToday();
 		$averageScore = $this->Evaluations_model->getExamAverage();
 		$totalAttempts = $this->Evaluations_model->getExamAttempts();
+		$topExams = $this->Evaluations_model->getTopExams();
 
-
+		//var_dump($topExams);
 		$data=array(
 			'available' => $availableExams,
 			'attemptsToday' => $attemptsToday,
 			'average' => $averageScore,
 			'totalAttempts' =>$totalAttempts,
+			'topExams' => $topExams,
 			'title' => "Evaluations Analytics",
 			'view' => "evaluations/evaluations.php"
 		);

@@ -59,7 +59,7 @@
 						<p>Total Exam Attempts</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-person-add"></i>
+						<i class="fa fa-universal-access"></i>
 					</div>
 					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
@@ -88,20 +88,13 @@
 		<!-- Main row -->
 		<div class="row">
 			<!-- Left col -->
-			<section class="col-lg-6 ">
+			<section class="col-lg-8 ">
 				<!-- Custom tabs (Charts with tabs)-->
 				<div class="nav-tabs-custom">
 					<!-- Tabs within a box -->
 					<ul class="nav nav-tabs pull-right">
-						<div class="chart" id="active_users" style="height: 350px;"></div>
-						<br>
-						<br>
-						<br>
-						<div class="chart" id="topVideos" style="height: 350px;"></div>
-						<br>
-						<br>
-						<br>
-						<div class="chart" id="topBooks" style="height: 350px;"></div>
+						<div class="chart" id="topExams" style="height: 450px;"></div>
+
 					</ul>
 					<div class="tab-content no-padding">
 						<div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
@@ -114,7 +107,7 @@
 			</section>
 			<!-- /.Left col -->
 
-			<section class="col-lg-6 ">
+			<section class="col-lg-4 ">
 
 
 				<div class="box box-solid ">
@@ -162,6 +155,81 @@
 </div>
 <!-- ./wrapper -->
 
+<!--/*bar graph for top 5 viewed exams*/-->
+<script>
+    // Create the chart
+    Highcharts.chart('topExams', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Most Attempted Exams'
+        },
+        xAxis: {
+            type: '',
+            categories:[<?php
+				$count=0;
+				foreach($topExams as $exam){
+					$count +=1;
+					if($count== count($topExams)){
+						echo '"'.$exam->exam_name.'"';
+					}else{
+						echo  '"'.$exam->exam_name .'", ';
+					}
+				}; ?>],
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize:'13px'
+                }
+            }
 
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Attempts'
+            }
+
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    // format: '{point.y:.}'
+                }
+            }
+        },
+
+        tooltip: {
+            // headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span><br/>'
+        },
+
+        series: [
+            {
+                name: "Exam Names",
+                colorByPoint: true,
+                data: [<?php
+					$count=0;
+					foreach($topExams as $exam){
+						$count +=1;
+						if($count== count($topExams)){
+							echo $exam->count;
+						}else{
+							echo  $exam->count .',';
+						}
+					}; ?>
+                ]
+            }
+        ],
+
+    });
+
+</script>
 
 
