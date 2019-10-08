@@ -65,6 +65,7 @@ $route['accountsByDay'] = 'Analytics_controller/accountsByDay';
 $route['filter'] = 'Analytics_controller/filterSignups';
 $route['accountsview'] = "Analytics_controller/accountsByDay";
 $route['accountsByDay'] = "Analytics_controller/signUps_by_Day";//ajax
-
+$route['videos'] = "AppAnalytics/videos";
+$route['ebooks'] = "AppAnalytics/ebooks";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

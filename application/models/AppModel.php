@@ -69,43 +69,76 @@ class AppModel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('mobile_analysis_data');
 		$this->db->where('content_type', 'Signin');
-	//	$this->db->group_by('user_id');
+		//	$this->db->group_by('user_id');
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
-	public function students(){
+
+	public function students()
+	{
 		$this->db->select('users.fname, users.mobile,schools.name, study_levels.level_name,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as appMinutes,phone_type');
 		$this->db->from('mobile_analysis_data');
-		$this->db->join('users','mobile_analysis_data.user_ID = users.user_ID');
+		$this->db->join('users', 'mobile_analysis_data.user_ID = users.user_ID');
 		$this->db->join("students", "users.user_ID = students.user_ID");
-		$this->db->join("schools","students.school_code = schools.school_code");
+		$this->db->join("schools", "students.school_code = schools.school_code");
 		$this->db->join("study_levels", "students.study_level = study_levels.level_code	");
 		$this->db->group_by('mobile_analysis_data.user_ID');
 		$this->db->where('(content_type ="App Usage" OR content_type ="App+Usage")');
 		$this->db->limit(10);
-		$this->db->order_by('appMinutes','DESC');
+		$this->db->order_by('appMinutes', 'DESC');
 		$query = $this->db->get()->result();
 		return $query;
 	}
-	public function internetType(){
+
+	public function internetType()
+	{
 		$this->db->select('internet_type');
 		$this->db->from('mobile_analysis_data');
 		//$this->db->group_by('internet_type');
-		$this->db->where('internet_type','Wi-FI');
+		$this->db->where('internet_type', 'Wi-FI');
 		$query = $this->db->get();
-	$wifi =$query->num_rows();
+		$wifi = $query->num_rows();
 
 		$this->db->select('internet_type');
 		$this->db->from('mobile_analysis_data');
-	//	$this->db->group_by('internet_type');
-		$this->db->where('internet_type',"mobile");
+		//	$this->db->group_by('internet_type');
+		$this->db->where('internet_type', "mobile");
 		$query2 = $this->db->get();
-		$mobile =$query2->num_rows();
+		$mobile = $query2->num_rows();
 
 		$data = array(
 			'wifi' => $wifi,
-			'mobile' =>$mobile
+			'mobile' => $mobile
 		);
+		return $data;
+
+	}
+
+	public function Videos_Watched()
+	{
+		$this->db->select('mobile_analysis_data.subtopic_ID, subtopics.name, syllabus.subject ,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs , COUNT(index_ID) as count');
+		$this->db->from('mobile_analysis_data');
+		$this->db->join('subtopics', 'subtopics.subtopicID = subtopic_ID');
+		$this->db->join('syllabus','subtopics.topicID = syllabus.topicID');
+		$this->db->group_by("subtopic_ID");
+		$this->db->where('content_type', 'Videos');
+		$this->db->where('(start_stamp < end_stamp)');
+		$this->db->order_by('watchSecs','DESC');
+		$data = $this->db->get()->result();
+		//print_r($data);
+		return $data;
+	}
+
+	public function Books_Read()
+	{
+		$this->db->select('mobile_analysis_data.subtopic_ID, multimedia_content.file_name ,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)) as BookTotalMinutes,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as BookMeanMinutes');
+		$this->db->from('mobile_analysis_data');
+		$this->db->join('multimedia_content', 'multimedia_content.file_id = subtopic_ID');
+		$this->db->group_by("subtopic_ID");
+		$this->db->where('content_type', 'Ebooks');
+		$this->db->where('(start_stamp < end_stamp)');
+		$data = $this->db->get()->result();
+		print_r($data);
 		return $data;
 
 	}
@@ -121,8 +154,8 @@ class AppModel extends CI_Model
 			if ($timee <= 0) { //checks and skips elements with no end time
 				continue;
 			} else {
-				$time_seconds[$count] =$timee;
-					$count++;
+				$time_seconds[$count] = $timee;
+				$count++;
 			}
 		}
 

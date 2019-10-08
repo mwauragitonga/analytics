@@ -31,8 +31,8 @@
                     <div class="icon">
                         <i class="fa fa-file-video-o"></i>
                     </div>
-<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
--->                </div>
+                    <a href="<?php echo base_url()?>videos" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
@@ -46,7 +46,7 @@
                     <div class="icon">
 						<i class="fa fa-book"></i>
                     </div>
-<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+<!--                    <a href="<?php /*echo base_url()*/?>ebooks" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 -->                </div>
             </div>
             <!-- ./col -->
