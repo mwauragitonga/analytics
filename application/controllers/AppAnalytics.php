@@ -1,4 +1,5 @@
 <?php
+/** @noinspection ALL */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
@@ -28,9 +29,25 @@ class AppAnalytics extends CI_Controller
 		'title' => "App analytics",
 		'view' => "app_analytics/app.php"
 		);
-		//var_dump($formFours);
 		$this->load->view('index.php', $data);
 
+	}
+	function  videos(){
+		$data = array(
+		'videos' =>$this->AppModel->Videos_Watched(),
+		'title' => "More information on Videos",
+		'view' => "app_analytics/videos.php"
+		);
+		$this->load->view('index.php', $data);
+	}
+	function ebooks(){
+		$data = array(
+			'books_read' =>$this->AppModel->Books_Read(),
+
+			'title' => "More Information on Ebooks",
+			'view' => "app_analytics/ebooks.php"
+		);
+		$this->load->view('index.php', $data);
 	}
 
 

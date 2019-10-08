@@ -11,8 +11,8 @@
 			</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Dashboard</li>
+			<li><a href="<?php echo base_url(); ?>general"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li class="active">Evaluations</li>
 		</ol>
 	</section>
 
@@ -24,96 +24,77 @@
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-<!--						<h3>--><?php //echo $signUps ; ?><!--</h3>-->
+				<h3><?php echo $available ; ?></h3>
 
-						<p>Sign Ups </p>
+						<p>Exams Available </p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-bag"></i>
+						<i class="fa fa-ravelry"></i>
 					</div>
 					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
 			<!-- ./col -->
-			<div class="col-lg-2 col-xs-6">
+			<div class="col-lg-3 col-xs-6">
 				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
-<!--						<h3>--><?php //echo $logins  ; ?>
+						<h3><?php echo $attemptsToday  ; ?>
 							<sup style="font-size: 20px"></sup></h3>
 
-						<p>Log Ins Today</p>
+						<p>Exams Attempted Today</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-stats-bars"></i>
-					</div>
-					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
-				</div>
-			</div>
-			<!-- ./col -->
-			<div class="col-lg-2 col-xs-6">
-				<!-- small box -->
-				<div class="small-box bg-yellow">
-					<div class="inner">
-<!--						<h3>--><?php //echo $views ;?><!--</h3>-->
-
-						<p>Video Views Today</p>
-					</div>
-					<div class="icon">
-						<i class="ion ion-pie-graph "></i>
-					</div>
-					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
-				</div>
-			</div>
-			<!-- ./col -->
-			<div class="col-lg-2 col-xs-6">
-				<!-- small box -->
-				<div class="small-box bg-red">
-					<div class="inner">
-<!--						<h3>--><?php //echo  $reads ; ?><!--</h3>-->
-<!---->
-						<p>Books Read Today</p>
-					</div>
-					<div class="icon">
-						<i class="ion ion-person-add"></i>
+						<i class="fa fa-asterisk"></i>
 					</div>
 					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
 			<div class="col-lg-3 col-xs-6">
 				<!-- small box -->
-				<div class="small-box bg-teal">
+				<div class="small-box bg-red">
 					<div class="inner">
-<!--						<h3>--><?php //echo $attempts ;?><!--</h3>-->
+							<h3><?php echo  $totalAttempts; ?></h3>
 
-						<p>Attempted Payments Today</p>
+						<p>Total Exam Attempts</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-pie-graph "></i>
+						<i class="fa fa-universal-access"></i>
 					</div>
 					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
+
+			<!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-yellow">
+					<div class="inner">
+						<h3><?php echo round($average, 2)*100 .'%'; ?></h3>
+
+						<p>Average Exam Score</p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-sitemap "></i>
+					</div>
+					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
+				</div>
+			</div>
+			<!-- ./col -->
+
 			<!-- ./col -->
 		</div>
 		<!-- /.row -->
 		<!-- Main row -->
 		<div class="row">
 			<!-- Left col -->
-			<section class="col-lg-6 ">
+			<section class="col-lg-8 ">
 				<!-- Custom tabs (Charts with tabs)-->
 				<div class="nav-tabs-custom">
 					<!-- Tabs within a box -->
 					<ul class="nav nav-tabs pull-right">
-						<div class="chart" id="active_users" style="height: 350px;"></div>
-						<br>
-						<br>
-						<br>
-						<div class="chart" id="topVideos" style="height: 350px;"></div>
-						<br>
-						<br>
-						<br>
-						<div class="chart" id="topBooks" style="height: 350px;"></div>
+						<div class="chart" id="topExams" style="height: 450px;"></div>
+
 					</ul>
 					<div class="tab-content no-padding">
 						<div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
@@ -126,7 +107,7 @@
 			</section>
 			<!-- /.Left col -->
 
-			<section class="col-lg-6 ">
+			<section class="col-lg-4 ">
 
 
 				<div class="box box-solid ">
@@ -174,6 +155,81 @@
 </div>
 <!-- ./wrapper -->
 
+<!--/*bar graph for top 5 viewed exams*/-->
+<script>
+    // Create the chart
+    Highcharts.chart('topExams', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Most Attempted Exams'
+        },
+        xAxis: {
+            type: '',
+            categories:[<?php
+				$count=0;
+				foreach($topExams as $exam){
+					$count +=1;
+					if($count== count($topExams)){
+						echo '"'.$exam->exam_name.'"';
+					}else{
+						echo  '"'.$exam->exam_name .'", ';
+					}
+				}; ?>],
+            labels: {
+                style: {
+                    color: 'black',
+                    fontSize:'13px'
+                }
+            }
 
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Attempts'
+            }
+
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    // format: '{point.y:.}'
+                }
+            }
+        },
+
+        tooltip: {
+            // headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span><br/>'
+        },
+
+        series: [
+            {
+                name: "Exam Names",
+                colorByPoint: true,
+                data: [<?php
+					$count=0;
+					foreach($topExams as $exam){
+						$count +=1;
+						if($count== count($topExams)){
+							echo $exam->count;
+						}else{
+							echo  $exam->count .',';
+						}
+					}; ?>
+                ]
+            }
+        ],
+
+    });
+
+</script>
 
 
