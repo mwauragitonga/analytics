@@ -20,123 +20,163 @@
     <section class="content">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <!--                        <h3><?php /*echo $studentCount ; */?></h3>
--->
-                        <p>Students</p>
+                                                <h3><?php echo $video_Minutes_Watched ; ?></h3>
+
+                        <p>Video Minutes Watched</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="fa fa-file-video-o"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url()?>videos" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <!--                        <h3><?php /*echo count($maleCount)  ; */?><sup style="font-size: 20px"></sup></h3>
--->
-                        <p>Male Students</p>
+                                                <h3><?php echo $book_Minutes_Read  ; ?><sup style="font-size: 20px"></sup></h3>
+
+                        <p>Book Minutes Read</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
+						<i class="fa fa-book"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+<!--                    <a href="<?php /*echo base_url()*/?>ebooks" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+-->                </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <!--                        <h3><?php /*echo count($femaleCount) ; */?></h3>
--->
-                        <p>Female Students</p>
+                                                <h3><?php echo $total_Watchers ; ?></h3>
+
+                        <p>Total Viewers(Unique)</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph "></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+-->                </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <!--                        <h3><?php /*echo ($signupsToday) ; */?></h3>
--->
-                        <p>Sign Ups Today</p>
+                                                <h3><?php echo $total_Readers ; ?></h3>
+
+                        <p>Total Readers (Unique)</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+-->                </div>
             </div>
+			<div class="col-lg-2 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-aqua">
+					<div class="inner">
+						<h3><?php echo $signins ; ?></h3>
+
+						<p>Sign Ins</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+<!--					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+-->				</div>
+			</div>
+
+			<div class="col-lg-2 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-blue">
+					<div class="inner">
+						<h3><?php echo $app_Usage_Minutes ; ?></h3>
+
+						<p>App Usage Minutes (Counts also background usage, hence inaccurate)</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-bag"></i>
+					</div>
+					<!--					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+					-->				</div>
+			</div>
             <!-- ./col -->
         </div>
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
             <!-- Left col -->
-            <section class="col-lg-7 connectedSortable">
+            <section class="col-lg-7">
+				<h2> Top Students in watching and reading content</h2><hr>
                 <!-- Custom tabs (Charts with tabs)-->
-                <div class="nav-tabs-custom">
-                    <!-- Tabs within a box -->
-                    <ul class="nav nav-tabs pull-right">
-                        <div class="chart" id="studyLevel" style="height: 350px;"></div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="chart" id="topVideos" style="height: 350px;"></div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="chart" id="topBooks" style="height: 350px;"></div>
-                    </ul>
-                    <div class="tab-content no-padding">
-                        <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
-                    </div>
-                </div>
+               <table class="table table-responsive table-striped">
+				   <thead>
+				   <tr>
+					   <th> #</th>
+					   <th>Name </th>
+					   <th>Phone Number</th>
+					   <th>School</th>
+					   <th>Study Level</th>
+					   <th>Phone Model</th>
+					   <th>App minutes</th>
+
+				   </tr>
+				   </thead>
+				   <tbody id="students">
+				   <?php
+				   $count =0;
+				   foreach ($students as $student){
+				   	?>
+				  <tr>
+					  <?php
+					  sscanf($student->appMinutes, "%d:%d:%d", $hours, $minutes, $seconds);
+					  $appMinutes = $hours * 3600 + $minutes * 60 + $seconds;
+					  ?>
+
+					  <td><?php echo $count+1?></td>
+					  <td><?php echo $student->fname?></td>
+					  <td><?php echo $student->mobile?></td>
+					  <td><?php echo $student->name?></td>
+					  <td><?php echo $student->level_name?></td>
+					  <td><?php echo $student->phone_type?></td>
+					  <td><?php echo round($appMinutes / 60,2)?></td>
+
+					  <td></td>
+
+				  </tr>
+
+
+
+
+					  <?php  $count++;
+				   }
+				   ?>
+
+				   </tbody>
+			   </table>
                 <!-- /.nav-tabs-custom -->
-                <!-- solid sales graph -->
-                <div class="box box-solid bg-teal-gradient">
 
             </section>
             <!-- /.Left col -->
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-lg-5 connectedSortable">
+            <section class="col-lg-5 ">
 
-                <!-- Calendar -->
-                <div class="box box-solid bg-green-gradient">
-                    <div class="box-header">
-                        <i class="fa fa-line-chart"></i>
 
-                    </div>
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
                         <!--Student Classification -->
-                        <div class="chart" id="gender" style="height: 350px;"></div>
+                        <div class="chart" id="internet_type" style="height: 350px;"></div>
 
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="chart" id="subscriptions" style="height: 350px;"></div>
+                    	</div>
 
-                    <!-- /.box-body -->
-                    <div class="box-footer text-black">
-                        <br>
-                        <br>
-                        <br>
-                        <div class="chart" id="subscription_types" style="height: 450px;"></div>
-                    </div>
                 </div>
                 <!-- /.box -->
 
@@ -158,5 +198,43 @@
 <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-<!--/*bar graph for students by study level*/-->
+<script>
+    Highcharts.chart('internet_type', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Internet Types used by Users'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'WI-FI',
+                y: <?php echo $internet_type['wifi'] ?>,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Mobile Data',
+                y: <?php echo $internet_type["mobile"] ?>
+            },]
+        }]
+    });
+</script>
 

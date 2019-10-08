@@ -317,6 +317,30 @@ class Analytics_model extends CI_Model
 		return $query->users;
 
 	}
+	public function signUps_By_Day($date){
+		$this->db->select("fname , mobile, gender ,study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus");
+		$this->db->from("users");
+		$this->db->join("students","users.user_id = students.user_id");
+		$this->db->join("schools","students.school_code = schools.school_code");
+		$this->db->join("study_levels","students.study_level = study_levels.level_code");
+		$this->db->join("student_subscriptions","users.user_id = student_subscriptions.user_id");
+		$this->db->like("date_joined", $date);
+		$query = $this->db->get()->result();
+		return $query;
+	}
+	public function signUps_By_Range($start,$end){
+	    $this->db->select("fname , mobile, gender ,study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus");
+	    $this->db->from("users");
+	    $this->db->join("students","users.user_id = students.user_id");
+        $this->db->join("schools","students.school_code = schools.school_code");
+        $this->db->join("study_levels","students.study_level = study_levels.level_code");
+        $this->db->join("student_subscriptions","users.user_id = student_subscriptions.user_id");
+        $this->db->WHERE("date_joined BETWEEN '$start'  AND '$end'");
+	    $query = $this->db->get()->result();
+
+	   return $query;
+
+    }
 	//get logged in accounts
 	public function loggedInUsers()
 	{

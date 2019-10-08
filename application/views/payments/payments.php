@@ -190,7 +190,7 @@
         };
     }
 
-    //var refresh = setInterval(xHR, 2000);
+    var refresh = setInterval(xHR, 10000);
     window.addEventListener("load", function () {
             var response;
             var startDate;
