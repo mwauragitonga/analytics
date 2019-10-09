@@ -60,7 +60,7 @@
             type: 'column'
         },
         title: {
-            text: 'Most watched videos by minutes'
+            text: 'Top 10 watched videos by minutes'
         },
         xAxis: {
             type: '',
