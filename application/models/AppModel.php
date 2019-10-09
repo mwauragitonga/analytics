@@ -125,13 +125,13 @@ class AppModel extends CI_Model
 		$this->db->where('(start_stamp < end_stamp)');
 		$this->db->order_by('watchSecs','DESC');
 		$data = $this->db->get()->result();
-		//print_r($data);
+		///**/print_r($data);
 		return $data;
 	}
 
 	public function Books_Read()
 	{
-		$this->db->select('mobile_analysis_data.subtopic_ID, multimedia_content.file_name ,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)) as BookTotalMinutes,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as BookMeanMinutes');
+		$this->db->select('mobile_analysis_data.subtopic_ID, multimedia_content.file_name ,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)) as readSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgReadSecs, COUNT(index_ID) as count');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('multimedia_content', 'multimedia_content.file_id = subtopic_ID');
 		$this->db->group_by("subtopic_ID");

@@ -20,8 +20,9 @@
 				<th>#</th>
 				<th>Subtopic Name</th>
 				<th>Total Minutes Watched</th>
-				<th>Minutes Per View</th>
 				<th>Total Views</th>
+				<th>Average Minutes per view</th>
+
 				</thead>
 				<tbody>
 				<?php
@@ -32,8 +33,8 @@
 						<td><?php echo $count + 1 ?></td>
 						<td><?php echo $video->name . "  "  ?><span class="badge badge-info"><?php echo $video->subject ?></span> </td>
 						<td><?php echo gmdate('i :s', $video->watchSecs); ?></td>
-						<td><?php echo gmdate('i :s', $video->avgWatchSecs); ?></td>
 						<td><?php echo $video->count; ?></td>
+						<td><?php echo gmdate('i :s', $video->avgWatchSecs); ?></td>
 					</tr>
 					<?php
 					$count++;
