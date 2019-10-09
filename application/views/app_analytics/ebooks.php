@@ -8,7 +8,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url(); ?>general"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Videos</li>
+			<li class="active">ebooks</li>
 		</ol>
 	</section>
 
@@ -59,7 +59,7 @@
             type: 'column'
         },
         title: {
-            text: 'Most watched videos by minutes'
+            text: 'Top 10 read books by minutes'
         },
         xAxis: {
             type: '',

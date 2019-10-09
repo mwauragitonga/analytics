@@ -126,7 +126,7 @@ class AppModel extends CI_Model
 		$this->db->where('(start_stamp < end_stamp)');
 		$this->db->order_by('watchSecs', 'DESC');
 		$data = $this->db->get()->result();
-		print_r($data);
+		//print_r($data);
 		return $data;
 	}
 
@@ -139,7 +139,7 @@ class AppModel extends CI_Model
 		$this->db->where('content_type', 'Ebooks');
 		$this->db->where('(start_stamp < end_stamp)');
 		$data = $this->db->get()->result();
-		print_r($data);
+		//print_r($data);
 		return $data;
 
 	}
