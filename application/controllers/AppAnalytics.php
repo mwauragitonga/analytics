@@ -42,7 +42,7 @@ class AppAnalytics extends CI_Controller
 	}
 	function ebooks(){
 		$data = array(
-			'books_read' =>$this->AppModel->Books_Read(),
+			'books' =>$this->AppModel->Books_Read(),
 
 			'title' => "More Information on Ebooks",
 			'view' => "app_analytics/ebooks.php"
