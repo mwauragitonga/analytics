@@ -138,6 +138,8 @@ class AppModel extends CI_Model
 		$this->db->group_by("subtopic_ID");
 		$this->db->where('content_type', 'Ebooks');
 		$this->db->where('(start_stamp < end_stamp)');
+		$this->db->order_by('readSecs', 'DESC');
+
 		$data = $this->db->get()->result();
 		//print_r($data);
 		return $data;
