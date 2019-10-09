@@ -19,9 +19,9 @@
 				<thead>
 				<th>#</th>
 				<th>e-Book Name</th>
-				<th>Total Minutes read</th>
-				<th>Total Reads</th>
-				<th>Average minutes per read</th>
+				<th>Total Minutes read (i :s)</th>
+				<th>No. of Reads</th>
+				<th>Average minutes per read (i :s)</th>
 				</thead>
 				<tbody>
 				<?php
@@ -30,10 +30,10 @@
 					?>
 					<tr>
 						<td><?php echo $count + 1 ?></td>
-						<td><?php echo $book->name . "  "  ?><span class="badge badge-info"><?php echo $video->subject ?></span> </td>
+						<td><?php echo $book->file_name . "  "  ?><span class="badge badge-info"><?php echo "" ?></span> </td>
 						<td><?php echo gmdate('i :s', $book->readSecs); ?></td>
-						<td><?php echo gmdate('i :s', $book->avgReadSecs); ?></td>
 						<td><?php echo $book->count; ?></td>
+						<td><?php echo gmdate('i :s', $book->avgReadSecs); ?></td>
 					</tr>
 					<?php
 					$count++;
@@ -65,12 +65,12 @@
             type: '',
             categories:[<?php
 				$count=0;
-				foreach($videos as $video){
+				foreach($books as $book){
 					$count +=1;
-					if($count== count($videos)){
-						echo '"'.$video->name.'"';
+					if($count== count($books)){
+						echo '"'.$book->file_name.'"';
 					}else{
-						echo  '"'.$video->name .'", ';
+						echo  '"'.$book->file_name .'", ';
 					}
 				}; ?>],
             labels: {
@@ -112,12 +112,12 @@
                 colorByPoint: true,
                 data: [<?php
 					$count=0;
-					foreach($videos as $video){
+					foreach($books as $book){
 						$count +=1;
-						if($count== 10){
-							echo gmdate('i',$video->watchSecs);
+						if($count == 10 ){
+							echo  round(($book->readSecs)/60,2);
 						}else{
-							echo gmdate('i',$video->watchSecs).',';
+							echo round(($book->readSecs)/60,2).',';
 						}
 						if($count == 10){
 							break;

@@ -116,9 +116,9 @@
 					foreach($videos as $video){
 						$count +=1;
 						if($count== 10){
-							echo gmdate('i',$video->watchSecs);
+							echo round(($video->watchSecs)/60,2);
 						}else{
-							echo gmdate('i',$video->watchSecs).',';
+							echo round(($video->watchSecs)/60,2).',';
 						}
 						if($count == 10){
 							break;
