@@ -39,7 +39,7 @@ class AppModel extends CI_Model
 		$this->db->where('(content_type ="App Usage" OR content_type ="App+Usage")');
 		$query = $this->db->get();
 		$appUsageTimes = $query->result();
-		$totalAppUsageTime = $this->calculateTime($appUsageTimes);
+		$totalAppUsageTime = $this->calculateTime($appUsageTimes,'hours');
 
 		return round($totalAppUsageTime, 2);
 	}
@@ -83,7 +83,8 @@ class AppModel extends CI_Model
 		$this->db->join("schools", "students.school_code = schools.school_code");
 		$this->db->join("study_levels", "students.study_level = study_levels.level_code	");
 		$this->db->group_by('mobile_analysis_data.user_ID');
-		$this->db->where('(content_type ="App Usage" OR content_type ="App+Usage")');
+		$this->db->where('(content_type ="Videos" OR content_type ="Ebooks")');
+		$this->db->where('(start_stamp < end_stamp)');
 		$this->db->limit(10);
 		$this->db->order_by('appMinutes', 'DESC');
 		$query = $this->db->get()->result();
@@ -146,7 +147,7 @@ class AppModel extends CI_Model
 
 	}
 
-	private function calculateTime($arr_time)
+	private function calculateTime($arr_time,$format = 'mins')
 	{
 		$count = 0;
 		$time_seconds = array();
@@ -163,7 +164,11 @@ class AppModel extends CI_Model
 		}
 
 		$totalTime = array_sum($time_seconds); // in seconds
-		return $totalTime / 60; //in minutes
+		if ($format == 'mins') {
+			return $totalTime / 60; //in minutes
+		}else if ($format == 'hours'){
+			return $totalTime / 60 / 60; //in hours
+		}
 	}
 
 }
