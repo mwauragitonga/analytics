@@ -100,7 +100,7 @@
 					<div class="inner">
 						<h3><?php echo $app_Usage_Minutes ; ?></h3>
 
-						<p>App Usage Minutes (Counts also background usage, hence inaccurate)</p>
+						<p>App Usage ( Hours)</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-bag"></i>
@@ -126,7 +126,7 @@
 					   <th>School</th>
 					   <th>Study Level</th>
 					   <th>Phone Model</th>
-					   <th>App minutes</th>
+					   <th>Read and Watch minutes</th>
 
 				   </tr>
 				   </thead>
