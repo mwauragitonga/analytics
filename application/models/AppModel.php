@@ -141,7 +141,7 @@ class AppModel extends CI_Model
 		$data3 = array_merge($data,$data2);
 
 		//print_r($data3);
-		return $data;
+		return $data3;
 	}
 
 	public function Books_Read()
