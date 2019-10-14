@@ -52,7 +52,7 @@ class Evaluations_model extends CI_Model
 		$this->db->join('exams', 'exams.exam_id = test_respondents.exam_id');
 		$this->db->join('users', 'users.user_id = test_respondents.exam_id');
 		$this->db->group_by('test_respondents.user_id');
-		$this->db->distinct();
+		//$this->db->distinct();
 		$this->db->order_by('COUNT(test_respondents.response_id)', 'DESC');
 		$this->db->limit(10);
 		$query = $this->db->get();
