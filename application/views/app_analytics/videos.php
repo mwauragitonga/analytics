@@ -32,9 +32,9 @@
 					<tr>
 						<td><?php echo $count + 1 ?></td>
 						<td><?php echo $video->name . "  "  ?><span class="badge badge-info"><?php echo $video->subject ?></span> </td>
-						<td><?php echo gmdate('i :s', $video->watchSecs); ?></td>
+						<td><?php echo round(($video->watchSecs)/60,2); ?></td>
 						<td><?php echo $video->count; ?></td>
-						<td><?php echo gmdate('i :s', $video->avgWatchSecs); ?></td>
+						<td><?php echo gmdate('i :s', $video->avgWatchSecs) ;?></td>
 					</tr>
 					<?php
 					$count++;
