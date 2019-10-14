@@ -111,28 +111,32 @@
 
 
 				<div class="box box-solid ">
-					<div class="box-header">
-						<i class="fa fa-line-chart"></i>
-
-					</div>
 					<!-- /.box-header -->
 					<div class="box-body no-padding">
-						<!-- Sign Ups -->
-						<div class="chart" id="signups" style="height: 350px;"></div>
+						<table id="example1" class="table table-bordered table-striped">
+							<h3>Students Leader-board</h3>
+							<thead>
+							<tr>
+								<th> #</th>
+								<th>Name </th>
+								<th>Exam Attempts</th>
+							</tr>
+							</thead>
+							<tbody>
+							<?php $count= 1;
+							foreach ($topStudents as $student){ ?>
+							<tr>
+								<td><?php echo $count ; ?></td>
+								<td><?php echo $student->fname.' '. $student->lname ;?></td>
+								<td><?php echo $student->count ; ?></td>
+							</tr>
+							<?php
+								$count++;
+							}
+							?>
+							</tbody>
+						</table>
 
-					</div>
-					<br>
-					<br>
-					<br>
-					<div class="chart" id="subscriptions" style="height: 350px;"></div>
-
-					<!-- /.box-body -->
-					<div class="box-footer text-black">
-						<br>
-						<br>
-						<br>
-						<div class="chart" id="subscription_types" style="height: 450px;"></div>
-					</div>
 				</div>
 				<!-- /.box -->
 

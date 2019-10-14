@@ -9,9 +9,10 @@ class Web_model extends CI_Model
 		$date = date('Y-m-d');
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
-		$this->db->join('users','users.user_id=web_actions_logs.id');
-		$this->db->where('registration_source', 'source_001');
+		//$this->db->join('users','users.user_id=web_actions_logs.id');
+		//$this->db->where('users.registration_source', 'source_001');
 		$this->db->like('time_of_action', $date);
+		$this->db->where('(action = "registration")');
 		$query= $this->db->get();
 		return $query->num_rows();
 
@@ -23,6 +24,7 @@ class Web_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->like('time_of_action', $date);
+		$this->db->where('(action = "login")');
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
@@ -78,4 +80,5 @@ class Web_model extends CI_Model
 		return $query->users;
 
 	}
+
 }

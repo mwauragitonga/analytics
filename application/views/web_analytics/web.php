@@ -26,10 +26,10 @@
                     <div class="inner">
 						<h3><?php echo $signUps ; ?></h3>
 
-                        <p>Sign Ups </p>
+                        <p>Sign Ups Today</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="ion ion-person-add"></i>
                     </div>
 <!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
                 </div>
@@ -45,7 +45,7 @@
                         <p>Log Ins Today</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
+                        <i class="fa fa-sign-in"></i>
                     </div>
 <!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
                 </div>
@@ -60,7 +60,7 @@
                         <p>Video Views Today</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph "></i>
+                        <i class="fa fa-television"></i>
                     </div>
 <!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
                 </div>
@@ -75,7 +75,7 @@
                         <p>Books Read Today</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-person-add"></i>
+                        <i class="fa fa-book"></i>
                     </div>
 <!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
                 </div>
@@ -89,7 +89,7 @@
 						<p>Attempted Payments Today</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-pie-graph "></i>
+						<i class="fa fa-credit-card"></i>
 					</div>
 					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
@@ -234,7 +234,7 @@
             enabled: false
         },
         series: [{
-            name: 'Logged In Users',
+            name: 'Days',
             data: [<?php
 				$count=0;
 				foreach($weeklyUsers as $users){
@@ -305,7 +305,7 @@
             enabled: false
         },
         series: [{
-            name: 'Logged In Users',
+            name: 'Days',
             data: [<?php
 				$count=0;
 				foreach($weeklySignups as $users){
