@@ -171,7 +171,7 @@
         });
         request.send(data);
 
-        request.onreadystatechange = () => {
+        request.onload = () => {
             response = JSON.parse(request.responseText);
             var revenue = response.tiles_data.total_Revenue;
             var aYS = response.tiles_data.active_Yearly_Subscribers;
@@ -182,6 +182,8 @@
             var success_Attempts = response.tiles_data.successful_Payment_Attempts;
             var paymentSuccessRate = (success_Attempts / payment_Attempts) * 100;
 
+            console.log(success_Attempts);
+            console.log(payment_Attempts);
             document.getElementById("total_Revenue").innerText = formatMoney(revenue);
             document.getElementById("aYS").innerText = aYS;
             document.getElementById("aMS").innerText = aMS;
