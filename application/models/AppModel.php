@@ -121,13 +121,26 @@ class AppModel extends CI_Model
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('subtopics', 'subtopics.subtopicID = subtopic_ID');
 		$this->db->join('syllabus', 'subtopics.topicID = syllabus.topicID');
-		//$this->db->join('multimedia_content','IF(mobile_analysis_data.subtopic_ID LIKE "%[0-9]%" AND mobile_analysis_data.subtopic_ID = multimedia_content.file_ID) ');
 		$this->db->group_by("subtopic_ID");
 		$this->db->where('content_type', 'Videos');
 		$this->db->where('(start_stamp < end_stamp)');
 		$this->db->order_by('watchSecs', 'DESC');
 		$data = $this->db->get()->result();
-		//print_r($data);
+
+		$this->db->select('mobile_analysis_data.subtopic_ID ,subtopics.name, syllabus.subject ,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs , COUNT(index_ID) as count');
+		$this->db->from('mobile_analysis_data');
+		$this->db->join('multimedia_content', 'mobile_analysis_data.subtopic_ID = multimedia_content.file_id');
+		$this->db->join('subtopics', 'subtopics.subtopicID =  multimedia_content.subtopicID');
+		$this->db->join('syllabus', 'subtopics.topicID = syllabus.topicID');
+		$this->db->group_by("subtopic_ID");
+		$this->db->where('content_type', 'Videos');
+		$this->db->where('(start_stamp < end_stamp)');
+		$this->db->order_by('watchSecs', 'DESC');
+		$data2 = $this->db->get()->result();
+
+		$data3 = array_merge($data,$data2);
+
+		//print_r($data3);
 		return $data;
 	}
 
