@@ -47,10 +47,10 @@ class Evaluations_model extends CI_Model
 		return $query->result();
 	}
 	public function getTopStudents(){
-		$this->db->select('users.user_id, users.fname, users.lname,  test_respondents.response_id, test_respondents.exam_id,exams.exam_id, exams.exam_name, test_respondents.user_id, COUNT(test_respondents.user_id) as count');
+		$this->db->select('users.user_id, users.fname, users.lname,  test_respondents.response_id, test_respondents.exam_id,exams.exam_id, exams.exam_name, test_respondents.user_id, COUNT(test_respondents.response_id) as count');
 		$this->db->from('test_respondents');
 		$this->db->join('exams', 'exams.exam_id = test_respondents.exam_id');
-		$this->db->join('users', 'users.user_id = test_respondents.exam_id');
+		$this->db->join('users', 'users.user_id = test_respondents.user_id');
 		$this->db->group_by('test_respondents.user_id');
 		//$this->db->distinct();
 		$this->db->order_by('COUNT(test_respondents.response_id)', 'DESC');
