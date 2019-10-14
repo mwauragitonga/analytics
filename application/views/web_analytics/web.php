@@ -234,7 +234,7 @@
             enabled: false
         },
         series: [{
-            name: 'Days',
+            name: 'Logins',
             data: [<?php
 				$count=0;
 				foreach($weeklyUsers as $users){
@@ -305,7 +305,7 @@
             enabled: false
         },
         series: [{
-            name: 'Days',
+            name: 'SignUps',
             data: [<?php
 				$count=0;
 				foreach($weeklySignups as $users){
