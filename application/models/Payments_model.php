@@ -68,7 +68,7 @@ class Payments_model extends CI_Model
 	{
 		$this->db->select("COUNT(index_ID) as count");
 		$this->db->from("mpesa_callbacks");
-		$this->db->where("transaction_ID !=", "NULL");
+		$this->db->where("amount >", 0);
 		$query = $this->db->get()->row();
 		return $query->count;
 	}
