@@ -139,8 +139,9 @@ class AppModel extends CI_Model
 		$data2 = $this->db->get()->result();
 
 		$data3 = array_merge($data,$data2);
-
-		//print_r($data3);
+		usort($data3, function($a, $b) {
+			return $b->watchSecs <=> $a->watchSecs;
+		});
 		return $data3;
 	}
 
