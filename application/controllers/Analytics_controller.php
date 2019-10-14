@@ -17,6 +17,7 @@ class Analytics_controller extends CI_Controller
 		$this->data ['description'] = "";
 
 		$this->load->model('Analytics_model');
+		$this->load->model('Payments_model');
 		$this->load->library('upload');
 		$this->load->library("bcrypt");
 	}
@@ -143,13 +144,16 @@ class Analytics_controller extends CI_Controller
 
 	public function accountsByDay()
 	{
-		$data = array(
+		if ($this->is_logged_in() == true) {
 
-			'title' => "Sign Ups ",
-			'view' => "accounts/signups.php"
-		);
-		//var_dump($formFours);
-		$this->load->view('index.php', $data);
+			$data = array(
+
+				'title' => "Sign Ups ",
+				'view' => "accounts/signups.php"
+			);
+			//var_dump($formFours);
+			$this->load->view('index.php', $data);
+		}
 	}
 
 	/**
@@ -184,24 +188,37 @@ class Analytics_controller extends CI_Controller
 
 	public function signUps_by_Day()
 	{
+		if ($this->is_logged_in() == true) {
 
-		$post_data = file_get_contents("php://input");
-		$decoded_post_data = json_decode($post_data);
-		$date = $decoded_post_data->date;
 
-		$dates = explode('-', $date);
-		$startDate = date("Y-m-d", strtotime($dates[0]));
-		$end_Date = date("Y-m-d", strtotime($dates[1]));
-		if ($startDate == $end_Date){
-			$users = $this->Analytics_model->signUps_By_Day($startDate);
+			$post_data = file_get_contents("php://input");
+			$decoded_post_data = json_decode($post_data);
+			$date = $decoded_post_data->date;
+
+			$dates = explode('-', $date);
+			$startDate = date("Y-m-d", strtotime($dates[0]));
+			$end_Date = date("Y-m-d", strtotime($dates[1]));
+			if ($startDate == $end_Date) {
+				$users = $this->Analytics_model->signUps_By_Day($startDate);
+
+			} else {
+				$users = $this->Analytics_model->signUps_By_Range($startDate, $end_Date);
+			}
+			echo json_encode($users);
 
 		}
-		else {
-			$users = $this->Analytics_model->signUps_By_Range($startDate, $end_Date);
-		}
-		echo json_encode($users);
-
 	}
+	public function payers(){
+		if ($this->is_logged_in() == true) {
+			$data = array(
+
+				'title' => "Paid Customers ",
+				'payers' =>$this->Payments_model->payers(),
+				'view' => "payments/payers.php"
+			);
+			$this->load->view('index.php', $data);
+		}
+		}
 
 	public function is_logged_in()
 	{
