@@ -311,7 +311,7 @@ class Analytics_model extends CI_Model
 		$date->modify('-1 week');
 		$week= $date->format('Y-m-d');
 		$today= date('Y-m-d ');
-		$this->db->select('users.user_id, fname, lname, online_status, mobile, email, hash, username, password, gender, user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus');
+		$this->db->select('users.user_id, fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender, user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus');
 		$this->db->from('users');
 		$this->db->join("students","users.user_id = students.user_id");
 		$this->db->join("schools","students.school_code = schools.school_code");
