@@ -297,13 +297,31 @@ class Analytics_model extends CI_Model
 		$week= $date->format('Y-m-d');
 		//var_dump($week);
 		$today= date('Y-m-d ');
-		$this->db->select('*');
+		$this->db->select('user_id, fname, lname, online_status, mobile, email, hash, username, password, gender, user_type, user_status');
 		$this->db->from('users');
 		$this->db->where('user_type', '1');
 		$this->db->where('last_seen >=',  $week);
 		//$this->db->where('last_seen <=', $today );
 		$query= $this->db->get();
 		return $query->num_rows();
+	}
+	public function weeklyUsers(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = new DateTime();
+		$date->modify('-1 week');
+		$week= $date->format('Y-m-d');
+		$today= date('Y-m-d ');
+		$this->db->select('users.user_id, fname, lname, online_status, mobile, email, hash, username, password, gender, user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus');
+		$this->db->from('users');
+		$this->db->join("students","users.user_id = students.user_id");
+		$this->db->join("schools","students.school_code = schools.school_code");
+		$this->db->join("study_levels","students.study_level = study_levels.level_code");
+		$this->db->join("student_subscriptions","users.user_id = student_subscriptions.user_id");
+		$this->db->where('user_type', '1');
+		$this->db->where('last_seen >=',  $week);
+		$this->db->order_by('last_seen', 'DESC');
+		$query= $this->db->get();
+		return $query->result();
 	}
 //	get active users over the last 12 months
 	public function users_By_Months($instance_month){

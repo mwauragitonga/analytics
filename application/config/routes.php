@@ -63,6 +63,7 @@ $route['logout'] = 'Analytics_controller/logout';
 $route['accounts'] = 'Analytics_controller/accounts';
 $route['accountsByDay'] = 'Analytics_controller/accountsByDay';
 $route['filter'] = 'Analytics_controller/filterSignups';
+$route['activeUsers'] = 'Analytics_controller/activeUsers';
 $route['accountsview'] = "Analytics_controller/accountsByDay";
 $route['accountsByDay'] = "Analytics_controller/signUps_by_Day";//ajax
 $route['videos'] = "AppAnalytics/videos";
