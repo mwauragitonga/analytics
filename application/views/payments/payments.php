@@ -44,7 +44,9 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                </div>
+					<a href="" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+
+				</div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">

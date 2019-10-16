@@ -85,7 +85,7 @@ class AppModel extends CI_Model
 		$this->db->group_by('mobile_analysis_data.user_ID');
 		$this->db->where('(content_type ="Videos" OR content_type ="Ebooks")');
 		$this->db->where('(start_stamp < end_stamp)');
-		$this->db->limit(10);
+	//	$this->db->limit(10);
 		$this->db->order_by('appMinutes', 'DESC');
 		$query = $this->db->get()->result();
 		return $query;
