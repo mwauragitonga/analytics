@@ -80,7 +80,8 @@ class AppModel extends CI_Model
 
 	public function students()
 	{
-		$this->db->select('users.fname,users.user_id, users.mobile,schools.name, study_levels.level_name,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as appMinutes,phone_type');
+		$this->db->select('users.fname,users.user_id, users.mobile,schools.name, study_levels.level_name,
+		SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as appMinutes,phone_type');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('users', 'mobile_analysis_data.user_ID = users.user_ID');
 		$this->db->join("students", "users.user_ID = students.user_ID");

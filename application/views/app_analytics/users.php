@@ -17,7 +17,7 @@
 		<!-- Left col -->
 		<section class="col-lg-6 content">
 			Videos Read
-			<table id="example1" class="table table-bordered table-striped table-responsive">
+			<table id="example1" class="table table-bordered table-striped table-responsive" style="overflow: auto">
 				<thead>
 				<th>#</th>
 				<th>Video Name</th>
