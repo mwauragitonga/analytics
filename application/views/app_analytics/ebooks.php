@@ -31,7 +31,7 @@
 					<tr>
 						<td><?php echo $count + 1 ?></td>
 						<td><?php echo $book->file_name . "  "  ?><span class="badge badge-info"><?php echo "" ?></span> </td>
-						<td><?php echo gmdate('i :s', $book->readSecs); ?></td>
+						<td><?php echo round(($book->readSecs)/60,2); ?></td>
 						<td><?php echo $book->count; ?></td>
 						<td><?php echo gmdate('i :s', $book->avgReadSecs); ?></td>
 					</tr>
