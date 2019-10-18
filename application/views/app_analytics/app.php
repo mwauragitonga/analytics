@@ -117,7 +117,7 @@
             <section class="col-lg-7">
 				<h2> Top Students in watching and reading content</h2><hr>
                 <!-- Custom tabs (Charts with tabs)-->
-               <table class="table table-responsive table-striped">
+               <table class="table table-responsive table-striped" style="overflow: auto">
 				   <thead>
 				   <tr>
 					   <th> #</th>
