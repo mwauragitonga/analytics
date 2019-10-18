@@ -126,7 +126,8 @@
 					   <th>School</th>
 					   <th>Study Level</th>
 					   <th>Phone Model</th>
-					   <th>Read and Watch minutes</th>
+					   <th>Study minutes</th>
+					   <th>More Info</th>
 
 				   </tr>
 				   </thead>
@@ -149,7 +150,7 @@
 					  <td><?php echo $student->phone_type?></td>
 					  <td><?php echo round($appMinutes / 60,2)?></td>
 
-					  <td></td>
+					  <td><a href="<?php echo base_url().'users/'.$student->user_id?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a></td>
 
 				  </tr>
 
@@ -223,7 +224,7 @@
             }
         },
         series: [{
-            name: 'Brands',
+            name: 'Internet Type',
             colorByPoint: true,
             data: [{
                 name: 'WI-FI',
