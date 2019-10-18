@@ -37,7 +37,7 @@
 				<?php
 				$count = 1;
 				foreach ($users  as $user){  ?>
-				<tbody id="signUps">
+				<tbody>
 				<tr>
 					<td><?php echo $count ; ?></td>
 					<td><?php echo $user->fname .' '. $user->lname ; ?></td>
