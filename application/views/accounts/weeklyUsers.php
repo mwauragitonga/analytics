@@ -30,7 +30,6 @@
 					<th>Phone Number</th>
 					<th>School</th>
 					<th>Study Level</th>
-					<th>Subscription Status</th>
 					<th>Last Seen </th>
 				</tr>
 				</thead>
@@ -45,7 +44,6 @@
 					<td><?php echo $user->mobile ; ?></td>
 					<td> <?php echo $user->school_name ; ?></td>
 					<td><?php echo $user->level_name ; ?></td>
-					<td><?php echo $user->userstatus ; ?></td>
 					<td><?php echo $user->last_seen ; ?></td>
 				</tr>
 				</tbody>
