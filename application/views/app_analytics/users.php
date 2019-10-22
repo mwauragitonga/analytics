@@ -15,9 +15,10 @@
 
 	<div class="row container">
 		<!-- Left col -->
-		<section class="col-lg-6 content">
+		<section class="col-lg-6 col-md-6 content">
 			Videos Read
-			<table id="example1" class="table table-bordered table-striped table-responsive" style="overflow: auto">
+			<div class="table-responsive">
+			<table id="example1" class="table table-bordered table-striped">
 				<thead>
 				<th>#</th>
 				<th>Video Name</th>
@@ -29,12 +30,14 @@
 				<?php
 				$count =0;
 				foreach ($userStudyInfo['videos'] as $video) {
+					sscanf($video->watchSecs, "%d:%d:%d", $hours, $minutes, $seconds);
+					$appMinutes = $hours * 3600 + $minutes * 60 + $seconds;
 
 					?>
 					<tr>
 						<td><?php echo $count + 1 ?></td>
 						<td><?php echo $video->file_name . "  "  ?><span class="badge badge-info"><?php echo "" ?></span> </td>
-						<td><?php echo round($video->watchSecs/60,2); ?></td>
+						<td><?php echo  round($appMinutes / 60 ,2) ?></td>
 						<td><?php echo $video->count; ?></td>
 						<td><?php echo gmdate('i :s', $video->avgWatchSecs); ?></td>
 					</tr>
@@ -45,12 +48,15 @@
 
 				</tbody>
 			</table>
+			</div>
+
 
 		</section>
 
-		<section class="col-lg-6 content" >
+		<section class="col-lg-6 col-md-6 content" >
 			Books Read
-			<table id="example1" class="table table-bordered table-striped table-responsive" style="width: auto">
+			<div class="table-responsive">
+			<table id="example1" class="table table-bordered table-striped table-responsive order-column" >
 				<thead>
 				<th>#</th>
 				<th>Ebook Name</th>
@@ -62,11 +68,14 @@
 				<?php
 				$count =0;
 				foreach ($userStudyInfo['ebooks'] as $book) {
+
+					sscanf($book->readSecs, "%d:%d:%d", $hours, $minutes, $seconds);
+					$appMinutes = $hours * 3600 + $minutes * 60 + $seconds;
 					?>
 					<tr>
 						<td><?php echo $count + 1 ?></td>
 						<td><?php echo $book->file_name . "  "  ?><span class="badge badge-info"><?php echo "" ?></span> </td>
-						<td><?php echo round($book->readSecs/60,2); ?></td>
+						<td><?php echo round($appMinutes/60,2); ?></td>
 						<td><?php echo $book->count; ?></td>
 						<td><?php echo gmdate('i :s', $book->avgReadSecs); ?></td>
 					</tr>
@@ -77,7 +86,7 @@
 
 				</tbody>
 			</table>
-
+			</div>
 		</section>
 		<!-- /.Left col -->
 		<!-- right col (We are only adding the ID to make the widgets sortable)-->

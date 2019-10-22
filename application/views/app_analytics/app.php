@@ -117,7 +117,8 @@
             <section class="col-lg-7">
 				<h2> Top Students in watching and reading content</h2><hr>
                 <!-- Custom tabs (Charts with tabs)-->
-               <table class="table table-responsive table-striped" style="overflow: auto">
+				<div class="table-responsive">
+				<table class="table table-responsive table-striped" style="overflow: auto">
 				   <thead>
 				   <tr>
 					   <th> #</th>
@@ -148,7 +149,7 @@
 					  <td><?php echo $student->name?></td>
 					  <td><?php echo $student->level_name?></td>
 					  <td><?php echo $student->phone_type?></td>
-					  <td><?php echo round($appMinutes / 60,2)?></td>
+					  <td><?php echo round($appMinutes / 60 ,2)?></td>
 
 					  <td><a href="<?php echo base_url().'users/'.$student->user_id?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a></td>
 
@@ -163,6 +164,7 @@
 
 				   </tbody>
 			   </table>
+				</div>
                 <!-- /.nav-tabs-custom -->
 
             </section>
