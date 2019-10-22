@@ -36,9 +36,9 @@ class Analytics_controller extends CI_Controller
 			$activeSubscriptions = $this->Analytics_model->getActiveSubscriptions();
 			$inactiveSubscriptions = $this->Analytics_model->getInactiveSubscriptions();
 			$annualSubscriptions = $this->Analytics_model->getAnnualSubscriptions();
-			$termlySusbscriptions = $this->Analytics_model->getTermlySubscriptions();
-			$monthlySusbscriptions = $this->Analytics_model->getMonthlySubscriptions();
-			$nonSusbcribers = $this->Analytics_model->getNonSubscribers();
+			$termlySubscriptions = $this->Analytics_model->getTermlySubscriptions();
+			$monthlySubscriptions = $this->Analytics_model->getMonthlySubscriptions();
+			$nonSubscribers = $this->Analytics_model->getNonSubscribers();
 			$topVideos = $this->Analytics_model->getVideosViews();
 			$topEbooks = $this->Analytics_model->getEbooksViews();
 
@@ -54,9 +54,9 @@ class Analytics_controller extends CI_Controller
 				'activeSubs' => $activeSubscriptions,
 				'inactiveSubs' => $inactiveSubscriptions,
 				'annualSubs' => $annualSubscriptions,
-				'termlySubs' => $termlySusbscriptions,
-				'monthlySubs' => $monthlySusbscriptions,
-				'nonSubs' => $nonSusbcribers,
+				'termlySubs' => $termlySubscriptions,
+				'monthlySubs' => $monthlySubscriptions,
+				'nonSubs' => $nonSubscribers,
 				'topVideos' => $topVideos,
 				'topEbooks' => $topEbooks,
 				'title' => "General Analytics",
@@ -118,7 +118,7 @@ class Analytics_controller extends CI_Controller
 			}
 			//return $users;
 			$today = date('Y-m-d ');
-			//var_dump($loggedInUsers);
+			//var_dump($weeklyActiveUsers);
 			$data = array(
 				'signupsToday' => $signupsToday,
 				'webRegistrations' => $webRegistrations,
@@ -154,6 +154,18 @@ class Analytics_controller extends CI_Controller
 			//var_dump($formFours);
 			$this->load->view('index.php', $data);
 		}
+	}
+	public function activeUsers(){
+
+		$users = $this->Analytics_model->weeklyUsers();
+
+		$data = array(
+			'users' => $users,
+			'title' => "Users Active in the last week",
+			'view' => "accounts/weeklyUsers.php"
+		);
+		//var_dump($users);
+		$this->load->view('index.php', $data);
 	}
 
 	/**
