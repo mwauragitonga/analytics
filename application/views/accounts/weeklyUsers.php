@@ -20,7 +20,7 @@
 
 	<section>
 		<div class="box-body">
-
+			<div class="table-responsive col-md-12 col-lg-12">
 			<table id="example1" class="table table-bordered table-striped table-responsive">
 				<thead>
 				<tr>
@@ -30,7 +30,6 @@
 					<th>Phone Number</th>
 					<th>School</th>
 					<th>Study Level</th>
-					<th>Subscription Status</th>
 					<th>Last Seen </th>
 				</tr>
 				</thead>
@@ -45,7 +44,6 @@
 					<td><?php echo $user->mobile ; ?></td>
 					<td> <?php echo $user->school_name ; ?></td>
 					<td><?php echo $user->level_name ; ?></td>
-					<td><?php echo $user->userstatus ; ?></td>
 					<td><?php echo $user->last_seen ; ?></td>
 				</tr>
 				</tbody>
@@ -54,6 +52,7 @@
 				$count ++;
 				} ?>
 			</table>
+			</div>
 		</div>
 	</section>
 </div>

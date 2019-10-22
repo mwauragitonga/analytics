@@ -29,7 +29,7 @@
 			</div>
 		</form>
 		<div class="box-body">
-			<div class="table-responsive">
+			<div class="table-responsive col-md-12">
 				<table id="example1" class="table table-bordered table-striped table-responsive" style="overflow: auto">
 					<thead>
 					<tr>

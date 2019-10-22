@@ -15,7 +15,7 @@
 	<div class="row">
 		<!-- Left col -->
 		<section class="col-lg-7">
-			<div class="table-responsive">
+			<div class="table-responsive col-lg-12 col-md-12">
 			<table id="example1" class="table table-bordered table-striped table-responsive" style="overflow: auto">
 				<thead>
 				<th>#</th>

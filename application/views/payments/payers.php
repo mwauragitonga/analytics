@@ -21,7 +21,7 @@
 	<section>
 
 		<div class="box-body">
-
+<div class="table-responsive col-md-12 col-lg-12">
 			<table id="example1" class="table table-bordered table-striped table-responsive">
 				<thead>
 				<tr>
@@ -58,6 +58,7 @@
 
 				</tbody>
 			</table>
+</div>
 		</div>
 	</section>
 </div>

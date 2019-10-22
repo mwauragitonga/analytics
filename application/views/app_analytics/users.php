@@ -13,11 +13,11 @@
 	</section>
 	<br><hr>
 
-	<div class="row container">
+	<div class="row ">
 		<!-- Left col -->
 		<section class="col-lg-6 col-md-6 content">
 			Videos Read
-			<div class="table-responsive">
+			<div class="table-responsive col-lg-12 col-md-12">
 			<table id="example1" class="table table-bordered table-striped">
 				<thead>
 				<th>#</th>
@@ -55,7 +55,7 @@
 
 		<section class="col-lg-6 col-md-6 content" >
 			Books Read
-			<div class="table-responsive">
+			<div class="table-responsive col-lg-12 ">
 			<table id="example1" class="table table-bordered table-striped table-responsive order-column" >
 				<thead>
 				<th>#</th>
