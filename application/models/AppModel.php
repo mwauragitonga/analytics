@@ -166,7 +166,7 @@ class AppModel extends CI_Model
 
 	}
 	function userStudyInfo($user_id){
-		$this->db->select("SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as readSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgReadSecs,multimedia_content.file_name,count(index_ID) as count");
+		$this->db->select("SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as readSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgReadSecs,multimedia_content.file_name,count(index_ID) as count");
 		$this->db->from("mobile_analysis_data");
 		$this->db->join('users',"users.user_id=mobile_analysis_data.user_id");
 		$this->db->join('multimedia_content','subtopic_ID = multimedia_content.file_id');
@@ -178,17 +178,17 @@ class AppModel extends CI_Model
 		$this->db->order_by('readSecs');
 		$data_ebooks = $this->db->get()->result();
 
-		$this->db->select("file_name,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs,count(index_ID) as count");
+		$this->db->select("name as file_name,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs,count(index_ID) as count");
 		$this->db->from("mobile_analysis_data");
 		$this->db->join('users',"users.user_id=mobile_analysis_data.user_id");
-		$this->db->join('multimedia_content','subtopic_ID = multimedia_content.subtopicID');
+		$this->db->join('subtopics','subtopic_ID = subtopics.subtopicID');
 		$this->db->where('mobile_analysis_data.content_type',"Videos");
 		$this->db->where('mobile_analysis_data.user_id',$user_id);
 		$this->db->where('(start_stamp < end_stamp)');
 		$this->db->group_by('subtopic_ID');
 		$this->db->order_by('watchSecs');
 		$data_videos = $this->db->get()->result();
-		$this->db->select("file_name,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs,count(index_ID) as count");
+		$this->db->select("file_name,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs,count(index_ID) as count");
 		$this->db->from("mobile_analysis_data");
 		$this->db->join('users',"users.user_id=mobile_analysis_data.user_id");
 		$this->db->join('multimedia_content','subtopic_ID = multimedia_content.file_id');
@@ -204,6 +204,7 @@ class AppModel extends CI_Model
 		});
 
 		$data= array("ebooks"=>$data_ebooks,"videos" =>$data3);
+
 		return $data;
 
 	}

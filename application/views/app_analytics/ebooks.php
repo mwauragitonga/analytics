@@ -15,6 +15,7 @@
 	<div class="row">
 		<!-- Left col -->
 		<section class="col-lg-7">
+			<div class="table-responsive">
 			<table id="example1" class="table table-bordered table-striped table-responsive" style="overflow: auto">
 				<thead>
 				<th>#</th>
@@ -42,7 +43,7 @@
 
 				</tbody>
 			</table>
-
+			</div>
 		</section>
 		<!-- /.Left col -->
 		<!-- right col (We are only adding the ID to make the widgets sortable)-->
