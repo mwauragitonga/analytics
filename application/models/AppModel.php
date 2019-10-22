@@ -48,8 +48,10 @@ class AppModel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('mobile_analysis_data');
+		$this->db->join('users', 'mobile_analysis_data.user_ID = users.user_ID');
 		$this->db->where('content_type', 'Videos');
-		$this->db->group_by('user_id');
+		$this->db->group_by('mobile_analysis_data.user_id');
+		//$this->db->where('(start_stamp <= end_stamp)');
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -58,8 +60,10 @@ class AppModel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('mobile_analysis_data');
+		$this->db->join('users', 'mobile_analysis_data.user_ID = users.user_ID');
 		$this->db->where('content_type', 'Ebooks');
-		$this->db->group_by('user_id');
+		//$this->db->where('(start_stamp <= end_stamp)');
+		$this->db->group_by('users.user_id');
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -76,7 +80,8 @@ class AppModel extends CI_Model
 
 	public function students()
 	{
-		$this->db->select('users.fname, users.mobile,schools.name, study_levels.level_name,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as appMinutes,phone_type');
+		$this->db->select('users.fname,users.user_id, users.mobile,schools.name, study_levels.level_name,
+		SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as appMinutes,phone_type');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('users', 'mobile_analysis_data.user_ID = users.user_ID');
 		$this->db->join("students", "users.user_ID = students.user_ID");
@@ -85,7 +90,7 @@ class AppModel extends CI_Model
 		$this->db->group_by('mobile_analysis_data.user_ID');
 		$this->db->where('(content_type ="Videos" OR content_type ="Ebooks")');
 		$this->db->where('(start_stamp < end_stamp)');
-		$this->db->limit(10);
+	//	$this->db->limit(10);
 		$this->db->order_by('appMinutes', 'DESC');
 		$query = $this->db->get()->result();
 		return $query;
@@ -95,14 +100,14 @@ class AppModel extends CI_Model
 	{
 		$this->db->select('internet_type');
 		$this->db->from('mobile_analysis_data');
-		//$this->db->group_by('internet_type');
+		$this->db->group_by('user_id');
 		$this->db->where('internet_type', 'Wi-FI');
 		$query = $this->db->get();
 		$wifi = $query->num_rows();
 
 		$this->db->select('internet_type');
 		$this->db->from('mobile_analysis_data');
-		//	$this->db->group_by('internet_type');
+		$this->db->group_by('user_id');
 		$this->db->where('internet_type', "mobile");
 		$query2 = $this->db->get();
 		$mobile = $query2->num_rows();
@@ -159,6 +164,56 @@ class AppModel extends CI_Model
 		//print_r($data);
 		return $data;
 
+	}
+	function userStudyInfo($user_id){
+		$this->db->select("SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as readSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgReadSecs,multimedia_content.file_name,count(index_ID) as count");
+		$this->db->from("mobile_analysis_data");
+		$this->db->join('users',"users.user_id=mobile_analysis_data.user_id");
+		$this->db->join('multimedia_content','subtopic_ID = multimedia_content.file_id');
+		$this->db->where('mobile_analysis_data.content_type',"Ebooks");
+		$this->db->where('mobile_analysis_data.user_id',$user_id);
+		$this->db->where('(start_stamp < end_stamp)');
+
+		$this->db->group_by('subtopic_ID');
+		$this->db->order_by('readSecs');
+		$data_ebooks = $this->db->get()->result();
+
+		$this->db->select("name as file_name,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs,count(index_ID) as count");
+		$this->db->from("mobile_analysis_data");
+		$this->db->join('users',"users.user_id=mobile_analysis_data.user_id");
+		$this->db->join('subtopics','subtopic_ID = subtopics.subtopicID');
+		$this->db->where('mobile_analysis_data.content_type',"Videos");
+		$this->db->where('mobile_analysis_data.user_id',$user_id);
+		$this->db->where('(start_stamp < end_stamp)');
+		$this->db->group_by('subtopic_ID');
+		$this->db->order_by('watchSecs');
+		$data_videos = $this->db->get()->result();
+		$this->db->select("file_name,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs,count(index_ID) as count");
+		$this->db->from("mobile_analysis_data");
+		$this->db->join('users',"users.user_id=mobile_analysis_data.user_id");
+		$this->db->join('multimedia_content','subtopic_ID = multimedia_content.file_id');
+		$this->db->where('mobile_analysis_data.content_type',"Videos");
+		$this->db->where('mobile_analysis_data.user_id',$user_id);
+		$this->db->where('(start_stamp < end_stamp)');
+		$this->db->group_by('subtopic_ID');
+		$this->db->order_by('watchSecs');
+		$data_videos2 = $this->db->get()->result();
+		$data3 = array_merge($data_videos,$data_videos2);
+		usort($data3, function($a, $b) {
+			return $b->watchSecs <=> $a->watchSecs;
+		});
+
+		$data= array("ebooks"=>$data_ebooks,"videos" =>$data3);
+
+		return $data;
+
+	}
+	public function getUserName($user_id){
+		$this->db->select('fname');
+		$this->db->from('users');
+		$this->db->where('user_id',$user_id);
+		$fname = $this->db->get()->row() ;
+		return $fname;
 	}
 
 	private function calculateTime($arr_time,$format = 'mins')

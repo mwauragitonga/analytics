@@ -28,7 +28,9 @@
                     <div class="icon">
                         <i class="fa fa-money"></i>
                     </div>
-                </div>
+					<a href="<?php echo base_url()?>payers" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
+				</div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
@@ -42,7 +44,9 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                </div>
+					<a href="" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+
+				</div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
@@ -169,7 +173,7 @@
         });
         request.send(data);
 
-        request.onreadystatechange = () => {
+        request.onload = () => {
             response = JSON.parse(request.responseText);
             var revenue = response.tiles_data.total_Revenue;
             var aYS = response.tiles_data.active_Yearly_Subscribers;
@@ -180,6 +184,8 @@
             var success_Attempts = response.tiles_data.successful_Payment_Attempts;
             var paymentSuccessRate = (success_Attempts / payment_Attempts) * 100;
 
+            console.log(success_Attempts);
+            console.log(payment_Attempts);
             document.getElementById("total_Revenue").innerText = formatMoney(revenue);
             document.getElementById("aYS").innerText = aYS;
             document.getElementById("aMS").innerText = aMS;
