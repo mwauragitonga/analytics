@@ -62,6 +62,15 @@ class AppAnalytics extends CI_Controller
 		$this->load->view('index.php', $data);
 
 	}
+	function signins(){
+		$signins=$this->AppModel->users_signIns();
+		$data = array(
+			'signins' =>$signins,
+			'title' => "Signins",
+			'view' => "app_analytics/signins.php"
+		);
+		$this->load->view('index.php', $data);
+	}
 
 
 }

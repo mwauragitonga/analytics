@@ -70,5 +70,6 @@ $route['videos'] = "AppAnalytics/videos";
 $route['ebooks'] = "AppAnalytics/ebooks";
 $route['payers'] = "Analytics_controller/payers";
 $route['users/(:num)'] = "AppAnalytics/users/$1";
+$route['signins'] ="AppAnalytics/signins";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
