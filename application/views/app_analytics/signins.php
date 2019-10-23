@@ -21,6 +21,8 @@
 					<thead>
 					<th>#</th>
 					<th>Student Name</th>
+					<th>Time</th>
+
 					</thead>
 					<tbody>
 					<?php
@@ -31,6 +33,8 @@
 						<tr>
 							<td><?php echo $count + 1 ?></td>
 							<td><?php echo $signin->fname ?></td>
+							<td><?php echo date('l,Y-m-d h:i:s A ',strtotime($signin->start_stamp))?></td>
+
 						</tr>
 						<?php
 						$count++;
