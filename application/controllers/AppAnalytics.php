@@ -49,6 +49,19 @@ class AppAnalytics extends CI_Controller
 		);
 		$this->load->view('index.php', $data);
 	}
+	function users($user_id){
+	//	$user_id = "";
+		$userStudyInfo=$this->AppModel->userStudyInfo($user_id);
+
+		$user_name =  $this->AppModel ->getUserName($user_id) ;
+		$data = array(
+			'userStudyInfo' =>$userStudyInfo,
+			'title' => $user_name->fname,
+			'view' => "app_analytics/users.php"
+		);
+		$this->load->view('index.php', $data);
+
+	}
 
 
 }

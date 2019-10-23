@@ -15,7 +15,8 @@
 	<div class="row">
 		<!-- Left col -->
 		<section class="col-lg-7">
-			<table id="example1" class="table table-bordered table-striped table-responsive">
+			<div class="table-responsive col-lg-12 col-md-12">
+			<table id="example1" class="table table-bordered table-striped table-responsive" style="overflow: auto">
 				<thead>
 				<th>#</th>
 				<th>e-Book Name</th>
@@ -31,7 +32,7 @@
 					<tr>
 						<td><?php echo $count + 1 ?></td>
 						<td><?php echo $book->file_name . "  "  ?><span class="badge badge-info"><?php echo "" ?></span> </td>
-						<td><?php echo gmdate('i :s', $book->readSecs); ?></td>
+						<td><?php echo round(($book->readSecs)/60,2); ?></td>
 						<td><?php echo $book->count; ?></td>
 						<td><?php echo gmdate('i :s', $book->avgReadSecs); ?></td>
 					</tr>
@@ -42,7 +43,7 @@
 
 				</tbody>
 			</table>
-
+			</div>
 		</section>
 		<!-- /.Left col -->
 		<!-- right col (We are only adding the ID to make the widgets sortable)-->

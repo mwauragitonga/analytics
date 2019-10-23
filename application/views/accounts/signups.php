@@ -20,32 +20,34 @@
 
 	<section>
 		<form>
-		<div class="form-group" style="width: 55%;float: right">
-			<label for="date" >Choose a date range</label>
-			<input class="form-control" type="text" id="date" name="date" value="" min="23-" style="width: 25%;" onchange="dateChanged()">
+			<div class="form-group" style="width: 55%;float: right">
+				<label for="date">Choose a date range</label>
+				<input class="form-control" type="text" id="date" name="date" value="" min="23-" style="width: 25%;"
+					   onchange="dateChanged()">
 
 
-		</div>
+			</div>
 		</form>
 		<div class="box-body">
+			<div class="table-responsive col-md-12">
+				<table id="example1" class="table table-bordered table-striped table-responsive" style="overflow: auto">
+					<thead>
+					<tr>
+						<th> #</th>
+						<th>Name</th>
+						<th>Gender</th>
+						<th>Phone Number</th>
+						<th>School</th>
+						<th>Study Level</th>
+						<th>Subscription Status</th>
+						<th>SMS confirmation</th>
+					</tr>
+					</thead>
+					<tbody id="signUps">
 
-			<table id="example1" class="table table-bordered table-striped table-responsive">
-				<thead>
-				<tr>
-					<th> #</th>
-					<th>Name</th>
-					<th>Gender</th>
-					<th>Phone Number</th>
-					<th>School</th>
-					<th>Study Level</th>
-					<th>Subscription Status</th>
-					<th>SMS confirmation</th>
-				</tr>
-				</thead>
-				<tbody id="signUps">
-
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</section>
 </div>
@@ -56,7 +58,7 @@
     var year_initial = currentDate.getFullYear();
 
     var dateString_initial = year_initial + "-" + (month_initial + 1) + "-" + date_initial;
-  //  window.onLoad = loadSignUps(dateString_initial);
+    //  window.onLoad = loadSignUps(dateString_initial);
 
     //from date picker
     function dateChanged() {

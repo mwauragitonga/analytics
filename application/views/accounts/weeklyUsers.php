@@ -14,51 +14,45 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url(); ?>general"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">paid customers</li>
+			<li class="active"> Active Users </li>
 		</ol>
 	</section>
 
 	<section>
-
 		<div class="box-body">
-<div class="table-responsive col-md-12 col-lg-12">
+			<div class="table-responsive col-md-12 col-lg-12">
 			<table id="example1" class="table table-bordered table-striped table-responsive">
 				<thead>
 				<tr>
 					<th> #</th>
 					<th>Name</th>
-					<th>Paying Mobile</th>
-					<th>Student's Mobile</th>
-					<th>Transaction Code</th>
-					<th>Amount paid</th>
-					<th>Date of payment</th>
-
+					<th>Gender</th>
+					<th>Phone Number</th>
+					<th>School</th>
+					<th>Study Level</th>
+					<th>Last Seen </th>
 				</tr>
 				</thead>
-				<tbody id="signUps">
 				<?php
 				$count = 1;
-				foreach ($payers as $payer){
-					?>
-					<tr>
-						<td><?php echo $count?></td>
-						<td><?php echo $payer->fname?></td>
-						<td><?php echo $payer->msisdn ?></td>
-						<td><?php echo $payer->mobile ?></td>
-						<td><?php echo $payer->transaction_ID ?></td>
-						<td><?php echo $payer->amount ?></td>
-						<td><?php echo date('l,Y-m-d h:i:s A ',strtotime($payer->time_of_payment))?></td>
-
-					</tr>
+				foreach ($users  as $user){  ?>
+				<tbody>
+				<tr>
+					<td><?php echo $count ; ?></td>
+					<td><?php echo $user->fname .' '. $user->lname ; ?></td>
+					<td><?php echo $user->gender ; ?></td>
+					<td><?php echo $user->mobile ; ?></td>
+					<td> <?php echo $user->school_name ; ?></td>
+					<td><?php echo $user->level_name ; ?></td>
+					<td><?php echo $user->last_seen ; ?></td>
+				</tr>
+				</tbody>
 
 				<?php
-					$count++;
-				}
-				?>
-
-				</tbody>
+				$count ++;
+				} ?>
 			</table>
-</div>
+			</div>
 		</div>
 	</section>
 </div>
