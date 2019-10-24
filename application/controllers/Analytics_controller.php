@@ -96,7 +96,7 @@ class Analytics_controller extends CI_Controller
 			$unclassifiedRegistrations = $this->Analytics_model->getUnclassifiedRegistrations();
 			$activeSubscriptions = $this->Analytics_model->getActiveSubscriptions();
 			$inactiveSubscriptions = $this->Analytics_model->getInactiveSubscriptions();
-			//	$nonSusbcribers= $this->Analytics_model->getNonSubscribers();
+			//$nonSusbcribers= $this->Analytics_model->getNonSubscribers();
 			$weeklySignups = $this->Analytics_model->averageSignups();
 			$monthlyActiveUsers = $this->Analytics_model->monthlyActiveUsers();
 			$weeklyActiveUsers = $this->Analytics_model->weeklyActiveUsers();
@@ -118,7 +118,7 @@ class Analytics_controller extends CI_Controller
 			}
 			//return $users;
 			$today = date('Y-m-d ');
-			//var_dump($weeklyActiveUsers);
+
 			$data = array(
 				'signupsToday' => $signupsToday,
 				'webRegistrations' => $webRegistrations,

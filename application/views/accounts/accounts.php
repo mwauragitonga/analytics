@@ -26,7 +26,7 @@
 					<div class="inner">
 						<h3><?php echo $active ; ?></h3>
 
-						<p>Active Accounts</p>
+						<p>Active Subscriptions</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-bag"></i>
@@ -41,7 +41,7 @@
 					<div class="inner">
 						<h3><?php echo $inactive  ; ?>
 							<sup style="font-size: 20px"></sup></h3>
-						<p>Inactive Accounts</p>
+						<p>Inactive Subscriptions</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-stats-bars"></i>
@@ -76,7 +76,7 @@
 					<div class="icon">
 						<i class="ion ion-person-add"></i>
 					</div>
-					<a href="<?php echo base_url();?>activeUsers" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+					<a href="<?php echo base_url();?>weeklyUsers" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
