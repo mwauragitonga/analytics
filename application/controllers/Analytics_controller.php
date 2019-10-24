@@ -155,7 +155,7 @@ class Analytics_controller extends CI_Controller
 			$this->load->view('index.php', $data);
 		}
 	}
-	public function activeUsers(){
+	public function weeklyActiveUsers(){
 
 		$users = $this->Analytics_model->weeklyUsers();
 
@@ -163,6 +163,18 @@ class Analytics_controller extends CI_Controller
 			'users' => $users,
 			'title' => "Users Active in the last week",
 			'view' => "accounts/weeklyUsers.php"
+		);
+		//var_dump($users);
+		$this->load->view('index.php', $data);
+	}
+	public function monthlyActiveUsers(){
+
+		$users = $this->Analytics_model->monthlyUsers();
+
+		$data = array(
+			'users' => $users,
+			'title' => "Users Active in the last month",
+			'view' => "accounts/monthlyUsers.php"
 		);
 		//var_dump($users);
 		$this->load->view('index.php', $data);
