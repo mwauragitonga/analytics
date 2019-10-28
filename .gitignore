@@ -31,5 +31,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/results/
 #database and config files
 config/config.php
->>>>>>> Stashed changes
 config/database.php
