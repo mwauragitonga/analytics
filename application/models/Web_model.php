@@ -81,4 +81,38 @@ class Web_model extends CI_Model
 
 	}
 
+	public function getVideoViewers(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = date('Y-m-d');
+		$this->db->select('COUNT(id)  as views, web_actions_logs.user_id , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender, user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus');
+		$this->db->from('web_actions_logs');
+		$this->db->join("users","web_actions_logs.user_id = users.user_id");
+		$this->db->join("students","web_actions_logs.user_id = students.user_id");
+		$this->db->join("schools","students.school_code = schools.school_code");
+		$this->db->join("study_levels","students.study_level = study_levels.level_code");
+		$this->db->join("student_subscriptions","web_actions_logs.user_id = student_subscriptions.user_id");
+		$this->db->where('(action = "watch_video" OR action ="free_video")');
+		$this->db->where('web_actions_logs.user_id !=', NULL);
+		$this->db->group_by('user_id');
+		$this->db->like('time_of_action', $date);
+		$query= $this->db->get();
+		return $query->result();
+	}
+	public function getbookReaders(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = date('Y-m-d');
+		$this->db->select('COUNT(id)  as views , web_actions_logs.user_id , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender, user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus');
+		$this->db->from('web_actions_logs');
+		$this->db->join("users","web_actions_logs.user_id = users.user_id");
+		$this->db->join("students","web_actions_logs.user_id = students.user_id");
+		$this->db->join("schools","students.school_code = schools.school_code");
+		$this->db->join("study_levels","students.study_level = study_levels.level_code");
+		$this->db->join("student_subscriptions","web_actions_logs.user_id = student_subscriptions.user_id");
+		$this->db->where('(action = "read_book" OR action ="readFreeBook")');
+		$this->db->where('web_actions_logs.user_id !=', NULL);
+		$this->db->group_by('user_id');
+		$this->db->like('time_of_action', $date);
+		$query= $this->db->get();
+		return $query->result();
+	}
 }

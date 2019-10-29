@@ -54,4 +54,32 @@ class Web_controller extends CI_Controller
 			$this->load->view('index.php', $data);
 
 	}
+	public function videoViewers(){
+
+		$viewers = $this->Web_model->getVideoViewers();
+//		var_dump($viewers);
+		$data=array(
+
+			'users' => $viewers,
+			'title' => " Video Viewers",
+			'view' => "web_analytics/videoViewers.php"
+		);
+
+		$this->load->view('index.php', $data);
+
+	}
+	public function bookReaders(){
+
+		$readers = $this->Web_model->getbookReaders();
+
+		$data=array(
+
+			'users' => $readers,
+			'title' => " Book Readers",
+			'view' => "web_analytics/bookReaders.php"
+		);
+
+		$this->load->view('index.php', $data);
+
+	}
 }
