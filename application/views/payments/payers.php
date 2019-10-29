@@ -31,6 +31,7 @@
 					<th>Student's Mobile</th>
 					<th>Transaction Code</th>
 					<th>Amount paid</th>
+					<th>Source</th>
 					<th>Date of payment</th>
 
 				</tr>
@@ -47,6 +48,7 @@
 						<td><?php echo $payer->mobile ?></td>
 						<td><?php echo $payer->transaction_ID ?></td>
 						<td><?php echo $payer->amount ?></td>
+						<td><?php echo $payer->source_name ?></td>
 						<td><?php echo date('l,Y-m-d h:i:s A ',strtotime($payer->time_of_payment))?></td>
 
 					</tr>
