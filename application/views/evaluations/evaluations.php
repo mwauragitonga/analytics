@@ -70,7 +70,7 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3><?php echo round($average, 2)*100 .'%'; ?></h3>
+						<h3><?php echo '0'; ?></h3>
 
 						<p>Average Exam Score</p>
 					</div>
