@@ -73,9 +73,19 @@ class AppModel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('mobile_analysis_data');
 		$this->db->where('content_type', 'Signin');
-		//	$this->db->group_by('user_id');
+		$this->db->group_by('user_id');
 		$query = $this->db->get();
 		return $query->num_rows();
+	}
+	public function users_signIns(){
+		$this->db->select('users.fname,mobile_analysis_data.start_stamp');
+		$this->db->from('mobile_analysis_data');
+		$this->db->join('users',',mobile_analysis_data.user_id = users.user_id');
+		$this->db->where('content_type', 'Signin');
+		$this->db->group_by('mobile_analysis_data.user_id');
+		$this->db->order_by('start_stamp','DESC');
+		$query = $this->db->get()->result();
+		return $query;
 	}
 
 	public function students()
