@@ -14,7 +14,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url(); ?>general"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active"> Active Users </li>
+			<li class="active"> Video Viewers </li>
 		</ol>
 	</section>
 

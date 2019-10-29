@@ -14,7 +14,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url(); ?>general"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active"> Book Readers</li>
+			<li class="active"> Attempted Payments </li>
 		</ol>
 	</section>
 
@@ -29,7 +29,8 @@
 						<th>Gender</th>
 						<th>School</th>
 						<th>Study Level
-						<th>Reads</th>
+						<th>Payment Status</th>
+						<th>Time </th>
 					</tr>
 					</thead>
 					<?php
@@ -42,7 +43,16 @@
 							<td><?php echo $user->gender ; ?></td>
 							<td> <?php echo $user->school_name ; ?></td>
 							<td><?php echo $user->level_name ; ?></td>
-							<td><?php echo $user->views ; ?></td>
+							<td><?php
+								$transactionID = $user->transaction_ID;
+								if(empty($transactionID)) {
+									echo 'Incomplete';
+								}else{
+									echo 'Complete';
+								}
+								  ?></td>
+							<td><?php echo $user->time ; ?></td>
+
 						</tr>
 						</tbody>
 

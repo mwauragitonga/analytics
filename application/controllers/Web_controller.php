@@ -82,4 +82,18 @@ class Web_controller extends CI_Controller
 		$this->load->view('index.php', $data);
 
 	}
+	public function payments(){
+
+		$users = $this->Web_model->getPayments();
+//		var_dump(count($users));
+		$data=array(
+
+			'users' => $users,
+			'title' => " Attempted and Complete Payments",
+			'view' => "web_analytics/payments.php"
+		);
+
+		$this->load->view('index.php', $data);
+
+	}
 }

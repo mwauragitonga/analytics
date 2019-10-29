@@ -55,6 +55,7 @@ $route['payments'] = 'Analytics_controller/payments';
 $route['web'] ='Web_controller/webAnalytics';
 $route['videoViewers'] ='Web_controller/videoViewers';
 $route['bookReaders'] ='Web_controller/bookReaders';
+$route['payments'] ='Web_controller/payments';
 $route['app'] = 'AppAnalytics/index';
 $route['evaluations'] = 'Evaluations_controller/evaluations';
 $route['tiles'] = 'Payments/tiles';//api
