@@ -22,7 +22,7 @@ class Evaluations_model extends CI_Model
 
 	}
 	public function getExamAverage(){
-			$this->db->select('response_id, exam_id, user_id, AVG(score) as average');
+			$this->db->select('response_id, exam_id, user_id, AVG(percentage_score) as average');
 		$this->db->from('test_respondents');
 //		$this->db->where('response_status !=', NULL);
 		$this->db->where('score !=', NULL);
