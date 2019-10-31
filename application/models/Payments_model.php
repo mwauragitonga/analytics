@@ -97,9 +97,10 @@ class Payments_model extends CI_Model
 
 	public function payers()
 	{
-		$this->db->select('amount,transaction_ID,time_of_payment,fname,mpesa_callbacks.mobile as msisdn, users.mobile');
+		$this->db->select('amount,transaction_ID,time_of_payment,fname,mpesa_callbacks.mobile as msisdn, users.mobile,user_registration_source.source_name');
 		$this->db->from('mpesa_callbacks');
 		$this->db->join('users', 'users.email = mpesa_callbacks.email');
+		$this->db->join('user_registration_source','user_registration_source.source_code = mpesa_callbacks.registration_source');
 		$this->db->where('(amount != 0 AND amount != 1 )');
 		$this->db->order_by('time_of_payment','DESC');
 		$query = $this->db->get()->result();

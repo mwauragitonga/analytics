@@ -60,6 +60,13 @@
 				</a>
 
 			</li>
+			<li>
+				<a href="<?php echo base_url(); ?>schools">
+					<i class="fa fa-graduation-cap"></i>
+					<span>Schools</span>
+				</a>
+
+			</li>
         </ul>
     </section>
     <!-- /.sidebar -->

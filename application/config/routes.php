@@ -72,5 +72,10 @@ $route['ebooks'] = "AppAnalytics/ebooks";
 $route['payers'] = "Analytics_controller/payers";
 $route['users/(:num)'] = "AppAnalytics/users/$1";
 $route['signins'] ="AppAnalytics/signins";
+$route['schools']= "Schools/usage";
+$route['schools/(:any)'] = "Schools/students/$1";
+$route['reg_schools'] = "Schools/reg_schools";
+$route['schools/users/(:any)'] = "Schools/users/$1";
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
