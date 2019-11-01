@@ -62,7 +62,7 @@
                     <div class="icon">
                         <i class="fa fa-television"></i>
                     </div>
-<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
+                    <a href="<?php echo base_url();?>videoViewers" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -77,7 +77,7 @@
                     <div class="icon">
                         <i class="fa fa-book"></i>
                     </div>
-<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
+                    <a href="<?php echo base_url();?>bookReaders" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 			<div class="col-lg-3 col-xs-6">
@@ -86,12 +86,12 @@
 					<div class="inner">
 						<h3><?php echo $attempts ;?></h3>
 
-						<p>Attempted Payments Today</p>
+						<p> Attempted Payments Today</p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-credit-card"></i>
 					</div>
-					<!--                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
+					<a href="<?php echo base_url();?>payments" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
             <!-- ./col -->
