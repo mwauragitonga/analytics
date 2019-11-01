@@ -41,7 +41,7 @@
 					<div class="inner">
 						<h3 id="aTS"><?php echo $registered_Schools?></h3>
 
-						<p>Schools with > 1 students</p>
+						<p>Schools with >= 1 students</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-pie-graph "></i>
@@ -56,7 +56,7 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3 id="aMS"><sup style="font-size: 20px"><?php echo $top_school_Reading['name']?></h3><h4><?php echo "(".$top_school_Reading['appMinutes'].")"?></h4>
+						<h3 id="aMS"><sup style="font-size: 20px"><?php echo $top_school_Reading['name']?></h3><h3><?php echo "(".$top_school_Reading['appMinutes'].")"?></h3>
 
 
 						<p>Top school (Reading and viewing content)</p>
@@ -64,6 +64,7 @@
 					<div class="icon">
 						<i class="ion ion-person-add"></i>
 					</div>
+					<a href="<?php echo base_url()?>top_reading"  class="small-box-footer"> More Info<i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<div class="col-lg-3 col-xs-6">
@@ -79,6 +80,8 @@
 					<div class="icon">
 						<i class="fa fa-times "></i>
 					</div>
+					<a href="<?php echo base_url()?>reg_schools"  class="small-box-footer"> More Info<i class="fa fa-arrow-circle-right"></i></a>
+
 				</div>
 			</div>
 

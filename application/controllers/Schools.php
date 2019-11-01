@@ -42,7 +42,7 @@ class Schools extends CI_Controller
 	function reg_schools(){
 		$data = array(
 			'schools' =>$this->Schools_model->schools_students(),
-			'title' => "Schools with > 1 student",
+			'title' => "Schools with >= 1 student",
 			'view' => "Schools/schools_students.php"
 		);
 		$this->load->view('index.php', $data);
@@ -52,6 +52,14 @@ class Schools extends CI_Controller
 			'students' =>$this->Schools_model->users($code),
 			'title' => $this->Schools_model->getSchoolName($code)->name,
 			'view' => "Schools/schools_users.php"
+		);
+		$this->load->view('index.php', $data);
+	}
+	function top_reading(){
+		$data = array(
+			'school_usages' => $this->Schools_model->usage(),
+			'title' => "Top Schools in watching and reading content",
+			'view' => "Schools/top_schools_reading.php"
 		);
 		$this->load->view('index.php', $data);
 	}
