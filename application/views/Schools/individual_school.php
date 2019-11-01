@@ -27,6 +27,7 @@
 							<th> #</th>
 							<th>Student Name </th>
 							<th>Minutes</th>
+							<th>More info</th>
 
 						</tr>
 						</thead>
@@ -44,6 +45,8 @@
 								<td><?php echo $count+1?></td>
 								<td><?php echo $student->fname?></td>
 								<td><?php echo round($appMinutes / 60 ,2)?></td>
+								<td><a href="<?php echo base_url().'users/'.$student->user_ID?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a></td>
+
 
 							</tr>
 

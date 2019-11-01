@@ -26,7 +26,7 @@ class Schools_model extends CI_Model
 
 	function students($school_code = "school_032")
 	{
-		$this->db->select('users.fname,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as appMinutes');
+		$this->db->select('users.fname,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as appMinutes,users.user_ID');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('users','mobile_analysis_data.user_ID = users.user_ID');
 		$this->db->join("students", "users.user_ID = students.user_ID");
@@ -89,8 +89,11 @@ class Schools_model extends CI_Model
 		$top_schools = $this->usage();
 		$top_school = array();
 		for($i =0;$i<1;$i++){
-			$top_school['name'] = $top_schools[0]->name;
 			$top_school['appMinutes'] = $top_schools[0]->appMinutes;
+			$top_school['name'] = $top_schools[0]->name;
+			if($top_school['name'] == "Dawati Academy"){
+				$top_school['appMinutes'] = $top_schools[1]->appMinutes;
+				$top_school['name'] = $top_schools[1]->name;			}
 		}
 		return $top_school;
 	}
@@ -113,7 +116,12 @@ class Schools_model extends CI_Model
 		for($i =0;$i<1;$i++){
 			$top_school['name'] = $top_Schools[0]->name;
 			$top_school['count'] = $top_Schools[0]->count;
+			if($top_school['name'] == "Dawati Academy"){
+				$top_school['name'] = $top_Schools[1]->name;
+				$top_school['count'] = $top_Schools[1]->count;
+			}
 		}
+
 		return $top_school;
 	}
 	function users($code){
