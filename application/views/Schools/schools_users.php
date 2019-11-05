@@ -18,7 +18,7 @@
 		<!-- Small boxes (Stat box) -->
 		<div class="row">
 			<section class="col-lg-7">
-				 Students from <?php echo $title ?>
+				Students from <?php echo $title ?>
 				<!-- Custom tabs (Charts with tabs)-->
 				<div class="table-responsive">
 					<table class="table table-responsive table-striped" style="overflow: auto">
@@ -26,8 +26,8 @@
 						<tr>
 							<th> #</th>
 							<th>Student Name </th>
-							<th>Minutes</th>
-							<th>More info</th>
+							<th>Study Level</th>
+							<th>Date joined</th>
 
 						</tr>
 						</thead>
@@ -37,15 +37,12 @@
 						foreach ($students as $student){
 							?>
 							<tr>
-								<?php
-								sscanf($student->appMinutes, "%d:%d:%d", $hours, $minutes, $seconds);
-								$appMinutes = $hours * 3600 + $minutes * 60 + $seconds;
-								?>
+
 
 								<td><?php echo $count+1?></td>
-								<td><?php echo $student->fname?></td>
-								<td><?php echo round($appMinutes / 60 ,2)?></td>
-								<td><a href="<?php echo base_url().'users/'.$student->user_ID?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a></td>
+								<td><?php echo $student->fname ." ". $student->lname?></td>
+								<td><?php echo $student->level_name?></td>
+								<td><?php echo $student->date_joined?></td>
 
 
 							</tr>
