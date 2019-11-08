@@ -24,7 +24,7 @@ class Evaluations_controller extends CI_Controller
 		$availableExams = $this->Evaluations_model->getExams();
 		$attemptsToday = $this->Evaluations_model->getExamAttemptsToday();
 		$averageScore = $this->Evaluations_model->getExamAverage();
-		$totalAttempts = $this->Evaluations_model->getExamAttempts();
+		$totalAttempts = $this->Evaluations_model->getAllAttempts();
 		$topExams = $this->Evaluations_model->getTopExams();
 		$topStudents = $this->Evaluations_model->getTopStudents();
 
@@ -33,13 +33,37 @@ class Evaluations_controller extends CI_Controller
 			'available' => $availableExams,
 			'attemptsToday' => $attemptsToday,
 			'average' => $averageScore,
-			'totalAttempts' =>$totalAttempts,
+			'totalAttempts' =>count($totalAttempts),
 			'topExams' => $topExams,
 			'topStudents' => $topStudents,
 			'title' => "Evaluations Analytics",
 			'view' => "evaluations/evaluations.php"
 		);
 
+		$this->load->view('index.php', $data);
+
+	}
+	public function examsAttemptsToday(){
+		$users = $this->Evaluations_model->getAttemptsToday();
+
+		$data=array(
+			'users' => $users,
+
+			'title' => "Today's Evaluations Analytics",
+			'view' => "evaluations/attemptsToday.php"
+		);
+		$this->load->view('index.php', $data);
+
+	}
+	public function  examAttempts(){
+		$users = $this->Evaluations_model->getAllAttempts();
+		var_dump(count($users));
+
+		$data=array(
+			'users' => $users,
+			'title' => "Evaluations Analytics",
+			'view' => "evaluations/examAttempts.php"
+		);
 		$this->load->view('index.php', $data);
 
 	}
