@@ -249,5 +249,26 @@ class AppModel extends CI_Model
 			return $totalTime / 60 / 60; //in hours
 		}
 	}
+	public function users_unique(){
+
+		try {
+			$this->db->query("DELETE t1 FROM mobile_analysis_data t1
+INNER JOIN mobile_analysis_data t2 
+WHERE 
+    t1.index_ID < t2.index_ID AND
+	t1.analysis_ID = t2.analysis_ID AND
+	t1.user_ID = t2.user_ID;");
+
+			return true;
+		}catch (Exception $e){
+			return false;
+		}
+
+	}
+	function make_unique($user_id = ""){
+
+	//	echo  $user_id;
+
+	}
 
 }

@@ -53,8 +53,14 @@ $route['default_controller'] = 'Analytics_controller';
 $route['general'] = 'Analytics_controller/index';
 $route['payments'] = 'Analytics_controller/payments';
 $route['web'] ='Web_controller/webAnalytics';
+$route['videoViewers'] ='Web_controller/videoViewers';
+$route['bookReaders'] ='Web_controller/bookReaders';
+$route['payments'] ='Web_controller/payments';
 $route['app'] = 'AppAnalytics/index';
 $route['evaluations'] = 'Evaluations_controller/evaluations';
+$route['examsAttemptsToday'] = 'Evaluations_controller/examsAttemptsToday';
+$route['examAttempts'] = 'Evaluations_controller/examAttempts';
+
 $route['tiles'] = 'Payments/tiles';//api
 $route['graphs'] ='Payments/graphs';//api
 $route['authentication'] = 'Analytics_controller/authentication';
@@ -74,9 +80,9 @@ $route['users/(:num)'] = "AppAnalytics/users/$1";
 $route['signins'] ="AppAnalytics/signins";
 $route['schools']= "Schools/usage";
 $route['schools/(:any)'] = "Schools/students/$1";
+$route['unique']= "AppAnalytics/duplicates";
 $route['reg_schools'] = "Schools/reg_schools";
 $route['top_reading'] = "Schools/top_reading";
 $route['schools/users/(:any)'] = "Schools/users/$1";
-
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

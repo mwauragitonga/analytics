@@ -71,6 +71,13 @@ class AppAnalytics extends CI_Controller
 		);
 		$this->load->view('index.php', $data);
 	}
+	/*function duplicates(){
+
+		 echo $this->AppModel->users_unique();
+
+
+
+	}*/
 
 
 }
