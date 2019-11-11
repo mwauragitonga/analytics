@@ -57,7 +57,7 @@ class Web_controller extends CI_Controller
 	public function videoViewers(){
 
 		$viewers = $this->Web_model->getVideoViewers();
-//		var_dump($viewers);
+		//var_dump($viewers);
 		$data=array(
 
 			'users' => $viewers,

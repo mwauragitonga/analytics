@@ -57,7 +57,7 @@ class Evaluations_controller extends CI_Controller
 	}
 	public function  examAttempts(){
 		$users = $this->Evaluations_model->getAllAttempts();
-		var_dump(count($users));
+		//var_dump(count($users));
 
 		$data=array(
 			'users' => $users,

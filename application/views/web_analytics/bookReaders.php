@@ -29,7 +29,8 @@
 						<th>Gender</th>
 						<th>School</th>
 						<th>Study Level
-						<th>Reads</th>
+						<th>Item Read</th>
+						<th>Time of Read</th>
 					</tr>
 					</thead>
 					<?php
@@ -42,7 +43,8 @@
 							<td><?php echo $user->gender ; ?></td>
 							<td> <?php echo $user->school_name ; ?></td>
 							<td><?php echo $user->level_name ; ?></td>
-							<td><?php echo $user->views ; ?></td>
+							<td><?php echo $user->file_name ; ?></td>
+							<td><?php echo $user->time_of_action ; ?></td>
 						</tr>
 						</tbody>
 
