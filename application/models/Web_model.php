@@ -84,7 +84,8 @@ class Web_model extends CI_Model
 	public function getVideoViewers(){
 		date_default_timezone_set("Africa/Nairobi");
 		$date = date('Y-m-d');
-		$this->db->select('COUNT(id)  as views, web_actions_logs.user_id , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender, user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus');
+		$this->db->select('COUNT(id)  as views, web_actions_logs.user_id , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender,
+		 user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus');
 		$this->db->from('web_actions_logs');
 		$this->db->join("users","web_actions_logs.user_id = users.user_id");
 		$this->db->join("students","web_actions_logs.user_id = students.user_id");

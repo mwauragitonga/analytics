@@ -58,6 +58,9 @@ $route['bookReaders'] ='Web_controller/bookReaders';
 $route['payments'] ='Web_controller/payments';
 $route['app'] = 'AppAnalytics/index';
 $route['evaluations'] = 'Evaluations_controller/evaluations';
+$route['examsAttemptsToday'] = 'Evaluations_controller/examsAttemptsToday';
+$route['examAttempts'] = 'Evaluations_controller/examAttempts';
+
 $route['tiles'] = 'Payments/tiles';//api
 $route['graphs'] ='Payments/graphs';//api
 $route['authentication'] = 'Analytics_controller/authentication';
