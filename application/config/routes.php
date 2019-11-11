@@ -80,9 +80,9 @@ $route['users/(:num)'] = "AppAnalytics/users/$1";
 $route['signins'] ="AppAnalytics/signins";
 $route['schools']= "Schools/usage";
 $route['schools/(:any)'] = "Schools/students/$1";
+$route['unique']= "AppAnalytics/duplicates";
 $route['reg_schools'] = "Schools/reg_schools";
 $route['top_reading'] = "Schools/top_reading";
 $route['schools/users/(:any)'] = "Schools/users/$1";
-
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
