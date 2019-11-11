@@ -84,17 +84,19 @@ class Web_model extends CI_Model
 	public function getVideoViewers(){
 		date_default_timezone_set("Africa/Nairobi");
 		$date = date('Y-m-d');
-		$this->db->select('COUNT(id)  as views, web_actions_logs.user_id , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender,
-		 user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus');
+		$this->db->select('web_actions_logs.user_id , time_of_action , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender,
+		 user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus, multimedia_content.file_id, multimedia_content.file_name');
 		$this->db->from('web_actions_logs');
 		$this->db->join("users","web_actions_logs.user_id = users.user_id");
 		$this->db->join("students","web_actions_logs.user_id = students.user_id");
 		$this->db->join("schools","students.school_code = schools.school_code");
 		$this->db->join("study_levels","students.study_level = study_levels.level_code");
+		$this->db->join("multimedia_content", "web_actions_logs.file_id = multimedia_content.file_id");
 		$this->db->join("student_subscriptions","web_actions_logs.user_id = student_subscriptions.user_id");
-		$this->db->where('(action = "watch_video" OR action ="free_video")');
+		$this->db->where('action = "watch_video"');
 		$this->db->where('web_actions_logs.user_id !=', NULL);
-		$this->db->group_by('user_id');
+		$this->db->where('web_actions_logs.file_id !=', NULL);
+		$this->db->where('web_actions_logs.subtopic_id !=', NULL);
 		$this->db->like('time_of_action', $date);
 		$query= $this->db->get();
 		return $query->result();
@@ -102,16 +104,18 @@ class Web_model extends CI_Model
 	public function getbookReaders(){
 		date_default_timezone_set("Africa/Nairobi");
 		$date = date('Y-m-d');
-		$this->db->select('COUNT(id)  as views , web_actions_logs.user_id , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender, user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus');
+		$this->db->select('COUNT(id)  as views , web_actions_logs.user_id, time_of_action , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender, user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus, multimedia_content.file_id, multimedia_content.file_name');
 		$this->db->from('web_actions_logs');
 		$this->db->join("users","web_actions_logs.user_id = users.user_id");
 		$this->db->join("students","web_actions_logs.user_id = students.user_id");
 		$this->db->join("schools","students.school_code = schools.school_code");
 		$this->db->join("study_levels","students.study_level = study_levels.level_code");
+		$this->db->join("multimedia_content", "web_actions_logs.file_id = multimedia_content.file_id");
 		$this->db->join("student_subscriptions","web_actions_logs.user_id = student_subscriptions.user_id");
-		$this->db->where('(action = "read_book" OR action ="readFreeBook")');
+		$this->db->where('action = "read_book"');
 		$this->db->where('web_actions_logs.user_id !=', NULL);
-		$this->db->group_by('user_id');
+		$this->db->where('web_actions_logs.file_id !=', NULL);
+		$this->db->where('web_actions_logs.subtopic_id !=', NULL);
 		$this->db->like('time_of_action', $date);
 		$query= $this->db->get();
 		return $query->result();
