@@ -28,6 +28,21 @@ class Web_model extends CI_Model
 		$query= $this->db->get();
 		return $query->num_rows();
 	}
+	public function moreInfoLogins(){
+		date_default_timezone_set("Africa/Nairobi");
+		$date = date('Y-m-d');
+		$this->db->select('web_actions_logs.user_ID as mobile,users.fname,schools.name as school, count(id) as count ');
+		$this->db->from('web_actions_logs');
+		$this->db->join('users','web_actions_logs.user_ID = users.mobile');
+		$this->db->join('students','users.user_ID=students.user_ID');
+		$this->db->join('schools','students.school_code = schools.school_code');
+		$this->db->like('time_of_action', $date);
+		$this->db->where('(action = "login")');
+		$this->db->group_by('web_actions_logs.user_ID','ASC');
+
+		$logins= $this->db->get()->result();
+		return $logins;
+	}
 	public function getVideoViewsToday(){
 		date_default_timezone_set("Africa/Nairobi");
 		$date = date('Y-m-d');

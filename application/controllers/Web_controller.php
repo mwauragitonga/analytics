@@ -96,4 +96,17 @@ class Web_controller extends CI_Controller
 		$this->load->view('index.php', $data);
 
 	}
+
+	//Cyrus
+	public function logins(){
+		$logins = $this->Web_model->moreInfoLogins();
+		$data=array(
+
+			'logins' => $logins,
+			'title' => " Web Logins",
+			'view' => "web_analytics/logins.php"
+		);
+
+		$this->load->view('index.php', $data);
+	}
 }
