@@ -23,7 +23,7 @@
                     <div class="inner">
                         <h3 id="total_Revenue"></h3>
 
-                        <p>Total Revenue (Ksh)</p>
+                        <p>Total Revenue (STK push)</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-money"></i>
@@ -32,10 +32,25 @@
 
 				</div>
             </div>
+			<div class="col-lg-2 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-green">
+					<div class="inner">
+						<h3 id="org_balance"></h3>
+
+						<p>Org Balance(Pay Bill)</p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-money"></i>
+					</div>
+					<a href="" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+
+				</div>
+			</div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-green-gradient">
+                <div class="small-box bg-primary">
                     <div class="inner">
                         <h3 id="aYS"><sup style="font-size: 20px"></sup></h3>
 
@@ -51,7 +66,7 @@
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-primary">
+                <div class="small-box bg-green-gradient">
                     <div class="inner">
                         <h3 id="aTS"></h3>
 
@@ -60,7 +75,9 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph "></i>
                     </div>
-                </div>
+					<a href="" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+
+				</div>
             </div>
             <!-- ./col -->
             <div class="col-lg-2 col-xs-6">
@@ -76,21 +93,10 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-2 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-red">
-                    <div class="inner">
-                        <h3 id="nS"></h3>
-                        <p>Non Subscribers</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-times "></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
                     <div class="inner">
                         <h3 id="successRate"></h3>
 
@@ -175,11 +181,13 @@
 
         request.onload = () => {
             response = JSON.parse(request.responseText);
+            //console.log(response)
             var revenue = response.tiles_data.total_Revenue;
+            var orgBalance = response.tiles_data.org_Balance;
             var aYS = response.tiles_data.active_Yearly_Subscribers;
             var aTS = response.tiles_data.active_Termly_Subscribers;
             var aMS = response.tiles_data.active_Monthly_Subscribers;
-            var nS = response.tiles_data.non_Subscribers;
+           // var nS = response.tiles_data.non_Subscribers;
             var payment_Attempts = response.tiles_data.payment_Attempts;
             var success_Attempts = response.tiles_data.successful_Payment_Attempts;
             var paymentSuccessRate = (success_Attempts / payment_Attempts) * 100;
@@ -187,10 +195,11 @@
             console.log(success_Attempts);
             console.log(payment_Attempts);
             document.getElementById("total_Revenue").innerText = formatMoney(revenue);
+            document.getElementById("org_balance").innerText = formatMoney(orgBalance);
             document.getElementById("aYS").innerText = aYS;
             document.getElementById("aMS").innerText = aMS;
             document.getElementById("aTS").innerText = aTS;
-            document.getElementById("nS").innerText = nS;
+          //  document.getElementById("nS").innerText = nS;
             document.getElementById("successRate").innerText = Math.round(paymentSuccessRate, 3).toString() + "%";
 
         };

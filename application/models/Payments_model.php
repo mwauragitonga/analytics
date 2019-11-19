@@ -17,6 +17,13 @@ class Payments_model extends CI_Model
 		$query = $this->db->get()->row();
 		return $query->revenue;
 	}
+	public function orgBalance(){
+		$this->db->select("org_account_balance");
+		$this->db->from("mpesa_confirmations");
+		$this->db->order_by('index','DESC');
+		$query = $this->db->get()->row();
+		return $query->org_account_balance;
+	}
 
 	public function active_Yearly_Subscribers($start_date, $end_date)
 	{
