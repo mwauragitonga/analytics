@@ -27,7 +27,7 @@
 							<th> #</th>
 							<th>Student Name </th>
 							<th>School</th>
-							<th>Mobile</th>
+							<th>Mobile/email</th>
 							<th>Number of logins</th>
 						<!--	<th>Time </th>-->
 

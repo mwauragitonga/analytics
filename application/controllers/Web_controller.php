@@ -26,6 +26,8 @@ class Web_controller extends CI_Controller
 			$videoViews = $this->Web_model->getVideoViewsToday();
 			$bookReads = $this->Web_model->getBookReadsToday();
 			$attemptedPayments = $this->Web_model->getAttemptedPaymentsToday();
+			$freeBookViews =$this->Web_model->freeBooks();
+			$freeVideos = $this->Web_model->freeVideos();
 
 		$dat = date('Y-m-d');
 		$date = new DateTime($dat);
@@ -47,6 +49,7 @@ class Web_controller extends CI_Controller
 				'weeklyUsers' =>$users,
 				'weeklySignups'=> $signups,
 				'attempts' => $attemptedPayments,
+				'freeContentViews' => $freeVideos+$freeBookViews,
 				'title' => "Web Analysis",
 				'view' => "web_analytics/web.php"
 			);
