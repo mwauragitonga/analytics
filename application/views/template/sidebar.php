@@ -30,6 +30,7 @@
 
                 </a>
             </li>
+
             <li>
                 <a href="<?php echo base_url(); ?>app">
                     <i class="fa fa-pie-chart"></i>
@@ -37,6 +38,7 @@
                 </a>
 
             </li>
+
             <li>
                 <a href="<?php echo base_url(); ?>payments">
                     <i class="fa fa-laptop"></i>

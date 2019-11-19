@@ -74,10 +74,10 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+	'dsn' => '',
+	'hostname' => 'dawati.co.ke',
+	'username' => 'dawatico_dawati',
+	'password' => '@dawati2016',
 	'database' => 'dawatico_dawati',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
@@ -90,7 +90,7 @@ $db['default'] = array(
 	'swap_pre' => '',
 	'encrypt' => FALSE,
 	'compress' => FALSE,
-'stricton' => FALSE,
+	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE
 );
