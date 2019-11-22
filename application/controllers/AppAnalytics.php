@@ -9,6 +9,7 @@ class AppAnalytics extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('AppModel');
+		$this->load->model('Payments_model');
 
 	}
 
@@ -78,6 +79,17 @@ class AppAnalytics extends CI_Controller
 
 
 	}*/
+
+	//payments
+	function payment_reports(){
+		$reports = $this->Payments_model->reports();
+		$data = array(
+			'payments' =>$reports,
+			'title' => "All Payments",
+			'view' => "payments/mpesa_reports.php"
+		);
+		$this->load->view('index.php', $data);
+	}
 
 
 }

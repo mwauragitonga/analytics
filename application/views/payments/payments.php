@@ -43,7 +43,7 @@
 					<div class="icon">
 						<i class="fa fa-money"></i>
 					</div>
-					<a href="" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+					<a href="<?php echo base_url()?>payment_reports" class="small-box-footer"> More Info <i class="fa fa-arrow-circle-right"></i></a>
 
 				</div>
 			</div>

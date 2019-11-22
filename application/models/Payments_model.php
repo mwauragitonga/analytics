@@ -16,8 +16,7 @@ class Payments_model extends CI_Model
 		// $this->db->where();
 		$query = $this->db->get()->row();
 		return $query->revenue;
-	}
-	public function orgBalance(){
+	}public function orgBalance(){
 		$this->db->select("org_account_balance");
 		$this->db->from("mpesa_confirmations");
 		$this->db->order_by('index','DESC');
@@ -110,6 +109,13 @@ class Payments_model extends CI_Model
 		$this->db->join('user_registration_source','user_registration_source.source_code = mpesa_callbacks.registration_source');
 		$this->db->where('(amount != 0 AND amount != 1 )');
 		$this->db->order_by('time_of_payment','DESC');
+		$query = $this->db->get()->result();
+		return $query;
+	}
+	function  reports(){
+		$this->db->select('*');
+		$this->db->from('mpesa_confirmations');
+		$this->db->order_by(' transaction_Time ','DESC');
 		$query = $this->db->get()->result();
 		return $query;
 	}

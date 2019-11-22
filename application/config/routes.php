@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Analytics_controller';
 $route['general'] = 'Analytics_controller/index';
 $route['payments'] = 'Analytics_controller/payments';
+$route['payment_reports'] = 'AppAnalytics/payment_reports';
 $route['web'] ='Web_controller/webAnalytics';
 $route['videoViewers'] ='Web_controller/videoViewers';
 $route['bookReaders'] ='Web_controller/bookReaders';
