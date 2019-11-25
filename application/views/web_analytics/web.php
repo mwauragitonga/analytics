@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <?php echo $title ; ?>
+            <?php echo $title .' No reset' ; ?>
 
             </small>
         </h1>
@@ -26,7 +26,7 @@
                     <div class="inner">
 						<h3><?php echo $signUps ; ?></h3>
 
-                        <p>Sign Ups Today</p>
+                        <p>Total Sign Ups</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -42,7 +42,7 @@
                      <h3><?php echo $logins  ; ?>
 						 <sup style="font-size: 20px"></sup></h3>
 
-                        <p>Log Ins Today</p>
+                        <p>Log Ins</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-sign-in"></i>
@@ -57,7 +57,7 @@
                     <div class="inner">
                    <h3><?php echo $views ;?></h3>
 
-                        <p>Video Views Today</p>
+                        <p>Video Views</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-television"></i>
@@ -86,7 +86,7 @@
                     <div class="inner">
                   <h3><?php echo  $reads ; ?></h3>
 
-                        <p>Books Read Today</p>
+                        <p>Books Read</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-book"></i>
@@ -101,7 +101,7 @@
 					<div class="inner">
 						<h3><?php echo $attempts ;?></h3>
 
-						<p> Attempted Payments Today</p>
+						<p> Attempted Payments</p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-credit-card"></i>

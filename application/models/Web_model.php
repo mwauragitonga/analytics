@@ -12,7 +12,7 @@ class Web_model extends CI_Model
 		$this->db->from('web_actions_logs');
 		//$this->db->join('users','users.user_id=web_actions_logs.id');
 		//$this->db->where('users.registration_source', 'source_001');
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$this->db->where('(action = "registration")');
 		$query = $this->db->get();
 		return $query->num_rows();
@@ -25,7 +25,7 @@ class Web_model extends CI_Model
 		$date = date('Y-m-d');
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$this->db->where('(action = "login")');
 		$query = $this->db->get();
 		return $query->num_rows();
@@ -42,7 +42,7 @@ class Web_model extends CI_Model
 		$this->db->join('users', 'web_actions_logs.user_ID = users.mobile');
 		$this->db->join('students', 'users.user_ID=students.user_ID');
 		$this->db->join('schools', 'students.school_code = schools.school_code');
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$this->db->where('(action = "login")');
 		$this->db->group_by('web_actions_logs.user_ID', 'ASC');
 
@@ -54,7 +54,7 @@ class Web_model extends CI_Model
 		$this->db->join('users', 'web_actions_logs.user_ID = users.email');
 		$this->db->join('students', 'users.user_ID=students.user_ID');
 		$this->db->join('schools', 'students.school_code = schools.school_code');
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$this->db->where('(action = "login")');
 		$this->db->group_by('web_actions_logs.user_ID', 'ASC');
 
@@ -73,7 +73,7 @@ class Web_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->where('(action = "watch_video")');
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -83,7 +83,7 @@ class Web_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->where('(action = "free_video")');
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -93,7 +93,7 @@ class Web_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->where('(action = "readFreeBook")');
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -105,7 +105,7 @@ class Web_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->where('action', 'read_book');
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -117,7 +117,7 @@ class Web_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->where('(action = "initiate_payment" OR action ="proceedToPayment")');
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -128,7 +128,7 @@ class Web_model extends CI_Model
 		$this->db->select("COUNT(id) as users");
 		$this->db->from("web_actions_logs");
 		$this->db->where("action", "login");
-		$this->db->like('time_of_action', $instance_day);
+		//$this->db->like('time_of_action', $instance_day);
 		$query = $this->db->get()->row();
 		//var_dump($instance_day);
 		return $query->users;
@@ -141,7 +141,7 @@ class Web_model extends CI_Model
 		$this->db->select("COUNT(id) as users");
 		$this->db->from("web_actions_logs");
 		$this->db->where("action", "registration");
-		$this->db->like('time_of_action', $instance_day);
+		//$this->db->like('time_of_action', $instance_day);
 		$query = $this->db->get()->row();
 		return $query->users;
 
@@ -164,7 +164,7 @@ class Web_model extends CI_Model
 		//$this->db->where('web_actions_logs.user_id !=', NULL);
 		//$this->db->where('web_actions_logs.file_id !=', NULL);
 	//	$this->db->where('web_actions_logs.subtopic_id !=', NULL);
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -185,7 +185,7 @@ class Web_model extends CI_Model
 		$this->db->where('web_actions_logs.user_id !=', NULL);
 		$this->db->where('web_actions_logs.file_id !=', NULL);
 		//$this->db->where('web_actions_logs.subtopic_id !=', NULL);
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -207,7 +207,7 @@ class Web_model extends CI_Model
 		$this->db->where('(action = "initiate_payment" OR action ="proceedToPayment") ');
 		$this->db->where('web_actions_logs.user_id !=', 0);
 		$this->db->group_by('id');
-		$this->db->like('time_of_action', $date);
+		$this->db->where('time_of_action >', "2019-11-11");
 		$query = $this->db->get();
 		return $query->result();
 	}
