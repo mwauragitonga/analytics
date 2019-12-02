@@ -4,46 +4,68 @@ if (!defined('BASEPATH'))
 
 class Web_model extends CI_Model
 {
-	public function getSignUps()
+	public function getSignUps($startDate='',$end_Date='',$target='')
 	{
-		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d');
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+
+		}
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
-		//$this->db->join('users','users.user_id=web_actions_logs.id');
-		//$this->db->where('users.registration_source', 'source_001');
-		$this->db->where('time_of_action >', "2019-11-11");
+		if ($target == 'range') {
+			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("time_of_action", $startDate);
+
+		}
 		$this->db->where('(action = "registration")');
 		$query = $this->db->get();
 		return $query->num_rows();
 
 	}
 
-	public function getLoginsToday()
+	public function getLoginsToday($startDate='',$end_Date='',$target='')
 	{
-		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d');
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+
+		}
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
-		$this->db->where('time_of_action >', "2019-11-11");
-		$this->db->where('(action = "login")');
+		if ($target == 'range') {
+			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("time_of_action", $startDate);
+
+		}		$this->db->where('(action = "login")');
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
-	public function moreInfoLogins()
+	public function moreInfoLogins($startDate='',$end_Date='',$target='')
 	{
-		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d');
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
 
+		}
 		//mobile
 		$this->db->select('web_actions_logs.user_ID as mobile,users.fname,schools.name as school, count(id) as count ');
 		$this->db->from('web_actions_logs');
 		$this->db->join('users', 'web_actions_logs.user_ID = users.mobile');
 		$this->db->join('students', 'users.user_ID=students.user_ID');
 		$this->db->join('schools', 'students.school_code = schools.school_code');
-		$this->db->where('time_of_action >', "2019-11-11");
-		$this->db->where('(action = "login")');
+		if ($target == 'range') {
+			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("time_of_action", $startDate);
+
+		}		$this->db->where('(action = "login")');
 		$this->db->group_by('web_actions_logs.user_ID', 'ASC');
 
 		$logins_mobile = $this->db->get()->result();
@@ -54,8 +76,12 @@ class Web_model extends CI_Model
 		$this->db->join('users', 'web_actions_logs.user_ID = users.email');
 		$this->db->join('students', 'users.user_ID=students.user_ID');
 		$this->db->join('schools', 'students.school_code = schools.school_code');
-		$this->db->where('time_of_action >', "2019-11-11");
-		$this->db->where('(action = "login")');
+		if ($target == 'range') {
+			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("time_of_action", $startDate);
+
+		}		$this->db->where('(action = "login")');
 		$this->db->group_by('web_actions_logs.user_ID', 'ASC');
 
 		$logins_email = $this->db->get()->result();
@@ -66,59 +92,99 @@ class Web_model extends CI_Model
 		return $logins;
 	}
 
-	public function getVideoViewsToday()
+	public function getVideoViewsToday($startDate='',$end_Date='',$target='')
 	{
-		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d');
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+
+		}
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->where('(action = "watch_video")');
-		$this->db->where('time_of_action >', "2019-11-11");
-		$query = $this->db->get();
+		if ($target == 'range') {
+			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("time_of_action", $startDate);
+
+		}		$query = $this->db->get();
 		return $query->num_rows();
 	}
-	public function freeVideos(){
-		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d');
+	public function freeVideos($startDate='',$end_Date='',$target=''){
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+
+		}
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->where('(action = "free_video")');
-		$this->db->where('time_of_action >', "2019-11-11");
-		$query = $this->db->get();
+		if ($target == 'range') {
+			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("time_of_action", $startDate);
+
+		}		$query = $this->db->get();
 		return $query->num_rows();
 	}
-	public function freeBooks(){
-		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d');
+	public function freeBooks($startDate='',$end_Date='',$target=''){
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+
+		}
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->where('(action = "readFreeBook")');
-		$this->db->where('time_of_action >', "2019-11-11");
-		$query = $this->db->get();
+		if ($target == 'range') {
+			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("time_of_action", $startDate);
+
+		}		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
-	public function getBookReadsToday()
+	public function getBookReadsToday($startDate='',$end_Date='',$target='')
 	{
-		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d');
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+
+		}
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->where('action', 'read_book');
-		$this->db->where('time_of_action >', "2019-11-11");
-		$query = $this->db->get();
+		if ($target == 'range') {
+			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("time_of_action", $startDate);
+
+		}		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
-	public function getAttemptedPaymentsToday()
+	public function getAttemptedPaymentsToday($startDate='',$end_Date='',$target='')
 	{
-		date_default_timezone_set("Africa/Nairobi");
-		$date = date('Y-m-d');
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+
+		}
 		$this->db->select('*');
 		$this->db->from('web_actions_logs');
 		$this->db->where('(action = "initiate_payment" OR action ="proceedToPayment")');
-		$this->db->where('time_of_action >', "2019-11-11");
-		$query = $this->db->get();
+		if ($target == 'range') {
+			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("time_of_action", $startDate);
+
+		}		$query = $this->db->get();
 		return $query->num_rows();
 	}
 

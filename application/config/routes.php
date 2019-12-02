@@ -85,5 +85,6 @@ $route['unique']= "AppAnalytics/duplicates";
 $route['reg_schools'] = "Schools/reg_schools";
 $route['top_reading'] = "Schools/top_reading";
 $route['schools/users/(:any)'] = "Schools/users/$1";
+$route['webData'] = 'Web_controller/webData';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
