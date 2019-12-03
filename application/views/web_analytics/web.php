@@ -141,8 +141,8 @@
 					<!-- Tabs within a box -->
 					<ul class="nav nav-tabs pull-right">
 						<div class="chart" id="active_users" style="height: 350px;"></div>
-						<div class="chart" id="topBooks" style="height: 350px;"></div>
-						-->
+<!--						<div class="chart" id="topBooks" style="height: 350px;"></div>
+-->
 					</ul>
 					<div class="tab-content no-padding">
 						<div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
