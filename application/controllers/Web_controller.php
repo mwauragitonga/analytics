@@ -11,7 +11,7 @@ class Web_controller extends CI_Controller
 		parent::__construct();
 		$this->data ['title'] = "Dawati Analytics | Web App Analysis";
 		$this->data ['description'] = "";
-
+		$this->load->library('session');
 		$this->load->model('Web_model');
 
 	}
@@ -22,7 +22,8 @@ class Web_controller extends CI_Controller
 
 	public function webAnalytics()
 	{
-
+		$array_items = array('startDate', 'end_Date','target');
+		$this->session->unset_userdata($array_items);
 		$signUps = $this->Web_model->getSignUps();
 		$logins = $this->Web_model->getLoginsToday();
 		$videoViews = $this->Web_model->getVideoViewsToday();
@@ -33,6 +34,12 @@ class Web_controller extends CI_Controller
 
 		$dat = date('Y-m-d');
 		$date = new DateTime($dat);
+		$sess_data = array(
+			'startDate' => $date,
+			'end_Date' => $date,
+			'target' => 'single'
+		);
+		$this->session->set_userdata($sess_data);
 		$users = array();
 		$signups = array();
 		$period = $date->modify("-6 days");
@@ -61,41 +68,52 @@ class Web_controller extends CI_Controller
 	}
 
 	/**
-	 * @var $period( contains first date and last date)
+	 * @var $period ( contains first date and last date)
 	 * responds ajax
 	 * @author  Cyrus Muchiri
 	 */
-	public function webData(){
+	public function webData()
+	{
+		$array_items = array('startDate', 'end_Date','target');
+		$this->session->unset_userdata($array_items);
 		$post_data = file_get_contents("php://input");
 		$decoded_post_data = json_decode($post_data);
 		$period = $decoded_post_data->date;
 		$dates = explode('-', $period);
 		$startDate = date("Y-m-d", strtotime($dates[0]));
 		$end_Date = date("Y-m-d", strtotime($dates[1]));
-		$target =''; /*Depicts single and range dates*/
-		if ($startDate == $end_Date){
+		$target = ''; /*Depicts single and range dates*/
+		if ($startDate == $end_Date) {
 			$target = 'single';
-		}else{
+		} else {
 			$target = 'range';
 		}
-		$signUps = $this->Web_model->getSignUps($startDate,$end_Date,$target);
-		$logins = $this->Web_model->getLoginsToday($startDate,$end_Date,$target);
-		$videoViews = $this->Web_model->getVideoViewsToday($startDate,$end_Date,$target);
-		$bookReads = $this->Web_model->getBookReadsToday($startDate,$end_Date,$target);
-		$attemptedPayments = $this->Web_model->getAttemptedPaymentsToday($startDate,$end_Date,$target);
-		$freeBookViews = $this->Web_model->freeBooks($startDate,$end_Date,$target);
-		$freeVideos = $this->Web_model->freeVideos($startDate,$end_Date,$target);
+		$sess_data = array(
+			'startDate' => $startDate,
+			'end_Date' => $end_Date,
+			'target' => $target
+		);
+		$this->session->set_userdata($sess_data);
+
+		$signUps = $this->Web_model->getSignUps($startDate, $end_Date, $target);
+		$logins = $this->Web_model->getLoginsToday($startDate, $end_Date, $target);
+		$videoViews = $this->Web_model->getVideoViewsToday($startDate, $end_Date, $target);
+		$bookReads = $this->Web_model->getBookReadsToday($startDate, $end_Date, $target);
+		$attemptedPayments = $this->Web_model->getAttemptedPaymentsToday($startDate, $end_Date, $target);
+		$freeBookViews = $this->Web_model->freeBooks($startDate, $end_Date, $target);
+		$freeVideos = $this->Web_model->freeVideos($startDate, $end_Date, $target);
 
 		$data = array(
-			'sign_Ups'=>$signUps,
-			'logins'=>$logins,
-			'videos_Views'=>$videoViews,
-			'book_Reads'=>$bookReads,
-			'attempted_payments'=>$attemptedPayments,
-			'free_content'=>$freeBookViews+$freeVideos
+			'sign_Ups' => $signUps,
+			'logins' => $logins,
+			'videos_Views' => $videoViews,
+			'book_Reads' => $bookReads,
+			'attempted_payments' => $attemptedPayments,
+			'free_content' => $freeBookViews + $freeVideos
 		);
 		echo json_encode($data);
 	}
+
 	public function videoViewers()
 	{
 

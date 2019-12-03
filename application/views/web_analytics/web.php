@@ -34,9 +34,7 @@
 					</div>
 				</form>
 			</div>
-			<script>
 
-			</script>
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
 				<div class="small-box bg-aqua">
