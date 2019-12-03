@@ -88,12 +88,13 @@
 					<div class="inner">
 						<h3 id="freeContent"><?php echo $freeContentViews; ?></h3>
 
-						<p>Free Content
-							(Videos and Books)</p>
+						<p>Free Content Usage</p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-free-code-camp"></i>
 					</div>
+					<a href="javascript:;" class="small-box-footer">More info <i
+							class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
