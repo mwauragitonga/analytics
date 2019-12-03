@@ -22,7 +22,7 @@ class Web_controller extends CI_Controller
 
 	public function webAnalytics()
 	{
-		$array_items = array('startDate', 'end_Date','target');
+		$array_items = array('startDate', 'end_Date', 'target');
 		$this->session->unset_userdata($array_items);
 		$signUps = $this->Web_model->getSignUps();
 		$logins = $this->Web_model->getLoginsToday();
@@ -47,7 +47,6 @@ class Web_controller extends CI_Controller
 			$users[$i] = $this->Web_model->users_By_Day($period->format('m-d'));
 			$signups[$i] = $this->Web_model->signups_By_Day($period->format('m-d'));
 			$period = $date->modify("+1 day");
-			//var_dump($users);
 		}
 		$data = array(
 
@@ -74,7 +73,7 @@ class Web_controller extends CI_Controller
 	 */
 	public function webData()
 	{
-		$array_items = array('startDate', 'end_Date','target');
+		$array_items = array('startDate', 'end_Date', 'target');
 		$this->session->unset_userdata($array_items);
 		$post_data = file_get_contents("php://input");
 		$decoded_post_data = json_decode($post_data);

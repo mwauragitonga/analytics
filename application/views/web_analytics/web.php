@@ -195,34 +195,22 @@
         //console.log(today);
         var dayString = new Array();
         var day = new Array();
+        var d = new Date;
+        day[0] = "Sunday";
+        day[1] = "Monday";
+        day[2] = "Tuesday";
+        day[3] = "Wednesday";
+        day[4] = "Thursday";
+        day[5] = "Friday";
+        day[6] = "Saturday";
 
-
-        for (var i = 7; i > 0; i--) {
+        for (var i = 6; i >= 0; i--) {
             var d = new Date;
-            /**/
-            d.setDate(today.getDay() - i);
-            day[0] = "Sunday";
-            day[1] = "Monday";
-            day[2] = "Tuesday";
-            day[3] = "Wednesday";
-            day[4] = "Thursday";
-            day[5] = "Friday";
-            day[6] = "Saturday";
-
+            d.setDate(today.getDay()-(i+6));
             dayString.push(day[d.getDay()]);
-            //d.setDate(d.getDay());
-            //console.log(today.getDay());
         }
-        //
-        //     var inverseDayString = new Array();
-        //     var k = 6;
-        // 	for(var j=0;j<7;j++){
-        //     inverseDayString[j] = dayString[k];
-        //     k--;
-        //
-        //
-        // }
-        // console.log( dayString);
+
+        console.log( dayString);
         return dayString;
     }
 
@@ -234,7 +222,7 @@
             text: 'Logins for the last 7 Days'
         },
         xAxis: {
-            categories: getDaysString()
+            categories:getDaysString()
         },
         yAxis: {
             title: {
@@ -270,33 +258,6 @@
 
 </script>
 <script>
-    function getDaysString() {
-        var today = new Date;
-        var current = today.getDay();
-        //console.log(today);
-        var dayString = new Array();
-        var day = new Array();
-        var d = new Date;
-
-        for (var i = 7; i > 0; i--) {
-            var d = new Date;
-            /**/
-            d.setDate(today.getDay() - i);
-            day[0] = "Sunday";
-            day[1] = "Monday";
-            day[2] = "Tuesday";
-            day[3] = "Wednesday";
-            day[4] = "Thursday";
-            day[5] = "Friday";
-            day[6] = "Saturday";
-
-            dayString.push(day[d.getDay()]);
-            //d.setDate(d.getDay());
-        }
-
-        // console.log( dayString);
-        return dayString;
-    }
 
     Highcharts.chart('signups', {
         chart: {

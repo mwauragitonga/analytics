@@ -191,7 +191,7 @@ class Web_model extends CI_Model
 		$this->db->select("COUNT(id) as users");
 		$this->db->from("web_actions_logs");
 		$this->db->where("action", "login");
-		//$this->db->like('time_of_action', $instance_day);
+		$this->db->like('time_of_action', $instance_day);
 		$query = $this->db->get()->row();
 		//var_dump($instance_day);
 		return $query->users;
@@ -204,7 +204,7 @@ class Web_model extends CI_Model
 		$this->db->select("COUNT(id) as users");
 		$this->db->from("web_actions_logs");
 		$this->db->where("action", "registration");
-		//$this->db->like('time_of_action', $instance_day);
+		$this->db->like('time_of_action', $instance_day);
 		$query = $this->db->get()->row();
 		return $query->users;
 
