@@ -1,3 +1,6 @@
+<?php
+header('Cache-Control: max-age=900');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +9,8 @@
 	<title>Dawati E-Learning| Admin | Dashboard</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!--	logout after 15 min idle OR inactivity-->
+	<meta http-equiv="refresh" content="900; url=<?php echo base_url()?>login" />
 	<!-- Bootstrap 3.3.7 -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<!-- Font Awesome -->
