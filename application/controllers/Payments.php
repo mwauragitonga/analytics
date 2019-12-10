@@ -53,6 +53,7 @@ class Payments extends REST_Controller
         $end_date = " ";
         $data = array();
         $data["revenue_By_Months"] = $this->revenue_By_Months();
+        $data['paybill_total'] = $this->payBillTotal();
         $data["subscriptions_Comparisons"] = $this->subscriptions_Comparisons();
         $response = array(
             "status" => true,
@@ -60,7 +61,7 @@ class Payments extends REST_Controller
         );
         $this->response($response, REST_Controller::HTTP_OK);
     }
-
+//stk push
     public function revenue_By_Months()
     {
 
@@ -69,7 +70,22 @@ class Payments extends REST_Controller
         $revenue = array();
         $period = $date->modify("-11 months");
         for ($i = 0; $i < 12; $i++) {
-            $revenue[$i] = $this->Payments_model->revenue_By_Months($period->format('Ym'));
+            $revenue[$i] = $this->Payments_model->revenue_By_Months($period->format('Ym'),'stk_push');
+            $period = $date->modify("+1 months");
+        }
+        return $revenue;
+
+    }
+    //includes payments outside stk push
+    public function payBillTotal()
+    {
+
+        $dat = date('Y-m-d');
+        $date = new DateTime($dat);
+        $revenue = array();
+        $period = $date->modify("-11 months");
+        for ($i = 0; $i < 12; $i++) {
+            $revenue[$i] = $this->Payments_model->revenue_By_Months($period->format('Ym'),'paybill');
             $period = $date->modify("+1 months");
         }
         return $revenue;

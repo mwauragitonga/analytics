@@ -59,7 +59,7 @@
     var year_initial = currentDate.getFullYear();
 
     var dateString_initial = year_initial + "-" + (month_initial + 1) + "-" + date_initial;
-    //  window.onLoad = loadSignUps(dateString_initial);
+     window.onLoad = loadSignUps(dateString_initial);
 
     //from date picker
     function dateChanged() {
