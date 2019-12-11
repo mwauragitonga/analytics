@@ -331,9 +331,9 @@
             var signups = response.sign_Ups;
             var logins = response.logins;
             var video_views = response.videos_Views;
-            var freeContent = response.book_Reads;
-            var booksRead = response.attempted_payments;
-            var attempted_payments = response.free_content;
+            var freeContent = response.free_content;
+            var booksRead = response.book_Reads;
+            var attempted_payments = response.attempted_payments;
             document.getElementById('sign_ups').innerText = signups;
             document.getElementById('logins').innerText = logins;
             document.getElementById('videoViews').innerText = video_views;
