@@ -41,7 +41,8 @@ class Analytics_controller extends CI_Controller
 			$nonSubscribers = $this->Analytics_model->getNonSubscribers();
 			$topVideos = $this->Analytics_model->getVideosViews();
 			$topEbooks = $this->Analytics_model->getEbooksViews();
-
+			$webHits = $this->Analytics_model->getWebHits();
+		//	var_dump($webHits);
 			$data = array(
 				'studentCount' => $studentCount,
 				'maleCount' => $maleStudents,
@@ -59,6 +60,7 @@ class Analytics_controller extends CI_Controller
 				'nonSubs' => $nonSubscribers,
 				'topVideos' => $topVideos,
 				'topEbooks' => $topEbooks,
+				'webHits' => $webHits,
 				'title' => "General Analytics",
 				'view' => "general/general.php"
 			);
