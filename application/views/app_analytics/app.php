@@ -118,9 +118,9 @@
 				<h2> Top Students in watching and reading content</h2><hr>
                 <!-- Custom tabs (Charts with tabs)-->
 				<div class="table-responsive">
-				<table class="table table-responsive table-striped" style="overflow: auto">
-				   <thead>
-				   <tr>
+					<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">	<thead>
+
+						<tr>
 					   <th> #</th>
 					   <th>Name </th>
 					   <th>Phone Number</th>

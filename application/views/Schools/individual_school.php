@@ -21,8 +21,8 @@
 				 Students from <?php echo $title ?>
 				<!-- Custom tabs (Charts with tabs)-->
 				<div class="table-responsive">
-					<table class="table table-responsive table-striped" style="overflow: auto">
-						<thead>
+					<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">	<thead>
+
 						<tr>
 							<th> #</th>
 							<th>Student Name </th>

@@ -17,8 +17,9 @@
 		<!-- Left col -->
 		<section class="col-lg-12 col-md-12 content">
 			<div class="table-responsive col-lg-5">
-				<table id="example1" class="table table-bordered table-striped">
+				<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 					<thead>
+
 					<th>#</th>
 					<th>Student Name</th>
 					<th>Time</th>

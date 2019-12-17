@@ -12,6 +12,7 @@ header('Cache-Control: max-age=900');
 	<!--	logout after 15 min idle OR inactivity-->
 	<meta http-equiv="refresh" content="900; url=<?php echo base_url()?>login" />
 	<!-- Bootstrap 3.3.7 -->
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.min.css">
@@ -41,6 +42,11 @@ header('Cache-Control: max-age=900');
 	<![endif]-->
 	<!-- Higcharts  -->
 	<script src="https://code.highcharts.com/highcharts.js"></script>
+
+	<!-- Datatables -->
+	<link href="<?php echo base_url(); ?>/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
 	<!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
