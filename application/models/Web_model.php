@@ -181,7 +181,8 @@ class Web_model extends CI_Model
 		}else{
 			$this->db->like("time_of_action", $startDate);
 
-		}		$query = $this->db->get();
+		}
+		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
@@ -212,11 +213,11 @@ class Web_model extends CI_Model
 
 	public function getVideoViewers()
 	{
+		date_default_timezone_set("Africa/Nairobi");
 		$startDate = $_SESSION['startDate'];
 		$end_Date =  $_SESSION['end_Date'];
 		$target =  $_SESSION['target'];
 
-		date_default_timezone_set("Africa/Nairobi");
 		$date = date('Y-m-d');
 		$this->db->select('web_actions_logs.user_id , time_of_action , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender,
 		 user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus, multimedia_content.file_id, multimedia_content.file_name');
@@ -233,32 +234,40 @@ class Web_model extends CI_Model
 		}else{
 			$this->db->like("time_of_action", $startDate);
 
-		}				$query = $this->db->get();
+		};
+		$this->db->order_by('time_of_action', 'DESC');
+		$query = $this->db->get();
 		return $query->result();
 	}
 
 	public function getbookReaders()
 	{
+		date_default_timezone_set("Africa/Nairobi");
 		$startDate = $_SESSION['startDate'];
 		$end_Date =  $_SESSION['end_Date'];
 		$target =  $_SESSION['target'];
-		$this->db->select('COUNT(id)  as views , web_actions_logs.user_id, time_of_action , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender, user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus, multimedia_content.file_id, multimedia_content.file_name');
-		$this->db->from('web_actions_logs');
+
+		//var_dump($startDate );var_dump($end_Date );var_dump($target );
+		$this->db->select('web_actions_logs.user_id , time_of_action , users.fname, lname, online_status, last_seen , mobile, email, hash, username, password, gender,
+		 user_type, user_status, study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus, multimedia_content.file_id, multimedia_content.file_name');		$this->db->from('web_actions_logs');
 		$this->db->join("users", "web_actions_logs.user_id = users.user_id");
 		$this->db->join("students", "web_actions_logs.user_id = students.user_id");
 		$this->db->join("schools", "students.school_code = schools.school_code");
 		$this->db->join("study_levels", "students.study_level = study_levels.level_code");
 		$this->db->join("multimedia_content", "web_actions_logs.file_id = multimedia_content.file_id");
 		$this->db->join("student_subscriptions", "web_actions_logs.user_id = student_subscriptions.user_id");
-		$this->db->where('action = "read_book"');
+		$this->db->where('action', "read_book");
 		$this->db->where('web_actions_logs.user_id !=', NULL);
 		$this->db->where('web_actions_logs.file_id !=', NULL);
 		if ($target == 'range') {
+//			$this->db->where('time_of_action >=', $startDate);
+//			$this->db->where('time_of_action =', $end_Date);
 			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
 		}else{
 			$this->db->like("time_of_action", $startDate);
 
-		}
+		};
+		$this->db->order_by('time_of_action', 'DESC');
 		$query = $this->db->get();
 		return $query->result();
 	}
