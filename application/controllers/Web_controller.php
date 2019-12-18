@@ -132,7 +132,7 @@ class Web_controller extends CI_Controller
 	{
 
 		$readers = $this->Web_model->getbookReaders();
-
+		var_dump(count($readers));
 		$data = array(
 
 			'users' => $readers,
