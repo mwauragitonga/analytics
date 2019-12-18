@@ -35,7 +35,7 @@
 					</div>
 				</div>
 				<!-- ./col -->
-				<div class="col-lg-3 col-xs-6">
+				<div class="col-lg-2 col-xs-6">
 					<!-- small box -->
 					<div class="small-box bg-green">
 						<div class="inner">
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				<!-- ./col -->
-				<div class="col-lg-3 col-xs-6">
+				<div class="col-lg-2 col-xs-6">
 					<!-- small box -->
 					<div class="small-box bg-yellow">
 						<div class="inner">
@@ -62,6 +62,21 @@
 							<i class="ion ion-pie-graph "></i>
 						</div>
 <!--						<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
+					</div>
+				</div>
+				<!-- ./col -->
+				<div class="col-lg-2 col-xs-6">
+					<!-- small box -->
+					<div class="small-box bg-green-active">
+						<div class="inner">
+							<h3><?php echo $webHits ; ?></h3>
+
+							<p>Web Hits</p>
+						</div>
+						<div class="icon">
+							<i class="ion ion-magnet "></i>
+						</div>
+						<!--						<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
 					</div>
 				</div>
 				<!-- ./col -->

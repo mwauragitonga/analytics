@@ -379,6 +379,12 @@ class Analytics_model extends CI_Model
 	   return $query;
 
     }
+    public function getWebHits(){
+		$this->db->select('hits as views');
+		$this->db->from('indexPageHits');
+		$query = $this->db->get()->row();
+		return $query->views;
+	}
 	//get logged in accounts
 	public function loggedInUsers()
 	{
