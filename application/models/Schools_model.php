@@ -20,6 +20,7 @@ class Schools_model extends CI_Model
 		$this->db->order_by('appMinutes','DESC');
 		$this->db->where('(content_type ="Videos" OR content_type ="Ebooks")');
 		$this->db->where('(start_stamp < end_stamp)');
+		$this->db->where('schools.name !=', 'Dawati Academy');
 		$usage = $this->db->get()->result();
 		return $usage;
 	}
