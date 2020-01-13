@@ -1,6 +1,9 @@
 <?php
 /*@cyrus Muchiri*/
-/** @noinspection ALL */
+/** @noinspection ALL
+ *@author  Cyrus Muchiri
+ *@mail cmuchiri8429@gmail.com
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 

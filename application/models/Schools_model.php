@@ -103,6 +103,7 @@ class Schools_model extends CI_Model
 		$this->db->from('users');
 		$this->db->join('students','users.user_ID = students.user_ID');
 		$this->db->join('schools','schools.school_code = students.school_code');
+		$this->db->where('schools.name !=', 'Dawati Academy');
 		$this->db->group_by("students.school_code");
 		$this->db->order_by("count",'DESC');
 

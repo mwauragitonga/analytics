@@ -114,6 +114,25 @@
 		</div>
 		<!-- /.row -->
 		<div class="row">
+			<div class="col-lg-2 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-green">
+					<div class="inner">
+						<h3 id="cumulative"></h3>
+
+						<p>Cumulative Total
+							(On progress)</p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-money"></i>
+					</div>
+					<a href="<?php echo base_url() ?>payment_reports" class="small-box-footer"> More Info <i
+							class="fa fa-arrow-circle-right"></i></a>
+
+				</div>
+			</div>
+		</div>
+		<div class="row">
 			<!-- Left col -->
 			<section class="col-lg-12">
 				<!-- Custom tabs (Charts with tabs)-->
