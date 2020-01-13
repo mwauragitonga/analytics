@@ -83,7 +83,7 @@
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-						<h3><?php echo $signins ; ?></h3>
+						<h3><?php echo $unique_signins ; ?></h3>
 
 						<p>Sign Ins (Unique)</p>
 					</div>
@@ -110,6 +110,23 @@
 			</div>
             <!-- ./col -->
         </div>
+		<div class="row">
+			<div class="col-lg-2 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-aqua">
+					<div class="inner">
+						<h3><?php echo $all_signins ; ?></h3>
+
+						<p>Sign Ins (Unique)</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+					<a href="<?php echo base_url()?>signins" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+
+		</div>
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
