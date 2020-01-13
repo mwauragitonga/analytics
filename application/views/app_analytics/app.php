@@ -117,7 +117,7 @@
 					<div class="inner">
 						<h3><?php echo $all_signins ; ?></h3>
 
-						<p>Sign Ins (Unique)</p>
+						<p>Sign Ins (All)</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-person-add"></i>
