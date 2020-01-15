@@ -94,9 +94,9 @@
 				<h2> Top Schools in watching and reading content</h2>
                 <!-- Custom tabs (Charts with tabs)-->
 				<div class="table-responsive">
-				<table class="table table-responsive table-striped" style="overflow: auto">
-				   <thead>
-				   <tr>
+					<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">	<thead>
+
+						<tr>
 					   <th> #</th>
 					   <th>School Name </th>
 					   <th>Number of students</th>

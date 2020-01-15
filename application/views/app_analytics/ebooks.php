@@ -16,9 +16,9 @@
 		<!-- Left col -->
 		<section class="col-lg-7">
 			<div class="table-responsive col-lg-12 col-md-12">
-			<table id="example1" class="table table-bordered table-striped table-responsive" style="overflow: auto">
-				<thead>
-				<th>#</th>
+				<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">	<thead>
+
+					<th>#</th>
 				<th>e-Book Name</th>
 				<th>Total Minutes read (i :s)</th>
 				<th>No. of Reads</th>

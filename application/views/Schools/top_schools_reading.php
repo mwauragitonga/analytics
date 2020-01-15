@@ -17,8 +17,8 @@
 		<!-- Left col -->
 		<section class="col-lg-12 col-md-12 content">
 			<div class="table-responsive col-lg-12">
-				<table class="table table-responsive table-striped" style="overflow: auto">
-					<thead>
+				<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">	<thead>
+
 					<tr>
 						<th> #</th>
 						<th>School Name </th>

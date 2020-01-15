@@ -68,12 +68,12 @@ class AppModel extends CI_Model
 		return $query->num_rows();
 	}
 
-	public function signIns()
+	public function signIns($mode='unique')
 	{
 		$this->db->select('*');
 		$this->db->from('mobile_analysis_data');
 		$this->db->where('content_type', 'Signin');
-		$this->db->group_by('user_id');
+		if($mode=='unique'){$this->db->group_by('user_id');}
 		$query = $this->db->get();
 		return $query->num_rows();
 	}

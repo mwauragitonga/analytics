@@ -57,6 +57,8 @@ class Web_model extends CI_Model
 		$this->db->join('users', 'web_actions_logs.user_ID = users.mobile');
 		$this->db->join('students', 'users.user_ID=students.user_ID');
 		$this->db->join('schools', 'students.school_code = schools.school_code');
+		$this->db->where('users.mobile !=','');
+
 		if ($target == 'range') {
 			$this->db->WHERE("time_of_action BETWEEN '$startDate'  AND '$end_Date'");
 		}else{

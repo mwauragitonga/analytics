@@ -1,23 +1,3 @@
-
-
-
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            <?php echo $title ; ?>
-
-            </small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
-        </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-lg-2 col-xs-6">
@@ -83,7 +63,7 @@
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-						<h3><?php echo $signins ; ?></h3>
+						<h3><?php echo $unique_signins ; ?></h3>
 
 						<p>Sign Ins (Unique)</p>
 					</div>
@@ -110,6 +90,23 @@
 			</div>
             <!-- ./col -->
         </div>
+		<div class="row">
+			<div class="col-lg-2 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-aqua">
+					<div class="inner">
+						<h3><?php echo $all_signins ; ?></h3>
+
+						<p>Sign Ins (All)</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+					<a href="<?php echo base_url()?>signins" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+
+		</div>
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
@@ -118,9 +115,9 @@
 				<h2> Top Students in watching and reading content</h2><hr>
                 <!-- Custom tabs (Charts with tabs)-->
 				<div class="table-responsive">
-				<table class="table table-responsive table-striped" style="overflow: auto">
-				   <thead>
-				   <tr>
+					<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">	<thead>
+
+						<tr>
 					   <th> #</th>
 					   <th>Name </th>
 					   <th>Phone Number</th>
