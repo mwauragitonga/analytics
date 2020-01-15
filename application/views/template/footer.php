@@ -1,7 +1,5 @@
-<footer class="main-footer">
-	<div class="pull-right hidden-xs">
+<footer>
 
-	</div>
 	<strong> <a href="#"></a></strong>
 
 

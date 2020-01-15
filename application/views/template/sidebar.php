@@ -67,6 +67,13 @@
 				</a>
 
 			</li>
+			<li>
+				<a href="<?php echo base_url(); ?>agents">
+					<i class="fa fa-user"></i>
+					<span>Agents</span>
+				</a>
+
+			</li>
         </ul>
     </section>
     <!-- /.sidebar -->
