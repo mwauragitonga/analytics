@@ -192,13 +192,21 @@ class Analytics_controller extends CI_Controller
 
 		$status = $this->Analytics_model->login_validation($email, $password);
 		$userDetails = $this->Analytics_model->getUserDetails($email);
-		if ($status == true) {
+		if ($status == true && $userDetails->user_type == '5') {
 			//lead to portal logged in
 
 			$this->session->set_userdata('status', 'true');
 			$this->session->set_userdata('fname', $userDetails->fname);
 			$this->session->set_userdata('lname', $userDetails->lname);
+			$this->session->set_userdata('userType', 'admin');
 
+			$this->index();
+
+		}elseif ($status == true && $userDetails->user_type == '6'){
+			$this->session->set_userdata('status', 'true');
+			$this->session->set_userdata('fname', $userDetails->fname);
+			$this->session->set_userdata('lname', $userDetails->lname);
+			$this->session->set_userdata('userType', 'agent');
 			$this->index();
 
 		} elseif ($status == false) {
