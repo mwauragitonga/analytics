@@ -45,20 +45,20 @@
 <!--				</a>-->
 <!---->
 <!--			</li>-->
-			<li>
-				<a href="<?php echo base_url(); ?>accounts">
-					<i class="fa fa-user"></i>
-					<span>Accounts</span>
-				</a>
-
-			</li>
-			<li>
-				<a href="<?php echo base_url(); ?>evaluations">
-					<i class="fa fa-tasks"></i>
-					<span>Evaluations</span>
-				</a>
-
-			</li>
+<!--			<li>-->
+<!--				<a href="--><?php //echo base_url(); ?><!--accounts">-->
+<!--					<i class="fa fa-user"></i>-->
+<!--					<span>Accounts</span>-->
+<!--				</a>-->
+<!---->
+<!--			</li>-->
+<!--			<li>-->
+<!--				<a href="--><?php //echo base_url(); ?><!--evaluations">-->
+<!--					<i class="fa fa-tasks"></i>-->
+<!--					<span>Evaluations</span>-->
+<!--				</a>-->
+<!---->
+<!--			</li>-->
 			<li>
 				<a href="<?php echo base_url(); ?>schools">
 					<i class="fa fa-graduation-cap"></i>
