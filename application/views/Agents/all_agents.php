@@ -22,7 +22,7 @@
 
 						<a href="<?php echo base_url(); ?>add_user">
 							<button type="button" class="btn btn-round  btn-primary "><i class="fa fa-plus-circle"></i>
-								Add User
+								Add Agent
 							</button>
 						</a>
 					</div>
@@ -42,6 +42,7 @@
 										<th>Email</th>
 										<th>Mobile</th>
 										<th>Referral code</th>
+										<th>Link</th>
 										<!--<th>More info</th> Trust these will be asked for @cyrus-->
 									</tr>
 
@@ -57,6 +58,7 @@
 												<td><?php echo $user->email; ?></td>
 												<td><?php echo $user->Mobile; ?></td>
 												<td><?php echo $user->referal_code; ?></td>
+												<td><a><?php echo "https://dawati.co.ke/createAccount/".$user->referal_code; ?></a></td>
 												<!--<td><a href="#">More info </a></td>-->
 											</tr>
 											<?php
