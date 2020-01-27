@@ -201,7 +201,8 @@ class Analytics_model extends CI_Model
 		$this->db->select('user_id, fname, lname, online_status, mobile, email, hash, username, password, gender, user_type, user_status');
 		$this->db->from('users');
 		$this->db->where('email',$email);
-		$this->db->where('user_type', '5');
+		$where = '(user_type="5" or user_type = "6")';
+		$this->db->where($where);
 		$result =$this->db->get()->row();
 		if(empty($result)){
 			//this is to prevent errors  when the email is not found
