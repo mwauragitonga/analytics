@@ -111,4 +111,28 @@ class Agents extends CI_Controller
 			$this->load->view('index.php', $data);
 		}
 	}
+	function referalByAgents($agent_code){
+		$agent_name = $this->agents_model->agentName($agent_code);
+		$referals = $this->agents_model->referalByAgents($agent_code);
+		$paid_students = $this->agents_model->paidStudents($agent_code);
+		$total_revenue =0;
+		if(is_null($paid_students->total_revenue)){
+
+		}else{
+			$total_revenue =$paid_students->total_revenue;
+		}
+		$agent_data = array(
+			'total_students' => count($referals),
+			'total_revenue'=> $total_revenue,
+			'associated_schools'=>$this->agents_model->registered_schools($agent_code),
+			'paid_students'=>$paid_students->paid_students,
+			'students' =>$referals
+		);
+		$data = array(
+			'response' => $agent_data,
+			'title' => $agent_name,
+			'view' => "Agents/referals",
+		);
+		$this->load->view('index.php', $data);
+	}
 }

@@ -89,5 +89,6 @@ $route['webData'] = 'Web_controller/webData';
 $route['agents'] = 'Agents/agentsView';
 $route['add_user'] = 'Agents/createAccountView';
 $route['createAccount'] = 'Agents/createAccount';
+$route['referrals/(:any)'] = 'Agents/referalByAgents/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
