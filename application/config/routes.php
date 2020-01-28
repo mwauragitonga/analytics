@@ -92,3 +92,7 @@ $route['createAccount'] = 'Agents/createAccount';
 $route['referrals/(:any)'] = 'Agents/referalByAgents/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+//payjoy
+$route['getDevice'] = "Analytics_controller/payjoy_check_device";
+

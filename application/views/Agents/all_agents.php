@@ -58,8 +58,9 @@
 												<td><?php echo $user->email; ?></td>
 												<td><?php echo $user->Mobile; ?></td>
 												<td><?php echo $user->referal_code; ?></td>
-												<td><a><?php echo "https://dawati.co.ke/createAccount/".$user->referal_code; ?></a></td>
+												<td><a><?php echo "https://dawati.co.ke/newAccount/".$user->referal_code; ?></a></td>
 												<td><a href="<?php echo base_url().'referrals/'.$user->referal_code ?>">More info </a></td>
+												<!--<td><a href="#">More info </a></td>-->
 											</tr>
 											<?php
 											$count++;
