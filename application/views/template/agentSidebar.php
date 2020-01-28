@@ -17,8 +17,15 @@
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">MAIN NAVIGATION</li>
 			<li >
+				<a href="<?php echo base_url().'referrals/'.$this->session->userdata('agentCode') ?>">
+					<i class="fa fa-home"></i> <span>Agent Dashboard</span>
+				<?php // var_dump($this->session->userdata('agentCode'))?>
+				</a>
+
+			</li>
+			<li >
 				<a href="<?php echo base_url(); ?>general">
-					<i class="fa fa-dashboard"></i> <span>General</span>
+					<i class="fa fa-dashboard"></i> <span>General Dawati Analytics</span>
 
 				</a>
 
@@ -26,7 +33,7 @@
 
 			<li>
 				<a href="<?php echo base_url(); ?>web">
-					<i class="fa fa-th"></i> <span>Web App Analysis</span>
+					<i class="fa fa-th"></i> <span>Dawati Web  Analysis</span>
 
 				</a>
 			</li>

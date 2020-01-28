@@ -18,6 +18,8 @@ class Analytics_controller extends CI_Controller
 
 		$this->load->model('Analytics_model');
 		$this->load->model('Payments_model');
+		$this->load->model('agents_model');
+
 		$this->load->library('upload');
 		$this->load->library("bcrypt");
 	}
@@ -203,15 +205,41 @@ class Analytics_controller extends CI_Controller
 			$this->index();
 
 		}elseif ($status == true && $userDetails->user_type == '6'){
+			$agent_code= $userDetails->hash;
+
 			$this->session->set_userdata('status', 'true');
 			$this->session->set_userdata('fname', $userDetails->fname);
 			$this->session->set_userdata('lname', $userDetails->lname);
 			$this->session->set_userdata('userType', 'agent');
-			$this->index();
+			$this->session->set_userdata('agentCode', $agent_code);
+
+			$agent_name = $this->agents_model->agentName($agent_code);
+			$referals = $this->agents_model->referalByAgents($agent_code);
+			$paid_students = $this->agents_model->paidStudents($agent_code);
+			$total_revenue =0;
+			if(is_null($paid_students->total_revenue)){
+
+			}else{
+				$total_revenue =$paid_students->total_revenue;
+			}
+			$agent_data = array(
+				'total_students' => count($referals),
+				'total_revenue'=> $total_revenue,
+				'associated_schools'=>$this->agents_model->registered_schools($agent_code),
+				'paid_students'=>$paid_students->paid_students,
+				'students' =>$referals,
+				'agentCode'=>$agent_code
+			);
+			$data = array(
+				'response' => $agent_data,
+				'title' => $agent_name,
+				'view' => "Agents/referals",
+			);
+			$this->load->view('index.php', $data);
 
 		} elseif ($status == false) {
 			//lead to log in page showing error message
-			$message = 'Log in failed!! Incorrect username or password';
+			$message = 'Log in failed!! Incorrect email or password';
 			$data = array(
 				'message' => $message
 			);

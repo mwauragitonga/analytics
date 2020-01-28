@@ -47,7 +47,13 @@
 	<!-- /.login-logo -->
 	<div class="login-box-body">
 		<p class="login-box-msg">Sign in to Analytics Portal</p>
-
+			<?php if(!empty($message) && $message == 'Log in failed!! Incorrect email or password'){ ?>
+				<div class="alert alert-danger alert-dismissible " role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+					</button>
+					<strong><?php echo $message; ?></strong>
+				</div>
+			<?php } ?>
 		<form action="<?php echo base_url(); ?>authentication" method="post">
 			<div class="form-group has-feedback">
 				<input type="email" class="form-control" name="email" placeholder="Email or Phone">
