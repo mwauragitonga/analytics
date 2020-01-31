@@ -40,7 +40,7 @@
 						<td><?php echo $video->file_name . "  "  ?><span class="badge badge-info"><?php echo "" ?></span> </td>
 						<td><?php echo  round($appMinutes / 60 ,2) ?></td>
 						<td><?php echo $video->count; ?></td>
-						<td><?php echo gmdate('i :s', $video->avgWatchSecs); ?></td>
+						<td><?php echo round($video->avgWatchSecs / 60,2) ;?></td>
 					</tr>
 					<?php
 					$count++;
@@ -78,7 +78,7 @@
 						<td><?php echo $book->file_name . "  "  ?><span class="badge badge-info"><?php echo "" ?></span> </td>
 						<td><?php echo round($appMinutes/60,2); ?></td>
 						<td><?php echo $book->count; ?></td>
-						<td><?php echo gmdate('i :s', $book->avgReadSecs); ?></td>
+						<td><?php echo round($book->avgReadSecs / 60,2) ;?></td>
 					</tr>
 					<?php
 					$count++;

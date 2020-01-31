@@ -35,7 +35,7 @@
 						<td><?php echo $video->name . "  "  ?><span class="badge badge-info"><?php echo $video->subject ?></span> </td>
 						<td><?php echo round(($video->watchSecs)/60,2); ?></td>
 						<td><?php echo $video->count; ?></td>
-						<td><?php echo gmdate('i :s', $video->avgWatchSecs) ;?></td>
+						<td><?php echo round($video->avgWatchSecs / 60,2) ;?></td>
 					</tr>
 					<?php
 					$count++;
