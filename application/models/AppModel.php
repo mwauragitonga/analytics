@@ -187,6 +187,11 @@ class AppModel extends CI_Model
 		$this->db->group_by('subtopic_ID');
 		$this->db->order_by('readSecs');
 		$data_ebooks = $this->db->get()->result();
+		foreach ($data_ebooks as $data_ebook) {
+			if ($data_ebook->readSecs > 2040) {
+				$data_ebook->readSecs = 2040;
+			}
+		}
 
 		$this->db->select("name as file_name,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs,count(index_ID) as count");
 		$this->db->from("mobile_analysis_data");
@@ -198,6 +203,12 @@ class AppModel extends CI_Model
 		$this->db->group_by('subtopic_ID');
 		$this->db->order_by('watchSecs');
 		$data_videos = $this->db->get()->result();
+		foreach ($data_videos as $data_video) {
+			if ($data_video->watchSecs > 2040) {
+				$data_video->watchSecs = 2040;
+			}
+		}
+
 		$this->db->select("file_name,SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs,count(index_ID) as count");
 		$this->db->from("mobile_analysis_data");
 		$this->db->join('users',"users.user_id=mobile_analysis_data.user_id");
@@ -208,6 +219,12 @@ class AppModel extends CI_Model
 		$this->db->group_by('subtopic_ID');
 		$this->db->order_by('watchSecs');
 		$data_videos2 = $this->db->get()->result();
+		foreach ($data_videos2 as $datavideo) {
+			if ($datavideo->watchSecs > 2040) {
+				$datavideo->watchSecs = 2040;
+			}
+		}
+
 		$data3 = array_merge($data_videos,$data_videos2);
 		usort($data3, function($a, $b) {
 			return $b->watchSecs <=> $a->watchSecs;
