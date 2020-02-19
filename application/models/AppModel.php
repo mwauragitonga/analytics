@@ -102,7 +102,9 @@ class AppModel extends CI_Model
 		$this->db->where('(start_stamp < end_stamp)');
 	//	$this->db->limit(10);
 		$this->db->order_by('appMinutes', 'DESC');
+
 		$query = $this->db->get()->result();
+
 		return $query;
 	}
 
@@ -139,9 +141,13 @@ class AppModel extends CI_Model
 		$this->db->group_by("subtopic_ID");
 		$this->db->where('content_type', 'Videos');
 		$this->db->where('(start_stamp < end_stamp)');
-		$this->db->order_by('watchSecs', 'DESC');
+		//$this->db->order_by('(avgWatchSecs*count)', 'DESC');
 		$data = $this->db->get()->result();
-
+		foreach ($data as $dat) {
+			if ($dat->avgWatchSecs > VIDEOCAP) {
+				$dat->avgWatchSecs = VIDEOCAP;
+			}
+		}
 		$this->db->select('mobile_analysis_data.subtopic_ID ,multimedia_content.file_name as name, syllabus.subject ,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs , COUNT(index_ID) as count');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('multimedia_content', 'mobile_analysis_data.subtopic_ID = multimedia_content.file_id');
@@ -150,12 +156,16 @@ class AppModel extends CI_Model
 		$this->db->group_by("subtopic_ID");
 		$this->db->where('content_type', 'Videos');
 		$this->db->where('(start_stamp < end_stamp)');
-		$this->db->order_by('watchSecs', 'DESC');
+		//$this->db->order_by('watchSecs', 'DESC');
 		$data2 = $this->db->get()->result();
-
+		foreach ($data2 as $dat2) {
+			if ($dat2->avgWatchSecs > VIDEOCAP) {
+				$dat2->avgWatchSecs = VIDEOCAP;
+			}
+		}
 		$data3 = array_merge($data,$data2);
 		usort($data3, function($a, $b) {
-			return $b->watchSecs <=> $a->watchSecs;
+			return $b->avgWatchSecs*$b->count <=> $a->avgWatchSecs*$a->count;
 		});
 		return $data3;
 	}
@@ -171,6 +181,14 @@ class AppModel extends CI_Model
 		$this->db->order_by('readSecs', 'DESC');
 
 		$data = $this->db->get()->result();
+		foreach ($data as $dat) {
+			if ($dat->avgReadSecs > VIDEOCAP) {
+				$dat->avgReadSecs = VIDEOCAP;
+			}
+		}
+		usort($data, function($a, $b) {
+			return $b->avgReadSecs*$b->count <=> $a->avgReadSecs*$a->count;
+		});
 		//print_r($data);
 		return $data;
 
@@ -187,9 +205,10 @@ class AppModel extends CI_Model
 		$this->db->group_by('subtopic_ID');
 		$this->db->order_by('readSecs');
 		$data_ebooks = $this->db->get()->result();
+		//print_r($data_ebooks);
 		foreach ($data_ebooks as $data_ebook) {
-			if ($data_ebook->readSecs > 2040) {
-				$data_ebook->readSecs = 2040;
+			if ($data_ebook->avgReadSecs > VIDEOCAP) {
+				$data_ebook->avgReadSecs = VIDEOCAP;
 			}
 		}
 
@@ -201,11 +220,11 @@ class AppModel extends CI_Model
 		$this->db->where('mobile_analysis_data.user_id',$user_id);
 		$this->db->where('(start_stamp < end_stamp)');
 		$this->db->group_by('subtopic_ID');
-		$this->db->order_by('watchSecs');
+		$this->db->order_by('avgWatchSecs');
 		$data_videos = $this->db->get()->result();
 		foreach ($data_videos as $data_video) {
-			if ($data_video->watchSecs > 2040) {
-				$data_video->watchSecs = 2040;
+			if ($data_video->avgWatchSecs > VIDEOCAP) {
+				$data_video->avgWatchSecs = VIDEOCAP;
 			}
 		}
 
@@ -220,8 +239,8 @@ class AppModel extends CI_Model
 		$this->db->order_by('watchSecs');
 		$data_videos2 = $this->db->get()->result();
 		foreach ($data_videos2 as $datavideo) {
-			if ($datavideo->watchSecs > 2040) {
-				$datavideo->watchSecs = 2040;
+			if ($datavideo->avgWatchSecs > VIDEOCAP) {
+				$datavideo->avgWatchSecs = VIDEOCAP;
 			}
 		}
 
@@ -254,6 +273,9 @@ class AppModel extends CI_Model
 			if ($timee <= 0) { //checks and skips elements with no end time
 				continue;
 			} else {
+				if($timee > VIDEOCAP){
+					$timee = VIDEOCAP;
+				}
 				$time_seconds[$count] = $timee;
 				$count++;
 			}

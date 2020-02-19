@@ -33,7 +33,7 @@
 					<tr>
 						<td><?php echo $count + 1 ?></td>
 						<td><?php echo $video->name . "  "  ?><span class="badge badge-info"><?php echo $video->subject ?></span> </td>
-						<td><?php echo round(($video->watchSecs)/60,2); ?></td>
+						<td><?php echo round($video->avgWatchSecs / 60,2)*$video->count; ?></td>
 						<td><?php echo $video->count; ?></td>
 						<td><?php echo round($video->avgWatchSecs / 60,2) ;?></td>
 					</tr>
@@ -115,12 +115,13 @@
                 colorByPoint: true,
                 data: [<?php
 					$count=0;
+
 					foreach($videos as $video){
 						$count +=1;
 						if($count== 10){
-							echo round(($video->watchSecs)/60,2);
+							echo round($video->avgWatchSecs / 60,2)*$video->count;
 						}else{
-							echo round(($video->watchSecs)/60,2).',';
+							echo round($video->avgWatchSecs / 60,2)*$video->count.',';
 						}
 						if($count == 10){
 							break;

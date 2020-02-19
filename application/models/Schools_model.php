@@ -11,7 +11,7 @@ class Schools_model extends CI_Model
 	function usage()
 	{
 		$this->db->select('schools.name,schools.school_code as code,
-		SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as appMinutes , count(DISTINCT(mobile_analysis_data.user_ID)) as count');
+		SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as appMinutes , count(DISTINCT(mobile_analysis_data.user_ID)) as count');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('users', 'mobile_analysis_data.user_ID = users.user_ID');
 		$this->db->join("students", "users.user_ID = students.user_ID");
@@ -21,8 +21,16 @@ class Schools_model extends CI_Model
 		$this->db->where('(content_type ="Videos" OR content_type ="Ebooks")');
 		$this->db->where('(start_stamp < end_stamp)');
 		$this->db->where('schools.name !=', 'Dawati Academy');
-		$usage = $this->db->get()->result();
-		return $usage;
+		$usages = $this->db->get()->result();
+		/*foreach ($usages as $usage) {
+			if ($usage->appMinutes > 2045) {
+				$usage->appMinutes = 2045;
+			}
+		}
+		usort($data, function($a, $b) {
+			return $b->avgReadSecs*$b->count <=> $a->avgReadSecs*$a->count;
+		});*/
+		return $usages;
 	}
 
 	function students($school_code = "school_032")
