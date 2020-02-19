@@ -94,5 +94,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //payjoy
-$route['getDevice'] = "Analytics_controller/payjoy_check_device";
+$route['getDevice'] = "PayJoy/payjoy_check_device";
+$route['lock'] = "PayJoy/payjoy_lock_device";
+$route['unlock'] = "PayJoy/payjoy_unlock_device";
 

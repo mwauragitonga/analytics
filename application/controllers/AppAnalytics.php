@@ -18,8 +18,6 @@ class AppAnalytics extends CI_Controller
 
 	public function index()
 	{
-
-
 		$data = array(
 
 			"book_Minutes_Read" => $this->AppModel->book_Minutes_Read(),

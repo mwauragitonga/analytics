@@ -306,23 +306,5 @@ class Analytics_controller extends CI_Controller
 		$this->session->sess_destroy();
 		$this->load->view('login/login.php');
 	}
-	public function payjoy_check_device(){
-		$apiKey = 'M8ZmO79uXQEt_g7Y1cBxV-dWbQaEiJ63';
-		$deviceTag = '[DeviceTag]';
 
-		$url = "https://api.payjoy.com/devicemanager/v1/device?key=" .
-			$apiKey . "&deviceTag=" . $deviceTag;
-
-		$options = array(
-			'http'  => array (
-				'method' => 'GET',
-				'ignore_errors' => true,
-			),
-		);
-
-		$context = stream_context_create($options);
-		$response = file_get_contents($url, false, $context);
-
-		echo($response);
-	}
 }
