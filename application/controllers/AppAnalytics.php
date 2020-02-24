@@ -1,7 +1,7 @@
 <?php
 /** @noinspection ALL
- *@author Cyrus Muchiri
- *@mail cmuchiri8429@gmail.com
+ * @author Cyrus Muchiri
+ * @mail cmuchiri8429@gmail.com
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -29,6 +29,8 @@ class AppAnalytics extends CI_Controller
 			"all_signins" => $this->AppModel->signIns('all'),
 			"students" => $this->AppModel->students(),
 			"internet_type" => $this->AppModel->internetType(),
+			'total_reads' => $this->getCount($this->AppModel->Books_Read(), 'books'),
+			'total_views' => $this->getCount($this->AppModel->Videos_Watched(), 'videos'),
 			'title' => "App analytics",
 			'view' => "app_analytics/app.php"
 		);
@@ -100,6 +102,18 @@ class AppAnalytics extends CI_Controller
 			'view' => "payments/mpesa_reports.php"
 		);
 		$this->load->view('index.php', $data);
+	}
+
+	/**
+	 * @param $array
+	 */
+	function getCount($arrays)
+	{
+		$sum = 0;
+		foreach ($arrays as $array) {
+			$sum += $array->count;
+		}
+		return $sum;
 	}
 
 
