@@ -21,7 +21,7 @@ class Schools_model extends CI_Model
 		$this->db->where('(content_type ="Videos" OR content_type ="Ebooks")');
 		$this->db->where('(start_stamp < end_stamp)');
 		$this->db->where('schools.name !=', 'Dawati Academy');
-		$this->db->where('schools.name !=', 'A.I.C LITEIN GIRLS SECONDARY S CHOOL');
+		$this->db->where('schools.name !=', 'A.I.C LITEIN GIRLS SECONDARY SCHOOL');
 		$usages = $this->db->get()->result();
 		/*foreach ($usages as $usage) {
 			if ($usage->appMinutes > 2045) {
