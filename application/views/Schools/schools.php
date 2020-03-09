@@ -56,7 +56,7 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3 id="aMS"><sup style="font-size: 20px"><?php echo $top_school_Reading['name']?></h3><h3><?php echo "(".$top_school_Reading['appMinutes'].")"?></h3>
+						<h3 id="aMS"><sup style="font-size: 20px"><?php echo $top_school_Reading['name']?></h3><!--<h3><?php /*echo "(".($top_school_Reading['appMinutes']/60/60).")"*/?></h3>-->
 
 
 						<p>Top school (Reading and viewing content)</p>
@@ -100,8 +100,8 @@
 					   <th> #</th>
 					   <th>School Name </th>
 					   <th>Number of students</th>
-					   <th>Study minutes</th>
-
+					  <!-- <th>Study minutes</th>
+-->
 					   <th>More Info</th>
 
 				   </tr>
@@ -120,7 +120,7 @@
 					  <td><?php echo $count+1?></td>
 					  <td><?php echo $school_usage->name?></td>
 					  <td><?php echo $school_usage->count?></td>
-					  <td><?php echo round($appMinutes / 60 ,2)?></td>
+					  <!--<td><?php /*echo round($appMinutes / 60 ,2)*/?></td>-->
 
 					  <td><a href="<?php echo base_url().'schools/'.$school_usage->code?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a></td>
 
