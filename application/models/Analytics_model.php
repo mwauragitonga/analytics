@@ -355,7 +355,7 @@ class Analytics_model extends CI_Model
 
 	}
 	public function signUps_By_Day($date){
-		$this->db->select("fname , mobile, gender , user_registration_source.source_name  as source ,study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus");
+		$this->db->select("fname , mobile, gender , user_registration_source.source_name  as source ,study_levels.level_name,schools.name as school_name, student_subscriptions.status,code ,users.user_status as userstatus");
 		$this->db->from("users");
 		$this->db->join("students","users.user_id = students.user_id");
 		$this->db->join("schools","students.school_code = schools.school_code");
@@ -367,7 +367,7 @@ class Analytics_model extends CI_Model
 		return $query;
 	}
 	public function signUps_By_Range($start,$end){
-	    $this->db->select("fname , mobile, gender,  user_registration_source.source_name  as source ,study_levels.level_name,schools.name as school_name, student_subscriptions.status ,users.user_status as userstatus");
+	    $this->db->select("fname , mobile, gender,  user_registration_source.source_name  as source ,study_levels.level_name,schools.name as school_name, student_subscriptions.status,code ,users.user_status as userstatus");
 	    $this->db->from("users");
 	    $this->db->join("students","users.user_id = students.user_id");
         $this->db->join("schools","students.school_code = schools.school_code");

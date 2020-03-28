@@ -41,6 +41,7 @@
 						<th>Study Level</th>
 						<th>Subscription Status</th>
 						<th>SMS confirmation</th>
+						<th>SMS code</th>
 						<th>Registration Source</th>
 					</tr>
 					</thead>
@@ -92,10 +93,11 @@
                 var school_name = response[i].school_name;
                 var subscription_Status = response[i].status;
                 var userstatus = response[i].userstatus
+				var code = response[i].code;
                 var source = response[i].source
                 //  console.log(school_name);
 
-                tr += "<tr><td>" + (i + 1) + "</td><td>" + fname + "</td><td>" + gender + "</td><td>" + mobile + "</td><td>" + school_name + "</td><td>" + level_name + "</td><td>" + subscription_Status + "</td><td>" + userstatus + "</td><td>" + source + "</td></tr>";
+                tr += "<tr><td>" + (i + 1) + "</td><td>" + fname + "</td><td>" + gender + "</td><td>" + mobile + "</td><td>" + school_name + "</td><td>" + level_name + "</td><td>" + subscription_Status + "</td><td>" + userstatus + "</td><td>" + code + "</td><td>" + source + "</td></tr>";
                 // console.log(tr)
 
             }
