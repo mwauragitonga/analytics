@@ -71,8 +71,9 @@
 					<i class="fa fa-graduation-cap"></i>
 					<span>Schools</span>
 				</a>
-
 			</li>
+
+
 		</ul>
 	</section>
 	<!-- /.sidebar -->
