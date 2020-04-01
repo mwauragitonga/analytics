@@ -91,20 +91,72 @@ class Broadcasts extends CI_Controller
 		}
 
 
-		$data = array(
-
-			'title' => "Broadcast Messages",
-			'view' => "broadcasts/messages.php"
-		);
-		//var_dump($formFours);
-		$this->load->view('index.php', $data);
+//		$data = array(
+//
+//			'title' => "Broadcast Messages",
+//			'view' => "broadcasts/messages.php"
+//		);
+//		//var_dump($formFours);
+//		$this->load->view('index.php', $data);
 	}
-	public function send_corona_message($name, $mobile)
+	public function broadcastSMS(){
+		$message = $this->input->post('message');
+		//if checkbox is checked send to that number else fetch all student phone numbers from dB @kelvin
+		$checkbox = $this->input->post('checkbox');
+		if($checkbox == 1){
+			$phone = $this->input->post('phone');
+			$send= $this->send_broadcast_SMS( $message, $phone);
+			if ($send == True){
+				$message = "SMS Sent!";
+				$data = array(
+					'message' => $message,
+					'title' => "Broadcast Messages",
+					'view' => "broadcasts/messages.php"
+				);
+				$this->load->view('index.php', $data);
+			}else{
+				$message = "SMS Not Sent!";
+				$data = array(
+					'message' => $message,
+					'title' => "Broadcast Messages",
+					'view' => "broadcasts/messages.php"
+				);
+				$this->load->view('index.php', $data);
+			}
+
+		}else{
+			//get all user phone numbers from dB
+			$numbers = $this->Broadcasts_model->getUserNumbers();
+			foreach ($numbers as $number){
+				$phoneNo = $numbers->phone;
+				$name = $numbers->fName;
+				$send=	$this->send_broadcast_SMS($message, $phoneNo, $name);
+				if ($send == True){
+					$message = "SMS Sent!";
+					$data = array(
+						'message' => $message,
+						'title' => "Broadcast Messages",
+						'view' => "broadcasts/messages.php"
+					);
+					//var_dump($formFours);
+					$this->load->view('index.php', $data);
+				}else{
+					$message = "SMS Not Sent!";
+					$data = array(
+						'message' => $message,
+						'title' => "Broadcast Messages",
+						'view' => "broadcasts/messages.php"
+					);
+					//var_dump($formFours);
+					$this->load->view('index.php', $data);
+				}
+			}
+		}
+	}
+	public function send_broadcast_SMS($text, $mobile, $name)
 	{
 		$from_ = 'DAWATI';
-		$message = 'Dear  ' . $name . '. Thank You for signing up to Dawati.  You have been awarded a free monthly subscription. Enjoy access to 100s of videos,
-		 ebooks, lab practicals and revision materials  . For more information call , text or WhatsApp  +25475001456.';
-
+		$message = "Dear ". $name. " ". $text
 		try {
 			$this->gateway->sendMessage($mobile, $message, $from_);
 
