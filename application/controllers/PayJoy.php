@@ -1,6 +1,5 @@
 <?php
 /**
- * @noinspection ALL
  * @author  Mwaura Gitonga
  * @mail mwauragitonga12@gmail.com
  */
@@ -12,7 +11,6 @@ class PayJoy extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('agents_model');
 	}
 	public function payjoy_check_device(){
 		$apiKey = 'M8ZmO79uXQEt_g7Y1cBxV-dWbQaEiJ63';
@@ -61,7 +59,7 @@ class PayJoy extends CI_Controller
 			),
 		);
 		$context = stream_context_create($options);
-		$response = file_get_contents($url, false, $context);
+		$response = $this->payjoy_check_device();
 		$decoded = json_decode($response);
 
 		$data = array(
@@ -84,7 +82,7 @@ class PayJoy extends CI_Controller
 			),
 		);
 		$context = stream_context_create($options);
-		$response = file_get_contents($url, false, $context);
+		$response = $this->payjoy_check_device();
 		$decoded = json_decode($response);
 
 		$data = array(
@@ -97,8 +95,8 @@ class PayJoy extends CI_Controller
 	public function payjoy_lock_device(){
 		$apiKey = 'M8ZmO79uXQEt_g7Y1cBxV-dWbQaEiJ63';
 		$deviceTag = 'DWXTSZG';
-		$expiration = time() ;
-
+		$expiration = time() + 60;
+		echo $expiration;
 		$url = "https://api.payjoy.com/devicemanager/v1/device/lock?key=" .
 			$apiKey . "&deviceTag=" . $deviceTag . "&state=active&expiration=" . $expiration;
 
@@ -110,11 +108,17 @@ class PayJoy extends CI_Controller
 		);
 
 		$context = stream_context_create($options);
-		$response = file_get_contents($url, false, $context);
+		$response = $this->payjoy_check_device();
 		$decoded = json_decode($response);
-
+		$device= $decoded->device;
+		$lock=$decoded->device->lock;
+		$lockStatus= $lock->state;
+		$expiration= $lock->expiration;
+		$expirationDate= date('Y-m-d H:i:s', $expiration);
 		$data = array(
-			'message'=> 'Device state: active!',
+			'lockStatus'=> $lockStatus,
+			'expiration' => $expirationDate,
+			'device'=> $device,
 			'title' => "PayJoy Devices",
 			'view' => "payjoy/devices.php",
 		);
@@ -125,7 +129,7 @@ class PayJoy extends CI_Controller
 		$apiKey = 'M8ZmO79uXQEt_g7Y1cBxV-dWbQaEiJ63';
 		// unix timestamp. time now + one day
 		//based on the subscription package; this timestamp will be updated accordingly after payment
-		$expiration = time() + 86400;
+		$expiration = time() + 186400;
 
 		$url = "https://api.payjoy.com/devicemanager/v1/device/lock?key=" .
 			$apiKey . "&deviceTag=" . $deviceTag . "&state=active&expiration=" . $expiration;
@@ -138,7 +142,7 @@ class PayJoy extends CI_Controller
 		);
 
 		$context = stream_context_create($options);
-		$response = file_get_contents($url, false, $context);
+		$response = $this->payjoy_check_device();
 		$decoded = json_decode($response);
 
 		$data = array(
