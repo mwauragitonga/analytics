@@ -58,7 +58,7 @@
 
 			<section class="col-lg-5 " style="margin-top: 3%; margin-left: 3%">
 
-				<form>
+				<?php echo(form_open('broadcastSMS')) ?>
 					<label for=""style="text-align: center">Enter the contents of the SMS: </label>
 					<br>
 					<br>
@@ -66,21 +66,21 @@
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" name="checkbox" value="1" id="checkbox"> &nbsp;
 							<label class="form-check-label" for="defaultCheck2">
-								Send to specific users
+								Send to specific user
 							</label>
 							<br>
 							<br>
 						</div>
 						<label for="Phone ">Phone Number</label>
-						<input type="text" class="form-control" id="title" placeholder="Enter users' phone numbers  (07xx xxx xxx)">
+						<input type="number" class="form-control" id="phone" name="phone" placeholder="Enter users' phone numbers  (07xx xxx xxx)">
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlTextarea1">SMS Body</label>
-						<textarea class="form-control" id="message" rows="3"placeholder="Enter the contents of your SMS. (1 sms <= 150 characters)"></textarea>
+						<textarea class="form-control" id="message" name="message" rows="3"placeholder="Enter the contents of your SMS. (1 sms <= 150 characters)"></textarea>
 					</div>
 					<button type="submit" class="btn btn-primary">Send SMS</button>
 
-				</form>
+				<?php echo form_close() ?>
 			</section>
 			<!-- right col -->
 		</div>
