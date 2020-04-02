@@ -154,10 +154,10 @@ class Broadcasts extends CI_Controller
 			}
 		}
 	}
-	public function send_broadcast_SMS($text, $mobile, $name)
+	public function send_broadcast_SMS($text, $mobile, $name='')
 	{
 		$from_ = 'DAWATI';
-		$message = "Dear ". $name. " ". $text ;
+		$message = $text ;
 		try {
 			$this->gateway->sendMessage($mobile, $message, $from_);
 			return true;
