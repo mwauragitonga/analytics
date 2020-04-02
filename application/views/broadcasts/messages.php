@@ -27,7 +27,7 @@
 				Message sent successfully.
 			</div>
 			<?php 	}elseif(!empty($message) && $message== "Message Not Sent!"){ ?>
-			<div class="alert alert-danger" role="alert">
+			<div class="alert alert-danger" role="alert" >
 		Message not sent!
 		</div>
 		<?php	} ?>
@@ -83,7 +83,7 @@
 							<br>
 						</div>
 						<label for="Phone ">Phone Number</label>
-						<input type="number" class="form-control" id="phone" name="phone" placeholder="Enter users' phone numbers  (07xx xxx xxx)">
+						<input type="text" class="form-control" id="phone" name="phone" placeholder="Enter users' phone numbers  (07xx xxx xxx)">
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlTextarea1">SMS Body</label>
