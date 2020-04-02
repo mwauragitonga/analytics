@@ -13,7 +13,8 @@
 	"require": {
 		"php": ">=7.0",
 		"ext-json": "*",
-		"ext-gd": "*"
+		"ext-gd": "*",
+		"mpdf/mpdf": "^8.0"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

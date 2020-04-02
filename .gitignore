@@ -1,6 +1,8 @@
 .DS_Store
 
 application/cache/*
+application/views/reports/tmp/*
+
 !application/cache/index.html
 
 application/logs/*

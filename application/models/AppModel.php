@@ -198,7 +198,7 @@ class AppModel extends CI_Model
 
 	}
 
-	function userStudyInfo($user_id)
+	function userStudyInfo($user_id,$period='')
 	{
 		$this->db->select("SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as readSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgReadSecs,multimedia_content.file_name,count(index_ID) as count");
 		$this->db->from("mobile_analysis_data");
@@ -323,6 +323,16 @@ WHERE
 
 		//	echo  $user_id;
 
+	}
+	function getAllStudents(){
+		$this->db->select('users.user_id,users.email,users.fname,users.lname,schools.name, study_levels.level_name,');
+		$this->db->from('users');
+		$this->db->join("students", "users.user_ID = students.user_ID");
+		$this->db->join("schools", "students.school_code = schools.school_code");
+		$this->db->join("study_levels", "students.study_level = study_levels.level_code	");
+		$this->db->where('users.user_type',1);
+
+		$students = $this->db->get()->result();
 	}
 
 }

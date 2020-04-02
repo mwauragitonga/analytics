@@ -98,3 +98,6 @@ $route['getDevice'] = "PayJoy/payjoy_check_device";
 $route['lock'] = "PayJoy/payjoy_lock_device";
 $route['unlock'] = "PayJoy/payjoy_unlock_device";
 
+
+//cron job emails wget
+$route['notify'] = "Email_notifications/notifications";

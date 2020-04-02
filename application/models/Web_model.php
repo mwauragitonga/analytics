@@ -299,4 +299,15 @@ class Web_model extends CI_Model
 		}				$query = $this->db->get();
 		return $query->result();
 	}
+
+	/**
+	 * @author Cyrus Muchiri
+	 * @Gets Web usage of the student for the last month
+	 * @param $user_id
+	 * @return mixed
+	 *
+	 */
+	public function userStudyInfo($user_id){
+
+	}
 }
