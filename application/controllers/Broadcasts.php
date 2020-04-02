@@ -128,8 +128,8 @@ class Broadcasts extends CI_Controller
 			//get all user phone numbers from dB
 			$numbers = $this->Broadcasts_model->getUserNumbers();
 			foreach ($numbers as $number){
-				$phoneNo = $numbers->phone;
-				$name = $numbers->fName;
+				$phoneNo = $number->mobile;
+				$name = $number->fName;
 				$send=	$this->send_broadcast_SMS($message, $phoneNo, $name);
 				if ($send == True){
 					$message = "SMS Sent!";
@@ -156,12 +156,10 @@ class Broadcasts extends CI_Controller
 	public function send_broadcast_SMS($text, $mobile, $name)
 	{
 		$from_ = 'DAWATI';
-		$message = "Dear ". $name. " ". $text
+		$message = "Dear ". $name. " ". $text ;
 		try {
 			$this->gateway->sendMessage($mobile, $message, $from_);
-
 			return true;
-
 
 		} catch (Exception $e) {
 			// var_dump($e);
