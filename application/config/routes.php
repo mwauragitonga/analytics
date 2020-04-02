@@ -93,6 +93,7 @@ $route['referrals/(:any)'] = 'Agents/referalByAgents/$1';
 $route['broadcasts'] = 'Broadcasts/messages';
 $route['broadcastEmail'] = 'Broadcasts/broadcastEmail';
 $route['broadcastSMS'] = 'Broadcasts/broadcastSMS';
+$route['email'] = 'Broadcasts/loadEmail';
 
 
 $route['404_override'] = '';

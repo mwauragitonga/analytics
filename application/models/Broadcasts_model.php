@@ -11,7 +11,6 @@ class Broadcasts_model extends CI_Model
 		$this->db->select('email, fName');
 		$this->db->from('users');
 		$this->db->where('user_type', 1);
-		$this->db->limit(10);
 		$query = $this->db->get();
 		return $query->result();
 	}
