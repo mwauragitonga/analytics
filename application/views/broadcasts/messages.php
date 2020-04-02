@@ -21,6 +21,17 @@
 		<div class="alert alert-warning" role="alert">
 			The emails/sms will be sent to all users unless you've specified the users address or phone numbers in the provided fields.
 		</div>
+
+			<?php if(!empty($message ) && $message== "Message Sent!"){ ?>
+			<div class="alert alert-success" role="alert">
+				Message sent successfully.
+			</div>
+			<?php 	}elseif(!empty($message) && $message== "Message Not Sent!"){ ?>
+			<div class="alert alert-danger" role="alert">
+		Message not sent!
+		</div>
+		<?php	} ?>
+
 		<!-- Main row -->
 		<div class="row">
 			<!-- Left col -->

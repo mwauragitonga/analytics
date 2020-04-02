@@ -43,7 +43,7 @@ class Broadcasts extends CI_Controller
 			$email = $this->input->post('email');
 		$send= $this->send_broadcast_email($title, $message, $email);
 		if ($send == True){
-			$message = "Email Sent!";
+			$message = "Message Sent!";
 			$data = array(
 				'message' => $message,
 				'title' => "Broadcast Messages",
@@ -52,7 +52,7 @@ class Broadcasts extends CI_Controller
 			//var_dump($formFours);
 			$this->load->view('index.php', $data);
 		}else{
-			$message = "Email Not Sent!";
+			$message = "Message Not Sent!";
 			$data = array(
 				'message' => $message,
 				'title' => "Broadcast Messages",
@@ -67,9 +67,10 @@ class Broadcasts extends CI_Controller
 			$emails = $this->Broadcasts_model->getUserEmails();
 			foreach ($emails as $email){
 				$mail = $email->email;
-				$send=	$this->send_broadcast_email($title, $message, $mail);
+				$name = $number->fName;
+				$send=	$this->send_broadcast_email($title, $message, $mail, $name);
 				if ($send == True){
-					$message = "Email Sent!";
+					$message = "Message Sent!";
 					$data = array(
 						'message' => $message,
 						'title' => "Broadcast Messages",
@@ -78,7 +79,7 @@ class Broadcasts extends CI_Controller
 					//var_dump($formFours);
 					$this->load->view('index.php', $data);
 				}else{
-					$message = "Email Not Sent!";
+					$message = "Message Not Sent!";
 					$data = array(
 						'message' => $message,
 						'title' => "Broadcast Messages",
@@ -107,7 +108,7 @@ class Broadcasts extends CI_Controller
 			$phone = $this->input->post('phone');
 			$send= $this->send_broadcast_SMS( $message, $phone);
 			if ($send == True){
-				$message = "SMS Sent!";
+				$message = "Message Sent!";
 				$data = array(
 					'message' => $message,
 					'title' => "Broadcast Messages",
@@ -115,7 +116,7 @@ class Broadcasts extends CI_Controller
 				);
 				$this->load->view('index.php', $data);
 			}else{
-				$message = "SMS Not Sent!";
+				$message = "Message Not Sent!";
 				$data = array(
 					'message' => $message,
 					'title' => "Broadcast Messages",
@@ -132,7 +133,7 @@ class Broadcasts extends CI_Controller
 				$name = $number->fName;
 				$send=	$this->send_broadcast_SMS($message, $phoneNo, $name);
 				if ($send == True){
-					$message = "SMS Sent!";
+					$message = "Message Sent!";
 					$data = array(
 						'message' => $message,
 						'title' => "Broadcast Messages",
@@ -141,7 +142,7 @@ class Broadcasts extends CI_Controller
 					//var_dump($formFours);
 					$this->load->view('index.php', $data);
 				}else{
-					$message = "SMS Not Sent!";
+					$message = "Message Not Sent!";
 					$data = array(
 						'message' => $message,
 						'title' => "Broadcast Messages",
@@ -176,8 +177,13 @@ class Broadcasts extends CI_Controller
 	 * @return  boolean
 	 */
 
-	public function send_broadcast_email($title, $message, $email)
+	public function send_broadcast_email($title, $message, $email, $name="")
 	{
+		$data= array(
+			'name'=> $name,
+			'message'=> $message
+		);
+
 		$config['protocol'] = 'smtp';
 		$config['smtp_host'] = 'dawati.co.ke';
 		$config['smtp_port'] = '465';
@@ -195,8 +201,8 @@ class Broadcasts extends CI_Controller
 		$this->email->from('account_confirmations@dawati.co.ke', 'Dawati');
 		$this->email->to($email);
 		$this->email->subject($title);
-	//	$body = $this->load->view('template/confirmationEmail', $data, TRUE); // to be provided
-		$this->email->message($message);
+		$body = $this->load->view('broadcasts/email', $data, True); // to be provided
+		$this->email->message($body);
 		try {
 			$this->email->send();
 			// echo "mail sent";
@@ -208,5 +214,16 @@ class Broadcasts extends CI_Controller
 			return false;
 
 		}
+	}
+	public function loadEmail(){
+		$data = array(
+			'fName'=> "Tosh",
+			'message'=> "By the way, if you're wondering where you can find more of this fine meaty filler, visitBy the way, if you're wondering where you can find more of this fine meaty filler, visitBy the way, if you're wondering where you can find more of this fine meaty filler, visit",
+			'title' => "Broadcast Email",
+			'view' => "broadcasts/email.php"
+		);
+		//var_dump($formFours);
+		$this->load->view('index.php', $data);
+
 	}
 }
