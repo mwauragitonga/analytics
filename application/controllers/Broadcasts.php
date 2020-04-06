@@ -65,28 +65,31 @@ class Broadcasts extends CI_Controller
 		}else{
 			//get all user emails from dB
 			$emails = $this->Broadcasts_model->getUserEmails();
-			foreach ($emails as $email){
+			foreach ($emails as $email) {
 				$mail = $email->email;
 				$name = $email->fName;
-				$send=	$this->send_broadcast_email($title, $message, $mail, $name);
-				if ($send == True){
-					$status = "Message Sent!";
-					$data = array(
-						'message' => $status,
-						'title' => "Broadcast Messages",
-						'view' => "broadcasts/messages.php"
-					);
-					//var_dump($formFours);
-					$this->load->view('index.php', $data);
-				}else{
-					$status = "Message Not Sent!";
-					$data = array(
-						'message' => $status,
-						'title' => "Broadcast Messages",
-						'view' => "broadcasts/messages.php"
-					);
-					//var_dump($formFours);
-					$this->load->view('index.php', $data);
+				if (!empty($mail)) {
+					$send = $this->send_broadcast_email($title, $message, $mail, $name);
+
+					if ($send == True) {
+						$status = "Message Sent!";
+						$data = array(
+							'message' => $status,
+							'title' => "Broadcast Messages",
+							'view' => "broadcasts/messages.php"
+						);
+						//var_dump($formFours);
+						$this->load->view('index.php', $data);
+					} else {
+						$status = "Message Not Sent!";
+						$data = array(
+							'message' => $status,
+							'title' => "Broadcast Messages",
+							'view' => "broadcasts/messages.php"
+						);
+						//var_dump($formFours);
+						$this->load->view('index.php', $data);
+					}
 				}
 			}
 		}
@@ -106,7 +109,8 @@ class Broadcasts extends CI_Controller
 		$checkbox = $this->input->post('checkbox');
 		if($checkbox == 1){
 			$phone = $this->input->post('phone');
-			$send= $this->send_broadcast_SMS( $message, $phone);
+
+				$send = $this->send_broadcast_SMS($message, $phone);
 			if ($send == True){
 				$status = "Message Sent!";
 				$data = array(
@@ -131,25 +135,28 @@ class Broadcasts extends CI_Controller
 			foreach ($numbers as $number){
 				$phoneNo = $number->mobile;
 				$name = $number->fName;
-				$send=	$this->send_broadcast_SMS($message, $phoneNo, $name);
-				if ($send == True){
-					$status = "Message Sent!";
-					$data = array(
-						'message' => $status,
-						'title' => "Broadcast Messages",
-						'view' => "broadcasts/messages.php"
-					);
-					//var_dump($formFours);
-					$this->load->view('index.php', $data);
-				}else{
-					$status = "Message Not Sent!";
-					$data = array(
-						'message' => $status,
-						'title' => "Broadcast Messages",
-						'view' => "broadcasts/messages.php"
-					);
-					//var_dump($formFours);
-					$this->load->view('index.php', $data);
+				if(!empty($phoneNo)) {
+					$send = $this->send_broadcast_SMS($message, $phoneNo, $name);
+
+					if ($send == True) {
+						$status = "Message Sent!";
+						$data = array(
+							'message' => $status,
+							'title' => "Broadcast Messages",
+							'view' => "broadcasts/messages.php"
+						);
+						//var_dump($formFours);
+						$this->load->view('index.php', $data);
+					} else {
+						$status = "Message Not Sent!";
+						$data = array(
+							'message' => $status,
+							'title' => "Broadcast Messages",
+							'view' => "broadcasts/messages.php"
+						);
+						//var_dump($formFours);
+						$this->load->view('index.php', $data);
+					}
 				}
 			}
 		}
