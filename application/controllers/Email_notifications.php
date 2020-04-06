@@ -34,7 +34,7 @@ class Email_notifications extends CI_Controller {
 			} catch (MpdfException $e)
 			{
 			}
-			$this->sendMail($pdf_path,$email);
+			$this->sendMail($student);
 		}
 	}
 
@@ -79,7 +79,7 @@ class Email_notifications extends CI_Controller {
 			$string_version = serialize($html);
 			$mpdf->WriteHTML($string_version);
 			$time = date('ymdhis');
-			$mpdf->Output(APPPATH . 'views/reports/pdfs/' . $time . '.pdf', 'F');
+			$mpdf->Output(APPPATH . 'views/reports/pdfs/' . $student->fname .'_'. $student->lname . '.pdf', 'F');
 		} catch (MpdfException $e)
 		{
 		}
@@ -87,16 +87,15 @@ class Email_notifications extends CI_Controller {
 	}
 
 	/**
-	 * @param $pdf_path
-	 * @param $email
+	 * @param $student
 	 * @return bool
 	 */
-	private function sendMail($pdf_path,$email)
+	private function sendMail($student)
 	{
 		$config['protocol'] = 'smtp';
 		$config['smtp_host'] = 'dawati.co.ke';
 		$config['smtp_port'] = '465';
-		$config['smtp_user'] = 'account_confirmations@dawati.co.ke';
+		$config['smtp_user'] = 'usagenotifications@dawati.co.ke';
 		$config['smtp_pass'] = 'D%bEPUE523yR';
 		$config['smtp_crypto'] = 'ssl';
 		$config['charset'] = 'iso-8859-1';
@@ -106,24 +105,15 @@ class Email_notifications extends CI_Controller {
 		$this->email->set_newline("\r\n");
 
 		$this->email->set_mailtype("html");
-		$this->email->from('account_confirmations@dawati.co.ke', 'Dawati');
-		$this->email->to($email);
+		$this->email->from('usagenotifications@dawati.co.ke', 'Dawati');
+		$this->email->to($student->email);
 		$this->email->subject('Dawati App Usage For The Last Month');
-		//select newest file
-		$files = scandir(APPPATH . 'views/reports/pdfs/', SCANDIR_SORT_DESCENDING);
-		$newest_file = $files[0];
-		$this->email->message('Generated Report on ' . $title);
-		$this->email->attach(APPPATH . 'views/reports/pdfs/' . $newest_file);
+		$this->email->message("Dear '.$student->fname.', \n. Find the attached document containing you dawati usage for the previous month");
+		$this->email->attach(APPPATH . 'views/reports/pdfs/' . $student->fname .'_'. $student->lname.'.pdf');
 		try
 		{
-			if ($this->email->send())
-			{
-				echo 'Email sent';
-			} else
-			{
-				echo 'Fail';
-			}
-			unlink(APPPATH . 'views/reports/pdfs/' . $newest_file);
+			$this->email->send();
+			unlink(APPPATH . 'views/reports/pdfs/' . $student->fname .'_'. $student->lname.'.pdf');
 
 		} catch (Exception $e)
 		{
