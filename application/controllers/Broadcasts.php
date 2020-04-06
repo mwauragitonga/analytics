@@ -43,18 +43,18 @@ class Broadcasts extends CI_Controller
 			$email = $this->input->post('email');
 		$send= $this->send_broadcast_email($title, $message, $email);
 		if ($send == True){
-			$message = "Message Sent!";
+			$status = "Message Sent!";
 			$data = array(
-				'message' => $message,
+				'message' => $status,
 				'title' => "Broadcast Messages",
 				'view' => "broadcasts/messages.php"
 			);
 			//var_dump($formFours);
 			$this->load->view('index.php', $data);
 		}else{
-			$message = "Message Not Sent!";
+			$status = "Message Not Sent!";
 			$data = array(
-				'message' => $message,
+				'message' => $status,
 				'title' => "Broadcast Messages",
 				'view' => "broadcasts/messages.php"
 			);
@@ -67,21 +67,21 @@ class Broadcasts extends CI_Controller
 			$emails = $this->Broadcasts_model->getUserEmails();
 			foreach ($emails as $email){
 				$mail = $email->email;
-				$name = $number->fName;
+				$name = $email->fName;
 				$send=	$this->send_broadcast_email($title, $message, $mail, $name);
 				if ($send == True){
-					$message = "Message Sent!";
+					$status = "Message Sent!";
 					$data = array(
-						'message' => $message,
+						'message' => $status,
 						'title' => "Broadcast Messages",
 						'view' => "broadcasts/messages.php"
 					);
 					//var_dump($formFours);
 					$this->load->view('index.php', $data);
 				}else{
-					$message = "Message Not Sent!";
+					$status = "Message Not Sent!";
 					$data = array(
-						'message' => $message,
+						'message' => $status,
 						'title' => "Broadcast Messages",
 						'view' => "broadcasts/messages.php"
 					);
@@ -108,17 +108,17 @@ class Broadcasts extends CI_Controller
 			$phone = $this->input->post('phone');
 			$send= $this->send_broadcast_SMS( $message, $phone);
 			if ($send == True){
-				$message = "Message Sent!";
+				$status = "Message Sent!";
 				$data = array(
-					'message' => $message,
+					'message' => $status,
 					'title' => "Broadcast Messages",
 					'view' => "broadcasts/messages.php"
 				);
 				$this->load->view('index.php', $data);
 			}else{
-				$message = "Message Not Sent!";
+				$status = "Message Not Sent!";
 				$data = array(
-					'message' => $message,
+					'message' => $status,
 					'title' => "Broadcast Messages",
 					'view' => "broadcasts/messages.php"
 				);
@@ -133,18 +133,18 @@ class Broadcasts extends CI_Controller
 				$name = $number->fName;
 				$send=	$this->send_broadcast_SMS($message, $phoneNo, $name);
 				if ($send == True){
-					$message = "Message Sent!";
+					$status = "Message Sent!";
 					$data = array(
-						'message' => $message,
+						'message' => $status,
 						'title' => "Broadcast Messages",
 						'view' => "broadcasts/messages.php"
 					);
 					//var_dump($formFours);
 					$this->load->view('index.php', $data);
 				}else{
-					$message = "Message Not Sent!";
+					$status = "Message Not Sent!";
 					$data = array(
-						'message' => $message,
+						'message' => $status,
 						'title' => "Broadcast Messages",
 						'view' => "broadcasts/messages.php"
 					);
