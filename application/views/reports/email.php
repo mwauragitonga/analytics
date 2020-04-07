@@ -179,8 +179,8 @@ Yours Truly @Cyrus
 							<tr>
 								<td align="center">
 									<p>
-										<a href="" class="button">Login</a> <br>
-										or follow this link
+										<a href="bit.ly/2RjIcRZ" class="button">Login</a> <br>
+										or follow this link <a href="bit.ly/2RjIcRZ">bit.ly/2RjIcRZ</a>
 									</p>
 								</td>
 							</tr>

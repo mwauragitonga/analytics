@@ -217,7 +217,7 @@ class AppModel extends CI_Model {
 		{
 			$today = date('Y-m-d', time());
 			$usageStartDate = date('Y-m-d', strtotime($today . ' - 30  days'));
-			$this->db->where('start_stamp>', $usageStartDate);
+			$this->db->where('start_stamp >', $usageStartDate);
 		}
 		$this->db->group_by('subtopic_ID');
 		$this->db->order_by('readSecs');
@@ -372,7 +372,7 @@ WHERE
 		$this->db->where('users.user_type', 1);
 		if ( ! empty($u))
 		{
-			$this->db->where('users.email', $u);
+			$this->db->where('users.user_id', $u);
 		}
 		$students = $this->db->get()->result();
 		return $students;

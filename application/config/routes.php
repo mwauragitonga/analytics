@@ -109,3 +109,6 @@ $route['activate'] = "PayJoy/payjoy_activate_device";
 
 //cron job emails wget
 $route['notify'] = "Email_notifications/notifications";
+
+
+//student portal

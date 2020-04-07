@@ -309,5 +309,37 @@ class Web_model extends CI_Model
 	 */
 	public function userStudyInfo($user_id){
 
+		$today = date('Y-m-d', time());
+		$usageStartDate = date('Y-m-d', strtotime($today . ' - 30  days'));
+
+		$this->db->select('web_actions_logs.user_id , time_of_action , users.fname, lname, study_levels.level_name, multimedia_content.file_name');
+		$this->db->from('web_actions_logs');
+		$this->db->join("users", "web_actions_logs.user_id = users.user_id");
+		$this->db->join("students", "web_actions_logs.user_id = students.user_id");
+		$this->db->join("study_levels", "students.study_level = study_levels.level_code");
+		$this->db->join("multimedia_content", "web_actions_logs.file_id = multimedia_content.file_id");
+		$this->db->where('action', "read_book");
+		$this->db->where('web_actions_logs.user_id !=', NULL);
+		$this->db->where('web_actions_logs.file_id !=', NULL);
+		$this->db->where('time_of_action >', $usageStartDate);
+		$this->db->where('users.user_id',$user_id);
+		$ebooks = $this->db->get()->result();
+//videos
+		$this->db->select('web_actions_logs.user_id , time_of_action , users.fname, lname, study_levels.level_name, multimedia_content.file_name');
+		$this->db->from('web_actions_logs');
+		$this->db->join("users", "web_actions_logs.user_id = users.user_id");
+		$this->db->join("students", "web_actions_logs.user_id = students.user_id");
+		$this->db->join("study_levels", "students.study_level = study_levels.level_code");
+		$this->db->join("multimedia_content", "web_actions_logs.file_id = multimedia_content.file_id");
+		$this->db->where('action', "read_book");
+		$this->db->where('web_actions_logs.user_id !=', NULL);
+		$this->db->where('web_actions_logs.file_id !=', NULL);
+		$this->db->where('time_of_action >', $usageStartDate);
+		$this->db->where('users.user_id',$user_id);
+		$videos = $this->db->get()->result();
+		$data = array("ebooks" => $ebooks, "videos" => $videos);
+
+		return $data;
+
 	}
 }

@@ -21,20 +21,23 @@ class Email_notifications extends CI_Controller {
 	function notifications()
 	{
 
-		$students = $this->app->getAllStudents('rusrus844@gmail.com');
+		$students = $this->app->getAllStudents('11145');
+		print_r($students);
 		foreach ($students as $student)
 		{
 			$user_id = $student->user_id;
 			$email = $student->email;
 			$app_usage = $this->appUsage($user_id);
 			$web_usage = $this->webUsage($user_id);
+
+			print_r($web_usage);
 			try
 			{
-				$pdf_path = $this->generatePdf($app_usage, $web_usage, $student);
+				//$pdf_path = $this->generatePdf($app_usage, $web_usage, $student);
 			} catch (MpdfException $e)
 			{
 			}
-			$this->sendMail($student);
+			//$this->sendMail($student);
 		}
 	}
 

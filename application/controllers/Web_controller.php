@@ -3,8 +3,7 @@ require APPPATH . '/libraries/REST_Controller.php';
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class Web_controller extends CI_Controller
-{
+class Web_controller extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
@@ -42,7 +41,8 @@ class Web_controller extends CI_Controller
 		$users = array();
 		$signups = array();
 		$period = $date->modify("-6 days");
-		for ($i = 0; $i < 7; $i++) {
+		for ($i = 0; $i < 7; $i++)
+		{
 			$users[$i] = $this->Web_model->users_By_Day($period->format('m-d'));
 			$signups[$i] = $this->Web_model->signups_By_Day($period->format('m-d'));
 			$period = $date->modify("+1 day");
@@ -81,9 +81,11 @@ class Web_controller extends CI_Controller
 		$startDate = date("Y-m-d", strtotime($dates[0]));
 		$end_Date = date("Y-m-d", strtotime($dates[1]));
 		$target = ''; /*Depicts single and range dates*/
-		if ($startDate == $end_Date) {
+		if ($startDate == $end_Date)
+		{
 			$target = 'single';
-		} else {
+		} else
+		{
 			$target = 'range';
 		}
 		$sess_data = array(
@@ -132,7 +134,7 @@ class Web_controller extends CI_Controller
 	{
 
 		$readers = $this->Web_model->getbookReaders();
-	//	var_dump(count($readers));
+		//	var_dump(count($readers));
 		$data = array(
 
 			'users' => $readers,
