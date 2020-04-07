@@ -96,6 +96,8 @@
 	</div>
 
 	<div class="appUsage">
+
+		<h2>1 .Mobile App Usage</h2>
 		<b> Videos Watched</b>
 
 		<table style="border: solid #00a19a">
@@ -170,8 +172,23 @@
 			</table>
 			<br>
 	</div>
-
+	<pagebreak>
 	<div class="webUsage">
+
+		<h2>1 .Web App Usage</h2>
+		<b> Videos Watched</b>
+
+		table style="border: solid #00a19a">
+		<tr>
+			<b></b>
+			<td><b>Index |</b></td>
+			<td><b>Video Name |</b></td>
+			<td><b>Level|</b></td>
+			<td><b>Time of View |</b></td>
+
+		</tr>
+		<tbody>
+
 	</div>
 
 	<div class="footer">
