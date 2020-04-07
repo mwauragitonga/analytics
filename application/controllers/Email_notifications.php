@@ -21,7 +21,7 @@ class Email_notifications extends CI_Controller {
 	function notifications()
 	{
 
-		$students = $this->app->getAllStudents();
+		$students = $this->app->getAllStudents('rusrus844@gmail.com');
 		foreach ($students as $student)
 		{
 			$user_id = $student->user_id;
@@ -108,7 +108,7 @@ class Email_notifications extends CI_Controller {
 		$this->email->from('usagenotifications@dawati.co.ke', 'Dawati');
 		$this->email->to($student->email);
 		$this->email->subject('Dawati App Usage For The Last Month');
-		$this->email->message("Dear '.$student->fname.', \n. Find the attached document containing you dawati usage for the previous month");
+		$this->email->message("Dear .$student->fname, \n. Find the attached document containing you dawati usage for the previous month");
 		$this->email->attach(APPPATH . 'views/reports/pdfs/' . $student->fname .'_'. $student->lname.'.pdf');
 		try
 		{
