@@ -103,12 +103,17 @@ class Email_notifications extends CI_Controller {
 		$this->load->library('email');
 		$this->email->initialize($config);
 		$this->email->set_newline("\r\n");
-
+		$data=array(
+			'student' =>$student,
+			'url' =>''
+		);
+		$body = $this->load->view('reports/email', $data, True);
 		$this->email->set_mailtype("html");
 		$this->email->from('usagenotifications@dawati.co.ke', 'Dawati');
 		$this->email->to($student->email);
 		$this->email->subject('Dawati App Usage For The Last Month');
-		$this->email->message("Dear .$student->fname, \n. Find the attached document containing you dawati usage for the previous month");
+		$this->email->message($body);
+		//$this->email->message("Dear .$student->fname, \n. Find the attached document containing you dawati usage for the previous month");
 		$this->email->attach(APPPATH . 'views/reports/pdfs/' . $student->fname .'_'. $student->lname.'.pdf');
 		try
 		{
