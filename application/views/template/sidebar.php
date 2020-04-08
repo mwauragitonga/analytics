@@ -74,6 +74,12 @@
 				</a>
 
 			</li>
+			<li>
+				<a href="<?php echo base_url(); ?>broadcasts">
+					<i class="fa fa-send"></i>
+					<span>Broadcasts</span>
+				</a>
+			</li>
         </ul>
     </section>
     <!-- /.sidebar -->

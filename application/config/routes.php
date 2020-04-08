@@ -90,6 +90,12 @@ $route['agents'] = 'Agents/agentsView';
 $route['add_user'] = 'Agents/createAccountView';
 $route['createAccount'] = 'Agents/createAccount';
 $route['referrals/(:any)'] = 'Agents/referalByAgents/$1';
+$route['broadcasts'] = 'Broadcasts/messages';
+$route['broadcastEmail'] = 'Broadcasts/broadcastEmail';
+$route['broadcastSMS'] = 'Broadcasts/broadcastSMS';
+$route['email'] = 'Broadcasts/loadEmail';
+
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -97,4 +103,12 @@ $route['translate_uri_dashes'] = FALSE;
 $route['getDevice'] = "PayJoy/payjoy_check_device";
 $route['lock'] = "PayJoy/payjoy_lock_device";
 $route['unlock'] = "PayJoy/payjoy_unlock_device";
+$route['deactivate'] = "PayJoy/payjoy_deactivate_device";
+$route['activate'] = "PayJoy/payjoy_activate_device";
 
+
+//cron job emails wget
+$route['notify'] = "Email_notifications/notifications";
+
+
+//student portal

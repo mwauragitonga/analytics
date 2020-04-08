@@ -33,7 +33,8 @@
 						<th>Last Seen </th>
 						<th> Lock Device </th>
 						<th> Unlock Device </th>
-						<th> More Actions </th>
+						<th> Activate Lock </th>
+						<th> Deactivate Lock </th>
 
 					</tr>
 					</thead>
@@ -51,7 +52,9 @@
 							<td><?php echo date('Y-m-d H:i:s', $device->lastSeen);?></td>
 							<td><a href="<?php echo base_url(); ?>lock"><button class="btn-danger" >Lock Device</button></a></td>
 							<td><a href="<?php echo base_url(); ?>unlock"><button class="btn-info" >Unlock Device</button></a></td>
-							<td><a href="<?php echo base_url() ; ?>" class="small-box-footer">More Actions  <i class="fa fa-arrow-circle-right"></i></a></td>
+							<td><a href="<?php echo base_url(); ?>activate"><button class="btn-primary" >Activate Lock</button></a></td>
+							<td><a href="<?php echo base_url(); ?>deactivate"><button class="btn-success" >Deactivate Lock</button></a></td>
+
 						</tr>
 						</tbody>
 
