@@ -330,8 +330,9 @@ class Web_model extends CI_Model
 		$this->db->join("users", "web_actions_logs.user_id = users.user_id");
 		$this->db->join("students", "web_actions_logs.user_id = students.user_id");
 		$this->db->join("study_levels", "students.study_level = study_levels.level_code");
-		$this->db->join("multimedia_content", "web_actions_logs.file_id = multimedia_content.file_id");
-		$this->db->where('action', "read_book");
+		$this->db->join("multimedia_content", "web_actions_logs.subtopic_id = multimedia_content.subtopicID");
+		//$this->db->join('subtopics','web_actions_logs.subtopic_id = subtopics.subtopicID','left');
+		$this->db->where('action', "watch_video");
 		$this->db->where('web_actions_logs.user_id !=', NULL);
 		$this->db->where('web_actions_logs.file_id !=', NULL);
 		$this->db->where('time_of_action >', $usageStartDate);

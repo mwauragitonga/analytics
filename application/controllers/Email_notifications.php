@@ -21,8 +21,8 @@ class Email_notifications extends CI_Controller {
 	function notifications()
 	{
 
-		$students = $this->app->getAllStudents('11145');
-		print_r($students);
+		$students = $this->app->getAllStudents('');
+		//print_r($students);
 		foreach ($students as $student)
 		{
 			$user_id = $student->user_id;
@@ -30,14 +30,15 @@ class Email_notifications extends CI_Controller {
 			$app_usage = $this->appUsage($user_id);
 			$web_usage = $this->webUsage($user_id);
 
-			print_r($web_usage);
+			//print_r($web_usage);
 			try
 			{
-				//$pdf_path = $this->generatePdf($app_usage, $web_usage, $student);
+				$pdf_path = $this->generatePdf($app_usage, $web_usage, $student);
 			} catch (MpdfException $e)
 			{
+				print_r($e);
 			}
-			//$this->sendMail($student);
+			$this->sendMail($student);
 		}
 	}
 
@@ -85,6 +86,7 @@ class Email_notifications extends CI_Controller {
 			$mpdf->Output(APPPATH . 'views/reports/pdfs/' . $student->fname .'_'. $student->lname . '.pdf', 'F');
 		} catch (MpdfException $e)
 		{
+			echo 'fail';
 		}
 		return '';
 	}

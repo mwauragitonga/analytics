@@ -60,6 +60,9 @@
 		border-top: 1px solid;
 		text-align: center;
 	}
+	table {
+		width: 100%;
+	}
 
 	tbody > tr:nth-child(odd) {
 		background-color: rgba(0, 0, 0, 0.025);
@@ -138,7 +141,7 @@
 
 			<b>Books Read</b>
 
-			<table  style="border: solid #00a19a">
+			<table  style="border: solid #00a19a" >
 				<tr>
 					<td><b>Index |</b></td>
 					<td><b>Ebook Name |</b></td>
@@ -175,10 +178,10 @@
 	<pagebreak>
 	<div class="webUsage">
 
-		<h2>1 .Web App Usage</h2>
+		<h2>2 .Web App Usage</h2>
 		<b> Videos Watched</b>
 
-		table style="border: solid #00a19a">
+		<table style="border: solid #00a19a">
 		<tr>
 			<b></b>
 			<td><b>Index |</b></td>
@@ -187,8 +190,56 @@
 			<td><b>Time of View |</b></td>
 
 		</tr>
-		<tbody>
+			<tbody>
+			<?php
+			$count = 0;
+			foreach ($webUsage['videos'] as $video)
+			{?>
+				<tr>
+					<td><?php echo $count + 1 ?></td>
+					<td><?php echo ucfirst(strtolower(substr($video->file_name , 0, -4))) . "  " ?></td>
+					<td><?php echo  $video->level_name ?></td>
+					<td><?php echo $video->time_of_action; ?></td>
 
+				</tr>
+				<?php
+				$count++;
+			}
+			?>
+
+			</tbody>
+		</table>
+		<pagebreak>
+		<b> eBooks Watched</b>
+
+		<table style="border: solid #00a19a">
+			<tr>
+				<b></b>
+				<td><b>Index |</b></td>
+				<td><b>eBook Name |</b></td>
+				<td><b>Level|</b></td>
+				<td><b>Time of View |</b></td>
+
+			</tr>
+			<tbody>
+			<?php
+			$count = 0;
+			foreach ($webUsage['ebooks'] as $book)
+			{?>
+				<tr>
+					<td><?php echo $count + 1 ?></td>
+					<td><?php echo $book->file_name . "  " ?></td>
+					<td><?php echo $book->level_name ?></td>
+					<td><?php echo $book->time_of_action; ?></td>
+
+				</tr>
+				<?php
+				$count++;
+			}
+			?>
+
+			</tbody>
+		</table>
 	</div>
 
 	<div class="footer">
