@@ -129,5 +129,13 @@ class Payments_model extends CI_Model
         $query = $this->db->get()->result();
         return $query;
     }
+    public function cumulative_total(){
+    	$initial_paybill_amount = 63753; //i am sorry i had to hardcode this
+		$amounts = $this->reports();
+		foreach ($amounts as $amount){
+			$initial_paybill_amount+=$amount->transaction_Amount;
+		}
+		return $initial_paybill_amount;
+	}
 
 }

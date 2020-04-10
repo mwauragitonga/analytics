@@ -121,7 +121,7 @@
 						<h3 id="cumulative"></h3>
 
 						<p>Cumulative Total
-							(On progress)</p>
+							</p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-money"></i>
@@ -231,7 +231,7 @@
             var payment_Attempts = response.tiles_data.payment_Attempts;
             var success_Attempts = response.tiles_data.successful_Payment_Attempts;
             var paymentSuccessRate = (success_Attempts / payment_Attempts) * 100;
-
+			var cumulativeTotal =  response.tiles_data.cumulative
             document.getElementById("total_Revenue").innerText = formatMoney(revenue);
             document.getElementById("org_balance").innerText = formatMoney(orgBalance);
             document.getElementById("aYS").innerText = aYS;
@@ -239,6 +239,7 @@
             document.getElementById("aTS").innerText = aTS;
             //  document.getElementById("nS").innerText = nS;
             document.getElementById("successRate").innerText = Math.round(paymentSuccessRate, 3).toString() + "%";
+            document.getElementById("cumulative").innerText =formatMoney(cumulativeTotal);
 
         };
     }

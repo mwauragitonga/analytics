@@ -37,6 +37,7 @@ class Payments extends REST_Controller
      //   $data["non_Subscribers"] = $this->Payments_model->none_subscribers($start_date, $end_date);
         $data["payment_Attempts"] = $this->Payments_model->paymentAttempts($start_date, $end_date);
         $data["successful_Payment_Attempts"] = $this->Payments_model->successfulPaymentAttempts($start_date, $end_date);
+        $data["cumulative"] = $this->Payments_model->cumulative_total();
 
         $response = array(
             "status" => true,
