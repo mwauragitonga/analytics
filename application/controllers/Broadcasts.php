@@ -2,8 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include_once 'AfricasTalkingGateway.php';
 
-class Broadcasts extends CI_Controller
-{
+class Broadcasts extends CI_Controller {
 
 	/**
 	 * This is the broadcast messages controller for Dawati
@@ -24,7 +23,9 @@ class Broadcasts extends CI_Controller
 		$this->load->model('Broadcasts_model');
 
 	}
-	public function messages(){
+
+	public function messages()
+	{
 		$data = array(
 
 			'title' => "Broadcast Messages",
@@ -33,66 +34,66 @@ class Broadcasts extends CI_Controller
 		//var_dump($formFours);
 		$this->load->view('index.php', $data);
 	}
-	public function broadcastEmail(){
+
+	public function broadcastEmail()
+	{
 
 		$title = $this->input->post('title');
 		$message = $this->input->post('message');
 		$checkbox = $this->input->post('checkbox');
 		//if checkbox is checked send email to users listed only otherwise send to all users
-		if($checkbox == 1){
+		if ($checkbox == 1)
+		{
 			$email = $this->input->post('email');
-		$send= $this->send_broadcast_email($title, $message, $email);
-		if ($send == True){
-			$status = "Message Sent!";
-			$data = array(
-				'message' => $status,
-				'title' => "Broadcast Messages",
-				'view' => "broadcasts/messages.php"
-			);
-			//var_dump($formFours);
-			$this->load->view('index.php', $data);
-		}else{
-			$status = "Message Not Sent!";
-			$data = array(
-				'message' => $status,
-				'title' => "Broadcast Messages",
-				'view' => "broadcasts/messages.php"
-			);
-			//var_dump($formFours);
-			$this->load->view('index.php', $data);
-		}
+			$send = $this->send_broadcast_email($title, $message, $email);
+			if ($send == TRUE)
+			{
+				$status = "Message Sent!";
+				$data = array(
+					'message' => $status,
+					'title' => "Broadcast Messages",
+					'view' => "broadcasts/messages.php"
+				);
+				//var_dump($formFours);
+				$this->load->view('index.php', $data);
+			} else
+			{
+				$status = "Message Not Sent!";
+				$data = array(
+					'message' => $status,
+					'title' => "Broadcast Messages",
+					'view' => "broadcasts/messages.php"
+				);
+				//var_dump($formFours);
+				$this->load->view('index.php', $data);
+			}
 
-		}else{
+		} else
+		{
 			//get all user emails from dB
 			$emails = $this->Broadcasts_model->getUserEmails();
-			foreach ($emails as $email) {
+			foreach ($emails as $email)
+			{
 				$mail = $email->email;
 				$name = $email->fName;
-				if (!empty($mail)) {
+				if ( ! empty($mail))
+				{
 					$send = $this->send_broadcast_email($title, $message, $mail, $name);
 
-					if ($send == True) {
-						$status = "Message Sent!";
-						$data = array(
-							'message' => $status,
-							'title' => "Broadcast Messages",
-							'view' => "broadcasts/messages.php"
-						);
-						//var_dump($formFours);
-						$this->load->view('index.php', $data);
-					} else {
-						$status = "Message Not Sent!";
-						$data = array(
-							'message' => $status,
-							'title' => "Broadcast Messages",
-							'view' => "broadcasts/messages.php"
-						);
-						//var_dump($formFours);
-						$this->load->view('index.php', $data);
-					}
+
 				}
+
+
 			}
 		}
+		$status = "Message Sent!";
+		$data = array(
+			'message' => $status,
+			'title' => "Broadcast Messages",
+			'view' => "broadcasts/messages.php"
+		);
+
+		$this->load->view('index.php', $data);
 
 
 //		$data = array(
@@ -103,15 +104,19 @@ class Broadcasts extends CI_Controller
 //		//var_dump($formFours);
 //		$this->load->view('index.php', $data);
 	}
-	public function broadcastSMS(){
+
+	public function broadcastSMS()
+	{
 		$message = $this->input->post('message');
 		//if checkbox is checked send to that number else fetch all student phone numbers from dB @kelvin
 		$checkbox = $this->input->post('checkbox');
-		if($checkbox == 1){
+		if ($checkbox == 1)
+		{
 			$phone = $this->input->post('phone');
 
-				$send = $this->send_broadcast_SMS($message, $phone);
-			if ($send == True){
+			$send = $this->send_broadcast_SMS($message, $phone);
+			if ($send == TRUE)
+			{
 				$status = "Message Sent!";
 				$data = array(
 					'message' => $status,
@@ -119,7 +124,8 @@ class Broadcasts extends CI_Controller
 					'view' => "broadcasts/messages.php"
 				);
 				$this->load->view('index.php', $data);
-			}else{
+			} else
+			{
 				$status = "Message Not Sent!";
 				$data = array(
 					'message' => $status,
@@ -129,16 +135,20 @@ class Broadcasts extends CI_Controller
 				$this->load->view('index.php', $data);
 			}
 
-		}else{
+		} else
+		{
 			//get all user phone numbers from dB
 			$numbers = $this->Broadcasts_model->getUserNumbers();
-			foreach ($numbers as $number){
+			foreach ($numbers as $number)
+			{
 				$phoneNo = $number->mobile;
 				$name = $number->fName;
-				if(!empty($phoneNo)) {
+				if ( ! empty($phoneNo))
+				{
 					$send = $this->send_broadcast_SMS($message, $phoneNo, $name);
 
-					if ($send == True) {
+					if ($send == TRUE)
+					{
 						$status = "Message Sent!";
 						$data = array(
 							'message' => $status,
@@ -147,7 +157,8 @@ class Broadcasts extends CI_Controller
 						);
 						//var_dump($formFours);
 						$this->load->view('index.php', $data);
-					} else {
+					} else
+					{
 						$status = "Message Not Sent!";
 						$data = array(
 							'message' => $status,
@@ -161,17 +172,20 @@ class Broadcasts extends CI_Controller
 			}
 		}
 	}
-	public function send_broadcast_SMS($text, $mobile, $name='')
+
+	public function send_broadcast_SMS($text, $mobile, $name = '')
 	{
 		$from_ = 'DAWATI';
-		$message = $text ;
-		try {
+		$message = $text;
+		try
+		{
 			$this->gateway->sendMessage($mobile, $message, $from_);
-			return true;
+			return TRUE;
 
-		} catch (Exception $e) {
+		} catch (Exception $e)
+		{
 			// var_dump($e);
-			return false;
+			return FALSE;
 
 		}
 
@@ -184,11 +198,11 @@ class Broadcasts extends CI_Controller
 	 * @return  boolean
 	 */
 
-	public function send_broadcast_email($title, $message, $email, $name="")
+	public function send_broadcast_email($title, $message, $email, $name = "")
 	{
-		$data= array(
-			'name'=> $name,
-			'message'=> $message
+		$data = array(
+			'name' => $name,
+			'message' => $message
 		);
 
 		$config['protocol'] = 'smtp';
@@ -208,24 +222,28 @@ class Broadcasts extends CI_Controller
 		$this->email->from('account_confirmations@dawati.co.ke', 'Dawati');
 		$this->email->to($email);
 		$this->email->subject($title);
-		$body = $this->load->view('broadcasts/email', $data, True); // to be provided
+		$body = $this->load->view('broadcasts/email', $data, TRUE); // to be provided
 		$this->email->message($body);
-		try {
+		try
+		{
 			$this->email->send();
 			// echo "mail sent";
-			return true;
+			return TRUE;
 
 
-		} catch (Exception $e) {
+		} catch (Exception $e)
+		{
 			echo "failed";
-			return false;
+			return FALSE;
 
 		}
 	}
-	public function loadEmail(){
+
+	public function loadEmail()
+	{
 		$data = array(
-			'fName'=> "Tosh",
-			'message'=> "By the way, if you're wondering where you can find more of this fine meaty filler, visitBy the way, if you're wondering where you can find more of this fine meaty filler, visitBy the way, if you're wondering where you can find more of this fine meaty filler, visit",
+			'fName' => "Tosh",
+			'message' => "By the way, if you're wondering where you can find more of this fine meaty filler, visitBy the way, if you're wondering where you can find more of this fine meaty filler, visitBy the way, if you're wondering where you can find more of this fine meaty filler, visit",
 			'title' => "Broadcast Email",
 			'view' => "broadcasts/email.php"
 		);

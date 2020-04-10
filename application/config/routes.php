@@ -106,9 +106,3 @@ $route['unlock'] = "PayJoy/payjoy_unlock_device";
 $route['deactivate'] = "PayJoy/payjoy_deactivate_device";
 $route['activate'] = "PayJoy/payjoy_activate_device";
 
-
-//cron job emails wget
-$route['notify'] = "Email_notifications/notifications";
-
-
-//student portal
