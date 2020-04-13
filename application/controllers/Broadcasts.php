@@ -17,7 +17,7 @@ class Broadcasts extends CI_Controller {
 		$this->data ['description'] = "";
 		//load africastalking api
 		$this->username = "boardpass";
-		$this->apikey = "c6885b63f091493b5fe00d3d9ad35d4a82f41c6182974f9c238f42a927444176";
+		$this->apikey = "e64837ac0691f08049305379bc705e5f90d1f06bd99f3ecc15b874f57b32d283";
 		$this->gateway = new AfricasTalkingGateway($this->username, $this->apikey, "boardpass");
 		//$this->load->model('Evaluations_model');
 		$this->load->model('Broadcasts_model');
