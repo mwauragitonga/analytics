@@ -174,13 +174,13 @@ Yours Truly @Cyrus
 						<h5> <?php echo "Dear $student->fname,"  ?><br/></h5>
 						<p><?php echo "Find the attached document containing you dawati usage for the previous month" ; ?></p>
 
-						<p>Use Your Dawati Credentials to Log in to the Analytics Portal and See Your Usages</p>
+						<p>Use Your Dawati Credentials to Log in to Dawati, Click on <b>"My Usage"</b> to See Your Usage</p>
 						<table>
 							<tr>
 								<td align="center">
 									<p>
-										<a href="bit.ly/2RjIcRZ" class="button">Login</a> <br>
-										or follow this link <a href="bit.ly/2RjIcRZ">bit.ly/2RjIcRZ</a>
+										<a href="https://bit.ly/2xBu7bW" class="button">Login</a> <br>
+										or follow this link <a href="https://bit.ly/2xBu7bW">https://bit.ly/2xBu7bW</a>
 									</p>
 								</td>
 							</tr>

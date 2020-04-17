@@ -94,6 +94,7 @@ $route['broadcasts'] = 'Broadcasts/messages';
 $route['broadcastEmail'] = 'Broadcasts/broadcastEmail';
 $route['broadcastSMS'] = 'Broadcasts/broadcastSMS';
 $route['email'] = 'Broadcasts/loadEmail';
+$route['notify'] = 'Email_notifications/notifications';
 
 
 $route['404_override'] = '';
