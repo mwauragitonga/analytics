@@ -9,6 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use Mpdf\Mpdf;
 use Mpdf\MpdfException;
 
+
+
 class Email_notifications extends CI_Controller {
 
 	public function __construct()

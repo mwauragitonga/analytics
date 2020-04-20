@@ -3,7 +3,7 @@
 <body>
 <style type="text/css">
 	body {
-		background: rgb(204, 204, 204);
+		background: rgb(255, 255, 255);
 	}
 
 	page {
