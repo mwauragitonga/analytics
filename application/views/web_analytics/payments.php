@@ -26,9 +26,10 @@
 					<tr>
 						<th> #</th>
 						<th>Name</th>
+						<th>Mobile</th>
 						<th>Gender</th>
 						<th>School</th>
-						<th>Study Level
+						<th>Study Level</th>
 						<th>Payment Status</th>
 						<th>Time </th>
 					</tr>
@@ -40,6 +41,7 @@
 						<tr>
 							<td><?php echo $count ; ?></td>
 							<td><?php echo $user->fname .' '. $user->lname ; ?></td>
+							<td><?php echo  $user->mobile ; ?></td>
 							<td><?php echo $user->gender ; ?></td>
 							<td> <?php echo $user->school_name ; ?></td>
 							<td><?php echo $user->level_name ; ?></td>
