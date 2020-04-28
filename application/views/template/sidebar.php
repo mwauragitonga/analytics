@@ -79,6 +79,11 @@
 					<i class="fa fa-send"></i>
 					<span>Broadcasts</span>
 				</a>
+			</li><li>
+				<a href="<?php echo base_url(); ?>searchView">
+					<i class="fa fa-search-plus"></i>
+					<span>Look Up</span>
+				</a>
 			</li>
         </ul>
     </section>
