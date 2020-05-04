@@ -13,13 +13,29 @@ class AppAnalytics extends CI_Controller
 		parent::__construct();
 		$this->load->model('AppModel');
 		$this->load->model('Payments_model');
+		//new addon
+		$this->load->library('session');
 
 	}
 
 	public function index()
 	{
-		$data = array(
+		$array_items=array('startDate','end_date','target');
+		$this->session->unset_userdata($array_items);
 
+		$dat = date('Y-m-d');
+		print_r($dat);
+		$date = new DateTime($dat);
+		$sess_data = array(
+			'startDate' => $dat,
+			'end_Date' => $dat,
+			'target' => 'single'
+		);
+		$this->session->set_userdata($sess_data);
+
+
+		$data = array(
+			//"dblayout"=>$this->AppModel->db_layout(),
 			"book_Minutes_Read" => $this->AppModel->book_Minutes_Read(),
 			"video_Minutes_Watched" => $this->AppModel->video_Minutes_Watched(),
 			"app_Usage_Minutes" => $this->AppModel->app_Usage_Minutes(),
@@ -36,12 +52,72 @@ class AppAnalytics extends CI_Controller
 		);
 		$this->load->view('index.php', $data);
 
+//		print_r($data['unique_signins']);
+		//print_r($data['all_signins']);
+
+	}
+	public function AppData(){
+		/*new function-by Stan*/
+
+		$array_items=array('startDate','end_date','target');
+		$this->session->unset_userdata($array_items);
+		$post_data= file_get_contents("php://input");
+		$decoded_post_data= json_decode($post_data);
+		$period= $decoded_post_data->date;
+		$dates=explode('-',$period);
+		$startDate=date("Y-m-d",strtotime($dates[0]));
+		$end_Date=date("Y-m-d",strtotime($dates[1]));
+		$target=''; /*Depicts single and rage dates*/
+		if ($startDate==$end_Date)
+		{
+			$target='single';
+		} else
+			{
+				$target='range';
+
+		}
+		$sess_data=array(
+			'startDate'=> $startDate,
+			'end_Date'=>$end_Date,
+			'target'=>$target
+		);
+		$this->session->set_userdata($sess_data);
+
+		$books_minutes_read = $this->AppModel->book_Minutes_Read($startDate, $end_Date, $target);
+		$video_Minutes_Watched = $this->AppModel->video_Minutes_Watched($startDate, $end_Date, $target);
+		$app_Usage_Minutes = $this->AppModel->app_Usage_Minutes($startDate, $end_Date, $target);
+		$total_Watchers = $this->AppModel->total_Watchers($startDate, $end_Date, $target);
+		$total_Readers = $this->AppModel->total_Readers($startDate, $end_Date, $target);
+		$unique_signins = $this->AppModel->signIns($startDate, $end_Date, $target);
+		$all_signins = $this->AppModel->signIns('all');
+		$students = $this->AppModel->students($startDate, $end_Date, $target);
+		$internet_type = $this->AppModel->internetType($startDate, $end_Date, $target);
+		$total_reads = $this->getCount($this->AppModel->Books_Read($startDate, $end_Date, $target), 'books');
+		$total_views = $this->getCount($this->AppModel->Videos_Watched($startDate, $end_Date, $target), 'videos');
+
+		$data= array(
+			'books_mins_Read'=>$books_minutes_read,
+			'video_Minutes_watched'=>$video_Minutes_Watched,
+			'app_usage_minutes'=>$app_Usage_Minutes,
+			'total_watchers'=>$total_Watchers,
+			'total_Readers'=>$total_Readers,
+			'unique_signins'=>$unique_signins,
+			'all_signs'=>$all_signins,
+			'students'=>$students,
+			'internet_type'=>$internet_type,
+			'total_reads'=>$total_reads,
+			'total_views'=>$total_views
+
+		);
+		echo  json_encode($data);
+
 	}
 
 	function videos()
-	{
+	{	$videos=$this->AppModel->Videos_Watched();
+
 		$data = array(
-			'videos' => $this->AppModel->Videos_Watched(),
+			'videos' => $videos,
 			'title' => "More information on Videos",
 			'view' => "app_analytics/videos.php"
 		);
@@ -49,9 +125,12 @@ class AppAnalytics extends CI_Controller
 	}
 
 	function ebooks()
-	{
+	{ 	$ebooks = $this->AppModel->Books_Read();
+
+		//print_r($ebooks);
 		$data = array(
-			'books' => $this->AppModel->Books_Read(),
+
+			'books' => $ebooks,
 
 			'title' => "More Information on Ebooks",
 			'view' => "app_analytics/ebooks.php"
@@ -61,11 +140,14 @@ class AppAnalytics extends CI_Controller
 
 	function users($user_id)
 	{
+
 		//	$user_id = "";
 		$userStudyInfo = $this->AppModel->userStudyInfo($user_id);
-
+//		$users=$this->AppModel->userStudyInfo();
 		$user_name = $this->AppModel->getUserName($user_id);
 		$data = array(
+			/*new by stan*/
+//			'users'=>$users,
 			'userStudyInfo' => $userStudyInfo,
 			'title' => $user_name->fname,
 			'view' => "app_analytics/users.php"
@@ -77,6 +159,7 @@ class AppAnalytics extends CI_Controller
 	function signins()
 	{
 		$signins = $this->AppModel->users_signIns();
+
 		$data = array(
 			'signins' => $signins,
 			'title' => "Signins",

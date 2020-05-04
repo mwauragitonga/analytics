@@ -95,7 +95,7 @@ $route['broadcastEmail'] = 'Broadcasts/broadcastEmail';
 $route['broadcastSMS'] = 'Broadcasts/broadcastSMS';
 $route['email'] = 'Broadcasts/loadEmail';
 $route['notify'] = 'Email_notifications/notifications';
-
+$route['appData']='AppAnalytics/AppData';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

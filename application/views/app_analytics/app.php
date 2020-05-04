@@ -1,3 +1,9 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -15,12 +21,24 @@
 	<section class="content">
 		<!-- Small boxes (Stat box) -->
 		<!-- Small boxes (Stat box) -->
+		<!--  new  date picker added by Stan-->
 		<div class="row">
+			<form>
+				<div class="form-group" style="width: 55%;float: right">
+					<label for="date">Choose a date range</label>
+					<input class="form-control" type="text" id="date" name="date"
+						   style="width: 25%;"
+						   onchange="dateChanged()">
+				</div>
+			</form>
+		</div>
+		<div class="row">
+
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-						<h3><?php echo $video_Minutes_Watched; ?></h3>
+						<h3 id="VideoMinsWatched"><?php echo $video_Minutes_Watched; ?></h3>
 
 						<p>Video Minutes Watched</p>
 					</div>
@@ -36,7 +54,7 @@
 				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
-						<h3><?php echo $book_Minutes_Read; ?><sup style="font-size: 20px"></sup></h3>
+						<h3 id="booksMinRead"><?php echo $book_Minutes_Read; ?><sup style="font-size: 20px"></sup></h3>
 
 						<p>Book Minutes Read</p>
 					</div>
@@ -52,7 +70,7 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3><?php echo $total_Watchers; ?></h3>
+						<h3 id="totalWatchersUnique"><?php echo $total_Watchers; ?></h3>
 
 						<p>Total Viewers(Unique)</p>
 					</div>
@@ -67,7 +85,7 @@
 				<!-- small box -->
 				<div class="small-box bg-red">
 					<div class="inner">
-						<h3><?php echo $total_Readers; ?></h3>
+						<h3 id="totalReaders"><?php echo $total_Readers; ?></h3>
 
 						<p>Total Readers (Unique)</p>
 					</div>
@@ -81,7 +99,7 @@
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-						<h3><?php echo $unique_signins; ?></h3>
+						<h3 id="uniqueSignins"><?php echo $unique_signins; ?></h3>
 
 						<p>Sign Ins (Unique)</p>
 					</div>
@@ -97,7 +115,7 @@
 				<!-- small box -->
 				<div class="small-box bg-blue">
 					<div class="inner">
-						<h3><?php echo $app_Usage_Minutes; ?></h3>
+						<h3 id="appUsageMins"><?php echo $app_Usage_Minutes; ?></h3>
 
 						<p>App Usage ( Hours)</p>
 					</div>
@@ -114,7 +132,7 @@
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-						<h3><?php echo $all_signins; ?></h3>
+						<h3 id="allSignins"><?php echo $all_signins; ?></h3>
 
 						<p>Sign Ins (All)</p>
 					</div>
@@ -129,7 +147,7 @@
 				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
-						<h3><?php echo $total_views; ?></h3>
+						<h3 id="totalViews"><?php echo $total_views; ?></h3>
 
 						<p>Total Views</p>
 					</div>
@@ -144,7 +162,7 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3><?php echo $total_reads; ?></h3>
+						<h3 id="totalReads"><?php echo $total_reads; ?></h3>
 
 						<p>Total Reads</p>
 					</div>
@@ -177,40 +195,48 @@
 							<th>School</th>
 							<th>Study Level</th>
 							<th>Phone Model</th>
-<!--							<th>Study minutes</th>
--->							<th>More Info</th>
+<!--							<th>Study minutes</th>-->
+							<th>More Info</th>
+							<th>user_id</th>
 
 						</tr>
 						</thead>
-						<tbody id="students">
-						<?php
-						$count = 0;
-						foreach ($students as $student) {
-							?>
-							<tr>
-								<?php
-								sscanf($student->appMinutes, "%d:%d:%d", $hours, $minutes, $seconds);
-								$appMinutes = $hours * 3600 + $minutes * 60 + $seconds;
-								?>
+<!--						<tbody id="students">-->
+<!--						--><?php
+//						$count = 0;
+//						foreach ($students as $student) {
+//							?>
+<!--							<tr>-->
+<!--								--><?php
+//								sscanf($student->appMinutes, "%d:%d:%d", $hours, $minutes, $seconds);
+//								$appMinutes = $hours * 3600 + $minutes * 60 + $seconds;
+//							?>
+<!---->
+<!--								<td>--><?php //echo $count + 1 ?><!--</td>-->
+<!--								<td>--><?php //echo $student->fname ?><!--</td>-->
+<!--								<td>--><?php //echo $student->mobile ?><!--</td>-->
+<!--								<td>--><?php //echo $student->name ?><!--</td>-->
+<!--								<td>--><?php //echo $student->level_name ?><!--</td>-->
+<!--								<td>--><?php //echo $student->phone_type ?><!--</td>-->
+<!--<!--								<td>-->--><?php ////echo round($appMinutes / 60, 2) ?>
+<!---->
+<!--								<td><a href="--><?php //echo base_url() . 'users/' . $student->user_id ?><!--"-->
+<!--									   class="small-box-footer">More-->
+<!--										info <i class="fa fa-arrow-circle-right"></i></a></td>-->
+<!---->
+<!--							</tr>-->
+<!---->
+<!---->
+<!--							--><?php //$count++;
+//						}
+//						?>
+<!---->
+<!--					</tbody>-->
 
-								<td><?php echo $count + 1 ?></td>
-								<td><?php echo $student->fname ?></td>
-								<td><?php echo $student->mobile ?></td>
-								<td><?php echo $student->name ?></td>
-								<td><?php echo $student->level_name ?></td>
-								<td><?php echo $student->phone_type ?></td>
-<!--								<td><?php /*echo round($appMinutes / 60, 2) */?></td>
--->
-								<td><a href="<?php echo base_url() . 'users/' . $student->user_id ?>"
-									   class="small-box-footer">More
-										info <i class="fa fa-arrow-circle-right"></i></a></td>
-
-							</tr>
+						<tbody id="signUps">
 
 
-							<?php $count++;
-						}
-						?>
+
 
 						</tbody>
 					</table>
@@ -290,3 +316,84 @@
 	});
 </script>
 
+<script>
+	// new script functions by stan
+    var currentDate = new Date();
+    var maxDate = currentDate.getDate();
+    $('input[name="date"]').daterangepicker({
+        "minDate": "09/23/2019",
+        "opens": "center",
+        "autoApply": true,
+        "maxDate": maxDate
+    });
+
+    function dateChanged() {
+        var date = document.getElementById("date").value;
+        console.log(date);
+        loadData(date)
+    }
+
+    function loadData(date) {
+        // console.log(dateString_initial)
+        var request = new XMLHttpRequest();
+        request.open("POST", "<?php echo base_url() . 'appData'?>");
+        request.setRequestHeader('Content-Type', 'application/json');
+        var tbody = document.getElementById("signUps");
+        var tr = '';
+        let data = JSON.stringify({
+            "date": date
+        });
+        request.send(data);
+
+        request.onload = () => {
+            var response = JSON.parse(request.responseText);
+           //  var response = request.responseText;
+          console.log(response)
+            //console.log(tr)
+            var booksMinsRead= response.books_mins_Read;
+            var videoMinutesWatched = response.video_Minutes_watched;
+            var totalWatchers = response.total_watchers;
+            var totalReaders = response.total_Readers;
+            var uniqueSignins= response.unique_signins;
+            var allSigns = response.all_signs;
+            var appUsageMins = response.app_usage_minutes;
+            var topStudents = response.students;
+            var totalReads = response.total_reads;
+            var totalViews = response.total_views;
+            var totalWatchersUnique = response.total_views;
+
+
+            document.getElementById('booksMinRead').innerText =booksMinsRead;
+            document.getElementById('VideoMinsWatched').innerText = videoMinutesWatched;
+            document.getElementById('totalReaders').innerText = totalReaders;
+            document.getElementById('uniqueSignins').innerText = uniqueSignins;
+            document.getElementById('allSignins').innerText = allSigns;
+            document.getElementById('appUsageMins').innerText = appUsageMins;
+           // document.getElementById('students').innerText = topStudents;
+            document.getElementById('totalReads').innerText = totalReads;
+            document.getElementById('totalViews').innerText = totalViews;
+            document.getElementById('totalWatchersUnique').innerText = totalWatchers;
+
+            for (var i = 0; i < topStudents.length; i++) {
+                var fname = topStudents[i].fname;
+                var phone_type = topStudents[i].phone_type;
+                var school = topStudents[i].name;
+                var study_level = topStudents[i].level_name;
+                var mobile =  topStudents[i].mobile;
+                var user_id =  topStudents[i].user_id;
+                var link= "<a href='https://analytics.dawati.co.ke/users/" + user_id +"'>More Info </a>'";
+
+                //  console.log(phone_type);
+
+                tr += "<tr><td>" + (i + 1) + "</td><td>" + fname + "</td><td>" + mobile + "</td><td>" + school + "</td><td>" + study_level + "</td><td>" + phone_type + "</td><td>" + link + "</td></tr>";
+                 //console.log(tr)
+
+            }
+            tbody.innerHTML = tr;
+            init_DataTables();
+        }
+    }
+
+
+
+</script>

@@ -41,7 +41,8 @@ class Web_model extends CI_Model
 		}else{
 			$this->db->like("time_of_action", $startDate);
 
-		}		$this->db->where('(action = "login")');
+		}
+		$this->db->where('(action = "login")');
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -279,6 +280,7 @@ class Web_model extends CI_Model
 		$startDate = $_SESSION['startDate'];
 		$end_Date =  $_SESSION['end_Date'];
 		$target =  $_SESSION['target'];
+
 		$this->db->select('mpesa_callbacks.email, mpesa_callbacks.mobile, mpesa_callbacks.amount, mpesa_callbacks.transaction_ID, action , web_actions_logs.user_id ,web_actions_logs.time_of_action as time ,  
 		 users.fname, lname,, last_seen , users.mobile, users.email, gender, user_type,  study_levels.level_name,schools.name as school_name');
 		$this->db->from('web_actions_logs');

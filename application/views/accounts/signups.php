@@ -104,6 +104,7 @@
 
             }
             tbody.innerHTML = tr;
+            init_DataTables();
         }
     }
 
