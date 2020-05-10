@@ -390,11 +390,12 @@ class AppModel extends CI_Model {
 
 	}
 
-	function userStudyInfo($user_id, $period = '',$startDate='',$end_Date='',$target='')
+	function userStudyInfo($user_id, $period = '')
 	{
-//		$startDate = $_SESSION['startDate'];
-//		$end_Date =  $_SESSION['end_Date'];
-//		$target =  $_SESSION['target'];
+		$startDate =$this->session->userdata('startDate');
+		$end_Date =  $this->session->userdata('end_Date');
+		$target = $this->session->userdata('target');
+
 
 		$this->db->select("SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as readSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgReadSecs,multimedia_content.file_name,count(index_ID) as count");
 		$this->db->from("mobile_analysis_data");

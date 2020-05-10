@@ -3,6 +3,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
+session_start();
 
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -180,7 +181,7 @@
 		<!-- Main row -->
 		<div class="row">
 			<!-- Left col -->
-			<section class="col-lg-7">
+			<section class="col-lg-8">
 				<h2> Top Students in watching and reading content</h2>
 				<hr>
 				<!-- Custom tabs (Charts with tabs)-->
@@ -195,30 +196,31 @@
 							<th>School</th>
 							<th>Study Level</th>
 							<th>Phone Model</th>
-<!--							<th>Study minutes</th>-->
+							<th>Study Minutes</th>
 							<th>More Info</th>
-							<th>user_id</th>
+
+<!--							<th>user_id</th>-->
 
 						</tr>
 						</thead>
 <!--						<tbody id="students">-->
-<!--						--><?php
+<!--						<?php
 //						$count = 0;
 //						foreach ($students as $student) {
 //							?>
 <!--							<tr>-->
-<!--								--><?php
+<!--								<?php
 //								sscanf($student->appMinutes, "%d:%d:%d", $hours, $minutes, $seconds);
 //								$appMinutes = $hours * 3600 + $minutes * 60 + $seconds;
 //							?>
-<!---->
+
 <!--								<td>--><?php //echo $count + 1 ?><!--</td>-->
 <!--								<td>--><?php //echo $student->fname ?><!--</td>-->
 <!--								<td>--><?php //echo $student->mobile ?><!--</td>-->
 <!--								<td>--><?php //echo $student->name ?><!--</td>-->
 <!--								<td>--><?php //echo $student->level_name ?><!--</td>-->
 <!--								<td>--><?php //echo $student->phone_type ?><!--</td>-->
-<!--<!--								<td>-->--><?php ////echo round($appMinutes / 60, 2) ?>
+<!--<!--								<td>--><?php ////echo round($appMinutes / 60, 2) ?>
 <!---->
 <!--								<td><a href="--><?php //echo base_url() . 'users/' . $student->user_id ?><!--"-->
 <!--									   class="small-box-footer">More-->
@@ -239,6 +241,7 @@
 
 
 						</tbody>
+
 					</table>
 				</div>
 				<!-- /.nav-tabs-custom -->
@@ -246,7 +249,7 @@
 			</section>
 			<!-- /.Left col -->
 			<!-- right col (We are only adding the ID to make the widgets sortable)-->
-			<section class="col-lg-5 ">
+			<section class="col-lg-4 ">
 
 
 				<!-- /.box-header -->
@@ -344,7 +347,8 @@
             "date": date
         });
         request.send(data);
-
+		$("table > tbody> tr ").hide().slice(0,25).show();
+		$
         request.onload = () => {
             var response = JSON.parse(request.responseText);
            //  var response = request.responseText;
@@ -361,7 +365,7 @@
             var totalReads = response.total_reads;
             var totalViews = response.total_views;
             var totalWatchersUnique = response.total_views;
-
+			var totalWatchTime= booksMinsRead+ videoMinutesWatched;
 
             document.getElementById('booksMinRead').innerText =booksMinsRead;
             document.getElementById('VideoMinsWatched').innerText = videoMinutesWatched;
@@ -381,11 +385,12 @@
                 var study_level = topStudents[i].level_name;
                 var mobile =  topStudents[i].mobile;
                 var user_id =  topStudents[i].user_id;
-                var link= "<a href='https://analytics.dawati.co.ke/users/" + user_id +"'>More Info </a>'";
+                var totalMinsWatched= topStudents[i].appMinutes;
+                var link= "<a href='https://analytics.dawati.co.ke/users/" + user_id +"'>More Info </a>";
 
                 //  console.log(phone_type);
 
-                tr += "<tr><td>" + (i + 1) + "</td><td>" + fname + "</td><td>" + mobile + "</td><td>" + school + "</td><td>" + study_level + "</td><td>" + phone_type + "</td><td>" + link + "</td></tr>";
+                tr += "<tr><td>" + (i + 1) + "</td><td>" + fname + "</td><td>" + mobile + "</td><td>" + school + "</td><td>" + study_level + "</td><td>" + phone_type + "</td><td>" + totalMinsWatched + "</td><td>" + link + "</td></tr>";
                  //console.log(tr)
 
             }
@@ -397,3 +402,4 @@
 
 
 </script>
+

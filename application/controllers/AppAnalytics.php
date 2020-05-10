@@ -42,7 +42,7 @@ class AppAnalytics extends CI_Controller
 			"total_Watchers" => $this->AppModel->total_Watchers(),
 			"total_Readers" => $this->AppModel->total_Readers(),
 			"unique_signins" => $this->AppModel->signIns(),
-			"all_signins" => $this->AppModel->signIns('all'),
+			"all_signins" => $this->AppModel->signIns(),
 			"students" => $this->AppModel->students(),
 			"internet_type" => $this->AppModel->internetType(),
 			'total_reads' => $this->getCount($this->AppModel->Books_Read(), 'books'),
