@@ -38,7 +38,7 @@ class Email_notifications extends CI_Controller {
 				$pdf_path = $this->generatePdf($app_usage, $web_usage, $student);
 			} catch (MpdfException $e)
 			{
-				print_r($e);
+				//print_r($e);
 			}
 			$this->sendMail($student);
 		}

@@ -372,7 +372,7 @@ WHERE
 		$this->db->where('users.user_type', 1);
 		if ( ! empty($u))
 		{
-			$this->db->where('users.user_id', $u);
+			$this->db->where('users.email', $u);
 		}
 		$students = $this->db->get()->result();
 		return $students;
