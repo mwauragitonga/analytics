@@ -1,7 +1,38 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+session_start();
+
 <div class="content-wrapper">
+	<style>
+		#loading {
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0 ;
+			position: fixed;
+			display: block;
+			opacity: 0.9;
+			background-color: #fff;
+			z-index: 99;
+			text-align: center;
+		}
+
+		#loading-image {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			z-index: 100;
+		}
+	</style>
+	<div id="loading">
+		<img id="loading-image" src="<?php echo base_url()?>assets/img/preloader.gif" alt="Loading..." />
+	</div>
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>
+		<h1 id ="titleH">
 			<?php echo $title; ?>
 
 			</small>
@@ -15,12 +46,24 @@
 	<section class="content">
 		<!-- Small boxes (Stat box) -->
 		<!-- Small boxes (Stat box) -->
+		<!--  new  date picker added by Stan-->
 		<div class="row">
+			<form>
+				<div class="form-group" style="width: 55%;float: right">
+					<label for="date">Choose a date range</label>
+					<input class="form-control" type="text" id="date" name="date"
+						   style="width: 25%;"
+						   onchange="dateChanged()">
+				</div>
+			</form>
+		</div>
+		<div class="row">
+
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-						<h3><?php echo $video_Minutes_Watched; ?></h3>
+						<h3 id="VideoMinsWatched"></h3>
 
 						<p>Video Minutes Watched</p>
 					</div>
@@ -36,7 +79,7 @@
 				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
-						<h3><?php echo $book_Minutes_Read; ?><sup style="font-size: 20px"></sup></h3>
+						<h3 id="booksMinRead"><sup style="font-size: 20px"></sup></h3>
 
 						<p>Book Minutes Read</p>
 					</div>
@@ -52,7 +95,7 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3><?php echo $total_Watchers; ?></h3>
+						<h3 id="totalWatchersUnique"></h3>
 
 						<p>Total Viewers(Unique)</p>
 					</div>
@@ -67,7 +110,7 @@
 				<!-- small box -->
 				<div class="small-box bg-red">
 					<div class="inner">
-						<h3><?php echo $total_Readers; ?></h3>
+						<h3 id="totalReaders"></h3>
 
 						<p>Total Readers (Unique)</p>
 					</div>
@@ -81,7 +124,7 @@
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-						<h3><?php echo $unique_signins; ?></h3>
+						<h3 id="uniqueSignins"></h3>
 
 						<p>Sign Ins (Unique)</p>
 					</div>
@@ -97,7 +140,7 @@
 				<!-- small box -->
 				<div class="small-box bg-blue">
 					<div class="inner">
-						<h3><?php echo $app_Usage_Minutes; ?></h3>
+						<h3 id="appUsageMins"></h3>
 
 						<p>App Usage ( Hours)</p>
 					</div>
@@ -114,7 +157,7 @@
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-						<h3><?php echo $all_signins; ?></h3>
+						<h3 id="allSignins"></h3>
 
 						<p>Sign Ins (All)</p>
 					</div>
@@ -129,7 +172,7 @@
 				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
-						<h3><?php echo $total_views; ?></h3>
+						<h3 id="totalViews"></h3>
 
 						<p>Total Views</p>
 					</div>
@@ -144,7 +187,7 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3><?php echo $total_reads; ?></h3>
+						<h3 id="totalReads"></h3>
 
 						<p>Total Reads</p>
 					</div>
@@ -162,7 +205,7 @@
 		<!-- Main row -->
 		<div class="row">
 			<!-- Left col -->
-			<section class="col-lg-7">
+			<section class="col-lg-8">
 				<h2> Top Students in watching and reading content</h2>
 				<hr>
 				<!-- Custom tabs (Charts with tabs)-->
@@ -177,42 +220,20 @@
 							<th>School</th>
 							<th>Study Level</th>
 							<th>Phone Model</th>
-<!--							<th>Study minutes</th>
--->							<th>More Info</th>
+							<th>Study Minutes</th>
+							<th>More Info</th>
+
+							<!--							<th>user_id</th>-->
 
 						</tr>
 						</thead>
-						<tbody id="students">
-						<?php
-						$count = 0;
-						foreach ($students as $student) {
-							?>
-							<tr>
-								<?php
-								sscanf($student->appMinutes, "%d:%d:%d", $hours, $minutes, $seconds);
-								$appMinutes = $hours * 3600 + $minutes * 60 + $seconds;
-								?>
-
-								<td><?php echo $count + 1 ?></td>
-								<td><?php echo $student->fname ?></td>
-								<td><?php echo $student->mobile ?></td>
-								<td><?php echo $student->name ?></td>
-								<td><?php echo $student->level_name ?></td>
-								<td><?php echo $student->phone_type ?></td>
-<!--								<td><?php /*echo round($appMinutes / 60, 2) */?></td>
--->
-								<td><a href="<?php echo base_url() . 'users/' . $student->user_id ?>"
-									   class="small-box-footer">More
-										info <i class="fa fa-arrow-circle-right"></i></a></td>
-
-							</tr>
 
 
-							<?php $count++;
-						}
-						?>
+						<tbody id="signUps">
+
 
 						</tbody>
+
 					</table>
 				</div>
 				<!-- /.nav-tabs-custom -->
@@ -220,7 +241,7 @@
 			</section>
 			<!-- /.Left col -->
 			<!-- right col (We are only adding the ID to make the widgets sortable)-->
-			<section class="col-lg-5 ">
+			<section class="col-lg-4 ">
 
 
 				<!-- /.box-header -->
@@ -288,5 +309,98 @@
 			},]
 		}]
 	});
+</script>
+
+<script>
+	// new script functions by stan
+	var currentDate = new Date();
+	var maxDate = currentDate.getDate();
+	$('input[name="date"]').daterangepicker({
+		"minDate": "09/23/2019",
+		"opens": "center",
+		"autoApply": true,
+		"maxDate": maxDate
+	});
+
+	function dateChanged() {
+		var date = document.getElementById("date").value;
+		console.log(date);
+		loadData(date)
+	}
+
+	$(document).ready(function () {
+		var date = document.getElementById("date").value;
+		console.log(date);
+		loadData(date)
+	});
+
+	function loadData(date) {
+		$('#loading').show();
+		// console.log(dateString_initial)
+		var request = new XMLHttpRequest();
+		request.open("POST", "<?php echo base_url() . 'appData'?>");
+		request.setRequestHeader('Content-Type', 'application/json');
+		var tbody = document.getElementById("signUps");
+		var tr = '';
+		let data = JSON.stringify({
+			"date": date
+		});
+		request.send(data);
+		request.onload = () => {
+			var response = JSON.parse(request.responseText);
+			//  var response = request.responseText;
+			console.log(response)
+			//console.log(tr)
+			var booksMinsRead = response.books_mins_Read;
+			var videoMinutesWatched = response.video_Minutes_watched;
+			var totalWatchers = response.total_watchers;
+			var totalReaders = response.total_Readers;
+			var uniqueSignins = response.unique_signins;
+			var allSigns = response.all_signs;
+			var appUsageMins = response.app_usage_minutes;
+			var topStudents = response.students;
+			var totalReads = response.total_reads;
+			var totalViews = response.total_views;
+			var totalWatchersUnique = response.total_views;
+			var totalWatchTime = booksMinsRead + videoMinutesWatched;
+
+			document.getElementById('booksMinRead').innerText = booksMinsRead;
+			document.getElementById('VideoMinsWatched').innerText = videoMinutesWatched;
+			document.getElementById('totalReaders').innerText = totalReaders;
+			document.getElementById('uniqueSignins').innerText = uniqueSignins;
+			document.getElementById('allSignins').innerText = allSigns;
+			document.getElementById('appUsageMins').innerText = appUsageMins;
+			// document.getElementById('students').innerText = topStudents;
+			document.getElementById('totalReads').innerText = totalReads;
+			document.getElementById('totalViews').innerText = totalViews;
+			document.getElementById('totalWatchersUnique').innerText = totalWatchers;
+
+			for (var i = 0; i < topStudents.length; i++) {
+				var fname = topStudents[i].fname;
+				var phone_type = topStudents[i].phone_type;
+				var school = topStudents[i].name;
+				var study_level = topStudents[i].level_name;
+				var mobile = topStudents[i].mobile;
+				var user_id = topStudents[i].user_id;
+				var totalMinsWatched = topStudents[i].appMinutes;
+				var link = "<a href='https://analytics.dawati.co.ke/users/" + user_id + "'>More Info </a>";
+
+				//  console.log(phone_type);
+
+				tr += "<tr><td>" + (i + 1) + "</td><td>" + fname + "</td><td>" + mobile + "</td><td>" + school + "</td><td>" + study_level + "</td><td>" + phone_type + "</td><td>" + totalMinsWatched + "</td><td>" + link + "</td></tr>";
+				//console.log(tr)
+
+			}
+			tbody.innerHTML = tr;
+			document.getElementById("titleH").innerText = 'App Analytics (' + date + ' )'
+		}
+		$('#loading').hide();
+		$("#datatable-buttons").dataTable().fnDestroy()
+		init_DataTables();
+
+
+	}
+
+
 </script>
 

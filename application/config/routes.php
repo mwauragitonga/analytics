@@ -98,6 +98,7 @@ $route['notify'] = 'Email_notifications/notifications';
 $route['searchView'] = 'Search/searchView';
 $route['search'] = 'Search/search';
 
+$route['appData']='AppAnalytics/AppData';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

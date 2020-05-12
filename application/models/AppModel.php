@@ -7,12 +7,32 @@ class AppModel extends CI_Model {
 	function __construct()
 	{
 	}
+	public function db_layout(){
+		$this->db->select('*');
+		$this->db->from('mobile_analysis_data');
+		$this->db->where('date', '2020-01-20');
+		$query = $this->db->get()->result();
+		return $query;
 
-	public function book_Minutes_Read()
+
+	}
+	public function book_Minutes_Read($startDate='',$end_Date='',$target='')
 	{
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+
+		}
 		$this->db->select('TIMEDIFF(end_stamp,start_stamp) as time_elapsed');
 		$this->db->from('mobile_analysis_data');
 		$this->db->where('content_type', 'Ebooks');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		$query = $this->db->get();
 		$readTimes = $query->result();
 		$totalReadTime = $this->calculateTime($readTimes);
@@ -20,22 +40,45 @@ class AppModel extends CI_Model {
 
 	}
 
-	public function video_Minutes_Watched()
+	public function video_Minutes_Watched($startDate='',$end_Date='',$target='')
 	{
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+
+		}
 		$this->db->select('TIMEDIFF(end_stamp,start_stamp) as time_elapsed');
 		$this->db->from('mobile_analysis_data');
 		$this->db->where('content_type', 'Videos');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		$query = $this->db->get();
 		$watchTimes = $query->result();
 		$totalWatchTime = $this->calculateTime($watchTimes);
 		return round($totalWatchTime, 2);
 	}
 
-	public function app_Usage_Minutes()
+	public function app_Usage_Minutes($startDate='',$end_Date='',$target='')
 	{
+		if (empty($startDate) && empty($end_Date)){
+		date_default_timezone_set("Africa/Nairobi");
+		$startDate = date('Y-m-d');
+		$target = 'single';
+     	}
 		$this->db->select('TIMEDIFF(end_stamp,start_stamp) as time_elapsed');
 		$this->db->from('mobile_analysis_data');
 		$this->db->where('(content_type ="App Usage" OR content_type ="App+Usage")');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		$query = $this->db->get();
 		$appUsageTimes = $query->result();
 		$totalAppUsageTime = $this->calculateTime($appUsageTimes, 'hours', 'APPUSAGE');
@@ -43,32 +86,59 @@ class AppModel extends CI_Model {
 		return round($totalAppUsageTime, 2);
 	}
 
-	public function total_Watchers()
+	public function total_Watchers($startDate='',$end_Date='',$target='')
 	{
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+		}
 		$this->db->select('*');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('users', 'mobile_analysis_data.user_ID = users.user_ID');
 		$this->db->where('content_type', 'Videos');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		$this->db->group_by('mobile_analysis_data.user_id');
 		//$this->db->where('(start_stamp <= end_stamp)');
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
-	public function total_Readers()
+	public function total_Readers($startDate='',$end_Date='',$target='')
 	{
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+		}
 		$this->db->select('*');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('users', 'mobile_analysis_data.user_ID = users.user_ID');
 		$this->db->where('content_type', 'Ebooks');
 		//$this->db->where('(start_stamp <= end_stamp)');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		$this->db->group_by('users.user_id');
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
-	public function signIns($mode = 'unique')
+	public function signIns($mode = 'unique',$startDate='',$end_Date='',$target='')
 	{
+		if (empty($startDate) && empty($end_Date)){
+		date_default_timezone_set("Africa/Nairobi");
+		$startDate = date('Y-m-d');
+		$target = 'single';
+		}
 		$this->db->select('*');
 		$this->db->from('mobile_analysis_data');
 		$this->db->where('content_type', 'Signin');
@@ -76,24 +146,45 @@ class AppModel extends CI_Model {
 		{
 			$this->db->group_by('user_id');
 		}
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->where("date", $startDate);
+
+		}
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
 	public function users_signIns()
 	{
+		$startDate =$this->session->userdata('startDate');
+		$end_Date =  $this->session->userdata('end_Date');
+		$target = $this->session->userdata('target');
+
 		$this->db->select('users.fname,mobile_analysis_data.start_stamp');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('users', ',mobile_analysis_data.user_id = users.user_id');
 		$this->db->where('content_type', 'Signin');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		$this->db->group_by('mobile_analysis_data.user_id');
 		$this->db->order_by('start_stamp', 'DESC');
 		$query = $this->db->get()->result();
 		return $query;
 	}
 
-	public function students()
+	public function students($startDate='',$end_Date='',$target='')
 	{
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+		}
 		$this->db->select('users.fname,users.user_id, users.mobile,schools.name, study_levels.level_name,
 		SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as appMinutes,phone_type');
 		$this->db->from('mobile_analysis_data');
@@ -104,6 +195,12 @@ class AppModel extends CI_Model {
 		$this->db->group_by('mobile_analysis_data.user_ID');
 		$this->db->where('(content_type ="Videos" OR content_type ="Ebooks")');
 		$this->db->where('(start_stamp < end_stamp)');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		//	$this->db->limit(10);
 		$this->db->order_by('appMinutes', 'DESC');
 
@@ -112,12 +209,23 @@ class AppModel extends CI_Model {
 		return $query;
 	}
 
-	public function internetType()
+	public function internetType($startDate='',$end_Date='',$target='')
 	{
+	/*	if (empty($startDate) && empty($end_Date)){
+		date_default_timezone_set("Africa/Nairobi");
+		$startDate = date('Y-m-d');
+		$target = 'single';
+		}*/
 		$this->db->select('internet_type');
 		$this->db->from('mobile_analysis_data');
 		$this->db->group_by('user_id');
 		$this->db->where('internet_type', 'Wi-FI');
+		/*if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}*/
 		$query = $this->db->get();
 		$wifi = $query->num_rows();
 
@@ -125,6 +233,12 @@ class AppModel extends CI_Model {
 		$this->db->from('mobile_analysis_data');
 		$this->db->group_by('user_id');
 		$this->db->where('internet_type', "mobile");
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		$query2 = $this->db->get();
 		$mobile = $query2->num_rows();
 
@@ -138,6 +252,13 @@ class AppModel extends CI_Model {
 
 	public function Videos_Watched()
 	{
+	//	print_r($_SESSION);
+		$startDate =$this->session->userdata('startDate');
+		$end_Date =  $this->session->userdata('end_Date');
+		$target = $this->session->userdata('target');
+
+
+
 		$this->db->select('mobile_analysis_data.subtopic_ID , subtopics.name, syllabus.subject ,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as watchSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgWatchSecs , COUNT(index_ID) as count');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('subtopics', 'subtopics.subtopicID = subtopic_ID');
@@ -145,6 +266,12 @@ class AppModel extends CI_Model {
 		$this->db->group_by("subtopic_ID");
 		$this->db->where('content_type', 'Videos');
 		$this->db->where('(start_stamp < end_stamp)');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		//$this->db->order_by('(avgWatchSecs*count)', 'DESC');
 		$data = $this->db->get()->result();
 		foreach ($data as $dat)
@@ -162,6 +289,12 @@ class AppModel extends CI_Model {
 		$this->db->group_by("subtopic_ID");
 		$this->db->where('content_type', 'Videos');
 		$this->db->where('(start_stamp < end_stamp)');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		//$this->db->order_by('watchSecs', 'DESC');
 		$data2 = $this->db->get()->result();
 		foreach ($data2 as $dat2)
@@ -178,14 +311,29 @@ class AppModel extends CI_Model {
 		return $data3;
 	}
 
-	public function Books_Read()
+	public function Books_Read($startDate='',$end_Date='',$target='')
 	{
+//		$startDate = $_SESSION['startDate'];
+//		$end_Date =  $_SESSION['end_Date'];
+//		$target =  $_SESSION['target'];
+
+		if (empty($startDate) && empty($end_Date)){
+			date_default_timezone_set("Africa/Nairobi");
+			$startDate = date('Y-m-d');
+			$target = 'single';
+		}
 		$this->db->select('mobile_analysis_data.subtopic_ID, multimedia_content.file_name ,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as readSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgReadSecs, COUNT(index_ID) as count');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('multimedia_content', 'multimedia_content.file_id = subtopic_ID');
 		$this->db->group_by("subtopic_ID");
 		$this->db->where('content_type', 'Ebooks');
 		$this->db->where('(start_stamp < end_stamp)');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		$this->db->order_by('readSecs', 'DESC');
 
 		$data = $this->db->get()->result();
@@ -204,20 +352,70 @@ class AppModel extends CI_Model {
 
 	}
 
+	public function Books_Read_Info()
+	{
+		$startDate =$this->session->userdata('startDate');
+		$end_Date =  $this->session->userdata('end_Date');
+		$target = $this->session->userdata('target');
+
+
+		$this->db->select('mobile_analysis_data.subtopic_ID, multimedia_content.file_name ,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as readSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgReadSecs, COUNT(index_ID) as count');
+		$this->db->from('mobile_analysis_data');
+		$this->db->join('multimedia_content', 'multimedia_content.file_id = subtopic_ID');
+		$this->db->group_by("subtopic_ID");
+		$this->db->where('content_type', 'Ebooks');
+		$this->db->where('(start_stamp < end_stamp)');
+
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
+		$this->db->order_by('readSecs', 'DESC');
+
+		$data = $this->db->get()->result();
+		foreach ($data as $dat)
+		{
+			if ($dat->avgReadSecs > VIDEOCAP)
+			{
+				$dat->avgReadSecs = VIDEOCAP;
+			}
+		}
+		usort($data, function ($a, $b) {
+			return $b->avgReadSecs * $b->count <=> $a->avgReadSecs * $a->count;
+		});
+//		print_r($data);
+		return $data;
+
+	}
+
 	function userStudyInfo($user_id, $period = '')
 	{
+		$startDate =$this->session->userdata('startDate');
+		$end_Date =  $this->session->userdata('end_Date');
+		$target = $this->session->userdata('target');
+
+
 		$this->db->select("SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp)))) as readSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgReadSecs,multimedia_content.file_name,count(index_ID) as count");
 		$this->db->from("mobile_analysis_data");
 		$this->db->join('users', "users.user_id=mobile_analysis_data.user_id");
 		$this->db->join('multimedia_content', 'subtopic_ID = multimedia_content.file_id');
 		$this->db->where('mobile_analysis_data.content_type', "Ebooks");
 		$this->db->where('mobile_analysis_data.user_id', $user_id);
+
 		$this->db->where('(start_stamp < end_stamp)');
 		if ( ! empty($period))
 		{
 			$today = date('Y-m-d', time());
 			$usageStartDate = date('Y-m-d', strtotime($today . ' - 30  days'));
 			$this->db->where('start_stamp >', $usageStartDate);
+		}
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
 		}
 		$this->db->group_by('subtopic_ID');
 		$this->db->order_by('readSecs');
@@ -238,6 +436,12 @@ class AppModel extends CI_Model {
 		$this->db->where('mobile_analysis_data.content_type', "Videos");
 		$this->db->where('mobile_analysis_data.user_id', $user_id);
 		$this->db->where('(start_stamp < end_stamp)');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		$this->db->group_by('subtopic_ID');
 		$this->db->order_by('avgWatchSecs');
 		if ( ! empty($period))
@@ -263,6 +467,12 @@ class AppModel extends CI_Model {
 		$this->db->where('mobile_analysis_data.content_type', "Videos");
 		$this->db->where('mobile_analysis_data.user_id', $user_id);
 		$this->db->where('(start_stamp < end_stamp)');
+		if ($target == 'range') {
+			$this->db->WHERE("date BETWEEN '$startDate'  AND '$end_Date'");
+		}else{
+			$this->db->like("date", $startDate);
+
+		}
 		$this->db->group_by('subtopic_ID');
 		$this->db->order_by('watchSecs');
 		$data_videos2 = $this->db->get()->result();
@@ -337,11 +547,11 @@ class AppModel extends CI_Model {
 		try
 		{
 			$this->db->query("DELETE t1 FROM mobile_analysis_data t1
-INNER JOIN mobile_analysis_data t2 
-WHERE 
-    t1.index_ID < t2.index_ID AND
-	t1.analysis_ID = t2.analysis_ID AND
-	t1.user_ID = t2.user_ID;");
+			INNER JOIN mobile_analysis_data t2 
+			WHERE 
+		    t1.index_ID < t2.index_ID AND
+			t1.analysis_ID = t2.analysis_ID AND
+			t1.user_ID = t2.user_ID;");
 
 			return TRUE;
 		} catch (Exception $e)
