@@ -87,8 +87,8 @@ class AppAnalytics extends CI_Controller
 		$app_Usage_Minutes = $this->AppModel->app_Usage_Minutes($startDate, $end_Date, $target);
 		$total_Watchers = $this->AppModel->total_Watchers($startDate, $end_Date, $target);
 		$total_Readers = $this->AppModel->total_Readers($startDate, $end_Date, $target);
-		$unique_signins = $this->AppModel->signIns($startDate, $end_Date, $target);
-		$all_signins = $this->AppModel->signIns('all');
+		$unique_signins = $this->AppModel->signIns('unique',$startDate, $end_Date, $target);
+		$all_signins = $this->AppModel->signIns('all',$startDate, $end_Date, $target);
 		$students = $this->AppModel->students($startDate, $end_Date, $target);
 		$internet_type = $this->AppModel->internetType($startDate, $end_Date, $target);
 		$total_reads = $this->getCount($this->AppModel->Books_Read($startDate, $end_Date, $target), 'books');

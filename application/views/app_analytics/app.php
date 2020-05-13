@@ -395,8 +395,8 @@ session_start();
 			document.getElementById("titleH").innerText = 'App Analytics (' + date + ' )'
 		}
 		$('#loading').hide();
-		$("#datatable-buttons").dataTable().fnDestroy()
-		init_DataTables();
+	//	$("#datatable-buttons").dataTable().fnDestroy()
+		//init_DataTables();
 
 
 	}
