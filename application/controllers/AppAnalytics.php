@@ -24,6 +24,7 @@ class AppAnalytics extends CI_Controller
 		$this->session->unset_userdata($array_items);
 
 		$dat = date('Y-m-d');
+
 		$date = new DateTime($dat);
 		$sess_data = array(
 			'startDate' => $dat,

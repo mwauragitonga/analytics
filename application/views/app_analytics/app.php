@@ -334,35 +334,36 @@ session_start();
 		loadData(date)
 	});
 
-	function loadData(date) {
-		$('#loading').show();
-		// console.log(dateString_initial)
-		var request = new XMLHttpRequest();
-		request.open("POST", "<?php echo base_url() . 'appData'?>");
-		request.setRequestHeader('Content-Type', 'application/json');
-		var tbody = document.getElementById("signUps");
-		var tr = '';
-		let data = JSON.stringify({
-			"date": date
-		});
-		request.send(data);
-		request.onload = () => {
-			var response = JSON.parse(request.responseText);
-			//  var response = request.responseText;
-			console.log(response)
-			//console.log(tr)
-			var booksMinsRead = response.books_mins_Read;
-			var videoMinutesWatched = response.video_Minutes_watched;
-			var totalWatchers = response.total_watchers;
-			var totalReaders = response.total_Readers;
-			var uniqueSignins = response.unique_signins;
-			var allSigns = response.all_signs;
-			var appUsageMins = response.app_usage_minutes;
-			var topStudents = response.students;
-			var totalReads = response.total_reads;
-			var totalViews = response.total_views;
-			var totalWatchersUnique = response.total_views;
-			var totalWatchTime = booksMinsRead + videoMinutesWatched;
+    function loadData(date) {
+        // console.log(dateString_initial)
+        var request = new XMLHttpRequest();
+        request.open("POST", "<?php echo base_url() . 'appData'?>");
+        request.setRequestHeader('Content-Type', 'application/json');
+        var tbody = document.getElementById("signUps");
+        var tr = '';
+        let data = JSON.stringify({
+            "date": date
+        });
+        request.send(data);
+		$("table > tbody> tr ").hide().slice(0,25).show();
+		$
+        request.onload = () => {
+            var response = JSON.parse(request.responseText);
+           //  var response = request.responseText;
+          console.log(response)
+            //console.log(tr)
+            var booksMinsRead= response.books_mins_Read;
+            var videoMinutesWatched = response.video_Minutes_watched;
+            var totalWatchers = response.total_watchers;
+            var totalReaders = response.total_Readers;
+            var uniqueSignins= response.unique_signins;
+            var allSigns = response.all_signs;
+            var appUsageMins = response.app_usage_minutes;
+            var topStudents = response.students;
+            var totalReads = response.total_reads;
+            var totalViews = response.total_views;
+            var totalWatchersUnique = response.total_views;
+			var totalWatchTime= booksMinsRead+ videoMinutesWatched;
 
 			document.getElementById('booksMinRead').innerText = booksMinsRead;
 			document.getElementById('VideoMinsWatched').innerText = videoMinutesWatched;
