@@ -24,7 +24,7 @@ class AppAnalytics extends CI_Controller
 		$this->session->unset_userdata($array_items);
 
 		$dat = date('Y-m-d');
-		print_r($dat);
+		//print_r($dat);
 		$date = new DateTime($dat);
 		$sess_data = array(
 			'startDate' => $dat,
@@ -52,8 +52,6 @@ class AppAnalytics extends CI_Controller
 		);
 		$this->load->view('index.php', $data);
 
-//		print_r($data['unique_signins']);
-		//print_r($data['all_signins']);
 
 	}
 	public function AppData(){

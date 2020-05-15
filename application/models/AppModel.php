@@ -311,17 +311,12 @@ class AppModel extends CI_Model {
 		return $data3;
 	}
 
-	public function Books_Read($startDate='',$end_Date='',$target='')
+	public function Books_Read()
 	{
-//		$startDate = $_SESSION['startDate'];
-//		$end_Date =  $_SESSION['end_Date'];
-//		$target =  $_SESSION['target'];
+		$startDate =$this->session->userdata('startDate');
+		$end_Date =  $this->session->userdata('end_Date');
+		$target = $this->session->userdata('target');
 
-		if (empty($startDate) && empty($end_Date)){
-			date_default_timezone_set("Africa/Nairobi");
-			$startDate = date('Y-m-d');
-			$target = 'single';
-		}
 		$this->db->select('mobile_analysis_data.subtopic_ID, multimedia_content.file_name ,SUM(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as readSecs,AVG(TIME_TO_SEC(TIMEDIFF(end_stamp,start_stamp))) as avgReadSecs, COUNT(index_ID) as count');
 		$this->db->from('mobile_analysis_data');
 		$this->db->join('multimedia_content', 'multimedia_content.file_id = subtopic_ID');
