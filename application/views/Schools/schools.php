@@ -102,39 +102,34 @@
 					<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 						<thead>
 
-						<tr>
-							<th> #</th>
-							<th>Student Name </th>
-							<th>Study Level</th>
-							<th>Date joined</th>
+						<th>#</th>
+						<th>School Name</th>
+						<th>Number of students</th>
+						<th>More info</th>
 
-						</tr>
 						</thead>
-						<tbody id="students">
+						<tbody>
 						<?php
 						$count =0;
-						foreach ($students as $student){
+						foreach ($schools as $school) {
+
 							?>
 							<tr>
-
-
-								<td><?php echo $count+1?></td>
-								<td><?php echo $student->fname ." ". $student->lname?></td>
-								<td><?php echo $student->level_name?></td>
-								<td><?php echo $student->date_joined?></td>
+								<td><?php echo $count + 1 ?></td>
+								<td><?php echo $school->name ?></td>
+								<td><?php echo $school->count?></td>
+								<td><a href="<?php echo base_url().'schools/users/'.$school->school_code?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a></td>
 
 
 							</tr>
-
-
-
-
-							<?php  $count++;
+							<?php
+							$count++;
 						}
 						?>
 
 						</tbody>
 					</table>
+
 				</div>
 				<!-- /.nav-tabs-custom -->
 
