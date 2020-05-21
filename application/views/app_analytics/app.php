@@ -220,7 +220,6 @@ session_start();
 							<th>School</th>
 							<th>Study Level</th>
 							<th>Phone Model</th>
-							<th>Study Minutes</th>
 							<th>More Info</th>
 
 							<!--							<th>user_id</th>-->

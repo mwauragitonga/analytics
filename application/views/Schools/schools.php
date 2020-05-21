@@ -104,38 +104,32 @@
 
 						<tr>
 							<th> #</th>
-							<th>School Name</th>
-							<th>Number of students</th>
-							<th>Study minutes</th>
-
-							<th>More Info</th>
+							<th>Student Name </th>
+							<th>Study Level</th>
+							<th>Date joined</th>
 
 						</tr>
 						</thead>
 						<tbody id="students">
 						<?php
-						$count = 0;
-						foreach ($school_usages as $school_usage) {
+						$count =0;
+						foreach ($students as $student){
 							?>
 							<tr>
-								<?php
-								sscanf($school_usage->appMinutes, "%d:%d:%d", $hours, $minutes, $seconds);
-								$appMinutes = $hours * 3600 + $minutes * 60 + $seconds;
-								?>
 
-								<td><?php echo $count + 1 ?></td>
-								<td><?php echo $school_usage->name ?></td>
-								<td><?php echo $school_usage->count ?></td>
-								<td><?php echo round($appMinutes / 60, 2) ?></td>
 
-								<td><a href="<?php echo base_url() . 'schools/' . $school_usage->code ?>"
-									   class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-								</td>
+								<td><?php echo $count+1?></td>
+								<td><?php echo $student->fname ." ". $student->lname?></td>
+								<td><?php echo $student->level_name?></td>
+								<td><?php echo $student->date_joined?></td>
+
 
 							</tr>
 
 
-							<?php $count++;
+
+
+							<?php  $count++;
 						}
 						?>
 
