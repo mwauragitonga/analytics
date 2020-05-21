@@ -388,7 +388,7 @@ session_start();
 
 				//  console.log(phone_type);
 
-				tr += "<tr><td>" + (i + 1) + "</td><td>" + fname + "</td><td>" + mobile + "</td><td>" + school + "</td><td>" + study_level + "</td><td>" + phone_type + "</td><td>" + totalMinsWatched + "</td><td>" + link + "</td></tr>";
+				tr += "<tr><td>" + (i + 1) + "</td><td>" + fname + "</td><td>" + mobile + "</td><td>" + school + "</td><td>" + study_level + "</td><td>" + phone_type + "</td><td>" + link + "</td></tr>";
 				//console.log(tr)
 
 			}
