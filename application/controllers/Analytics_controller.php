@@ -31,6 +31,7 @@ class Analytics_controller extends CI_Controller
 			$maleStudents = $this->Analytics_model->getMaleStudents();
 			$femaleStudents = $this->Analytics_model->getFemaleStudents();
 			$signupsToday = $this->Analytics_model->getDailySignups();
+			$versionOne = $this->Analytics_model->getVersionOne();
 			$formOnes = $this->Analytics_model->getFormOne();
 			$formTwos = $this->Analytics_model->getFormTwo();
 			$formThrees = $this->Analytics_model->getFormThree();
@@ -50,6 +51,7 @@ class Analytics_controller extends CI_Controller
 				'maleCount' => $maleStudents,
 				'femaleCount' => $femaleStudents,
 				'signupsToday' => $signupsToday,
+				'versionOne' => $versionOne,
 				'formOnes' => $formOnes,
 				'formTwos' => $formTwos,
 				'formThrees' => $formThrees,

@@ -60,6 +60,18 @@ class Analytics_model extends CI_Model
 	}
 
 	/*Filter students by study level*/
+	public function getVersionOne(){
+		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me');
+		$this->db->from('users');
+		$this->db->join('students', 'students.user_id = users.user_id', 'left');
+		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
+		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
+		//$this->db->where('students.study_level', 'level_001');
+		$this->db->where('users.date_joined <', '2019-09-07');
+
+		$query=$this->db->get();
+		return $query->num_rows();
+	}/*Filter students by study level*/
 	public function getFormOne(){
 		$this->db->select('users.user_id, users.fname, users.lname, users.email, users.user_status, users.date_joined, users.prof_img, users.about_me');
 		$this->db->from('users');
@@ -67,6 +79,8 @@ class Analytics_model extends CI_Model
 		$this->db->join('schools', 'schools.school_code = students.school_code', 'left');
 		$this->db->join('study_levels', 'study_levels.level_code = students.study_level', 'left');
 		$this->db->where('students.study_level', 'level_001');
+		$this->db->where('users.date_joined >=', '2019-09-07');
+
 		$query=$this->db->get();
 		return $query->num_rows();
 	}
