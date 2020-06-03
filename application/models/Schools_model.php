@@ -21,7 +21,7 @@ class Schools_model extends CI_Model
 		$this->db->where('(content_type ="Videos" OR content_type ="Ebooks")');
 		$this->db->where('(start_stamp < end_stamp)');
 		$this->db->where('schools.name !=', 'Dawati Academy');
-		$this->db->where('schools.name !=', 'Birithia Secondary School');
+		$this->db->where('schools.name !=', ' BIRITHIA SECONDARY SCHOOL ');
 		$this->db->where('schools.school_code !=', 'school_002');
 		$usages = $this->db->get()->result();
 		/*foreach ($usages as $usage) {
@@ -114,6 +114,7 @@ class Schools_model extends CI_Model
 		$this->db->join('students','users.user_ID = students.user_ID');
 		$this->db->join('schools','schools.school_code = students.school_code');
 		$this->db->where('schools.name !=', 'Dawati Academy');
+		$this->db->where('schools.name !=', ' BIRITHIA SECONDARY SCHOOL ');
 		$this->db->group_by("students.school_code");
 		$this->db->order_by("count",'DESC');
 
