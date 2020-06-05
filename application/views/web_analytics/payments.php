@@ -21,29 +21,29 @@
 	<section>
 		<div class="box-body">
 			<div class="table-responsive col-md-12 col-lg-12">
-				<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">	<thead>
-
+				<table  class="data-table " id="payers" >
+					<thead>
 					<tr>
-						<th> #</th>
+						<th>#</th>
 						<th>Name</th>
 						<th>Mobile</th>
 						<th>Gender</th>
 						<th>School</th>
 						<th>Study Level</th>
 						<th>Payment Status</th>
-						<th>Time </th>
+						<th>Time</th>
 					</tr>
 					</thead>
+					<tbody>
 					<?php
 					$count = 1;
 					foreach ($users  as $user){  ?>
-						<tbody>
 						<tr>
-							<td><?php echo $count ; ?></td>
+							<td><?php echo $count  ?></td>
 							<td><?php echo $user->fname .' '. $user->lname ; ?></td>
-							<td><?php echo  $user->mobile ; ?></td>
+							<td><?php echo $user->mobile ; ?></td>
 							<td><?php echo $user->gender ; ?></td>
-							<td> <?php echo $user->school_name ; ?></td>
+							<td><?php echo $user->school_name ; ?></td>
 							<td><?php echo $user->level_name ; ?></td>
 							<td><?php
 								$transactionID = $user->transaction_ID;
@@ -52,19 +52,25 @@
 								}else{
 									echo 'Complete';
 								}
-								  ?></td>
+								?></td>
 							<td><?php echo $user->time ; ?></td>
-
 						</tr>
-						</tbody>
-
 						<?php
-						$count ++;
-					} ?>
-				</table>
+						$count++;
+					}
+					?>
+					</tbody>
+					<tfoot>
+					</tfoot>
+				</table >
+
 			</div>
 		</div>
 	</section>
 </div>
 
-<?php
+<script>
+	$(document).ready( function () {
+		$('#payers').DataTable();
+	} );
+</script>

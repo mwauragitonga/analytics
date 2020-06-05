@@ -44,9 +44,8 @@ header('Cache-Control: max-age=900');
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 
 	<!-- Datatables -->
-	<link href="<?php echo base_url(); ?>/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-	<link href="<?php echo base_url(); ?>/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-	<link href="<?php echo base_url(); ?>/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" rel="stylesheet">
 	<!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
