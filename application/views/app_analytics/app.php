@@ -210,30 +210,27 @@ session_start();
 				<hr>
 				<!-- Custom tabs (Charts with tabs)-->
 				<div class="table-responsive">
-					<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
-						<thead>
 
-						<tr>
-							<th> #</th>
-							<th>Name</th>
-							<th>Phone Number</th>
-							<th>School</th>
-							<th>Study Level</th>
-							<th>Phone Model</th>
-							<th>More Info</th>
+					<div class="table-responsive col-sm-12 col-lg-12">
+						<table  class="data-table  table table-striped table-bordered" id="topStudents" >
+							<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Phone Number</th>
+								<th>School</th>
+								<th>Study Level</th>
+								<th>Phone Model</th>
+								<th>More Info</th>
+							</tr>
+							</thead>
+							<tbody id="signUps">
+							<tfoot>
+							</tfoot>
+						</table >
 
-							<!--							<th>user_id</th>-->
+					</div>
 
-						</tr>
-						</thead>
-
-
-						<tbody id="signUps">
-
-
-						</tbody>
-
-					</table>
 				</div>
 				<!-- /.nav-tabs-custom -->
 

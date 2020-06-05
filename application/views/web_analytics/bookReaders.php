@@ -64,3 +64,31 @@
 		$('#bookReaders').DataTable();
 	} );
 </script>
+<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">	<thead>
+
+	<th>#</th>
+	<th>Subtopic Name</th>
+	<th>Total Minutes Watched</th>
+	<th>Total Views</th>
+	<th>Average Minutes per view</th>
+
+	</thead>
+	<tbody>
+	<?php
+	$count =0;
+	foreach ($videos as $video) {
+		?>
+		<tr>
+			<td><?php echo $count + 1 ?></td>
+			<td><?php echo $video->name . "  "  ?><span class="badge badge-info"><?php echo $video->subject ?></span> </td>
+			<td><?php echo round($video->avgWatchSecs / 60,2)*$video->count; ?></td>
+			<td><?php echo $video->count; ?></td>
+			<td><?php echo round($video->avgWatchSecs / 60,2) ;?></td>
+		</tr>
+		<?php
+		$count++;
+	}
+	?>
+
+	</tbody>
+</table>

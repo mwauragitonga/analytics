@@ -93,8 +93,8 @@
 					<div class="icon">
 						<i class="fa fa-free-code-camp"></i>
 					</div>
-					<a href="javascript:;" class="small-box-footer">More info <i
-							class="fa fa-arrow-circle-right"></i></a>
+<!--					<a href="javascript:;" class="small-box-footer">More info <i-->
+<!--							class="fa fa-arrow-circle-right"></i></a>-->
 				</div>
 			</div>
 			<!-- ./col -->
