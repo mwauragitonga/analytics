@@ -208,31 +208,27 @@
 				<hr>
 				<!-- Custom tabs (Charts with tabs)-->
 				<div class="table-responsive">
-					<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
-						<thead>
 
-						<tr>
-							<th> #</th>
-							<th>Name</th>
-							<th>Phone Number</th>
-							<th>School</th>
-							<th>Study Level</th>
-							<th>Phone Model</th>
-							<th>Study Minutes</th>
-							<th>More Info</th>
+					<div class="table-responsive col-sm-12 col-lg-12">
+						<table  class="data-table  table table-striped table-bordered" id="topStudents" >
+							<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Phone Number</th>
+								<th>School</th>
+								<th>Study Level</th>
+								<th>Phone Model</th>
+								<th>More Info</th>
+							</tr>
+							</thead>
+							<tbody id="signUps">
+							<tfoot>
+							</tfoot>
+						</table >
 
-							<!--							<th>user_id</th>-->
+					</div>
 
-						</tr>
-						</thead>
-
-
-						<tbody id="signUps">
-
-
-						</tbody>
-
-					</table>
 				</div>
 				<!-- /.nav-tabs-custom -->
 
@@ -386,7 +382,7 @@
 
 				//  console.log(phone_type);
 
-				tr += "<tr><td>" + (i + 1) + "</td><td>" + fname + "</td><td>" + mobile + "</td><td>" + school + "</td><td>" + study_level + "</td><td>" + phone_type + "</td><td>" + totalMinsWatched + "</td><td>" + link + "</td></tr>";
+				tr += "<tr><td>" + (i + 1) + "</td><td>" + fname + "</td><td>" + mobile + "</td><td>" + school + "</td><td>" + study_level + "</td><td>" + phone_type + "</td><td>" + link + "</td></tr>";
 				//console.log(tr)
 
 			}

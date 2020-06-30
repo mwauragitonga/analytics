@@ -20,42 +20,48 @@
 
 	<section>
 		<div class="box-body">
-			<div class="table-responsive col-md-12 col-lg-12">
-				<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">	<thead>
-
+			<div class="table-responsive col-sm-12 col-lg-12">
+				<table  class="data-table " id="videoWatchers" >
+					<thead>
 					<tr>
-						<th> #</th>
+						<th>#</th>
 						<th>Name</th>
 						<th>Gender</th>
 						<th>School</th>
-						<th>Study Level
-						<th>Item Viewed</th>
-						<th>Time of View</th>
+						<th>Study Level</th>
+						<th>Item Read</th>
+						<th>Time of Read</th>
 					</tr>
 					</thead>
+					<tbody>
 					<?php
 					$count = 1;
 					foreach ($users  as $user){  ?>
-						<tbody>
 						<tr>
-							<td><?php echo $count ; ?></td>
+							<td><?php echo $count  ?></td>
 							<td><?php echo $user->fname .' '. $user->lname ; ?></td>
 							<td><?php echo $user->gender ; ?></td>
-							<td> <?php echo $user->school_name ; ?></td>
+							<td><?php echo $user->school_name ; ?></td>
 							<td><?php echo $user->level_name ; ?></td>
 							<td><?php echo $user->file_name ; ?></td>
 							<td><?php echo $user->time_of_action ; ?></td>
 
-
 						</tr>
-						</tbody>
-
 						<?php
-						$count ++;
-					} ?>
-				</table>
+						$count++;
+					}
+					?>
+					</tbody>
+					<tfoot>
+					</tfoot>
+				</table >
+
 			</div>
 		</div>
 	</section>
 </div>
-
+<script>
+	$(document).ready( function () {
+		$('#videoWatchers').DataTable();
+	} );
+</script>

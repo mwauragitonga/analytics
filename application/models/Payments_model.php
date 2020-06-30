@@ -17,7 +17,8 @@ class Payments_model extends CI_Model
         // $this->db->where();
         $query = $this->db->get()->row();
         return $query->revenue;
-    }public function orgBalance()
+    }
+    public function orgBalance()
     {
         $this->db->select("org_account_balance");
         $this->db->from("mpesa_confirmations");

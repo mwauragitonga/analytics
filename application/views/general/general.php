@@ -185,7 +185,7 @@
         },
         xAxis: {
             type: '',
-            categories:['Form One ', 'Form Two', 'Form Three', 'Form Four'],
+            categories:['Version One ','Form One ', 'Form Two', 'Form Three', 'Form Four'],
             labels: {
                 style: {
                     color: 'black',
@@ -225,6 +225,11 @@
                 colorByPoint: true,
                 data: [
                     {
+                        name: "Version One",
+                        y: <?php  echo $versionOne ; ?>,
+
+                    },
+					{
                         name: "Form One",
                         y: <?php  echo $formOnes ; ?>,
 
