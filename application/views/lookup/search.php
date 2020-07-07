@@ -40,6 +40,23 @@
 			<!-- right col -->
 		</div>
 		<!-- /.row (main row) -->
+		<div>
+			<div class="form-group  col-md-6">
+				<?php echo(form_open('updateSub')) ?>
+
+				<label for="Category"><b>Subscribe user </b></label>
+				<select class="modaln" name="subscription" required>
+					<option value="">Select-Subscriptiion</option>
+					<option value="monthly" name="monthly">Monthly</option>
+					<option value="termly" name="termly">Termly</option>
+					<option value="yearly" name="yearly">Yearly</option>
+				</select>
+				<button class="primary">Submit</button>
+
+				<?php echo form_close() ?>
+
+			</div>
+		</div>
 
 	</section>
 	<!-- /.content -->
