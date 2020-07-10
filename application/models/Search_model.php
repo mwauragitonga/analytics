@@ -8,7 +8,7 @@ class Search_model extends CI_Model{
 		parent::__construct();
 	}
 	function search($phrase){
-		$this->db->select("fname ,users.user_id, mobile, email, gender , study_levels.level_name,schools.name as school_name, student_subscriptions.status,code ,users.user_status as userstatus");
+		$this->db->select("fname ,users.user_id, mobile, email, gender , study_levels.level_name,schools.name as school_name, student_subscriptions.status, student_subscriptions.subscription_type,code ,users.user_status as userstatus");
 		$this->db->from("users");
 		$this->db->join("students","users.user_id = students.user_id");
 		$this->db->join("schools","students.school_code = schools.school_code");
@@ -26,9 +26,9 @@ class Search_model extends CI_Model{
 
 	}
 
-	public function updateSubscription($id,$data){
+	public function updateSubscription($user_id,$data){
 
-		$this->db->where('user_id', $id);
+		$this->db->where('user_id', $user_id);
 		$this->db->set('subscription_type', $data['subscription_type']);
 		$this->db->set('status', $data['status']);
 		$this->db->set('start_date', $data['start_date']);
@@ -38,6 +38,15 @@ class Search_model extends CI_Model{
 			return true;
 		} else {
 			return false;
-		}	}
+		}
+	}
+	public function getUserDetails($userID){
+		$this->db->select('mobile, fname');
+		$this->db->from('users');
+		$this->db->where('user_id', $userID);
+		$query = $this->db->get();
+		$userDetails = $query->row();
+		return $userDetails;
+	}
 
 }

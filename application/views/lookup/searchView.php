@@ -18,11 +18,18 @@
 
 	<!-- Main content -->
 	<section class="content">
-<?php if (!empty($message)) { ?>
-	<div class="alert alert-info" role="alert">
+<?php if (!empty($message) && $status == true ) { ?>
+	<div class="alert alert-info alert-dismissable" role="alert">
 		<?php echo $message ?>
 	</div>
 	<?php
+}elseif((!empty($message) && $status == false)){ ?>
+		<div class="alert alert-danger alert-dismissable" role="alert">
+			<?php echo $message ?>
+		</div>
+ <?php }else
+ 	{
+
 }
 ?>
 		<!-- Main row -->

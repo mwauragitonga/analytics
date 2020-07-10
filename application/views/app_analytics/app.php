@@ -340,11 +340,10 @@
         });
         request.send(data);
 		$("table > tbody> tr ").hide().slice(0,25).show();
-		$
-        request.onload = () => {
+		    request.onload = () => {
             var response = JSON.parse(request.responseText);
            //  var response = request.responseText;
-          console.log(response)
+         	 //console.log(response)
             //console.log(tr)
             var booksMinsRead= response.books_mins_Read;
             var videoMinutesWatched = response.video_Minutes_watched;
