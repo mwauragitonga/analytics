@@ -7,7 +7,6 @@ include_once 'AfricasTalkingGateway.php';
  * @mail cmuchiri8429@gmail.com
  * @date : 28th April 2020 1613hrs
  */
-
 class Search extends CI_Controller
 {
 	public function __construct()
@@ -19,13 +18,15 @@ class Search extends CI_Controller
 		$this->apikey = "e64837ac0691f08049305379bc705e5f90d1f06bd99f3ecc15b874f57b32d283";
 		$this->gateway = new  AfricasTalkingGateway($this->username, $this->apikey, "boardpass");
 		$this->load->library('upload');
-		$this->load->model('search_model','lookup');
+		$this->load->model('search_model', 'lookup');
 		//load session
 		//new addon
 		$this->load->library('session');
 
 	}
-	public function searchView($data =''){
+
+	public function searchView($data = '')
+	{
 		$data = array(
 			'title' => "Search",
 			'view' => "lookup/searchView.php"
@@ -33,10 +34,13 @@ class Search extends CI_Controller
 		);
 		$this->load->view('index.php', $data);
 	}
-	public function reloadSearchView($data){
+
+	public function reloadSearchView($data)
+	{
 
 		$this->load->view('index.php', $data);
 	}
+
 	public function search()
 	{
 		$phrase = $this->input->post('phrase');
@@ -55,61 +59,63 @@ class Search extends CI_Controller
 			$data = array(
 				'result' => $result,
 				'title' => "Student Look Up",
-				'user_id'=>$result->user_id,
+				'user_id' => $result->user_id,
 				'view' => "lookup/search.php"
 			);
 			$this->load->view('index.php', $data);
 		}
 
 	}
-	public function updateSubscription(){
+
+	public function updateSubscription()
+	{
 
 		date_default_timezone_set("Africa/Nairobi");
 		$date = date('Y-m-d', time());
-		$subscription= $this->input->post('subscription');
-		$user_id= $this->input->post('user_id');
+		$subscription = $this->input->post('subscription');
+		$user_id = $this->input->post('user_id');
 
 		//load post data
-		if ($subscription== 'yearly'){
-			$data=array(
-			'subscription_type'=>'yearly',
-			'status'=>'active',
-			'start_date'=>$date,
-			'expiry'=>date('Y-m-d', strtotime($date . ' + 365  days'))
+		if ($subscription == 'yearly') {
+			$data = array(
+				'subscription_type' => 'yearly',
+				'status' => 'active',
+				'start_date' => $date,
+				'expiry' => date('Y-m-d', strtotime($date . ' + 365  days'))
 			);
-		}else if($subscription== 'monthly'){
-				$data =array(
-					'subscription_type'=>'monthly',
-					'status'=>'active',
-					'start_date'=>$date,
-					'expiry'=>date('Y-m-d', strtotime($date . ' + 30  days'))
-				);
-			}else if ($subscription =='termly'){
-				$data =array(
+		} else if ($subscription == 'monthly') {
+			$data = array(
+				'subscription_type' => 'monthly',
+				'status' => 'active',
+				'start_date' => $date,
+				'expiry' => date('Y-m-d', strtotime($date . ' + 30  days'))
+			);
+		} else if ($subscription == 'termly') {
+			$data = array(
 
-					'subscription_type'=>'termly',
-					'status'=>'active',
-					'start_date'=>$date,
-					'expiry'=>date('Y-m-d', strtotime($date . ' + 91  days'))
-				);
-		 }
-		 //send data to-from model
-		$result = $this->lookup->updateSubscription($user_id,$data);
-		if($result== true){
+				'subscription_type' => 'termly',
+				'status' => 'active',
+				'start_date' => $date,
+				'expiry' => date('Y-m-d', strtotime($date . ' + 91  days'))
+			);
+		}
+		//send data to-from model
+		$result = $this->lookup->updateSubscription($user_id, $data);
+		if ($result == true) {
 
-		/*	1.return alert to admin */
+			/*	1.return alert to admin */
 			$data_confirmation = array(
 				'title' => "Search",
 				'status' => 'true',
 				'message' => 'User Subscription updated successfully! ',
 				'view' => "lookup/searchView.php"
 			);
-		/*	2. send subscrioption message*/
+			/*	2. send subscrioption message*/
 			$userDetails = $this->lookup->getUserDetails($user_id);
 			$name = $userDetails->fname;
 			$mobile = $userDetails->mobile;
 			$this->send_subscription_message($name, $mobile);
-		}else{
+		} else {
 			$data_confirmation = array(
 				'title' => "Search",
 				'status' => 'false',
@@ -120,6 +126,7 @@ class Search extends CI_Controller
 		$this->reloadSearchView($data_confirmation);
 
 	}
+
 	public function send_subscription_message($name, $mobile)
 	{
 		$from_ = 'DAWATI';

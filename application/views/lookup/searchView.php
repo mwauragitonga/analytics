@@ -18,12 +18,12 @@
 
 	<!-- Main content -->
 	<section class="content">
-<?php if (!empty($message) && $status == true ) { ?>
+<?php if (!empty($message) && !empty($status) == true ) { ?>
 	<div class="alert alert-info alert-dismissable" role="alert">
 		<?php echo $message ?>
 	</div>
 	<?php
-}elseif((!empty($message) && $status == false)){ ?>
+}elseif((!empty($message) && !empty($status)== false)){ ?>
 		<div class="alert alert-danger alert-dismissable" role="alert">
 			<?php echo $message ?>
 		</div>

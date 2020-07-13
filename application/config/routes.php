@@ -97,6 +97,7 @@ $route['email'] = 'Broadcasts/loadEmail';
 $route['notify'] = 'Email_notifications/notifications';
 $route['searchView'] = 'Search/searchView';
 $route['search'] = 'Search/search';
+$route['updateSub'] = 'Search/updateSubscription';
 
 $route['appData']='AppAnalytics/AppData';
 
