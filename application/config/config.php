@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$config['base_url'] = 'http://dawati.co.ke/analytics';
+$config['base_url'] = 'http://analytics.dawati.co.ke/';
 
 
 /*
