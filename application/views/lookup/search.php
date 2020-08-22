@@ -23,14 +23,15 @@
 		<!-- Main row -->
 		<div class="row">
 			<!-- Left col -->
-			<section class="col-10" style="margin-top: 3%; margin-left: 3%">
-				<ul class="list-group">
+			<section class="col-12" style="margin-top: 3%; margin-left: 3%">
+				<ul class="list-group col-md-9">
 					<li class="list-group-item active">Name : <?php echo $result->fname ?></li>
 					<li class="list-group-item">School : <?php echo $result->school_name ?></li>
 					<li class="list-group-item">Mobile : <?php echo $result->mobile ?></li>
 					<li class="list-group-item">Email : <?php echo $result->email ?></li>
 					<li class="list-group-item">Study Level : <?php echo $result->level_name ?></li>
 					<li class="list-group-item">Payment Status : <?php echo $result->userstatus ?></li>
+					<li class="list-group-item">Subscription Type : <?php echo $result->subscription_type ?></li>
 					<li class="list-group-item">Confirmation code : <?php echo $result->code ?></li>
 				</ul>
 
@@ -40,6 +41,24 @@
 			<!-- right col -->
 		</div>
 		<!-- /.row (main row) -->
+		<div>
+			<div class="form-group  col-md-6">
+				<?php echo(form_open('updateSub')) ?>
+
+				<label for="Category"><b>Subscribe user </b></label>
+				<select class="modaln" name="subscription" required>
+					<option value="">Select-Subscriptiion</option>
+					<option value="monthly" name="monthly">Monthly</option>
+					<option value="termly" name="termly">Termly</option>
+					<option value="yearly" name="yearly">Yearly</option>
+				</select>
+				<input type="hidden" name="user_id" value="<?php echo $user_id ?>">
+				<button class="primary">Submit</button>
+
+				<?php echo form_close() ?>
+
+			</div>
+		</div>
 
 	</section>
 	<!-- /.content -->

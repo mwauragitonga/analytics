@@ -3,8 +3,6 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-session_start();
-
 <div class="content-wrapper">
 	<style>
 		#loading {
@@ -210,30 +208,27 @@ session_start();
 				<hr>
 				<!-- Custom tabs (Charts with tabs)-->
 				<div class="table-responsive">
-					<table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
-						<thead>
 
-						<tr>
-							<th> #</th>
-							<th>Name</th>
-							<th>Phone Number</th>
-							<th>School</th>
-							<th>Study Level</th>
-							<th>Phone Model</th>
-							<th>More Info</th>
+					<div class="table-responsive col-sm-12 col-lg-12">
+						<table  class="data-table  table table-striped table-bordered" id="topStudents" >
+							<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Phone Number</th>
+								<th>School</th>
+								<th>Study Level</th>
+								<th>Phone Model</th>
+								<th>More Info</th>
+							</tr>
+							</thead>
+							<tbody id="signUps">
+							<tfoot>
+							</tfoot>
+						</table >
 
-							<!--							<th>user_id</th>-->
+					</div>
 
-						</tr>
-						</thead>
-
-
-						<tbody id="signUps">
-
-
-						</tbody>
-
-					</table>
 				</div>
 				<!-- /.nav-tabs-custom -->
 
@@ -345,11 +340,10 @@ session_start();
         });
         request.send(data);
 		$("table > tbody> tr ").hide().slice(0,25).show();
-		$
-        request.onload = () => {
+		    request.onload = () => {
             var response = JSON.parse(request.responseText);
            //  var response = request.responseText;
-          console.log(response)
+         	 //console.log(response)
             //console.log(tr)
             var booksMinsRead= response.books_mins_Read;
             var videoMinutesWatched = response.video_Minutes_watched;
