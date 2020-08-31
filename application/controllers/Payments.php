@@ -38,7 +38,8 @@ class Payments extends REST_Controller
         $data["payment_Attempts"] = $this->Payments_model->paymentAttempts($start_date, $end_date);
         $data["successful_Payment_Attempts"] = $this->Payments_model->successfulPaymentAttempts($start_date, $end_date);
         $data["cumulative"] = $this->Payments_model->cumulative_total();
-
+        $repeatCustomers = $this->Payments_model->repeatCustomers($start_date,$end_date);
+		$data['repeatCustomers'] = sizeof($repeatCustomers);
         $response = array(
             "status" => true,
             "tiles_data" => $data,

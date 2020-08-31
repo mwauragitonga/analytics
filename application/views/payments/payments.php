@@ -131,6 +131,24 @@
 
 				</div>
 			</div>
+
+			<div class="col-lg-2 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-green">
+					<div class="inner">
+						<h3 id="repeatCustomers"></h3>
+
+						<p>Repeat Customers
+							</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+					<a href="<?php echo base_url() ?>repeatCustomers" class="small-box-footer"> More Info <i
+							class="fa fa-arrow-circle-right"></i></a>
+
+				</div>
+			</div>
 		</div>
 		<div class="row">
 			<!-- Left col -->
@@ -232,6 +250,7 @@
             var success_Attempts = response.tiles_data.successful_Payment_Attempts;
             var paymentSuccessRate = (success_Attempts / payment_Attempts) * 100;
 			var cumulativeTotal =  response.tiles_data.cumulative
+			var repeatCustomers =  response.tiles_data.repeatCustomers;
             document.getElementById("total_Revenue").innerText = formatMoney(revenue);
             document.getElementById("org_balance").innerText = formatMoney(orgBalance);
             document.getElementById("aYS").innerText = aYS;
@@ -240,6 +259,7 @@
             //  document.getElementById("nS").innerText = nS;
             document.getElementById("successRate").innerText = Math.round(paymentSuccessRate, 3).toString() + "%";
             document.getElementById("cumulative").innerText =formatMoney(cumulativeTotal);
+            document.getElementById("repeatCustomers").innerText =repeatCustomers
 
         };
     }

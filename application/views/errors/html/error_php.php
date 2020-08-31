@@ -1,18 +1,33 @@
-<!doctype html>
-<title>Site Maintenance</title>
-<style>
-	body { text-align: center; padding: 150px; }
-	h1 { font-size: 50px; }
-	body { font: 20px Helvetica, sans-serif; color: #333; }
-	article { display: block; text-align: left; width: 650px; margin: 0 auto; }
-	a { color: #dc8100; text-decoration: none; }
-	a:hover { color: #333; text-decoration: none; }
-</style>
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 
-<article>
-	<h1>We&rsquo;ll be back soon!</h1>
-	<div>
-		<p>Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment. If you need to you can always <a href="mailto:info@dawati.co.ke">contact us</a>, otherwise we&rsquo;ll be back online shortly!</p>
-		<p>&mdash; Dawati Team</p>
-	</div>
-</article>
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: <?php echo $severity; ?></p>
+<p>Message:  <?php echo $message; ?></p>
+<p>Filename: <?php echo $filepath; ?></p>
+<p>Line Number: <?php echo $line; ?></p>
+
+<?php if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === TRUE): ?>
+
+	<p>Backtrace:</p>
+	<?php foreach (debug_backtrace() as $error): ?>
+
+		<?php if (isset($error['file']) && strpos($error['file'], realpath(BASEPATH)) !== 0): ?>
+
+			<p style="margin-left:10px">
+			File: <?php echo $error['file'] ?><br />
+			Line: <?php echo $error['line'] ?><br />
+			Function: <?php echo $error['function'] ?>
+			</p>
+
+		<?php endif ?>
+
+	<?php endforeach ?>
+
+<?php endif ?>
+
+</div>

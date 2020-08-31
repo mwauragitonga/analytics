@@ -186,6 +186,26 @@ class AppAnalytics extends CI_Controller
 		);
 		$this->load->view('index.php', $data);
 	}
+	function repeatCustomers(){
+		$start_date='';
+		$end_date ='';
+		$repeatCustomers = $this->Payments_model->repeatCustomers($start_date,$end_date);
+		$data = array(
+			'repeatCustomers' => $repeatCustomers,
+			'title' => "Repeat Customers Payments",
+			'view' => "payments/repeatCustomers.php"
+		);
+		$this->load->view('index.php', $data);
+	}
+	function repeatCustomersInfo($mobile){
+		$customer = $this->Payments_model->repeatTimes($mobile);
+		$data = array(
+			'customer' => $customer,
+			'title' => "Repeat Customers Payments",
+			'view' => "payments/repeatCustomersInfo.php"
+		);
+		$this->load->view('index.php', $data);
+	}
 
 	/**
 	 * @param $array

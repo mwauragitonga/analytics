@@ -98,6 +98,8 @@ $route['notify'] = 'Email_notifications/notifications';
 $route['searchView'] = 'Search/searchView';
 $route['search'] = 'Search/search';
 $route['updateSub'] = 'Search/updateSubscription';
+$route['repeatCustomers'] = 'AppAnalytics/repeatCustomers';
+$route['info/(:any)']='AppAnalytics/repeatCustomersInfo/$1';
 
 $route['appData']='AppAnalytics/AppData';
 
