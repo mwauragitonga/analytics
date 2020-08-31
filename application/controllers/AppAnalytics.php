@@ -197,11 +197,16 @@ class AppAnalytics extends CI_Controller
 		);
 		$this->load->view('index.php', $data);
 	}
-	function repeatCustomersInfo($mobile){
-		$customer = $this->Payments_model->repeatTimes($mobile);
+	function repeatCustomersInfo($user_id){
+		$customer = $this->Payments_model->repeatTimes($user_id);
+		$name ='';
+		for($i=0;$i<1;$i++){
+			$name = $customer[$i]->fname;
+		}
+
 		$data = array(
 			'customer' => $customer,
-			'title' => "Repeat Customers Payments",
+			'title' => $name,
 			'view' => "payments/repeatCustomersInfo.php"
 		);
 		$this->load->view('index.php', $data);

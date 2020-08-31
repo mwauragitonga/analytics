@@ -66,7 +66,21 @@ class Schools_model extends CI_Model
 		$this->db->where('schools.school_code',$code);
 
 		$student = $this->db->get()->result();
-		print_r($student);
+		 return $student;
+	}
+	public function schools_with_paid_students(){
+		$this->db->select('users.user_id ,fname, lname, users.Mobile, last_seen, users.email, date_joined, schools.name');
+		$this->db->from('users');
+		$this->db->join('students', 'students.user_id=users.user_id');
+		$this->db->join('schools', 'schools.school_code=students.school_code');
+		$this->db->join('student_subscriptions', 'users.user_id= student_subscriptions.user_id');
+		$this->db->join('mpesa_callbacks', 'users.email=mpesa_callbacks.email');
+		$this->db->where('mpesa_callbacks.amount >', 0);
+		$this->db->where('users.user_status =', 'Confirmed');
+		$this->db->group_by('schools.name');
+		$result =$this->db->get()->result();
+		return $result;
+
 	}
 
 	function distribution()

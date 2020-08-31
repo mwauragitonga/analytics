@@ -27,9 +27,20 @@ class Schools extends CI_Controller
 			'registered_Schools'=>$this->Schools_model->registered_schools(),
 			'top_school_Reading'=>$this->Schools_model->top_schools_content(),
 			'top_school_students' =>$this->Schools_model->top_School_Registered_Students(),
+			'schools_with_paid_customers' => sizeof($this->Schools_model->schools_with_paid_students())
+
 		);
 		$this->load->view('index.php', $data);
 
+	}
+
+	function paid_schools(){
+		$data = array(
+			'schools' =>$this->Schools_model->schools_with_paid_students(),
+			'title' => 'Schools With Paid Students',
+			'view' => "Schools/paidSchools.php"
+		);
+		$this->load->view('index.php', $data);
 	}
 	function students($code){
 		$data = array(
