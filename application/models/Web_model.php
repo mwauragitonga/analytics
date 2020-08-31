@@ -287,7 +287,7 @@ class Web_model extends CI_Model
 		$this->db->join("users", "web_actions_logs.user_id = users.user_id");
 		$this->db->join("students", "users.user_id = students.user_id");
 		$this->db->join("schools", "students.school_code = schools.school_code");
-		$this->db->join("mpesa_callbacks", "users.email = mpesa_callbacks.email");
+		$this->db->join("mpesa_callbacks", "users.email = mpesa_callbacks.email"); //
 		$this->db->join("study_levels", "students.study_level = study_levels.level_code");
 		$this->db->join("student_subscriptions", "users.user_id = student_subscriptions.user_id");
 		$this->db->where('(action = "initiate_payment" OR action ="proceedToPayment") ');
