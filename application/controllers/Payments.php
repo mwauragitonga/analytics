@@ -103,9 +103,9 @@ class Payments extends REST_Controller
         $period = $date->modify("-11 months");
         for ($i = 0; $i < 12; $i++) {
           //  print_r($period); echo "<br>";
-            array_push($subscriptions['monthly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Y-m"),"monthly"));
-            array_push($subscriptions['termly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Y-m"),"termly"));
-            array_push($subscriptions['yearly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Y-m"),"yearly"));
+            array_push($subscriptions['monthly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Ym"),"monthly"));
+            array_push($subscriptions['termly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Ym"),"termly"));
+            array_push($subscriptions['yearly_subscriptions'],$this->Payments_model->subscriptions_Comparisons($period->format("Ym"),"yearly"));
             $period = $date->modify("+1 months");
 
         }

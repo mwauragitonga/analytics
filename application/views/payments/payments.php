@@ -33,22 +33,22 @@
 
 				</div>
 			</div>
-			<div class="col-lg-2 col-xs-6">
-				<!-- small box -->
-				<div class="small-box bg-green">
-					<div class="inner">
-						<h3 id="org_balance"></h3>
-
-						<p>Org Balance(Pay Bill)</p>
-					</div>
-					<div class="icon">
-						<i class="fa fa-money"></i>
-					</div>
-					<a href="<?php echo base_url() ?>payment_reports" class="small-box-footer"> More Info <i
-							class="fa fa-arrow-circle-right"></i></a>
-
-				</div>
-			</div>
+<!--			<div class="col-lg-2 col-xs-6">-->
+<!--				small box -->
+<!--				<div class="small-box bg-green">-->
+<!--					<div class="inner">-->
+<!--						<h3 id="org_balance"></h3>-->
+<!---->
+<!--						<p>Org Balance(Pay Bill)</p>-->
+<!--					</div>-->
+<!--					<div class="icon">-->
+<!--						<i class="fa fa-money"></i>-->
+<!--					</div>-->
+<!--					<a href="--><?php //echo base_url() ?><!--payment_reports" class="small-box-footer"> More Info <i-->
+<!--							class="fa fa-arrow-circle-right"></i></a>-->
+<!---->
+<!--				</div>-->
+<!--			</div>-->
 			<!-- ./col -->
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
@@ -109,11 +109,6 @@
 					</div>
 				</div>
 			</div>
-
-			<!-- ./col -->
-		</div>
-		<!-- /.row -->
-		<div class="row">
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
 				<div class="small-box bg-green">
@@ -121,16 +116,21 @@
 						<h3 id="cumulative"></h3>
 
 						<p>Cumulative Total
-							</p>
+						</p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-money"></i>
 					</div>
 					<a href="<?php echo base_url() ?>payment_reports" class="small-box-footer"> More Info <i
-							class="fa fa-arrow-circle-right"></i></a>
+								class="fa fa-arrow-circle-right"></i></a>
 
 				</div>
 			</div>
+			<!-- ./col -->
+		</div>
+		<!-- /.row -->
+		<div class="row">
+
 
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
@@ -157,7 +157,7 @@
 				<div class="nav-tabs-custom">
 					<!-- Tabs within a box -->
 					<ul class="nav nav-tabs pull-right">
-						<div class="chart" id="total_subscriptions" style="height: 400px;"></div>
+						<div class="chart" id="revenue_by_month" style="height: 400px;"></div>
 
 					</ul>
 					<div class="tab-content no-padding">
@@ -172,7 +172,7 @@
 		<!-- Main row -->
 		<div class="row">
 			<!-- Left col -->
-			<section class="col-lg-6 col-md-12 col-sm-12">
+			<section class="col-lg-12 col-md-12 col-sm-12">
 				<!-- Custom tabs (Charts with tabs)-->
 				<div class="nav-tabs-custom">
 					<!-- Tabs within a box -->
@@ -189,25 +189,25 @@
 			</section>
 			<!-- /.Left col -->
 			<!-- right col (We are only adding the ID to make the widgets sortable)-->
-			<section class="col-lg-6 ">
+		<!--	<section class="col-lg-6 ">-->
 
 				<!-- Calendar -->
 
 				<!-- /.box-header -->
-				<div class="box-body no-padding">
-					<div class="chart" id="revenue_by_month" style="height: 400px;"></div>
+			<!--	<div class="box-body no-padding">-->
+					<!--<div class="chart" id="total_subscriptions" style="height: 400px;"></div>-->
 
 
-				</div>
+				<!--</div>-->
 				<!-- /.box -->
 
-			</section>
+			<!--</section>-->
 			<!-- right col -->
-		</div>
+	<!--	</div>-->
 
 		<!-- /.row (main row) -->
 
-	</section>
+	<!--</section>-->
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
@@ -240,8 +240,8 @@
 
         request.onload = () => {
            response = JSON.parse(request.responseText);
-            var revenue = response.tiles_data.total_Revenue;
-            var orgBalance = response.tiles_data.org_Balance;
+             var revenue = response.tiles_data.total_Revenue;
+            // var orgBalance = response.tiles_data.org_Balance;
             var aYS = response.tiles_data.active_Yearly_Subscribers;
             var aTS = response.tiles_data.active_Termly_Subscribers;
             var aMS = response.tiles_data.active_Monthly_Subscribers;
@@ -252,7 +252,7 @@
 			var cumulativeTotal =  response.tiles_data.cumulative
 			var repeatCustomers =  response.tiles_data.repeatCustomers;
             document.getElementById("total_Revenue").innerText = formatMoney(revenue);
-            document.getElementById("org_balance").innerText = formatMoney(orgBalance);
+            // document.getElementById("org_balance").innerText = formatMoney(orgBalance);
             document.getElementById("aYS").innerText = aYS;
             document.getElementById("aMS").innerText = aMS;
             document.getElementById("aTS").innerText = aTS;
@@ -283,7 +283,7 @@
                 response = JSON.parse(request.responseText);
                // response = request.responseText;
                  console.log(response)
-                var paybill_revenues = response.graph_data.paybill_total.map(Number);// includes tablet payments
+              //  var paybill_revenues = response.graph_data.paybill_total.map(Number);// includes tablet payments
                 var revenue_By_Months = response.graph_data.revenue_By_Months.map(Number);
                 var subscription_Comparisons = response.graph_data.subscriptions_Comparisons;
                 var monthly = (subscription_Comparisons.monthly_subscriptions).map(Number);
@@ -329,7 +329,7 @@
                             data: yearly
                         }]
                 });
-                Highcharts.chart('total_subscriptions', {
+             /*   Highcharts.chart('total_subscriptions', {
                     chart: {
                         type: 'column'
                     },
@@ -359,7 +359,7 @@
                         name: 'Revenue',
                         data: paybill_revenues
                     }]
-                });
+                });*/
                 Highcharts.chart('revenue_by_month', {
                     chart: {
                         type: 'column'

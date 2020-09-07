@@ -27,6 +27,7 @@
 		<tr>
 					<th> #</th>
 					<th>Name</th>
+					<th>School</th>
 					<th>Paying Mobile</th>
 					<th>Student's Mobile</th>
 					<th>Transaction Code</th>
@@ -44,6 +45,7 @@
 					<tr>
 						<td><?php echo $count?></td>
 						<td><?php echo $payer->fname?></td>
+						<td><?php echo $payer->school_name?></td>
 						<td><?php echo $payer->msisdn ?></td>
 						<td><?php echo $payer->mobile ?></td>
 						<td><?php echo $payer->transaction_ID ?></td>
