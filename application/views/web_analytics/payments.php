@@ -37,6 +37,7 @@
 					<tbody>
 					<?php
 					$count = 1;
+					print_r($users);
 					foreach ($users  as $user){  ?>
 						<tr>
 							<td><?php echo $count  ?></td>
@@ -46,8 +47,11 @@
 							<td><?php echo $user->school_name ; ?></td>
 							<td><?php echo $user->level_name ; ?></td>
 							<td><?php
+
 								$transactionID = $user->transaction_ID;
-								if(empty($transactionID)) {
+								$logTime = date('Ymd',strtotime($user->time));
+								$paymentTime = date('Ymd',strtotime($user->time_of_payment));
+								if(empty($transactionID)&& $logTime == $paymentTime) {
 									echo 'Incomplete';
 								}else{
 									echo 'Complete';

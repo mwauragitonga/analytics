@@ -281,8 +281,8 @@ class Web_model extends CI_Model
 		$end_Date =  $_SESSION['end_Date'];
 		$target =  $_SESSION['target'];
 
-		$this->db->select('mpesa_callbacks.email, mpesa_callbacks.mobile, mpesa_callbacks.amount, mpesa_callbacks.transaction_ID, action , web_actions_logs.user_id ,web_actions_logs.time_of_action as time ,  
-		 users.fname, lname,, last_seen , users.mobile, users.email, gender, user_type,  study_levels.level_name,schools.name as school_name');
+		$this->db->select('mpesa_callbacks.email, mpesa_callbacks.mobile, mpesa_callbacks.amount, mpesa_callbacks.transaction_ID, mpesa_callbacks.time_of_payment, action , web_actions_logs.user_id ,web_actions_logs.time_of_action as time ,  
+		 users.fname, lname, last_seen , users.mobile, users.email, gender, user_type,  study_levels.level_name,schools.name as school_name');
 		$this->db->from('web_actions_logs');
 		$this->db->join("users", "web_actions_logs.user_id = users.user_id");
 		$this->db->join("students", "users.user_id = students.user_id");

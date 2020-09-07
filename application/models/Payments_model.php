@@ -103,40 +103,70 @@ class Payments_model extends CI_Model
     public function subscriptions_Comparisons($instance_month, $subscription_type)
     {
         $this->db->select("COUNT(index_ID) as count");
-        $this->db->from("student_subscriptions");
+        $this->db->from("mpesa_callbacks");
         $this->db->where("subscription_type", $subscription_type);
+        $this->db->where("amount >", '1');
+
         //    $this->db->where(date('m',strtotime("timestamp")),$instance_month);
-        $this->db->like("start_date", $instance_month);
+        $this->db->like("time_of_payment", $instance_month);
         $query = $this->db->get()->row();
         return $query->count;
     }
 
-    public function payers()
-    {
-        $this->db->select('amount,transaction_ID,time_of_payment,fname,mpesa_callbacks.mobile as msisdn, schools.name as school_name,users.mobile,user_registration_source.source_name');
-        $this->db->from('mpesa_callbacks');
-        $this->db->join('users', 'users.email = mpesa_callbacks.email');
+	public function payers()
+	{
+		$this->db->select('amount,transaction_ID,time_of_payment,fname,mpesa_callbacks.mobile as msisdn, schools.name as school_name,users.mobile,user_registration_source.source_name');
+		$this->db->from('mpesa_callbacks');
+		$this->db->join('users', 'users.email = mpesa_callbacks.email');
+		$this->db->join('user_registration_source', 'user_registration_source.source_code = mpesa_callbacks.registration_source');
 		$this->db->join("students","users.user_id = students.user_id");
 		$this->db->join('schools',"students.school_code = schools.school_code");
-		$this->db->join('user_registration_source', 'user_registration_source.source_code = mpesa_callbacks.registration_source');
-        $this->db->where('(amount != 0 AND amount != 1 )');
-        $this->db->order_by('time_of_payment', 'DESC');
-        $query = $this->db->get()->result();
-        return $query;
-    }
-    public function reports()
-    {
-        $this->db->select('*');
-        $this->db->from('mpesa_confirmations');
-        $this->db->order_by(' transaction_Time ', 'DESC');
-        $query = $this->db->get()->result();
-        return $query;
-    }
-    public function cumulative_total(){
-    	$initial_paybill_amount = 63753; //i am sorry i had to hardcode this
+		$this->db->where('(amount != 0 AND amount != 1 )');
+		$this->db->order_by('time_of_payment', 'DESC');
+		$query = $this->db->get()->result();
+		return $query;
+	}
+
+	public function reports()
+	{
+		$this->db->select('*');
+		$this->db->from('mpesa_confirmations');
+		$this->db->order_by(' transaction_Time ', 'DESC');
+		$query = $this->db->get()->result();
+		return $query;
+	}
+
+	public function repeatCustomers($start_date, $end_date)
+	{
+		$this->db->select('users.user_id,users.fname,users.mobile,mpesa_callbacks.subscription_type,COUNT(mpesa_callbacks.index_ID) as count,mpesa_callbacks.email');
+		$this->db->from('mpesa_callbacks');
+		$this->db->join('users', 'users.email = mpesa_callbacks.email');
+		$this->db->where('amount != 0 AND amount != 1 AND amount != ""');
+		$this->db->having('count>',1);
+		$this->db->group_by('mpesa_callbacks.email');
+		$customers = $this->db->get()->result();
+	//	$count = $this->db->get()->num_rows();
+
+		 return $customers;
+	}
+	public function repeatTimes($user_id)
+	{
+		$this->db->select('users.fname,users.mobile,mpesa_callbacks.mobile as payingMobile, mpesa_callbacks.subscription_type,mpesa_callbacks.transaction_ID,mpesa_callbacks.time_of_payment,mpesa_callbacks.email, mpesa_callbacks.amount');
+		$this->db->from('mpesa_callbacks');
+		$this->db->join('users', 'users.email = mpesa_callbacks.email');
+		$this->db->where('amount != 0 AND amount != 1 AND amount != ""');
+		$this->db->where('users.mobile',$user_id);
+		$customer = $this->db->get()->result();
+		//	$count = $this->db->get()->num_rows();
+
+		return $customer;
+	}
+	public function cumulative_total()
+	{
+		$initial_paybill_amount = 63753; //i am sorry i had to hardcode this @cyrus. It was the initial amount in the paybill at start
 		$amounts = $this->reports();
-		foreach ($amounts as $amount){
-			$initial_paybill_amount+=$amount->transaction_Amount;
+		foreach ($amounts as $amount) {
+			$initial_paybill_amount += $amount->transaction_Amount;
 		}
 		return $initial_paybill_amount;
 	}
