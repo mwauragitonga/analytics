@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => 'dawati.co.ke',
 	'username' => 'dawatico',
-	'password' => 'admin',
+	'password' => 'Carrel@123',
 	'database' => 'dawatico_dawati',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
