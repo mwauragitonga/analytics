@@ -52,6 +52,23 @@
 			<!-- ./col -->
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
+				<div class="small-box bg-green">
+					<div class="inner">
+						<h3 id="tabletRevenue"></h3>
+
+						<p>Tablet Revenue
+						</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+					<!--					<a href="--><?php //echo base_url() ?><!--repeatCustomers" class="small-box-footer"> More Info <i-->
+					<!--							class="fa fa-arrow-circle-right"></i></a>-->
+
+				</div>
+			</div>
+			<div class="col-lg-2 col-xs-6">
+				<!-- small box -->
 				<div class="small-box bg-primary">
 					<div class="inner">
 						<h3 id="aYS"><sup style="font-size: 20px"></sup></h3>
@@ -98,19 +115,6 @@
 
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
-				<div class="small-box bg-red">
-					<div class="inner">
-						<h3 id="successRate"></h3>
-
-						<p>Payment Success Rate</p>
-					</div>
-					<div class="icon">
-						<i class="fa fa-check"></i>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-2 col-xs-6">
-				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
 						<h3 id="cumulative"></h3>
@@ -126,11 +130,11 @@
 
 				</div>
 			</div>
+
 			<!-- ./col -->
 		</div>
 		<!-- /.row -->
 		<div class="row">
-
 
 			<div class="col-lg-2 col-xs-6">
 				<!-- small box -->
@@ -149,15 +153,43 @@
 
 				</div>
 			</div>
+			<div class="col-lg-2 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-red">
+					<div class="inner">
+						<h3 id="successRate"></h3>
+
+						<p>Payment Success Rate</p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-check"></i>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="row">
 			<!-- Left col -->
-			<section class="col-lg-12">
+			<section class="col-lg-6">
 				<!-- Custom tabs (Charts with tabs)-->
 				<div class="nav-tabs-custom">
 					<!-- Tabs within a box -->
 					<ul class="nav nav-tabs pull-right">
 						<div class="chart" id="revenue_by_month" style="height: 400px;"></div>
+
+					</ul>
+					<div class="tab-content no-padding">
+						<div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+					</div>
+				</div>
+				<!-- /.nav-tabs-custom -->
+
+			</section>
+			<section class="col-lg-6">
+				<!-- Custom tabs (Charts with tabs)-->
+				<div class="nav-tabs-custom">
+					<!-- Tabs within a box -->
+					<ul class="nav nav-tabs pull-right">
+						<div class="chart" id="Tablet_payments" style="height: 400px;"></div>
 
 					</ul>
 					<div class="tab-content no-padding">
@@ -241,6 +273,8 @@
         request.onload = () => {
            response = JSON.parse(request.responseText);
              var revenue = response.tiles_data.total_Revenue;
+             var subscription_revenue = response.tiles_data.total_Subscription_Revenue;
+             var tablet_revenue = response.tiles_data.total_Tablets_Revenue;
             // var orgBalance = response.tiles_data.org_Balance;
             var aYS = response.tiles_data.active_Yearly_Subscribers;
             var aTS = response.tiles_data.active_Termly_Subscribers;
@@ -252,7 +286,8 @@
 			var cumulativeTotal =  response.tiles_data.cumulative
 			var repeatCustomers =  response.tiles_data.repeatCustomers;
             document.getElementById("total_Revenue").innerText = formatMoney(revenue);
-            // document.getElementById("org_balance").innerText = formatMoney(orgBalance);
+            // document.getElementById("subscriptionRevenue").innerText = formatMoney(subscription_revenue);
+             document.getElementById("tabletRevenue").innerText = formatMoney(tablet_revenue);
             document.getElementById("aYS").innerText = aYS;
             document.getElementById("aMS").innerText = aMS;
             document.getElementById("aTS").innerText = aTS;
@@ -286,6 +321,7 @@
               //  var paybill_revenues = response.graph_data.paybill_total.map(Number);// includes tablet payments
                 var revenue_By_Months = response.graph_data.revenue_By_Months.map(Number);
                 var subscription_Comparisons = response.graph_data.subscriptions_Comparisons;
+                var tablet_revenue = response.graph_data.tablet_Payments.map(Number);
                 var monthly = (subscription_Comparisons.monthly_subscriptions).map(Number);
                 var yearly = subscription_Comparisons.yearly_subscriptions.map(Number);
                 var termly = subscription_Comparisons.termly_subscriptions.map(Number);
@@ -389,6 +425,37 @@
                     series: [{
                         name: 'Revenue',
                         data: revenue_By_Months
+                    }]
+                });
+                Highcharts.chart('Tablet_payments', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Tablet payments for the last 12 months'
+                    },
+                    xAxis: {
+                        categories: getMonthsString()
+                    },
+                    yAxis: {
+                        title: {
+                            text: "Tablet Revenue (Ksh)"
+                        }
+                    },
+                    plotOptions: {
+                        column: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'TabletRevenue',
+                        data: tablet_revenue
                     }]
                 });
 
