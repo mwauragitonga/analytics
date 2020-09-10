@@ -26,32 +26,26 @@
 
 					<tr>
 						<th> #</th>
-						<th>transaction_ID</th>
-						<th>Transaction Time</th>
-						<th>Transaction Amount</th>
-						<th>Business short code</th>
-						<th>Bill Reference Number</th>
-						<th>MSISDN</th>
 						<th>Name</th>
-						<th>Org Balance</th>
+						<th>Transaction Code</th>
+						<th>Paying Mobile</th>
+						<th>Amount paid</th>
+						<th>Date of payment</th>
 
 					</tr>
 					</thead>
 					<tbody id="signUps">
 					<?php
 					$count = 1;
-					foreach ($payments as $payment){
+					foreach ($tabletPayment as $tabletPayments){
 						?>
 						<tr>
 							<td><?php echo $count?></td>
-							<td><?php echo $payment->transaction_ID?></td>
-							<td><?php echo date('Y-m-d h:i:s ',strtotime($payment->transaction_Time))?></td>
-							<td><?php echo $payment->transaction_Amount ?> <span class="badge <?php if($payment->Payment_type == 'Tablet'){echo 'badge-light' ;}elseif ($payment->Payment_type == 'Unclassified'){echo 'badge-warning' ;}else{echo 'badge-dark' ;} ?>"><?php echo $payment->Payment_type ?></span></td>
-							<td><?php echo $payment->business_short_code ?></td>
-							<td><?php echo $payment->bill_reference_number ?></td>
-							<td><?php echo $payment->MSISDN ?></td>
-							<td><?php echo $payment->first_name . " ".$payment->middle_name." " .$payment->last_name?></td>
-							<th><?php echo $payment->org_account_balance?></th>
+							<td><?php echo $tabletPayments->first_name .' '.$tabletPayments->middle_name .' '.$tabletPayments->last_name ?></td>
+							<td><?php echo $tabletPayments->transaction_ID ?></td>
+							<td><?php echo $tabletPayments->MSISDN ?></td>
+							<td><?php echo $tabletPayments->transaction_Amount ?></td>
+							<td><?php echo date('l,Y-m-d h:i:s A ',strtotime($tabletPayments->transaction_Time))?></td>
 
 						</tr>
 
@@ -66,5 +60,4 @@
 		</div>
 	</section>
 </div>
-
 

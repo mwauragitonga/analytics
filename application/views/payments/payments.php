@@ -62,8 +62,8 @@
 					<div class="icon">
 						<i class="ion ion-person-add"></i>
 					</div>
-					<!--					<a href="--><?php //echo base_url() ?><!--repeatCustomers" class="small-box-footer"> More Info <i-->
-					<!--							class="fa fa-arrow-circle-right"></i></a>-->
+										<a href="<?php echo base_url() ?>tabletPayments" class="small-box-footer"> More Info <i
+												class="fa fa-arrow-circle-right"></i></a>
 
 				</div>
 			</div>

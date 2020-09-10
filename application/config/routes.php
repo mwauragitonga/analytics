@@ -77,6 +77,7 @@ $route['accountsByDay'] = "Analytics_controller/signUps_by_Day";//ajax
 $route['videos'] = "AppAnalytics/videos";
 $route['ebooks'] = "AppAnalytics/ebooks";
 $route['payers'] = "Analytics_controller/payers";
+$route['tabletPayments'] = "Analytics_controller/tabletPayments";
 $route['users/(:num)'] = "AppAnalytics/users/$1";
 $route['signins'] ="AppAnalytics/signins";
 $route['schools']= "Schools/usage";

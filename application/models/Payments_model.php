@@ -157,11 +157,22 @@ class Payments_model extends CI_Model
 		$this->db->from('mpesa_callbacks');
 		$this->db->join('users', 'users.email = mpesa_callbacks.email');
 		$this->db->join('mpesa_confirmations', 'mpesa_confirmations.transaction_ID = mpesa_callbacks.transaction_ID');
-		$this->db->join('user_registration_source', 'user_registration_source.source_code = mpesa_callbacks.registration_source');
+		$this->db->join('user_registration_source', 'user_registration_source.source_code = users.registration_source');
 		$this->db->join("students","users.user_id = students.user_id");
 		$this->db->join('schools',"students.school_code = schools.school_code");
 		$this->db->where('(amount != 0 AND amount != 1 )');
 		$this->db->order_by('time_of_payment', 'DESC');
+		$query = $this->db->get()->result();
+		return $query;
+	}
+
+
+	public function tabletPayment()
+	{
+		$this->db->select('first_name,middle_name,last_name,MSISDN,transaction_Amount,transaction_ID,transaction_Time,Payment_type as paymentType');
+		$this->db->from('mpesa_confirmations');
+		$this->db->where('Payment_type=','Tablet');
+		$this->db->order_by('transaction_Time ', 'DESC');
 		$query = $this->db->get()->result();
 		return $query;
 	}
