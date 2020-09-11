@@ -30,6 +30,9 @@ class Payments extends REST_Controller
         $end_date = " ";
         $data = array();
         $data["total_Revenue"] = $this->Payments_model->totalRevenue($start_date, $end_date);
+        $data["total_Subscription_Revenue"] = $this->Payments_model->totalSubscriptionRevenue($start_date, $end_date);
+        $data["total_Tablets_Revenue"] = $this->Payments_model->totalTabletRevenue($start_date, $end_date);
+        $data["total_Uncategorized_Revenue"] = $this->Payments_model->totalUncategorisedRevenue($start_date, $end_date);
         $data['org_Balance'] =  $this->Payments_model->orgBalance();
         $data["active_Yearly_Subscribers"] = $this->Payments_model->active_Yearly_Subscribers($start_date, $end_date);
         $data["active_Termly_Subscribers"] = $this->Payments_model->active_Termly_Subscribers($start_date, $end_date);
@@ -55,7 +58,8 @@ class Payments extends REST_Controller
         $end_date = " ";
         $data = array();
         $data["revenue_By_Months"] = $this->revenue_By_Months();
-        $data['paybill_total'] = $this->payBillTotal();
+        $data['tablet_Payments'] =$this->tabletsPayments();
+       // $data['paybill_total'] = $this->payBillTotal();
         $data["subscriptions_Comparisons"] = $this->subscriptions_Comparisons();
         $response = array(
             "status" => true,
@@ -93,6 +97,19 @@ class Payments extends REST_Controller
         return $revenue;
 
     }
+
+function tabletsPayments(){
+
+	$dat = date('Y-m-d');
+	$date = new DateTime($dat);
+	$tablet_revenue = array();
+	$period = $date->modify("-11 months");
+	for ($i = 0; $i < 12; $i++) {
+		$revenue[$i] = $this->Payments_model->tablet_revenue_By_Months($period->format('Ym'));
+		$period = $date->modify("+1 months");
+	}
+	return $revenue;
+}
     public function subscriptions_Comparisons(){
 
         $dat = date('Y-m-d');

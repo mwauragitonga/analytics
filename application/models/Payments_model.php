@@ -18,6 +18,31 @@ class Payments_model extends CI_Model
         $query = $this->db->get()->row();
         return $query->revenue;
     }
+    public function totalSubscriptionRevenue($start_date, $end_date)
+    {
+        $this->db->select("SUM(transaction_Amount) as revenue");
+        $this->db->from("mpesa_confirmations");
+        $this->db->where("Payment_type",'subscription');
+        // $this->db->where();
+        $query = $this->db->get()->row();
+        return $query->revenue;
+    }
+    public function totalTabletRevenue($start_date, $end_date)
+    {
+        $this->db->select("SUM(transaction_Amount) as revenue");
+        $this->db->from("mpesa_confirmations");
+        $this->db->where("Payment_type",'Tablet');
+        $query = $this->db->get()->row();
+        return $query->revenue;
+    }
+    public function totalUncategorisedRevenue($start_date, $end_date)
+    {
+        $this->db->select("SUM(transaction_Amount) as revenue");
+        $this->db->from("mpesa_confirmations");
+        $this->db->where("Payment_type",'Uncategorized');
+        $query = $this->db->get()->row();
+        return $query->revenue;
+    }
     public function orgBalance()
     {
         $this->db->select("org_account_balance");
@@ -99,6 +124,19 @@ class Payments_model extends CI_Model
         $query = $this->db->get()->row();
         return $query->revenue;
     }
+    // new subscription method
+	public function tablet_revenue_By_Months($instance_month)
+	{		$this->db->select("COALESCE(SUM(transaction_Amount),0) as revenue");
+			$this->db->from("mpesa_confirmations");
+			$this->db->where("transaction_ID !=", "NULL");
+			$this->db->where("Payment_type", "Tablet");
+			$this->db->like('transaction_Time', $instance_month);
+
+
+		$query = $this->db->get()->row();
+		return $query->revenue;
+	}
+
 
     public function subscriptions_Comparisons($instance_month, $subscription_type)
     {
@@ -115,10 +153,11 @@ class Payments_model extends CI_Model
 
 	public function payers()
 	{
-		$this->db->select('amount,transaction_ID,time_of_payment,fname,mpesa_callbacks.mobile as msisdn, schools.name as school_name,users.mobile,user_registration_source.source_name');
+		$this->db->select('amount,mpesa_callbacks.transaction_ID,time_of_payment,mpesa_confirmations.Payment_type as paymentType,fname,mpesa_callbacks.mobile as msisdn, schools.name as school_name,users.mobile,user_registration_source.source_name');
 		$this->db->from('mpesa_callbacks');
 		$this->db->join('users', 'users.email = mpesa_callbacks.email');
-		$this->db->join('user_registration_source', 'user_registration_source.source_code = mpesa_callbacks.registration_source');
+		$this->db->join('mpesa_confirmations', 'mpesa_confirmations.transaction_ID = mpesa_callbacks.transaction_ID');
+		$this->db->join('user_registration_source', 'user_registration_source.source_code = users.registration_source');
 		$this->db->join("students","users.user_id = students.user_id");
 		$this->db->join('schools',"students.school_code = schools.school_code");
 		$this->db->where('(amount != 0 AND amount != 1 )');
@@ -127,10 +166,30 @@ class Payments_model extends CI_Model
 		return $query;
 	}
 
+
+	public function tabletPayment()
+	{
+		$this->db->select('first_name,middle_name,last_name,MSISDN,transaction_Amount,transaction_ID,transaction_Time,Payment_type as paymentType');
+		$this->db->from('mpesa_confirmations');
+		$this->db->where('Payment_type=','Tablet');
+		$this->db->order_by('transaction_Time ', 'DESC');
+		$query = $this->db->get()->result();
+		return $query;
+	}
+
 	public function reports()
 	{
 		$this->db->select('*');
 		$this->db->from('mpesa_confirmations');
+		$this->db->order_by(' transaction_Time ', 'DESC');
+		$query = $this->db->get()->result();
+		return $query;
+	}
+	public function tabletPayments()
+	{
+		$this->db->select('*');
+		$this->db->from('mpesa_confirmations');
+		$this->db->where('Payment_type','Tablets');
 		$this->db->order_by(' transaction_Time ', 'DESC');
 		$query = $this->db->get()->result();
 		return $query;

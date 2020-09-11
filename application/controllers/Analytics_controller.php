@@ -283,6 +283,18 @@ class Analytics_controller extends CI_Controller
 			$this->load->view('index.php', $data);
 		}
 		}
+		public function tabletPayments(){
+
+			if ($this->is_logged_in() == true) {
+				$data = array(
+
+					'title' => "Paid Tablets ",
+					'tabletPayment' => $this->Payments_model->tabletPayment(),
+					'view' => "payments/tabletPayments.php"
+				);
+				$this->load->view('index.php', $data);
+			}
+		}
 
 	public function is_logged_in()
 	{
