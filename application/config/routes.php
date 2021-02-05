@@ -84,6 +84,7 @@ $route['schools']= "Schools/usage";
 $route['schools/(:any)'] = "Schools/students/$1";
 $route['unique']= "AppAnalytics/duplicates";
 $route['reg_schools'] = "Schools/reg_schools";
+$route['paid_schools'] = "Schools/paid_schools";
 $route['top_reading'] = "Schools/top_reading";
 $route['schools/users/(:any)'] = "Schools/users/$1";
 $route['webData'] = 'Web_controller/webData';

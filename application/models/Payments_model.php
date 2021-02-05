@@ -214,8 +214,9 @@ class Payments_model extends CI_Model
 		$this->db->from('mpesa_callbacks');
 		$this->db->join('users', 'users.email = mpesa_callbacks.email');
 		$this->db->where('amount != 0 AND amount != 1 AND amount != ""');
-		$this->db->where('users.mobile',$user_id);
+		$this->db->where('users.user_id',$user_id);
 		$customer = $this->db->get()->result();
+
 		//	$count = $this->db->get()->num_rows();
 
 		return $customer;
