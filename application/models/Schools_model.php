@@ -117,8 +117,7 @@ class Schools_model extends CI_Model
 		$this->db->where('schools.name !=', ' BIRITHIA SECONDARY SCHOOL ');
 		$this->db->group_by("students.school_code");
 		$this->db->order_by("count",'DESC');
-
-		//$this->db->limit(10);
+		$this->db->limit(15000);
 
 		$schools_students = $this->db->get()->result();
 		return $schools_students;

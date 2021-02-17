@@ -19,7 +19,7 @@ class Schools extends CI_Controller
 
 	function usage(){
 		$data = array(
-			'distribution' => $this->distribution(),
+			//'distribution' => $this->distribution(),
 			'schools' =>$this->Schools_model->schools_students(),
 			'title' => "School Analytics",
 			'view' => "Schools/schools.php",
